@@ -88,8 +88,8 @@ const children1 = [
   <MenuItem key="11"><i className="fa fa-home" aria-hidden="true"></i></MenuItem>,
   <SubMenu title={<span className="submenu-title-wrapper">Commissions</span>} key="1">
     <MenuItem key="Commissions"> <Link to="/commissions">Commissions</Link></MenuItem>
-    <MenuItem key="Rank Advancement">Rank Advancement</MenuItem>
-    <MenuItem key="Volumes">Volumes</MenuItem>
+    <MenuItem key="Rank Advancement"><Link to="/rank">Rank Advancement</Link></MenuItem>
+    <MenuItem key="Volumes"><Link to="/volumes">Volumes</Link></MenuItem>
   </SubMenu>,
   nestSubMenu,
   <SubMenu title={<span className="submenu-title-wrapper">Events</span>} key="2">

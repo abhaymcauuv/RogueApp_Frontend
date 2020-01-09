@@ -3,7 +3,7 @@ import HomeHeaderscreen from '../homeheader';
 import PageFooter from '../footer';
 import '../../styles/styles.css';
 
-class CommissionsScreen extends Component {
+class VolumesScreen extends Component {
   render() {
     return (
       <div>
@@ -12,16 +12,16 @@ class CommissionsScreen extends Component {
           <div className="row content">
             <div className="container">
               <div className="col-sm-12">
-                <h2 className="h2hdr">Commissions</h2>
+                <h2 className="h2hdr">Volumes</h2>
                 <div className="row">
                   <div className="col-sm-3">
 
                     <nav className="view-navigation">
                       <div className="panel-group">
                         <div className="panel panel-default no-border">
-                          <div className="panel-heading active">
+                          <div className="panel-heading">
                             <div className="panel-title">
-                              <a href="/#/commissions" className="active">
+                              <a href="/#/commissions">
                                 Commissions
                                 </a>
                             </div>
@@ -30,16 +30,16 @@ class CommissionsScreen extends Component {
                         <div className="panel panel-default no-border">
                           <div className="panel-heading ">
                             <div className="panel-title">
-                              <a href="/#/rank" className="">
+                              <a href="/#/rank">
                                 Rank Advancement
                                 </a>
                             </div>
                           </div>
                         </div>
                         <div className="panel panel-default no-border">
-                          <div className="panel-heading ">
+                          <div className="panel-heading active">
                             <div className="panel-title">
-                              <a href="/#/volumes" className="">
+                              <a href="/#/volumes" className="active">
                                 Volumes
                                 </a>
                             </div>
@@ -205,4 +205,4 @@ class CommissionsScreen extends Component {
   }
 }
 
-export default CommissionsScreen;
+export default VolumesScreen;
