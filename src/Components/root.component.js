@@ -5,6 +5,7 @@ import DashboardScreen from "./dashboard";
 import CommissionsScreen from "./Commissions/commissions";
 import RankScreen from "./Commissions/rank";
 import VolumesScreen from "./Commissions/volumes";
+import CartScreen from "./cart";
 
 export default class Root extends Component { 
   render() {
@@ -15,7 +16,8 @@ export default class Root extends Component {
           <Route exact path="/dashboard" component={DashboardScreen} />
           <Route exact path="/commissions" component={CommissionsScreen} />
           <Route exact path="/rank" component={RankScreen} />
-          <Route exact path="/volumes" component={VolumesScreen} />          
+          <Route exact path="/volumes" component={VolumesScreen} />
+          <Route exact path="/cart" component={CartScreen} />          
         </div>
       </HashRouter>
     );

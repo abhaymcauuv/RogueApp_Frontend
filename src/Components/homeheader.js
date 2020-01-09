@@ -85,7 +85,7 @@ function onOpenChange(value) {
 }
 
 const children1 = [
-  <MenuItem key="11"><i className="fa fa-home" aria-hidden="true"></i></MenuItem>,
+  <MenuItem key="Home"><Link to="/dashboard"><i className="fa fa-home" aria-hidden="true"></i></Link></MenuItem>,
   <SubMenu title={<span className="submenu-title-wrapper">Commissions</span>} key="1">
     <MenuItem key="Commissions"> <Link to="/commissions">Commissions</Link></MenuItem>
     <MenuItem key="Rank Advancement"><Link to="/rank">Rank Advancement</Link></MenuItem>
@@ -106,7 +106,7 @@ const children1 = [
   </SubMenu>,
   <SubMenu title={<span className="submenu-title-wrapper">Store</span>} key="5">
     <MenuItem key="Products">Products</MenuItem>
-    <MenuItem key="My Cart">My Cart</MenuItem>
+    <MenuItem key="MyCart"><Link to="/cart">My Cart</Link></MenuItem>
     <MenuItem key="Bulk Order">Bulk Order</MenuItem>
   </SubMenu>,
   <MenuItem key="6">Company News</MenuItem>,
@@ -182,7 +182,9 @@ export default class HomeHeaderscreen extends Component {
                                 <a href="/account/settings" className="btn btn-default btn-sm">Change settings</a>
                               </div>
                               <div className="col-sm-6">
-                                <a href="/logout" className="btn btn-default btn-sm pull-right">Sign out</a>
+                                <Link to="/">
+                                  <a href="/#/home" className="btn btn-default btn-sm pull-right">Sign out</a>
+                                </Link>
                               </div>
                             </div>
                           </div>
@@ -217,7 +219,11 @@ export default class HomeHeaderscreen extends Component {
                     </Menu>
                   </div>
                 </div>
-                <div className="col-md-1 mycart pl0"><i className="fa fa-shopping-cart" aria-hidden="true"></i> My Cart</div>
+                <div className="col-md-1 mycart pl0 aselect">
+                  <Link to="/cart">
+                    <i className="fa fa-shopping-cart" aria-hidden="true"></i> My Cart
+                  </Link>
+                </div>
               </div>
 
             </div>

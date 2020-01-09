@@ -49,151 +49,122 @@ class VolumesScreen extends Component {
                     </nav>
                   </div>
                   <div className="col-md-9">
-                    <div className="well well-sm">
-                      <div className="row">
-                        <div className="col-sm-12">
-                          <div className="input-group">
-                            <span className="input-group-btn">
-                              <button className="btn btn-default" type="button"><i className="fa fa-angle-left" aria-hidden="true"></i></button>
-                            </span>
-                            <select id="periodchoice" className="form-control">
-                              <option value="/commissions/0/37">Current Commissions - Monthly 37 January 2020 (1/1/2020 - 1/31/2020)</option>
-                              <option value="/commissions/0/36">Current Commissions - Monthly 36 December 2019 (12/1/2019 - 12/31/2019)</option>
-                              <option value="/commissions/520">Current Commissions - Monthly 35 November 2019 (11/1/2019 - 11/30/2019)</option>
-                              <option value="/commissions/503">Current Commissions - Monthly 34 October 2019 (10/1/2019 - 10/31/2019)</option>
-                              <option value="/commissions/481">Current Commissions - Monthly 33 September 2019 (9/1/2019 - 9/30/2019)</option>
-                            </select>
-                            <span className="input-group-btn">
-                              <button className="btn btn-default" type="button"><i className="fa fa-angle-right" aria-hidden="true"></i></button>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="panel panel-default">
-
-                      <div className="panel-body">
-                        <h4>Monthly 37 January 2020 Commissions</h4>
-                        <div className="row">
-                          <div className="col-sm-4">
-                            <div className="metric metric-sm">
-                              <dl className="dl-metric">
-                                <dt><strong>Team Commissions</strong></dt>
-                                <dd>$0.00&nbsp;USD</dd>
-                                <dt><strong>USD Deferred Commissions</strong></dt>
-                                <dd>$5.00&nbsp;USD</dd>
-                                <dt><strong>CAD Deferred Commissions</strong></dt>
-                                <dd>$53.36&nbsp;CAD</dd>
-                                <dt><strong>Savvy Seller Bonus Total</strong></dt>
-                                <dd>&nbsp;</dd>
-                              </dl>
-                            </div>
-                          </div>
-                          <div className="col-sm-8">
-                            <div className="row">
-                              <div className="col-sm-6">
-                                <dl className="dl-metric">
-                                  <dt>PV</dt>
-                                  <dd>107.92</dd>
-                                  <dt>TV</dt>
-                                  <dd>2,521.71</dd>
-                                  <dt>EV</dt>
-                                  <dd>3,786.12</dd>
-                                </dl>
-                              </div>
-                              <div className="col-sm-6">
-                                <dl className="dl-metric">
-                                  <dt>PSQ</dt>
-                                  <dd>3</dd>
-                                  <dt>Level 1 Mentors</dt>
-                                  <dd>0</dd>
-                                  <dt>Master Mentor Legs</dt>
-                                  <dd>0</dd>
-                                </dl>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-sm-4 h20">
-                            <div className="metric metric-sm">
-                              <div className="metric-title">
-                                Qualifying as: <strong>Qualified Designer</strong>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="teamh">
-                            <div className="metric metric-sm">
-                              <div className="metric-title">*Team Commissions are displayed in USD</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
+                    <div className="panel panel-default panelmb50">
                       <div>
-
                         <table className="table table-bordered tablemrb">
                           <thead>
+                            <tr>
+                              <th colSpan="6" className="textalignr tdbg">
+                                <button type="button" class="k-grid-excel btn btn-primary hidden-print"><i class="fa fa-download"></i> Excel</button>
+                              </th>
+                            </tr>
                             <tr className="tdbg">
-                              <th scope="col">From ID#</th>
-                              <th scope="col">From</th>
-                              <th scope="col">Paid Level</th>
-                              <th scope="col">Source</th>
-                              <th scope="col">%</th>
-                              <th scope="col">Earned</th>
+                              <th scope="col">Period</th>
+                              <th scope="col">Paid as Title</th>
+                              <th scope="col">PV</th>
+                              <th scope="col">TV</th>
+                              <th scope="col">Level 1 Mentor</th>
+                              <th scope="col">PSQ</th>
                             </tr>
                           </thead>
                           <tbody>
+                            <tr className="tdbg">
+                              <td>January 2020</td>
+                              <td>Master Mentor</td>
+                              <td className="textalignr">523.85</td>
+                              <td className="textalignr">10,586.36</td>
+                              <td className="textalignr">2</td>
+                              <td className="textalignr">8</td>
+                            </tr>
                             <tr>
-                              <th colSpan="6">Bonus: Deferred Commission</th>
+                              <td>November 2019</td>
+                              <td>Couturier</td>
+                              <td className="textalignr">1,549.63</td>
+                              <td className="textalignr">22,690.73</td>
+                              <td className="textalignr">2</td>
+                              <td className="textalignr">10</td>
                             </tr>
                             <tr className="tdbg">
-                              <td>872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
+                              <td>January 2020</td>
+                              <td>Master Mentor</td>
+                              <td className="textalignr">523.85</td>
+                              <td className="textalignr">10,586.36</td>
+                              <td className="textalignr">2</td>
+                              <td className="textalignr">8</td>
                             </tr>
                             <tr>
-                              <td>872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
+                              <td>November 2019</td>
+                              <td>Couturier</td>
+                              <td className="textalignr">1,549.63</td>
+                              <td className="textalignr">22,690.73</td>
+                              <td className="textalignr">2</td>
+                              <td className="textalignr">10</td>
                             </tr>
                             <tr className="tdbg">
-                              <td>872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
+                              <td>January 2020</td>
+                              <td>Master Mentor</td>
+                              <td className="textalignr">523.85</td>
+                              <td className="textalignr">10,586.36</td>
+                              <td className="textalignr">2</td>
+                              <td className="textalignr">8</td>
                             </tr>
                             <tr>
-                              <td>872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
+                              <td>November 2019</td>
+                              <td>Couturier</td>
+                              <td className="textalignr">1,549.63</td>
+                              <td className="textalignr">22,690.73</td>
+                              <td className="textalignr">2</td>
+                              <td className="textalignr">10</td>
+                            </tr>
+                            <tr className="tdbg">
+                              <td>January 2020</td>
+                              <td>Master Mentor</td>
+                              <td className="textalignr">523.85</td>
+                              <td className="textalignr">10,586.36</td>
+                              <td className="textalignr">2</td>
+                              <td className="textalignr">8</td>
                             </tr>
                             <tr>
-                              <td colSpan="5"></td>
-                              <td><div className="totalb">Total: $53.36&nbsp;CAD<br></br> $5.00&nbsp;USD</div></td>
+                              <td>November 2019</td>
+                              <td>Couturier</td>
+                              <td className="textalignr">1,549.63</td>
+                              <td className="textalignr">22,690.73</td>
+                              <td className="textalignr">2</td>
+                              <td className="textalignr">10</td>
                             </tr>
                           </tbody>
                         </table>
+                        <div className="row">
+                          <div className="col-sm-9">
+                            <nav aria-label="Page navigation example">
+                              <ul class="pagination">
+                                <li class="page-item">
+                                  <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                  </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                  <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                  </a>
+                                </li>
+                              </ul>
+                            </nav>
+                          </div>
+                          <div className="col-sm-3 paddingt10">
+                            <span class="k-pager-info k-label">1 - 23 of 23 items</span>
+                          </div>
+
+                        </div>
                       </div>
-
                     </div>
-
-
                   </div>
                 </div>
-
               </div>
             </div>
           </div>

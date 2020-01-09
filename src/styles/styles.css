@@ -893,8 +893,8 @@ dd {
     float: left;
     clear: left;
     text-align: left;
-    font-weight: lighter;
-    color: #4b4b4b;
+    font-weight: 400;
+    color: #6b6b6b;
 }
 .metric.metric-sm .metric-title {
     font-size: .9em;
@@ -1096,8 +1096,7 @@ border-bottom: 1px solid #f0f0f0 !important;
 .input-group-addon, .input-group-btn {
     width: 26px;
     background-color: #e4e4e4;
-    border: solid 1px #c7c7c7;
-    border-top-left-radius: 2px;
+    border: solid 1px #c7c7c7;    
     white-space: nowrap;
     vertical-align: middle;
 }
@@ -1132,7 +1131,88 @@ border-bottom: 1px solid #f0f0f0 !important;
 .textalignr{
     text-align: right;
 }
+.panelmb50{
+    margin-bottom: 50px;
+}
+.panelmb25{
+    margin-bottom: 25px;
+}
+.padiingt10{
+    padding-top: 20px;
+}
+.bluecolor{
+    color: #296091;
+}
+.fafonts15{
+    font-size: 23px !important;
+}
+.progress-bar-info {
+    background-color: #5bc0de !important;
+}
+.barwd{
+    width: 53.9600%;
+}
+.panelhdr{
+    background-color: #73afe6 !important;
+    color: #fff !important;
+}
+.view-navigation .panel-default>.panel-heading.active {
+    background-color: #73afe6;
+    color: #fff !important;
+}
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 5px 5px;
+    border-radius: 4px;
+}
+.paddingt10{
+    padding-top: 10px;
+    color: #9e9e9e;
+}
 
+.list-group a {
+    background-color: white !important;
+}
+.list-group a:hover {
+    background-color: #cfcfcf !important;
+}
+.card-heading {
+    padding: 15px 15px 0px 15px;
+    border-bottom: 1px solid transparent;   
+}
+.card-footer{
+    color: #fff;
+    background-color: #73afe6 !important;
+}
+.no-padding{
+    padding: 0 !important;
+    border: 0 !important;
+}
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 6px 10px;
+    background-color: #fff;
+    border: 0 !important;
+}
+.list-group-item a{
+    position: relative;
+    display: block;
+    padding: 2px 1px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.carticon{
+    font-size: 25px;
+}
+.borderbtm{
+    padding-bottom: 11px;
+}
+.aselect a{
+    color: #666 !important;
+}
 
 
 
