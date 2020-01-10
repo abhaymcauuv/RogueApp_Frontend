@@ -102,7 +102,7 @@ class RankScreen extends Component {
                   <div className="col-md-9">
                     <div className="well well-sm">
                       <div className="row">
-                        <div className="col-sm-12">
+                        <div className="col-sm-6">
                           <div className="input-group">
                             <span className="input-group-btn">
                               <button className="btn btn-default" type="button"><i className="fa fa-angle-left" aria-hidden="true"></i></button>
@@ -122,136 +122,81 @@ class RankScreen extends Component {
                         </div>
                       </div>
                     </div>
-
-                    <div className="panel panel-default">
-
-                      <div className="panel-body">
-                        <h4>Monthly 37 January 2020 Commissions</h4>
-                        <div className="row">
-                          <div className="col-sm-4">
-                            <div className="metric metric-sm">
-                              <dl className="dl-metric">
-                                <dt><strong>Team Commissions</strong></dt>
-                                <dd>$0.00&nbsp;USD</dd>
-                                <dt><strong>USD Deferred Commissions</strong></dt>
-                                <dd>$5.00&nbsp;USD</dd>
-                                <dt><strong>CAD Deferred Commissions</strong></dt>
-                                <dd>$53.36&nbsp;CAD</dd>
-                                <dt><strong>Savvy Seller Bonus Total</strong></dt>
-                                <dd>&nbsp;</dd>
-                              </dl>
-                            </div>
-                          </div>
-                          <div className="col-sm-8">
-                            <div className="row">
-                              <div className="col-sm-6">
-                                <dl className="dl-metric">
-                                  <dt>PV</dt>
-                                  <dd>107.92</dd>
-                                  <dt>TV</dt>
-                                  <dd>2,521.71</dd>
-                                  <dt>EV</dt>
-                                  <dd>3,786.12</dd>
-                                </dl>
+                    <div className="panel panel-default panelmb25">
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <h3>Leading Designer</h3>
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <div class="metric metric-sm">
+                                <div class="metric-body text-info">90%</div>
+                                <div class="metric-title">
+                                  Complete
+                             </div>
                               </div>
-                              <div className="col-sm-6">
-                                <dl className="dl-metric">
-                                  <dt>PSQ</dt>
-                                  <dd>3</dd>
-                                  <dt>Level 1 Mentors</dt>
-                                  <dd>0</dd>
-                                  <dt>Master Mentor Legs</dt>
-                                  <dd>0</dd>
-                                </dl>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-sm-4 h20">
-                            <div className="metric metric-sm">
-                              <div className="metric-title">
-                                Qualifying as: <strong>Qualified Designer</strong>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="teamh">
-                            <div className="metric metric-sm">
-                              <div className="metric-title">*Team Commissions are displayed in USD</div>
                             </div>
                           </div>
                         </div>
                       </div>
-
                       <div>
-
-                        <table className="table table-bordered tablemrb">
-                          <thead>
-                            <tr className="tdbg">
-                              <th scope="col">From ID#</th>
-                              <th scope="col">From</th>
-                              <th scope="col">Paid Level</th>
-                              <th scope="col">Source</th>
-                              <th scope="col">%</th>
-                              <th scope="col">Earned</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <th colSpan="6">Bonus: Deferred Commission</th>
-                            </tr>
-                            <tr className="tdbg">
-                              <td>872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
-                            </tr>
-                            <tr>
-                              <td>872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
-                            </tr>
-                            <tr className="tdbg">
-                              <td>872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
-                            </tr>
-                            <tr>
-                              <td>872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
-                            </tr>
-                            <tr>
-                              <td colSpan="5"></td>
-                              <td><div className="totalb">Total: $53.36&nbsp;CAD<br></br> $5.00&nbsp;USD</div></td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
-
                     </div>
+                    <div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading panelhdr">
+                          <h4 class="panel-title">Qualification Requirements</h4>
+                        </div>
+                        <div class="list-group">
+                          <div class="list-group-item">
+                            <div class="media">
+                              <div class="media-object pull-left fa fa-check fafonts15 text-success"></div>
+                              <div class="media-body">
+                                You must be a Designer.
+                             </div>
+                            </div>
+                          </div>
+                          <div class="list-group-item">
+                            <div class="media">
+                              <div class="media-object pull-left fa fa-check fafonts15 text-success"></div>
+                              <div class="media-body">
+                                Your account must be in good standing.
+                            </div>
+                            </div>
+                          </div>
+                          <div class="list-group-item">
+                            <div class="media">
+                              <div class="media-object pull-left fa fa-times fafonts15 text-danger"></div>
+                              <div class="media-body">
+                                You need at least 200 Personal Volume (PV).
 
-
+                            <div class="space-10"></div>
+                                <div class="progress progress-sm no-margin">
+                                  <div class="progress-bar progress-bar-info barwd" role="progressbar" aria-valuenow="53.9600" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="sr-only">53.9600% Complete</span>
+                                  </div>
+                                </div>
+                                <small class="text-muted">108 of 200</small>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="list-group-item">
+                            <div class="media">
+                              <div class="media-object pull-left fa fa-check fafonts15 text-success"></div>
+                              <div class="media-body">
+                                You need at least 1 Personally Sponsored Qualifieds (PSQ).
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
           <PageFooter />
         </div>
-
       </div>
     )
   }

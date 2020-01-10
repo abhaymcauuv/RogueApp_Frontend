@@ -3,7 +3,6 @@ import Menu, { SubMenu, Item as MenuItem, Divider } from 'rc-menu';
 import { Link } from "react-router-dom";
 import '../styles/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-flags-select/css/react-flags-select.css';
 import 'rc-menu/assets/index.css';
 import animate from 'css-animation';
 
@@ -63,19 +62,19 @@ const nestSubMenu = (
     key="0"
     popupOffset={[10, 7]}
   >
-    <MenuItem key="Customer List">Customer List</MenuItem>
-    <MenuItem key="Club Couture Customer">Club Couture Customer</MenuItem>
-    <MenuItem key="Personally Enrolled Team">Personally Enrolled Team</MenuItem>
-    <MenuItem key="Upcoming Promotions">Upcoming Promotions</MenuItem>
-    <MenuItem key="Downline's Orders">Downline's Orders</MenuItem>
-    <MenuItem key="New Designers List">New Designers List</MenuItem>
-    <MenuItem key="Team Performance">Team Performance</MenuItem>
-    <MenuItem key="Recent Activity List">Recent Activity List</MenuItem>
-    <MenuItem key="Watts of Love Donations">Watts of Love Donations</MenuItem>
-    <MenuItem key="Tree Viewer">Tree Viewer</MenuItem>
-    <MenuItem key="First Time Title Promotions">First Time Title Promotions</MenuItem>
-    <MenuItem key="Incentive Trip Tracker">Incentive Trip Tracker</MenuItem>
-    <MenuItem key="Designer Début Tracker">Designer Début Tracker</MenuItem>
+    <MenuItem key="Customer List"><Link to="/customers">Customer List</Link></MenuItem>
+    <MenuItem key="Club Couture Customer"><Link to="/clubcouture">Club Couture Customer</Link></MenuItem>
+    <MenuItem key="Personally Enrolled Team"><Link to="/personallyenrolledteam">Personally Enrolled Team</Link></MenuItem>
+    <MenuItem key="Upcoming Promotions"><Link to="/">Upcoming Promotions</Link></MenuItem>
+    <MenuItem key="Downline's Orders"><Link to="/">Downline's Orders</Link></MenuItem>
+    <MenuItem key="New Designers List"><Link to="/">New Designers List</Link></MenuItem>
+    <MenuItem key="Team Performance"><Link to="/">Team Performance</Link></MenuItem>
+    <MenuItem key="Recent Activity List"><Link to="/">Recent Activity List</Link></MenuItem>
+    <MenuItem key="Watts of Love Donations"><Link to="/">Watts of Love Donations</Link></MenuItem>
+    <MenuItem key="Tree Viewer"><Link to="/">Tree Viewer</Link></MenuItem>
+    <MenuItem key="First Time Title Promotions"><Link to="/">First Time Title Promotions</Link></MenuItem>
+    <MenuItem key="Incentive Trip Tracker"><Link to="/">Incentive Trip Tracker</Link></MenuItem>
+    <MenuItem key="Designer Début Tracker"><Link to="/">Designer Début Tracker</Link></MenuItem>
     <Divider />
   </SubMenu>
 );
@@ -85,9 +84,9 @@ function onOpenChange(value) {
 }
 
 const children1 = [
-  <MenuItem key="11"><i className="fa fa-home" aria-hidden="true"></i></MenuItem>,
+  <MenuItem key="Home"><Link to="/dashboard"><i className="fa fa-home" aria-hidden="true"></i></Link></MenuItem>,
   <SubMenu title={<span className="submenu-title-wrapper">Commissions</span>} key="1">
-    <MenuItem key="Commissions"> <Link to="/commissions">Commissions</Link></MenuItem>
+    <MenuItem key="Commissions"><Link to="/commissions">Commissions</Link></MenuItem>
     <MenuItem key="Rank Advancement"><Link to="/rank">Rank Advancement</Link></MenuItem>
     <MenuItem key="Volumes"><Link to="/volumes">Volumes</Link></MenuItem>
   </SubMenu>,
@@ -106,7 +105,7 @@ const children1 = [
   </SubMenu>,
   <SubMenu title={<span className="submenu-title-wrapper">Store</span>} key="5">
     <MenuItem key="Products">Products</MenuItem>
-    <MenuItem key="My Cart">My Cart</MenuItem>
+    <MenuItem key="MyCart"><Link to="/cart">My Cart</Link></MenuItem>
     <MenuItem key="Bulk Order">Bulk Order</MenuItem>
   </SubMenu>,
   <MenuItem key="6">Company News</MenuItem>,
@@ -182,7 +181,9 @@ export default class HomeHeaderscreen extends Component {
                                 <a href="/account/settings" className="btn btn-default btn-sm">Change settings</a>
                               </div>
                               <div className="col-sm-6">
-                                <a href="/logout" className="btn btn-default btn-sm pull-right">Sign out</a>
+                                <Link to="/">
+                                  <a href="/#/home" className="btn btn-default btn-sm pull-right">Sign out</a>
+                                </Link>
                               </div>
                             </div>
                           </div>
@@ -217,7 +218,11 @@ export default class HomeHeaderscreen extends Component {
                     </Menu>
                   </div>
                 </div>
-                <div className="col-md-1 mycart pl0"><i className="fa fa-shopping-cart" aria-hidden="true"></i> My Cart</div>
+                <div className="col-md-1 mycart pl0 aselect">
+                  <Link to="/cart">
+                    <i className="fa fa-shopping-cart" aria-hidden="true"></i> My Cart
+                  </Link>
+                </div>
               </div>
 
             </div>

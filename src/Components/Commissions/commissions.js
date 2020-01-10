@@ -71,12 +71,11 @@ class CommissionsScreen extends Component {
                       </div>
                     </div>
 
-                    <div className="panel panel-default">
-
+                    <div className="panel panel-default panelmb50">
                       <div className="panel-body">
                         <h4>Monthly 37 January 2020 Commissions</h4>
                         <div className="row">
-                          <div className="col-sm-4">
+                          <div className="col-sm-5">
                             <div className="metric metric-sm">
                               <dl className="dl-metric">
                                 <dt><strong>Team Commissions</strong></dt>
@@ -85,13 +84,12 @@ class CommissionsScreen extends Component {
                                 <dd>$5.00&nbsp;USD</dd>
                                 <dt><strong>CAD Deferred Commissions</strong></dt>
                                 <dd>$53.36&nbsp;CAD</dd>
-                                <dt><strong>Savvy Seller Bonus Total</strong></dt>
-                                <dd>&nbsp;</dd>
+
                               </dl>
                             </div>
                           </div>
-                          <div className="col-sm-8">
-                            <div className="row">
+                          <div className="col-sm-6">
+                            <div className="row padiingt10">
                               <div className="col-sm-6">
                                 <dl className="dl-metric">
                                   <dt>PV</dt>
@@ -116,7 +114,7 @@ class CommissionsScreen extends Component {
                           </div>
                         </div>
                         <div className="row">
-                          <div className="col-sm-4 h20">
+                          <div className="col-sm-8 h20">
                             <div className="metric metric-sm">
                               <div className="metric-title">
                                 Qualifying as: <strong>Qualified Designer</strong>
@@ -125,14 +123,12 @@ class CommissionsScreen extends Component {
                           </div>
                           <div className="teamh">
                             <div className="metric metric-sm">
-                              <div className="metric-title">*Team Commissions are displayed in USD</div>
+                              <div className="metric-title textalignr">*Team Commissions are displayed in USD</div>
                             </div>
                           </div>
                         </div>
                       </div>
-
                       <div>
-
                         <table className="table table-bordered tablemrb">
                           <thead>
                             <tr className="tdbg">
@@ -149,7 +145,7 @@ class CommissionsScreen extends Component {
                               <th colSpan="6">Bonus: Deferred Commission</th>
                             </tr>
                             <tr className="tdbg">
-                              <td>872805</td>
+                              <td className="bluecolor">872805</td>
                               <td>Lainey Miller</td>
                               <td>1</td>
                               <td className="textalignr">$19.99 USD</td>
@@ -157,7 +153,7 @@ class CommissionsScreen extends Component {
                               <td className="textalignr">$5.00 USD</td>
                             </tr>
                             <tr>
-                              <td>872805</td>
+                              <td className="bluecolor">872805</td>
                               <td>Lainey Miller</td>
                               <td>1</td>
                               <td className="textalignr">$19.99 USD</td>
@@ -165,7 +161,7 @@ class CommissionsScreen extends Component {
                               <td className="textalignr">$5.00 USD</td>
                             </tr>
                             <tr className="tdbg">
-                              <td>872805</td>
+                              <td className="bluecolor">872805</td>
                               <td>Lainey Miller</td>
                               <td>1</td>
                               <td className="textalignr">$19.99 USD</td>
@@ -173,7 +169,7 @@ class CommissionsScreen extends Component {
                               <td className="textalignr">$5.00 USD</td>
                             </tr>
                             <tr>
-                              <td>872805</td>
+                              <td className="bluecolor">872805</td>
                               <td>Lainey Miller</td>
                               <td>1</td>
                               <td className="textalignr">$19.99 USD</td>
@@ -182,12 +178,11 @@ class CommissionsScreen extends Component {
                             </tr>
                             <tr>
                               <td colSpan="5"></td>
-                              <td><div className="totalb">Total: $53.36&nbsp;CAD<br></br> $5.00&nbsp;USD</div></td>
+                              <td><div className="totalb textalignr">Total: $53.36&nbsp;CAD<br></br> $5.00&nbsp;USD</div></td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
-
                     </div>
 
 
