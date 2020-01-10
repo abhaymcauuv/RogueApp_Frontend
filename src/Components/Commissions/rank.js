@@ -2,9 +2,39 @@ import React, { Component } from 'react';
 import HomeHeaderscreen from '../homeheader';
 import PageFooter from '../footer';
 import '../../styles/styles.css';
+const axios = require('axios');
 
 class RankScreen extends Component {
+  state = {
+    rankData: []
+  }
+  componentDidMount() {
+    // Send a POST request
+    this.loadRankData();
+  }
+  handleChange(e) {
+    // let fields = this.state.fields;
+    // fields[e.target.name] = e.target.value;
+    // this.setState({
+    //   fields
+    // });
+    console.log(e.target.value);
+  }
+  loadRankData = () => {
+    axios({
+      method: 'GET',
+      url: 'http://localhost:6002/rogue/commission/rankadvancement/getrank'
+    }).then(async (response) => {
+      console.log(response.data.Items);
+      const dt = await response.data.Items
+      this.setState({ rankData: dt });
+    })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   render() {
+    const { rankData } = this.state;
     return (
       <div>
         <div className="container-fluid">
@@ -56,12 +86,13 @@ class RankScreen extends Component {
                             <span className="input-group-btn">
                               <button className="btn btn-default" type="button"><i className="fa fa-angle-left" aria-hidden="true"></i></button>
                             </span>
-                            <select id="periodchoice" className="form-control">
-                              <option value="/commissions/0/37">Current Commissions - Monthly 37 January 2020 (1/1/2020 - 1/31/2020)</option>
-                              <option value="/commissions/0/36">Current Commissions - Monthly 36 December 2019 (12/1/2019 - 12/31/2019)</option>
-                              <option value="/commissions/520">Current Commissions - Monthly 35 November 2019 (11/1/2019 - 11/30/2019)</option>
-                              <option value="/commissions/503">Current Commissions - Monthly 34 October 2019 (10/1/2019 - 10/31/2019)</option>
-                              <option value="/commissions/481">Current Commissions - Monthly 33 September 2019 (9/1/2019 - 9/30/2019)</option>
+                            <select id="periodchoice" className="form-control" onChange={this.handleChange} >
+                            <option value={0}>No Rank</option>
+                            {rankData.map((dt, i) => {
+                              return (
+                            <option key={i} value={dt.RankID}>{dt.RankDescription}</option>
+                              )
+                            })}
                             </select>
                             <span className="input-group-btn">
                               <button className="btn btn-default" type="button"><i className="fa fa-angle-right" aria-hidden="true"></i></button>
