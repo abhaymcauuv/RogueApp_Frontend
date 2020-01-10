@@ -9,6 +9,11 @@ import VolumesScreen from "./Commissions/volumes";
 import CustomersScreen from "./Reports/customers";
 import ClubCoutureScreen from "./Reports/clubcouture";
 import PersonallyEnrolledScreen from "./Reports/personallyenrolledteam";
+import UpcomingPromotionsScreen from "./Reports/upcomingpromotions";
+import DownlineOrdersScreen from "./Reports/downlineorders";
+import NewDesignersListScreen from "./Reports/newdesigners";
+import TeamPerformanceScreen from "./Reports/teamperformance";
+
 
 export default class Root extends Component { 
   render() {
@@ -23,7 +28,11 @@ export default class Root extends Component {
           <Route exact path="/volumes" component={VolumesScreen} />
           <Route exact path="/customers" component={CustomersScreen} /> 
           <Route exact path="/clubcouture" component={ClubCoutureScreen} />
-          <Route exact path="/personallyenrolledteam" component={PersonallyEnrolledScreen} />        
+          <Route exact path="/personallyenrolledteam" component={PersonallyEnrolledScreen} />
+          <Route exact path="/upcomingpromotions" component={UpcomingPromotionsScreen} />  
+          <Route exact path="/downlineorders" component={DownlineOrdersScreen} />  
+          <Route exact path="/newdesigners" component={NewDesignersListScreen} />
+          <Route exact path="/teamperformance" component={TeamPerformanceScreen} />       
         </div>
       </HashRouter>
     );

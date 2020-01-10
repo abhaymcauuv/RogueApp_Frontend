@@ -65,10 +65,10 @@ const nestSubMenu = (
     <MenuItem key="Customer List"><Link to="/customers">Customer List</Link></MenuItem>
     <MenuItem key="Club Couture Customer"><Link to="/clubcouture">Club Couture Customer</Link></MenuItem>
     <MenuItem key="Personally Enrolled Team"><Link to="/personallyenrolledteam">Personally Enrolled Team</Link></MenuItem>
-    <MenuItem key="Upcoming Promotions"><Link to="/">Upcoming Promotions</Link></MenuItem>
-    <MenuItem key="Downline's Orders"><Link to="/">Downline's Orders</Link></MenuItem>
-    <MenuItem key="New Designers List"><Link to="/">New Designers List</Link></MenuItem>
-    <MenuItem key="Team Performance"><Link to="/">Team Performance</Link></MenuItem>
+    <MenuItem key="Upcoming Promotions"><Link to="/upcomingpromotions">Upcoming Promotions</Link></MenuItem>
+    <MenuItem key="Downline's Orders"><Link to="/downlineorders">Downline's Orders</Link></MenuItem>
+    <MenuItem key="New Designers List"><Link to="/newdesigners">New Designers List</Link></MenuItem>
+    <MenuItem key="Team Performance"><Link to="/teamperformance">Team Performance</Link></MenuItem>
     <MenuItem key="Recent Activity List"><Link to="/">Recent Activity List</Link></MenuItem>
     <MenuItem key="Watts of Love Donations"><Link to="/">Watts of Love Donations</Link></MenuItem>
     <MenuItem key="Tree Viewer"><Link to="/">Tree Viewer</Link></MenuItem>
