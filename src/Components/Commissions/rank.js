@@ -19,6 +19,25 @@ class RankScreen extends Component {
     //   fields
     // });
     console.log(e.target.value);
+    //loadRankQualificationData = () => {
+     // console.log("________",rankid);
+      axios({
+        method: 'POST',
+        url: 'http://localhost:6002/rogue/commission/rankadvancement/postCustomerRankQualification',
+        data: {
+          customerId: 14113,
+          rankId:e.target.value,
+          periodId:1
+        }
+      }).then(async (response) => {
+        console.log(response.data.Items);
+        //const dt = await response.data.Items
+        //this.setState({ rankData: dt });
+      })
+        .catch(function (error) {
+          console.log(error);
+        });
+   // }
   }
   loadRankData = () => {
     axios({
@@ -33,6 +52,8 @@ class RankScreen extends Component {
         console.log(error);
       });
   }
+
+
   render() {
     const { rankData } = this.state;
     return (
