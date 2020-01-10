@@ -2,9 +2,60 @@ import React, { Component } from 'react';
 import HomeHeaderscreen from '../homeheader';
 import PageFooter from '../footer';
 import '../../styles/styles.css';
+const axios = require('axios');
 
 class RankScreen extends Component {
+  state = {
+    rankData: []
+  }
+  componentDidMount() {
+    // Send a POST request
+    this.loadRankData();
+  }
+  handleChange(e) {
+    // let fields = this.state.fields;
+    // fields[e.target.name] = e.target.value;
+    // this.setState({
+    //   fields
+    // });
+    console.log(e.target.value);
+    //loadRankQualificationData = () => {
+     // console.log("________",rankid);
+      axios({
+        method: 'POST',
+        url: 'http://localhost:6002/rogue/commission/rankadvancement/postCustomerRankQualification',
+        data: {
+          customerId: 14113,
+          rankId:e.target.value,
+          periodId:1
+        }
+      }).then(async (response) => {
+        console.log(response.data.Items);
+        //const dt = await response.data.Items
+        //this.setState({ rankData: dt });
+      })
+        .catch(function (error) {
+          console.log(error);
+        });
+   // }
+  }
+  loadRankData = () => {
+    axios({
+      method: 'GET',
+      url: 'http://localhost:6002/rogue/commission/rankadvancement/getrank'
+    }).then(async (response) => {
+      console.log(response.data.Items);
+      const dt = await response.data.Items
+      this.setState({ rankData: dt });
+    })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
   render() {
+    const { rankData } = this.state;
     return (
       <div>
         <div className="container-fluid">
@@ -56,18 +107,13 @@ class RankScreen extends Component {
                             <span className="input-group-btn">
                               <button className="btn btn-default" type="button"><i className="fa fa-angle-left" aria-hidden="true"></i></button>
                             </span>
-                            <select id="rankchoice" class="form-control">
-                              <option value="0">No Rank</option>
-                              <option value="1">Designer</option>
-                              <option value="10" selected="">Qualified Designer</option>
-                              <option value="20">Leading Designer</option>
-                              <option value="30">Master Designer</option>
-                              <option value="40">Mentor</option>
-                              <option value="50">Leading Mentor</option>
-                              <option value="60">Master Mentor</option>
-                              <option value="70">Couturier</option>
-                              <option value="80">Executive Couturier</option>
-                              <option value="90">Master Couturier</option>
+                            <select id="periodchoice" className="form-control" onChange={this.handleChange} >
+                            <option value={0}>No Rank</option>
+                            {rankData.map((dt, i) => {
+                              return (
+                            <option key={i} value={dt.RankID}>{dt.RankDescription}</option>
+                              )
+                            })}
                             </select>
                             <span className="input-group-btn">
                               <button className="btn btn-default" type="button"><i className="fa fa-angle-right" aria-hidden="true"></i></button>

@@ -2,9 +2,37 @@ import React, { Component } from 'react';
 import HomeHeaderscreen from '../homeheader';
 import PageFooter from '../footer';
 import '../../styles/styles.css';
+const axios = require('axios');
 
 class VolumesScreen extends Component {
+  state = {
+    volumeData: []
+  }
+  componentDidMount() {
+    // Send a POST request
+    this.loadVolumeData();
+  }
+  loadVolumeData = () => {
+    axios({
+      method: 'post',
+      url: 'http://localhost:6002/rogue/commission/volumes/postVolumes',
+      data: {
+        CustomerID: 14113,
+        periodTypeId: 1
+      }
+    }).then(async (response) => {
+      console.log(response.data.Items);
+      const dt = await response.data.Items
+      this.setState({ volumeData: dt });
+    })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   render() {
+    console.log('---load-', this.state.volumeData)
+    const { volumeData } = this.state;
     return (
       <div>
         <div className="container-fluid">
@@ -50,6 +78,7 @@ class VolumesScreen extends Component {
                   </div>
                   <div className="col-md-9">
                     <div className="panel panel-default panelmb50">
+
                       <div>
                         <table className="table table-bordered tablemrb">
                           <thead>
@@ -68,70 +97,18 @@ class VolumesScreen extends Component {
                             </tr>
                           </thead>
                           <tbody>
-                            <tr className="tdbg">
-                              <td>January 2020</td>
-                              <td>Master Mentor</td>
-                              <td className="textalignr">523.85</td>
-                              <td className="textalignr">10,586.36</td>
-                              <td className="textalignr">2</td>
-                              <td className="textalignr">8</td>
-                            </tr>
-                            <tr>
-                              <td>November 2019</td>
-                              <td>Couturier</td>
-                              <td className="textalignr">1,549.63</td>
-                              <td className="textalignr">22,690.73</td>
-                              <td className="textalignr">2</td>
-                              <td className="textalignr">10</td>
-                            </tr>
-                            <tr className="tdbg">
-                              <td>January 2020</td>
-                              <td>Master Mentor</td>
-                              <td className="textalignr">523.85</td>
-                              <td className="textalignr">10,586.36</td>
-                              <td className="textalignr">2</td>
-                              <td className="textalignr">8</td>
-                            </tr>
-                            <tr>
-                              <td>November 2019</td>
-                              <td>Couturier</td>
-                              <td className="textalignr">1,549.63</td>
-                              <td className="textalignr">22,690.73</td>
-                              <td className="textalignr">2</td>
-                              <td className="textalignr">10</td>
-                            </tr>
-                            <tr className="tdbg">
-                              <td>January 2020</td>
-                              <td>Master Mentor</td>
-                              <td className="textalignr">523.85</td>
-                              <td className="textalignr">10,586.36</td>
-                              <td className="textalignr">2</td>
-                              <td className="textalignr">8</td>
-                            </tr>
-                            <tr>
-                              <td>November 2019</td>
-                              <td>Couturier</td>
-                              <td className="textalignr">1,549.63</td>
-                              <td className="textalignr">22,690.73</td>
-                              <td className="textalignr">2</td>
-                              <td className="textalignr">10</td>
-                            </tr>
-                            <tr className="tdbg">
-                              <td>January 2020</td>
-                              <td>Master Mentor</td>
-                              <td className="textalignr">523.85</td>
-                              <td className="textalignr">10,586.36</td>
-                              <td className="textalignr">2</td>
-                              <td className="textalignr">8</td>
-                            </tr>
-                            <tr>
-                              <td>November 2019</td>
-                              <td>Couturier</td>
-                              <td className="textalignr">1,549.63</td>
-                              <td className="textalignr">22,690.73</td>
-                              <td className="textalignr">2</td>
-                              <td className="textalignr">10</td>
-                            </tr>
+                            {volumeData.map((dt, i) => {
+                              return (<tr className="tdbg" key={i} >
+                                <td>{dt.PeriodDescription}</td>
+                                <td>{dt.PaidRankDescription}</td>
+                                <td>{dt.PV}</td>
+                                <td className="textalignr">{dt.TV}</td>
+                                <td className="textalignr">{dt.L1M}	</td>
+                                <td className="textalignr">{dt.PSQ}</td>
+                              </tr>)
+
+                            })}
+
                           </tbody>
                         </table>
                         <div className="row">
@@ -171,7 +148,7 @@ class VolumesScreen extends Component {
           <PageFooter />
         </div>
 
-      </div>
+      </div >
     )
   }
 }
