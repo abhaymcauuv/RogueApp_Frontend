@@ -8,9 +8,13 @@ const BASE_URL = `http://localhost:6002/`;
 class CommissionsScreen extends Component {
   constructor() {
     super()
+    this.handleSelectedChange = this.handleSelectedChange.bind(this);
     this.state = {
       CommissionPeriodList: [],
-      error: {}
+      error: {},
+      HistoricalSummaryCommissions: {},
+      HistoricalCommission: {},
+      RealTimeCommissions: []
     }
   }
 
@@ -30,8 +34,33 @@ class CommissionsScreen extends Component {
       .catch(error => this.setState({ error }));
   }
 
+  handleSelectedChange(e) {
+    const val = e.target.value;
+    if (!val) {
+      return
+    }
+    let customerId = 967
+    const runId = val.split('-')[0];
+    const periodId = val.split('-')[1];
+    let url = Number(runId) > 0 ? BASE_URL + `rogue/commission/getcommissiondetails/${customerId}/${runId}/0` : BASE_URL + `rogue/commission/getcommissiondetails/${customerId}/0/${periodId}`
+    this.setState({ selectedPeriod: val });
+
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.data.Items) {
+          this.setState({
+            HistoricalSummaryCommissions: response.data.Items.HistoricalSummaryCommissions,
+            HistoricalCommission: response.data.Items.HistoricalCommission,
+            RealTimeCommissions: response.data.Items.RealTimeCommissions
+          });
+        }
+      })
+      .catch(error => this.setState({ error }));
+  }
+
   render() {
-    const { CommissionPeriodList } = this.state
+    const { CommissionPeriodList, HistoricalSummaryCommissions } = this.state
     return (
       <div>
         <div className="container-fluid">
@@ -83,7 +112,7 @@ class CommissionsScreen extends Component {
                             <span className="input-group-btn">
                               <button className="btn btn-default" type="button"><i className="fa fa-angle-left" aria-hidden="true"></i></button>
                             </span>
-                            <select id="periodchoice" className="form-control">
+                            <select value={this.state.selectedPeriod} onChange={this.handleSelectedChange} id="periodchoice" className="form-control">
                               {CommissionPeriodList.length > 0 ? (
                                 CommissionPeriodList.map((data, index) => {
                                   return (
@@ -102,7 +131,56 @@ class CommissionsScreen extends Component {
                       </div>
                     </div>
 
+
                     <div className="panel panel-default panelmb50">
+                      {!(JSON.stringify(HistoricalSummaryCommissions) === JSON.stringify({})) ?
+                        (
+                          <div className="panel-body">
+                            <h4>{HistoricalSummaryCommissions.PeriodDescription} Commissions</h4>
+                            <div className="row">
+                              <div className="col-sm-5">
+                                <div className="metric metric-sm">
+                                  <div className="metric-body text-info">
+                                    ${HistoricalSummaryCommissions.Commission.toLocaleString(undefined, { maximumFractionDigits: 2 })} <span style={{ fontSize: "15px" }}>USD</span>
+                                  </div>
+                                  <div className="metric-title">
+                                    QualifiedAs: <strong>{HistoricalSummaryCommissions.PaidAsTitle}</strong>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="col-sm-6">
+                                <div className="row padiingt10">
+                                  <div className="col-sm-6">
+                                    <dl className="dl-metric">
+                                      <dt>PV</dt>
+                                      <dd>{HistoricalSummaryCommissions.PV.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                      <dt>TV</dt>
+                                      <dd>{HistoricalSummaryCommissions.TV.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                      <dt>EV</dt>
+                                      <dd>{HistoricalSummaryCommissions.EV.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                    </dl>
+                                  </div>
+                                  <div className="col-sm-6">
+                                    <dl className="dl-metric">
+                                      <dt>PSQ</dt>
+                                      <dd>{HistoricalSummaryCommissions.PSQ}</dd>
+                                      <dt>Level 1 Mentors</dt>
+                                      <dd>{HistoricalSummaryCommissions.L1M}</dd>
+                                      <dt>Master Mentor Legs</dt>
+                                      <dd>{HistoricalSummaryCommissions.MML}</dd>
+                                    </dl>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <div></div>
+                        )}
+                    </div>
+
+
+                    {/* <div className="panel panel-default panelmb50">
                       <div className="panel-body">
                         <h4>Monthly 37 January 2020 Commissions</h4>
                         <div className="row">
@@ -214,7 +292,7 @@ class CommissionsScreen extends Component {
                           </tbody>
                         </table>
                       </div>
-                    </div>
+                    </div> */}
 
 
                   </div>
