@@ -19,19 +19,19 @@ class IncentiveTripTrackerScreen extends Component {
                   <ReportLeftmenuscreen />
                   <div className="col-md-9">
                     <div>
-                      <div class="well well-sm">
-                        <div class="row">
-                          <div class="col-sm-12">
-                            <div class="input-group">
-                              <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"><i class="fa fa-chevron-left"></i></button>
+                      <div className="well well-sm">
+                        <div className="row">
+                          <div className="col-sm-12">
+                            <div className="input-group">
+                              <span className="input-group-btn">
+                                <button className="btn btn-default" type="button"><i className="fa fa-chevron-left"></i></button>
                               </span>
-                              <select id="periods" class="form-control">
+                              <select id="periods" className="form-control">
                                 <option value="37">FIJI INCENTIVE TRIP 2020</option>
                                 <option value="36">ENCORE CRUISE INCENTIVE TRIP 2019</option>
                               </select>
-                              <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"><i class="fa fa-chevron-right"></i></button>
+                              <span className="input-group-btn">
+                                <button className="btn btn-default" type="button"><i className="fa fa-chevron-right"></i></button>
                               </span>
                             </div>
                           </div>
@@ -39,21 +39,21 @@ class IncentiveTripTrackerScreen extends Component {
                       </div>
                     </div>
                     <div className="panel panel-default panelmb25">
-                      <div class="panel-body">
+                      <div className="panel-body">
                         <h3>Summary</h3>
-                        <div class="row">
-                          <div class="col-sm-4">
-                            <div class="metric metric-sm">
-                              <div class="metric-body1 text-info">7327 / 30000</div>
-                              <div class="metric-title">
+                        <div className="row">
+                          <div className="col-sm-4">
+                            <div className="metric metric-sm">
+                              <div className="metric-body1 text-info">7327 / 30000</div>
+                              <div className="metric-title">
                                 <strong>Total Points</strong>
                               </div>
                             </div>
                           </div>
-                          <div class="col-sm-8">
-                            <div class="row">
-                              <div class="col-sm-6">
-                                <dl class="dl-metric">
+                          <div className="col-sm-8">
+                            <div className="row">
+                              <div className="col-sm-6">
+                                <dl className="dl-metric">
                                   <dt>PV Points</dt>
                                   <dd>3427</dd>
                                   <dt>Sponsored Pending Points</dt>
@@ -62,8 +62,8 @@ class IncentiveTripTrackerScreen extends Component {
                                   <dd>3000</dd>
                                 </dl>
                               </div>
-                              <div class="col-sm-6">
-                                <dl class="dl-metric">
+                              <div className="col-sm-6">
+                                <dl className="dl-metric">
                                   <dt>PSV Qualification</dt>
                                   <dd>2683 / 8000</dd>
                                   <dt>Airfare Earned</dt>
@@ -92,7 +92,7 @@ class IncentiveTripTrackerScreen extends Component {
                           </thead>
                           <tbody>
                             <tr className="tdbg">
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>October 2019</td>
                               <td>1,230</td>
                               <td>Master Mentor</td>
@@ -101,7 +101,7 @@ class IncentiveTripTrackerScreen extends Component {
                               <td>2,230</td>
                             </tr>
                             <tr>
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>November 2019</td>
                               <td>1,549</td>
                               <td>Couturier</td>
@@ -110,7 +110,7 @@ class IncentiveTripTrackerScreen extends Component {
                               <td>3,549</td>
                             </tr>
                             <tr className="tdbg">
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>October 2019</td>
                               <td>1,230</td>
                               <td>Master Mentor</td>
@@ -119,7 +119,7 @@ class IncentiveTripTrackerScreen extends Component {
                               <td>2,230</td>
                             </tr>
                             <tr>
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>November 2019</td>
                               <td>1,549</td>
                               <td>Couturier</td>
@@ -148,7 +148,7 @@ class IncentiveTripTrackerScreen extends Component {
                       </thead>
                       <tbody>
                         <tr className="tdbg">
-                          <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                          <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                           <td>October 2019</td>
                           <td>1,230</td>
                           <td>Master Mentor</td>
@@ -157,7 +157,7 @@ class IncentiveTripTrackerScreen extends Component {
                           <td>2,230</td>
                         </tr>
                         <tr>
-                          <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                          <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                           <td>November 2019</td>
                           <td>1,549</td>
                           <td>Couturier</td>

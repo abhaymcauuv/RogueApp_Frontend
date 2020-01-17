@@ -20,7 +20,6 @@ import TitlePromotionsScreen from "./Reports/titlepromotion";
 import IncentiveTripTrackerScreen from "./Reports/incentivetriptracker";
 import DesignerDebutTrackerScreen from "./Reports/designerdebuttracker";
 
-
 export default class Root extends Component { 
   render() {
     return (
