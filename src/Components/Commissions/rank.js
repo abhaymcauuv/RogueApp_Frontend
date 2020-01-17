@@ -123,14 +123,14 @@ class RankScreen extends Component {
                       </div>
                     </div>
                     <div className="panel panel-default panelmb25">
-                      <div class="panel panel-default">
-                        <div class="panel-body">
+                      <div className="panel panel-default">
+                        <div className="panel-body">
                           <h3>Leading Designer</h3>
-                          <div class="row">
-                            <div class="col-sm-12">
-                              <div class="metric metric-sm">
-                                <div class="metric-body text-info">90%</div>
-                                <div class="metric-title">
+                          <div className="row">
+                            <div className="col-sm-12">
+                              <div className="metric metric-sm">
+                                <div className="metric-body text-info">90%</div>
+                                <div className="metric-title">
                                   Complete
                              </div>
                               </div>
@@ -142,47 +142,47 @@ class RankScreen extends Component {
                       </div>
                     </div>
                     <div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading panelhdr">
-                          <h4 class="panel-title">Qualification Requirements</h4>
+                      <div className="panel panel-default">
+                        <div className="panel-heading panelhdr">
+                          <h4 className="panel-title">Qualification Requirements</h4>
                         </div>
-                        <div class="list-group">
-                          <div class="list-group-item">
-                            <div class="media">
-                              <div class="media-object pull-left fa fa-check fafonts15 text-success"></div>
-                              <div class="media-body">
+                        <div className="list-group">
+                          <div className="list-group-item">
+                            <div className="media">
+                              <div className="media-object pull-left fa fa-check fafonts15 text-success"></div>
+                              <div className="media-body">
                                 You must be a Designer.
                              </div>
                             </div>
                           </div>
-                          <div class="list-group-item">
-                            <div class="media">
-                              <div class="media-object pull-left fa fa-check fafonts15 text-success"></div>
-                              <div class="media-body">
+                          <div className="list-group-item">
+                            <div className="media">
+                              <div className="media-object pull-left fa fa-check fafonts15 text-success"></div>
+                              <div className="media-body">
                                 Your account must be in good standing.
                             </div>
                             </div>
                           </div>
-                          <div class="list-group-item">
-                            <div class="media">
-                              <div class="media-object pull-left fa fa-times fafonts15 text-danger"></div>
-                              <div class="media-body">
+                          <div className="list-group-item">
+                            <div className="media">
+                              <div className="media-object pull-left fa fa-times fafonts15 text-danger"></div>
+                              <div className="media-body">
                                 You need at least 200 Personal Volume (PV).
 
-                            <div class="space-10"></div>
-                                <div class="progress progress-sm no-margin">
-                                  <div class="progress-bar progress-bar-info barwd" role="progressbar" aria-valuenow="53.9600" aria-valuemin="0" aria-valuemax="100">
-                                    <span class="sr-only">53.9600% Complete</span>
+                            <div className="space-10"></div>
+                                <div className="progress progress-sm no-margin">
+                                  <div className="progress-bar progress-bar-info barwd" role="progressbar" aria-valuenow="53.9600" aria-valuemin="0" aria-valuemax="100">
+                                    <span className="sr-only">53.9600% Complete</span>
                                   </div>
                                 </div>
-                                <small class="text-muted">108 of 200</small>
+                                <small className="text-muted">108 of 200</small>
                               </div>
                             </div>
                           </div>
-                          <div class="list-group-item">
-                            <div class="media">
-                              <div class="media-object pull-left fa fa-check fafonts15 text-success"></div>
-                              <div class="media-body">
+                          <div className="list-group-item">
+                            <div className="media">
+                              <div className="media-object pull-left fa fa-check fafonts15 text-success"></div>
+                              <div className="media-body">
                                 You need at least 1 Personally Sponsored Qualifieds (PSQ).
                               </div>
                             </div>

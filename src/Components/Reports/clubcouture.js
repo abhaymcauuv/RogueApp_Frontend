@@ -18,7 +18,7 @@ class ClubCoutureScreen extends Component {
                 <div className="row">
                   <ReportLeftmenuscreen />
                   <div className="col-md-9">
-                    <div class="checkbox cheboxpl">
+                    <div className="checkbox cheboxpl">
                       <label>
                         <input type="checkbox" /> Include Cancelled/Paused Customers
                           </label>
@@ -29,7 +29,7 @@ class ClubCoutureScreen extends Component {
                           <thead>
                             <tr>
                               <th colSpan="8" className="textalignr tdbg">
-                                <button type="button" class="k-grid-excel btn btn-primary hidden-print"><i class="fa fa-download"></i> Excel</button>
+                                <button type="button" className="k-grid-excel btn btn-primary hidden-print"><i className="fa fa-download"></i> Excel</button>
                               </th>
                             </tr>
                             <tr className="tdbg">
@@ -45,7 +45,7 @@ class ClubCoutureScreen extends Component {
                           </thead>
                           <tbody>
                             <tr className="tdbg">
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>17050</td>
                               <td className="textalignr">Aleshia Lindhardt</td>
                               <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
@@ -55,7 +55,7 @@ class ClubCoutureScreen extends Component {
                               <td className="textalignr">123 Homewood Dr</td>
                             </tr>
                             <tr>
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>19893</td>
                               <td className="textalignr">Carley Schaefer</td>
                               <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
@@ -65,7 +65,7 @@ class ClubCoutureScreen extends Component {
                               <td className="textalignr">123 Yoofoo</td>
                             </tr>
                             <tr className="tdbg">
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>17050</td>
                               <td className="textalignr">Aleshia Lindhardt</td>
                               <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
@@ -75,7 +75,7 @@ class ClubCoutureScreen extends Component {
                               <td className="textalignr">123 Homewood Dr</td>
                             </tr>
                             <tr>
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>19893</td>
                               <td className="textalignr">Carley Schaefer</td>
                               <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
@@ -85,7 +85,7 @@ class ClubCoutureScreen extends Component {
                               <td className="textalignr">123 Yoofoo</td>
                             </tr>
                             <tr className="tdbg">
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>17050</td>
                               <td className="textalignr">Aleshia Lindhardt</td>
                               <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
@@ -95,7 +95,7 @@ class ClubCoutureScreen extends Component {
                               <td className="textalignr">123 Homewood Dr</td>
                             </tr>
                             <tr>
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>19893</td>
                               <td className="textalignr">Carley Schaefer</td>
                               <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
@@ -110,27 +110,27 @@ class ClubCoutureScreen extends Component {
                         <div className="row">
                           <div className="col-sm-9">
                             <nav aria-label="Page navigation example">
-                              <ul class="pagination">
-                                <li class="page-item">
-                                  <a class="page-link" href="#" aria-label="Previous">
+                              <ul className="pagination">
+                                <li className="page-item">
+                                  <a className="page-link" href="#" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
+                                    <span className="sr-only">Previous</span>
                                   </a>
                                 </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                  <a class="page-link" href="#" aria-label="Next">
+                                <li className="page-item"><a className="page-link" href="#">1</a></li>
+                                <li className="page-item"><a className="page-link" href="#">2</a></li>
+                                <li className="page-item"><a className="page-link" href="#">3</a></li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
+                                    <span className="sr-only">Next</span>
                                   </a>
                                 </li>
                               </ul>
                             </nav>
                           </div>
                           <div className="col-sm-3 paddingt10">
-                            <span class="k-pager-info k-label">1 - 23 of 23 items</span>
+                            <span className="k-pager-info k-label">1 - 23 of 23 items</span>
                           </div>
 
                         </div>

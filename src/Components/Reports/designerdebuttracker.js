@@ -18,8 +18,8 @@ class DesignerDebutTrackerScreen extends Component {
                 <div className="row">
                   <ReportLeftmenuscreen />
                   <div className="col-md-9">
-                  <div class="well-sm">
-                      <button type="button" id="btnActive" class="btn btn-primary hidden-print">PARTICIPATING</button>
+                  <div className="well-sm">
+                      <button type="button" id="btnActive" className="btn btn-primary hidden-print">PARTICIPATING</button>
                     </div>
                     <div className="checkbox cheboxpl">
                       <label>

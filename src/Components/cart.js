@@ -16,8 +16,8 @@ class CartScreen extends Component {
                   <div className="col-sm-12"><h2>Cart</h2></div>
                   <div className="col-sm-12">
                     <p>You don't have any items in your cart yet.</p>
-                    <a class="btn btn-primary" href="/#/dashboard">Back to Products</a>
-                    <div class="space-20"></div>
+                    <a className="btn btn-primary" href="/#/dashboard">Back to Products</a>
+                    <div className="space-20"></div>
                   </div>
                 </div>
               </div>

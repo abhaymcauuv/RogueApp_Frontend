@@ -84,7 +84,7 @@ class VolumesScreen extends Component {
                           <thead>
                             <tr>
                               <th colSpan="6" className="textalignr tdbg">
-                                <button type="button" class="k-grid-excel btn btn-primary hidden-print"><i class="fa fa-download"></i> Excel</button>
+                                <button type="button" className="k-grid-excel btn btn-primary hidden-print"><i className="fa fa-download"></i> Excel</button>
                               </th>
                             </tr>
                             <tr className="tdbg">
@@ -114,27 +114,27 @@ class VolumesScreen extends Component {
                         <div className="row">
                           <div className="col-sm-9">
                             <nav aria-label="Page navigation example">
-                              <ul class="pagination">
-                                <li class="page-item">
-                                  <a class="page-link" href="#" aria-label="Previous">
+                              <ul className="pagination">
+                                <li className="page-item">
+                                  <a className="page-link" href="#" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
+                                    <span className="sr-only">Previous</span>
                                   </a>
                                 </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                  <a class="page-link" href="#" aria-label="Next">
+                                <li className="page-item"><a className="page-link" href="#">1</a></li>
+                                <li className="page-item"><a className="page-link" href="#">2</a></li>
+                                <li className="page-item"><a className="page-link" href="#">3</a></li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
+                                    <span className="sr-only">Next</span>
                                   </a>
                                 </li>
                               </ul>
                             </nav>
                           </div>
                           <div className="col-sm-3 paddingt10">
-                            <span class="k-pager-info k-label">1 - 23 of 23 items</span>
+                            <span className="k-pager-info k-label">1 - 23 of 23 items</span>
                           </div>
 
                         </div>

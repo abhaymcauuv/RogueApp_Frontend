@@ -19,14 +19,14 @@ class WattsofLoveDonationsScreen extends Component {
                   <ReportLeftmenuscreen />
                   <div className="col-md-9">
                     <div>
-                      <div class="well well-sm">
-                        <div class="row">
-                          <div class="col-sm-12">
-                            <div class="input-group">
-                              <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"><i class="fa fa-chevron-left"></i></button>
+                      <div className="well well-sm">
+                        <div className="row">
+                          <div className="col-sm-12">
+                            <div className="input-group">
+                              <span className="input-group-btn">
+                                <button className="btn btn-default" type="button"><i className="fa fa-chevron-left"></i></button>
                               </span>
-                              <select id="periods" class="form-control">
+                              <select id="periods" className="form-control">
                                 <option value="37">Monthly 37 January 2020</option>
                                 <option value="36">Monthly 36 December 2019</option>
                                 <option value="35">Monthly 35 November 2019</option>
@@ -36,8 +36,8 @@ class WattsofLoveDonationsScreen extends Component {
                                 <option value="31">Monthly 31 July 2019</option>
                                 <option value="30">Monthly 30 June 2019</option>
                               </select>
-                              <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"><i class="fa fa-chevron-right"></i></button>
+                              <span className="input-group-btn">
+                                <button className="btn btn-default" type="button"><i className="fa fa-chevron-right"></i></button>
                               </span>
                             </div>
                           </div>
@@ -45,12 +45,12 @@ class WattsofLoveDonationsScreen extends Component {
                       </div>
                     </div>
                     <div className="panel panel-default panelmb50">
-                      <div class="panel-body">
+                      <div className="panel-body">
                         <h4>Total Monthly Donations</h4>
-                        <div class="row">
-                          <div class="col-sm-4">
-                            <div class="metric metric-sm">
-                              <span class="metric-body text-info">$3.30</span>
+                        <div className="row">
+                          <div className="col-sm-4">
+                            <div className="metric metric-sm">
+                              <span className="metric-body text-info">$3.30</span>
                               <span>USD</span>
                             </div>
                           </div>
@@ -70,7 +70,7 @@ class WattsofLoveDonationsScreen extends Component {
                           </thead>
                           <tbody>
                             <tr className="tdbg">
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>                             
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>                             
                               <td>1/14/2020</td>
                               <td>884804</td>
                               <td>0.84 USD</td>
@@ -78,7 +78,7 @@ class WattsofLoveDonationsScreen extends Component {
                               <td>89712</td>                             
                             </tr>
                             <tr>
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>1/16/2020</td>
                               <td>887686</td>
                               <td>0.13 USD</td>
@@ -86,7 +86,7 @@ class WattsofLoveDonationsScreen extends Component {
                               <td>14113</td>                              
                             </tr>
                             <tr className="tdbg">
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>1/1/2020</td>
                               <td>863695</td>
                               <td>0.76 USD</td>
@@ -94,7 +94,7 @@ class WattsofLoveDonationsScreen extends Component {
                               <td>14113</td>                             
                             </tr>
                             <tr>
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>1/7/2020</td>
                               <td>876074</td>
                               <td>0.72 USD</td>
@@ -107,27 +107,27 @@ class WattsofLoveDonationsScreen extends Component {
                         <div className="row">
                           <div className="col-sm-9">
                             <nav aria-label="Page navigation example">
-                              <ul class="pagination">
-                                <li class="page-item">
-                                  <a class="page-link" href="#" aria-label="Previous">
+                              <ul className="pagination">
+                                <li className="page-item">
+                                  <a className="page-link" href="#" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
+                                    <span className="sr-only">Previous</span>
                                   </a>
                                 </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                  <a class="page-link" href="#" aria-label="Next">
+                                <li className="page-item"><a className="page-link" href="#">1</a></li>
+                                <li className="page-item"><a className="page-link" href="#">2</a></li>
+                                <li className="page-item"><a className="page-link" href="#">3</a></li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
+                                    <span className="sr-only">Next</span>
                                   </a>
                                 </li>
                               </ul>
                             </nav>
                           </div>
                           <div className="col-sm-3 paddingt10">
-                            <span class="k-pager-info k-label">1 - 23 of 23 items</span>
+                            <span className="k-pager-info k-label">1 - 23 of 23 items</span>
                           </div>
 
                         </div>

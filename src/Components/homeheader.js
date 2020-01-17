@@ -191,7 +191,6 @@ export default class HomeHeaderscreen extends Component {
                       </li>
                     </ul>
                   </div>
-
                 </div>
               </div>
 
@@ -224,9 +223,7 @@ export default class HomeHeaderscreen extends Component {
                   </Link>
                 </div>
               </div>
-
             </div>
-
           </div>
         </div>
       </div>

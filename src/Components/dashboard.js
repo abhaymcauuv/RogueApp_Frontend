@@ -14,15 +14,15 @@ class DashboardScreen extends Component {
               <div className="col-sm-12">
 
                 <div className="row padiingt10">
-                  <div class="col-sm-6 col-md-4">
-                    <div class="card card-default">
-                      <div class="card-heading">
-                        <h3 class="card-title">
+                  <div className="col-sm-6 col-md-4">
+                    <div className="card card-default">
+                      <div className="card-heading">
+                        <h3 className="card-title">
                           Your Commissions
                     </h3>
                       </div>
-                      <div class="card-body text-center-mobile">
-                        <table class="table">
+                      <div className="card-body text-center-mobile">
+                        <table className="table">
                           <tbody>
                             <tr>
                               <th>Period</th>
@@ -50,94 +50,94 @@ class DashboardScreen extends Component {
                             </tr>
                           </tbody></table>
                       </div>
-                      <a href="/#/commissions" class="card-footer block text-right">
-                        View current earnings <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                      <a href="/#/commissions" className="card-footer block text-right">
+                        View current earnings <i className="fa fa-chevron-right" aria-hidden="true"></i>
                       </a>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4">
-                    <div class="card card-default">
-                      <div class="card-heading">
-                        <h3 class="card-title borderbtm">
+                  <div className="col-sm-6 col-md-4">
+                    <div className="card card-default">
+                      <div className="card-heading">
+                        <h3 className="card-title borderbtm">
                           Your Inventory Orders
                     </h3>
                       </div>
-                      <div class="card-body noborder no-padding">
-                        <ul class="list-group">
-                          <li class="list-group-item">
-                            <a class="media block" href="/">
-                              <div class="pull-left">
-                                <i class="fa fa-shopping-cart carticon" aria-hidden="true"></i>
+                      <div className="card-body noborder no-padding">
+                        <ul className="list-group">
+                          <li className="list-group-item">
+                            <a className="media block" href="/">
+                              <div className="pull-left">
+                                <i className="fa fa-shopping-cart carticon" aria-hidden="true"></i>
                               </div>
-                              <div class="media-body">
-                                <div class="row">
-                                  <div class="col-xs-10">
-                                    <h4 class="media-heading">Shipped</h4>
-                                    <span class="text-muted">#876074</span>
+                              <div className="media-body">
+                                <div className="row">
+                                  <div className="col-xs-10">
+                                    <h4 className="media-heading">Shipped</h4>
+                                    <span className="text-muted">#876074</span>
                                   </div>
-                                  <div class="col-xs-2">
-                                    <div class="text-right">
-                                      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                  <div className="col-xs-2">
+                                    <div className="text-right">
+                                      <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </a>
                           </li>
-                          <li class="list-group-item">
-                            <a class="media block" href="/">
-                              <div class="pull-left">
-                                <i class="fa fa-shopping-cart carticon" aria-hidden="true"></i>
+                          <li className="list-group-item">
+                            <a className="media block" href="/">
+                              <div className="pull-left">
+                                <i className="fa fa-shopping-cart carticon" aria-hidden="true"></i>
                               </div>
-                              <div class="media-body">
-                                <div class="row">
-                                  <div class="col-xs-10">
-                                    <h4 class="media-heading">Shipped</h4>
-                                    <span class="text-muted">#874130</span>
+                              <div className="media-body">
+                                <div className="row">
+                                  <div className="col-xs-10">
+                                    <h4 className="media-heading">Shipped</h4>
+                                    <span className="text-muted">#874130</span>
                                   </div>
-                                  <div class="col-xs-2">
-                                    <div class="text-right">
-                                      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                  <div className="col-xs-2">
+                                    <div className="text-right">
+                                      <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </a>
                           </li>
-                          <li class="list-group-item">
-                            <a class="media block" href="/">
-                              <div class="pull-left">
-                                <i class="fa fa-shopping-cart carticon" aria-hidden="true"></i>
+                          <li className="list-group-item">
+                            <a className="media block" href="/">
+                              <div className="pull-left">
+                                <i className="fa fa-shopping-cart carticon" aria-hidden="true"></i>
                               </div>
-                              <div class="media-body">
-                                <div class="row">
-                                  <div class="col-xs-10">
-                                    <h4 class="media-heading">Shipped</h4>
-                                    <span class="text-muted">#873049</span>
+                              <div className="media-body">
+                                <div className="row">
+                                  <div className="col-xs-10">
+                                    <h4 className="media-heading">Shipped</h4>
+                                    <span className="text-muted">#873049</span>
                                   </div>
-                                  <div class="col-xs-2">
-                                    <div class="text-right">
-                                      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                  <div className="col-xs-2">
+                                    <div className="text-right">
+                                      <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </a>
                           </li>
-                          <li class="list-group-item">
-                            <a class="media block" href="/">
-                              <div class="pull-left">
-                                <i class="fa fa-shopping-cart carticon" aria-hidden="true"></i>
+                          <li className="list-group-item">
+                            <a className="media block" href="/">
+                              <div className="pull-left">
+                                <i className="fa fa-shopping-cart carticon" aria-hidden="true"></i>
                               </div>
-                              <div class="media-body">
-                                <div class="row">
-                                  <div class="col-xs-10">
-                                    <h4 class="media-heading">Shipped</h4>
-                                    <span class="text-muted">#873035</span>
+                              <div className="media-body">
+                                <div className="row">
+                                  <div className="col-xs-10">
+                                    <h4 className="media-heading">Shipped</h4>
+                                    <span className="text-muted">#873035</span>
                                   </div>
-                                  <div class="col-xs-2">
-                                    <div class="text-right">
-                                      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                  <div className="col-xs-2">
+                                    <div className="text-right">
+                                      <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                     </div>
                                   </div>
                                 </div>
@@ -146,8 +146,8 @@ class DashboardScreen extends Component {
                           </li>
                         </ul>
                       </div>
-                      <a href="/orders" class="card-footer block text-right">
-                        View all orders <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                      <a href="/orders" className="card-footer block text-right">
+                        View all orders <i className="fa fa-chevron-right" aria-hidden="true"></i>
                       </a>
                     </div>
                   </div>

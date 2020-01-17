@@ -18,7 +18,7 @@ class PersonallyEnrolledScreen extends Component {
                 <div className="row">
                   <ReportLeftmenuscreen />
                   <div className="col-md-9">
-                    <div class="checkbox cheboxpl">
+                    <div className="checkbox cheboxpl">
                       <label>
                         <input type="checkbox" />  Include Closed Accounts
                           </label>
@@ -29,7 +29,7 @@ class PersonallyEnrolledScreen extends Component {
                           <thead>
                             <tr>
                               <th colSpan="8" className="textalignr tdbg">
-                                <button type="button" class="k-grid-excel btn btn-primary hidden-print"><i class="fa fa-download"></i> Excel</button>
+                                <button type="button" className="k-grid-excel btn btn-primary hidden-print"><i className="fa fa-download"></i> Excel</button>
                               </th>
                             </tr>
                             <tr className="tdbg">
@@ -44,7 +44,7 @@ class PersonallyEnrolledScreen extends Component {
                           </thead>
                           <tbody>
                             <tr className="tdbg">
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>17050</td>
                               <td className="textalignr">Aleshia</td>
                               <td className="textalignr">Setterfield</td>
@@ -53,7 +53,7 @@ class PersonallyEnrolledScreen extends Component {
                               <td className="textalignr">1/1/2020</td>
                             </tr>
                             <tr>
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>19893</td>
                               <td className="textalignr">Carley Schaefer</td>
                               <td className="textalignr">Homan</td>
@@ -62,7 +62,7 @@ class PersonallyEnrolledScreen extends Component {
                               <td className="textalignr">12/18/2019</td>
                             </tr>
                             <tr className="tdbg">
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>17050</td>
                               <td className="textalignr">Aleshia</td>
                               <td className="textalignr">Setterfield</td>
@@ -71,7 +71,7 @@ class PersonallyEnrolledScreen extends Component {
                               <td className="textalignr">1/1/2020</td>
                             </tr>
                             <tr>
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>19893</td>
                               <td className="textalignr">Carley Schaefer</td>
                               <td className="textalignr">Homan</td>
@@ -80,7 +80,7 @@ class PersonallyEnrolledScreen extends Component {
                               <td className="textalignr">12/18/2019</td>
                             </tr>
                             <tr className="tdbg">
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>17050</td>
                               <td className="textalignr">Aleshia</td>
                               <td className="textalignr">Setterfield</td>
@@ -89,7 +89,7 @@ class PersonallyEnrolledScreen extends Component {
                               <td className="textalignr">1/1/2020</td>
                             </tr>
                             <tr>
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>19893</td>
                               <td className="textalignr">Carley Schaefer</td>
                               <td className="textalignr">Homan</td>
@@ -98,7 +98,7 @@ class PersonallyEnrolledScreen extends Component {
                               <td className="textalignr">12/18/2019</td>
                             </tr>
                             <tr className="tdbg">
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>17050</td>
                               <td className="textalignr">Aleshia</td>
                               <td className="textalignr">Setterfield</td>
@@ -107,7 +107,7 @@ class PersonallyEnrolledScreen extends Component {
                               <td className="textalignr">1/1/2020</td>
                             </tr>
                             <tr>
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>19893</td>
                               <td className="textalignr">Carley Schaefer</td>
                               <td className="textalignr">Homan</td>
@@ -121,27 +121,27 @@ class PersonallyEnrolledScreen extends Component {
                         <div className="row">
                           <div className="col-sm-9">
                             <nav aria-label="Page navigation example">
-                              <ul class="pagination">
-                                <li class="page-item">
-                                  <a class="page-link" href="#" aria-label="Previous">
+                              <ul className="pagination">
+                                <li className="page-item">
+                                  <a className="page-link" href="#" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
+                                    <span className="sr-only">Previous</span>
                                   </a>
                                 </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                  <a class="page-link" href="#" aria-label="Next">
+                                <li className="page-item"><a className="page-link" href="#">1</a></li>
+                                <li className="page-item"><a className="page-link" href="#">2</a></li>
+                                <li className="page-item"><a className="page-link" href="#">3</a></li>
+                                <li className="page-item">
+                                  <a className="page-link" href="#" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
+                                    <span className="sr-only">Next</span>
                                   </a>
                                 </li>
                               </ul>
                             </nav>
                           </div>
                           <div className="col-sm-3 paddingt10">
-                            <span class="k-pager-info k-label">1 - 23 of 23 items</span>
+                            <span className="k-pager-info k-label">1 - 23 of 23 items</span>
                           </div>
 
                         </div>
