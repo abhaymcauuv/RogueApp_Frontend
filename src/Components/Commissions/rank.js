@@ -63,7 +63,7 @@ class RankScreen extends Component {
           <div className="row content">
             <div className="container">
               <div className="col-sm-12">
-                <h2 className="h2hdr">Rank</h2>
+                <h2 className="h2hdr">Rank Advancement</h2>
                 <div className="row">
                   <div className="col-sm-3">
 

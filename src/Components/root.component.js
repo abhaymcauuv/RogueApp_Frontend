@@ -13,6 +13,12 @@ import UpcomingPromotionsScreen from "./Reports/upcomingpromotions";
 import DownlineOrdersScreen from "./Reports/downlineorders";
 import NewDesignersListScreen from "./Reports/newdesigners";
 import TeamPerformanceScreen from "./Reports/teamperformance";
+import RecentActivityScreen from "./Reports/recentactivity";
+import WattsofLoveDonationsScreen from "./Reports/wattsoflovedonations";
+import TreeViewerScreen from "./Reports/treeviewer";
+import TitlePromotionsScreen from "./Reports/titlepromotion";
+import IncentiveTripTrackerScreen from "./Reports/incentivetriptracker";
+import DesignerDebutTrackerScreen from "./Reports/designerdebuttracker";
 
 
 export default class Root extends Component { 
@@ -32,7 +38,13 @@ export default class Root extends Component {
           <Route exact path="/upcomingpromotions" component={UpcomingPromotionsScreen} />  
           <Route exact path="/downlineorders" component={DownlineOrdersScreen} />  
           <Route exact path="/newdesigners" component={NewDesignersListScreen} />
-          <Route exact path="/teamperformance" component={TeamPerformanceScreen} />       
+          <Route exact path="/teamperformance" component={TeamPerformanceScreen} />  
+          <Route exact path="/recentactivity" component={RecentActivityScreen} /> 
+          <Route exact path="/wattsoflovedonations" component={WattsofLoveDonationsScreen} />  
+          <Route exact path="/treeviewer" component={TreeViewerScreen} />
+          <Route exact path="/titlepromotion" component={TitlePromotionsScreen} />
+          <Route exact path="/incentivetriptracker" component={IncentiveTripTrackerScreen} /> 
+          <Route exact path="/designerdebuttracker" component={DesignerDebutTrackerScreen} />   
         </div>
       </HashRouter>
     );

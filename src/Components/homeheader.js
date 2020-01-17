@@ -69,12 +69,12 @@ const nestSubMenu = (
     <MenuItem key="Downline's Orders"><Link to="/downlineorders">Downline's Orders</Link></MenuItem>
     <MenuItem key="New Designers List"><Link to="/newdesigners">New Designers List</Link></MenuItem>
     <MenuItem key="Team Performance"><Link to="/teamperformance">Team Performance</Link></MenuItem>
-    <MenuItem key="Recent Activity List"><Link to="/">Recent Activity List</Link></MenuItem>
-    <MenuItem key="Watts of Love Donations"><Link to="/">Watts of Love Donations</Link></MenuItem>
-    <MenuItem key="Tree Viewer"><Link to="/">Tree Viewer</Link></MenuItem>
-    <MenuItem key="First Time Title Promotions"><Link to="/">First Time Title Promotions</Link></MenuItem>
-    <MenuItem key="Incentive Trip Tracker"><Link to="/">Incentive Trip Tracker</Link></MenuItem>
-    <MenuItem key="Designer Début Tracker"><Link to="/">Designer Début Tracker</Link></MenuItem>
+    <MenuItem key="Recent Activity List"><Link to="/recentactivity">Recent Activity List</Link></MenuItem>
+    <MenuItem key="Watts of Love Donations"><Link to="/wattsoflovedonations">Watts of Love Donations</Link></MenuItem>
+    <MenuItem key="Tree Viewer"><Link to="/treeviewer">Tree Viewer</Link></MenuItem>
+    <MenuItem key="First Time Title Promotions"><Link to="/titlepromotion">First Time Title Promotions</Link></MenuItem>
+    <MenuItem key="Incentive Trip Tracker"><Link to="/incentivetriptracker">Incentive Trip Tracker</Link></MenuItem>
+    <MenuItem key="Designer Debut Tracker"><Link to="/designerdebuttracker">Designer Debut Tracker</Link></MenuItem>
     <Divider />
   </SubMenu>
 );

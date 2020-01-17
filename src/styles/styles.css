@@ -848,10 +848,17 @@ h3{
     color: #fff !important;
     font-weight: 600;
 }
-.metric.metric-sm .metric-body {
+.metric.metric-sm .metric-body{
     font-size: 3em;
     line-height: 1em;
     font-weight: bold;
+    color: #135ca0 !important;
+}
+.metric-body1{
+    font-size: 1.8em;
+    line-height: 1em;
+    font-weight: bold;
+    padding-bottom: 5px;
     color: #135ca0 !important;
 }
 /*------------End Dashboard ----------------*/
@@ -1224,7 +1231,22 @@ border-bottom: 1px solid #f0f0f0 !important;
 .cheboxpl{
     padding-left: 20px;
 }
-
+.list-group-item:first-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px !important;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd !important;
+}
+.tabletopm30{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 
 

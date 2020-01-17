@@ -5,7 +5,7 @@ import ReportLeftmenuscreen from '../reportleftmenu';
 import PageFooter from '../footer';
 import '../../styles/styles.css';
 
-class TeamPerformanceScreen extends Component {
+class WattsofLoveDonationsScreen extends Component {
   render() {
     return (
       <div>
@@ -14,7 +14,7 @@ class TeamPerformanceScreen extends Component {
           <div className="row content">
             <div className="container">
               <div className="col-sm-12">
-                <h2 className="h2hdr">Team Performance</h2>
+                <h2 className="h2hdr">Watts of Love Donations</h2>
                 <div className="row">
                   <ReportLeftmenuscreen />
                   <div className="col-md-9">
@@ -44,81 +44,62 @@ class TeamPerformanceScreen extends Component {
                         </div>
                       </div>
                     </div>
-                    <div class="checkbox cheboxpl">
-                      <label>
-                        <input type="checkbox" />  Include Closed Accounts
-                          </label>
-                    </div>
                     <div className="panel panel-default panelmb50">
+                      <div class="panel-body">
+                        <h4>Total Monthly Donations</h4>
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <div class="metric metric-sm">
+                              <span class="metric-body text-info">$3.30</span>
+                              <span>USD</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                       <div>
                         <table className="table table-bordered tablemrb">
                           <thead>
-                            <tr>
-                              <th colSpan="10" className="textalignr tdbg">
-                                <button type="button" class="k-grid-excel btn btn-primary hidden-print"><i class="fa fa-download"></i> Excel</button>
-                              </th>
-                            </tr>
                             <tr className="tdbg">
                               <th scope="col"></th>
-                              <th scope="col">ID</th>
-                              <th scope="col">Full Name</th>
-                              <th scope="col">Level</th>
-                              <th scope="col">Paid as Title</th>
-                              <th scope="col">PV</th>
-                              <th scope="col">TV</th>
-                              <th scope="col">PSQ</th>
-                              <th scope="col">Level 1 Mentor</th>
-                              <th scope="col">Advisor</th>
+                              <th scope="col">Order Date</th>
+                              <th scope="col">Order Number</th>
+                              <th scope="col">Dollar Amount</th>
+                              <th scope="col">Customer Name</th>
+                              <th scope="col">ID</th>                             
                             </tr>
                           </thead>
                           <tbody>
                             <tr className="tdbg">
-                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
-                              <td>17050</td>
-                              <td className="">Aleshia Lindhardt</td>
-                              <td className="textalignr">3</td>
-                              <td className="">Designer</td>
-                              <td className="textalignr">0</td>
-                              <td className="textalignr">0</td>
-                              <td className="textalignr">0</td>
-                              <td className="textalignr">0</td>
-                              <td className="">Lindzi Fitzwater</td>
+                              <td><Link to="/"><i class="far fa-address-book"></i></Link></td>                             
+                              <td>1/14/2020</td>
+                              <td>884804</td>
+                              <td>0.84 USD</td>
+                              <td>Linda Picker</td> 
+                              <td>89712</td>                             
                             </tr>
                             <tr>
                               <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
-                              <td>19893</td>
-                              <td className="">Carley Schaefer</td>
-                              <td className="textalignr">3</td>
-                              <td className="">Qualified Designer</td>
-                              <td className="textalignr">231.26</td>
-                              <td className="textalignr">231.26</td>
-                              <td className="textalignr">0</td>
-                              <td className="textalignr">0</td>
-                              <td className="">Lindsay Setterfield</td>
+                              <td>1/16/2020</td>
+                              <td>887686</td>
+                              <td>0.13 USD</td>
+                              <td>Lindzi Fitzwater</td>
+                              <td>14113</td>                              
                             </tr>
                             <tr className="tdbg">
                               <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
-                              <td>17050</td>
-                              <td className="">Aleshia Lindhardt</td>
-                              <td className="textalignr">3</td>
-                              <td className="">Designer</td>
-                              <td className="textalignr">0</td>
-                              <td className="textalignr">0</td>
-                              <td className="textalignr">0</td>
-                              <td className="textalignr">0</td>
-                              <td className="">Rebecca Zblewski</td>
+                              <td>1/1/2020</td>
+                              <td>863695</td>
+                              <td>0.76 USD</td>
+                              <td>Lindzi Fitzwater</td>
+                              <td>14113</td>                             
                             </tr>
                             <tr>
                               <td><Link to="/"><i class="far fa-address-book"></i></Link></td>
-                              <td>19893</td>
-                              <td className="">Carley Schaefer</td>
-                              <td className="textalignr">3</td>
-                              <td className="">Qualified Designer</td>
-                              <td className="textalignr">231.26</td>
-                              <td className="textalignr">231.26</td>
-                              <td className="textalignr">0</td>
-                              <td className="textalignr">0</td>
-                              <td className="">Lindzi Fitzwater</td>
+                              <td>1/7/2020</td>
+                              <td>876074</td>
+                              <td>0.72 USD</td>
+                              <td>Lindzi Fitzwater</td>
+                              <td>14113</td>                              
                             </tr>
 
                           </tbody>
@@ -165,4 +146,4 @@ class TeamPerformanceScreen extends Component {
   }
 }
 
-export default TeamPerformanceScreen;
+export default WattsofLoveDonationsScreen;
