@@ -1,10 +1,37 @@
 import React, { Component } from 'react';
 import HomeHeaderscreen from '../homeheader';
 import PageFooter from '../footer';
+import axios from 'axios';
 import '../../styles/styles.css';
+const BASE_URL = `http://localhost:6002/`;
 
 class CommissionsScreen extends Component {
+  constructor() {
+    super()
+    this.state = {
+      CommissionPeriodList: [],
+      error: {}
+    }
+  }
+
+  componentDidMount() {
+    this.bindCommissionPeriods();
+  }
+
+  bindCommissionPeriods() {
+    let customerId = 967
+    axios
+      .get(BASE_URL + "rogue/commission/getcommissionperiodlist/" + customerId)
+      .then((response) => {
+        this.setState({
+          CommissionPeriodList: response.data.Items.CommissionPeriodList
+        });
+      })
+      .catch(error => this.setState({ error }));
+  }
+
   render() {
+    const { CommissionPeriodList } = this.state
     return (
       <div>
         <div className="container-fluid">
@@ -57,11 +84,15 @@ class CommissionsScreen extends Component {
                               <button className="btn btn-default" type="button"><i className="fa fa-angle-left" aria-hidden="true"></i></button>
                             </span>
                             <select id="periodchoice" className="form-control">
-                              <option value="/commissions/0/37">Current Commissions - Monthly 37 January 2020 (1/1/2020 - 1/31/2020)</option>
-                              <option value="/commissions/0/36">Current Commissions - Monthly 36 December 2019 (12/1/2019 - 12/31/2019)</option>
-                              <option value="/commissions/520">Current Commissions - Monthly 35 November 2019 (11/1/2019 - 11/30/2019)</option>
-                              <option value="/commissions/503">Current Commissions - Monthly 34 October 2019 (10/1/2019 - 10/31/2019)</option>
-                              <option value="/commissions/481">Current Commissions - Monthly 33 September 2019 (9/1/2019 - 9/30/2019)</option>
+                              {CommissionPeriodList.length > 0 ? (
+                                CommissionPeriodList.map((data, index) => {
+                                  return (
+                                    <option key={index} value={data.RunID + "-" + data.Period.PeriodID}> {"Current Commissions - " + data.Period.PeriodDescription} {"(" + data.Period.StartDate.split('T')[0] + " - " + data.Period.EndDate.split('T')[0] + ")"}</option>
+                                  )
+                                })
+                              ) : (
+                                  <option value=""></option>
+                                )}
                             </select>
                             <span className="input-group-btn">
                               <button className="btn btn-default" type="button"><i className="fa fa-angle-right" aria-hidden="true"></i></button>
