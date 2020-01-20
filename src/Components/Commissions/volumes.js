@@ -15,10 +15,11 @@ class VolumesScreen extends Component {
   loadVolumeData = () => {
     axios({
       method: 'post',
-      url: 'http://localhost:6002/rogue/commission/volumes/postVolumes',
+      url: 'http://localhost:6002/rogue/commission/volumes/postvolumes',
       data: {
-        CustomerID: 14113,
-        periodTypeId: 1
+        CustomerId: 14113,
+        PageSize:"",
+        PageNumber:"1"
       }
     }).then(async (response) => {
       console.log(response.data.Items);
