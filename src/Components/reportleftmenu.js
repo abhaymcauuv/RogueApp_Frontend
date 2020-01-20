@@ -86,7 +86,7 @@ export default class ReportLeftmenuscreen extends Component {
               <div className="panel panel-default no-border">
                 <div className="panel-heading">
                   <div className="panel-title">
-                    <a href="/#/titlepromotion"><i className="fa fa-first-order lmenuicon" aria-hidden="true"></i> First Time Title Promotions</a>
+                    <a href="/#/titlepromotion"><i className="fa fa-tag lmenuicon" aria-hidden="true"></i> First Time Title Promotions</a>
                   </div>
                 </div>
               </div>
@@ -100,7 +100,7 @@ export default class ReportLeftmenuscreen extends Component {
               <div className="panel panel-default no-border">
                 <div className="panel-heading">
                   <div className="panel-title">
-                    <a href="/#/designerdebuttracker"><i className="fa fa-bar-chart lmenuicon" aria-hidden="true"></i> Designer Debut Tracker</a>
+                    <a href="/#/designerdebuttracker"><i className="fa fa-area-chart lmenuicon" aria-hidden="true"></i> Designer Debut Tracker</a>
                   </div>
                 </div>
               </div>
