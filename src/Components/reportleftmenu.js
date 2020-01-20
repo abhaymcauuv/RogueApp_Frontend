@@ -100,7 +100,7 @@ export default class ReportLeftmenuscreen extends Component {
               <div className="panel panel-default no-border">
                 <div className="panel-heading">
                   <div className="panel-title">
-                    <a href="/#/designerdebuttracker"><i className="fa fa-area-chart lmenuicon" aria-hidden="true"></i> Designer Debut Tracker</a>
+                    <a href="/#/designerdebuttracker"><i className="fa fa-map-marker lmenuicon" aria-hidden="true"></i> Designer Debut Tracker</a>
                   </div>
                 </div>
               </div>

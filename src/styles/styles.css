@@ -1247,8 +1247,13 @@ border-bottom: 1px solid #f0f0f0 !important;
 .lmenuicon{
     font-size: 20px;
 }
-
-
+.rc-menu-item, .rc-menu-submenu-title{
+    cursor: pointer;
+}
+.rc-menu-submenu-popup {
+    position: absolute;
+    z-index: 999;
+}
 
 
 
