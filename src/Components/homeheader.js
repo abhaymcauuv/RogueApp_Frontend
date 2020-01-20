@@ -54,14 +54,7 @@ const animation = {
 const reactContainer = document.getElementById('__react-content');
 
 const nestSubMenu = (
-
-  <SubMenu
-    title={
-      <span className="submenu-title-wrapper">Reports</span>
-    }
-    key="0"
-    popupOffset={[10, 7]}
-  >
+  <SubMenu title={<span className="submenu-title-wrapper">Reports</span>}key="0">
     <MenuItem key="Customer List"><Link to="/customers">Customer List</Link></MenuItem>
     <MenuItem key="Club Couture Customer"><Link to="/clubcouture">Club Couture Customer</Link></MenuItem>
     <MenuItem key="Personally Enrolled Team"><Link to="/personallyenrolledteam">Personally Enrolled Team</Link></MenuItem>
