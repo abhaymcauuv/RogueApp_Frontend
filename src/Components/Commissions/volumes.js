@@ -22,7 +22,7 @@ class VolumesScreen extends Component {
         PageNumber:"1"
       }
     }).then(async (response) => {
-      console.log(response.data.Items);
+      //console.log(response.data.Items);
       const dt = await response.data.Items
       this.setState({ volumeData: dt });
     })
@@ -32,7 +32,7 @@ class VolumesScreen extends Component {
   }
 
   render() {
-    console.log('---load-', this.state.volumeData)
+    //console.log('---load-', this.state.volumeData)
     const { volumeData } = this.state;
     return (
       <div>
