@@ -4,22 +4,15 @@ const EndPoints = {
         Url: `rogue/commission/getcommissionperiodlist/{CustomerId}`,
         Method: 'GET'
     },
-    CommissionDetails: {
-        Url: `rogue/commission/getcommissiondetails/{CustomerId}/{CommissionRunId}/{PeriodId}`,
-        Method: 'GET'
-    },
-    RealtimeBonusDetails: {
-        Url: `rogue/commission/getrealtimebonusdetails/{CustomerId}/{PeriodId}`,
-        Method: 'GET'
-    },
-    HistoricalBonusDetails: {
-        Url: `rogue/commission/gethistoricalbonusdetails`,
+    Commission: {
+        Url: `rogue/commission/getcommission`,
         Method: 'POST',
         PostData: {
-            CustomerID:0,
-            CommissionRunID:0,
-            PageSize:0,
-            PageNo:0
+            CustomerID: 0,
+            CommissionRunID: 0,
+            PeriodID: 0,
+            PageSize: 0,
+            PageNo: 0
         }
     }
 }
