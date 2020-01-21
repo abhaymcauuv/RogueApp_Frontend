@@ -3,7 +3,8 @@ import HomeHeaderscreen from '../homeheader';
 import PageFooter from '../footer';
 import axios from 'axios';
 import '../../styles/styles.css';
-const BASE_URL = `http://localhost:6002/`;
+import EndPoints from '../../Config/ApiEndpoints/endpoints';
+
 
 class CommissionsScreen extends Component {
   constructor() {
@@ -30,9 +31,10 @@ class CommissionsScreen extends Component {
   }
 
   bindCommissionPeriods() {
-    let customerId = 967
+    let customerId = 967;
+    let entPoint = EndPoints.CommissionPeriodList.Url.replace('{CustomerId}', customerId);
     axios
-      .get(BASE_URL + "rogue/commission/getcommissionperiodlist/" + customerId)
+      .get(EndPoints.BaseUrl + entPoint)
       .then((response) => {
         this.setState({
           CommissionPeriodList: response.data.Items.CommissionPeriodList
@@ -56,17 +58,28 @@ class CommissionsScreen extends Component {
 
     if (Number(commissionType) === 0) {
       try {
-        let url = BASE_URL + `rogue/commission/getcommissiondetails/${customerId}/0/${periodId}`;
-        let bonusUrl = BASE_URL + `rogue/commission/getrealtimebonusdetails/${customerId}/${periodId}`;
+        var commissionEndPoints = EndPoints.CommissionDetails.Url.replace('{CustomerId}', customerId).replace('{CommissionRunId}', 0).replace('{PeriodId}', periodId);
+        console.log(commissionEndPoints);
+        var bonusEndPoints = EndPoints.RealtimeBonusDetails.Url.replace('{CustomerId}', customerId).replace('{PeriodId}', periodId);
+        console.log(bonusEndPoints);
+        // let commissionRes = await axios.get(EndPoints.BaseUrl + commissionEndPoints);
+        // console.log(commissionRes.data);
 
-        let commissionRes = await axios.get(url);
-        console.log(commissionRes.data)
+        // axios.all([
+        //   axios.get(EndPoints.BaseUrl + commissionEndPoints),
+        //   axios.get(EndPoints.BaseUrl + bonusEndPoints)
+        // ])
+        //   .then(axios.spread((commissionRes, bonusRes) => {
+        //     console.log(commissionRes.data)
+        //     console.log(bonusRes.data)
+        //   }));
+
         // this.setState({
         //   RealTimeCommissions: commissionRes.data.Items.RealTimeCommissions
         // });
 
-        let bonusRes = await axios.get(bonusUrl);
-        console.log(bonusRes.data)
+        // let bonusRes = await axios.get(EndPoints.BaseUrl + bonusEndPoints);
+        // console.log(bonusRes.data)
         // this.setState({
         //   RealTimeBonusDetails: bonusRes.data.Items.RealTimeBonusDetails
         // });
@@ -78,15 +91,20 @@ class CommissionsScreen extends Component {
     }
     else if (Number(commissionType) === 1) {
       try {
-        let url = BASE_URL + `rogue/commission/getcommissiondetails/${customerId}/${runId}/0`;
-        let bonusUrl = BASE_URL + `rogue/commission/gethistoricalbonusdetails`;
-        let commissionRes = await axios.get(url);
+        var commissionEndPoints = EndPoints.CommissionDetails.Url.replace('{CustomerId}', customerId).replace('{CommissionRunId}', runId).replace('{PeriodId}', 0);
+
+        let commissionRes = await axios.get(EndPoints.BaseUrl + commissionEndPoints);
         console.log(commissionRes.data)
         this.setState({
           HistoricalCommission: commissionRes.data.Items.HistoricalCommission,
           HistoricalSummaryCommissions: {},
           RealTimeCommissions: [],
-          RealTimeBonusDetails: {}
+          RealTimeBonusDetails: {},
+          TeamSum: 0,
+          UsdSum: 0,
+          CadSum: 0,
+          SavvySum: 0,
+          Total: 0
         });
         const config = {
           headers: {
@@ -99,7 +117,7 @@ class CommissionsScreen extends Component {
           PageSize: 0,
           PageNo: 0
         }
-        let bonusRes = await axios.post(bonusUrl, JSON.stringify(postData), config);
+        let bonusRes = await axios.post(EndPoints.BaseUrl + EndPoints.HistoricalBonusDetails.Url, JSON.stringify(postData), config);
         console.log(bonusRes.data)
         this.setState({
           HistoricalBonusDetails: bonusRes.data.Items.HistoricalBonusDetails,
@@ -114,9 +132,9 @@ class CommissionsScreen extends Component {
       }
     }
     else if (Number(commissionType) === 2) {
-      let url = BASE_URL + `rogue/commission/getcommissiondetails/${customerId}/0/${periodId}`;
+      var commissionEndPoints = EndPoints.CommissionDetails.Url.replace('{CustomerId}', customerId).replace('{CommissionRunId}', 0).replace('{PeriodId}', periodId);
       axios
-        .get(url)
+        .get(EndPoints.BaseUrl + commissionEndPoints)
         .then((response) => {
           if (response.data.Items) {
             this.setState({
@@ -131,6 +149,12 @@ class CommissionsScreen extends Component {
     }
   }
 
+  calculateSum(commission) {
+    var total = commission.reduce(function (prev, cur) {
+      return prev + Number(cur.CommissionAmount);
+    }, 0);
+    return total.toLocaleString(undefined, { maximumFractionDigits: 2 });
+  }
 
   render() {
     const { CommissionPeriodList, HistoricalSummaryCommissions, HistoricalCommission, HistoricalBonusDetails, TeamSum,
@@ -262,13 +286,13 @@ class CommissionsScreen extends Component {
                                 <div className="metric metric-sm">
                                   <dl className="dl-metric">
                                     {TeamSum > 0 ? <div><dt id="teamLabel"><strong>Team Commissions</strong></dt>
-                                      <dd id="teamID" >{TeamSum.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd></div> : null}
+                                      <dd id="teamID" >${TeamSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
                                     {UsdSum > 0 ? <div>   <dt id="usdLabel" ><strong>USD Deferred Commissions</strong></dt>
-                                      <dd id="usdID" >{UsdSum.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd></div> : null}
+                                      <dd id="usdID" >${UsdSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
                                     {CadSum > 0 ? <div><dt id="cadLabel" ><strong>CAD Deferred Commissions</strong></dt>
-                                      <dd id="cadID" >{CadSum.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd></div> : null}
+                                      <dd id="cadID" >${CadSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} CAD</dd></div> : null}
                                     {SavvySum > 0 ? <div> <dt id="savvyLabel" ><strong>Savvy Seller Bonus Total</strong></dt>
-                                      <dd id="savvyID" >{SavvySum.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd></div> : null}
+                                      <dd id="savvyID" >${SavvySum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
                                   </dl>
                                 </div>
                               </div>
@@ -317,7 +341,161 @@ class CommissionsScreen extends Component {
 
                           </div>
                         )}
+
+                      {!(JSON.stringify(HistoricalBonusDetails) === JSON.stringify({})) ? (
+                        <div>
+                          <table className="table table-bordered tablemrb" style={{ overflowY: "scroll", height: "500px", display: "block" }}>
+                            <thead>
+                              <tr className="tdbg">
+                                <th style={{ width: "20%" }} scope="col">From ID#</th>
+                                <th style={{ width: "20%" }} scope="col">From</th>
+                                <th style={{ width: "20%" }} scope="col">Paid Level</th>
+                                <th style={{ width: "15%" }} scope="col">Source</th>
+                                <th style={{ width: "10%" }} scope="col">%</th>
+                                <th style={{ width: "15%" }} scope="col">Earned</th>
+                              </tr>
+                            </thead>
+
+                            {(HistoricalBonusDetails.DeferredCommission.length > 0) ? (
+                              <tbody>
+                                <tr>
+                                  <th colSpan="6">Bonus: Deferred Commission</th>
+                                </tr>
+                                {
+                                  HistoricalBonusDetails.DeferredCommission.map(data => {
+                                    return (
+                                      <tr className="tdbg">
+                                        <td className="bluecolor">{data.FromCustomerID}</td>
+                                        <td>{data.FromCustomerName}</td>
+                                        <td>{data.PaidLevel}</td>
+                                        <td className="textalignr">${data.SourceAmount + ` ` + data.CurrencyCode}</td>
+                                        <td className="textalignr">{data.Percentage}%</td>
+                                        <td className="textalignr">${data.CommissionAmount + ` ` + data.CurrencyCode}</td>
+                                      </tr>
+                                    )
+                                  })
+                                }
+                                <tr>
+                                  <td colSpan="5"></td>
+                                  <td><div className="totalb textalignr">Total:${this.calculateSum(HistoricalBonusDetails.DeferredCommission)}</div></td>
+                                </tr>
+                              </tbody>
+                            ) : null}
+
+                            {(HistoricalBonusDetails.SavvySeller.length > 0) ? (
+                              <tbody>
+                                <tr>
+                                  <th colSpan="6">Bonus: Savvy Seller Bonus</th>
+                                </tr>
+                                {
+                                  HistoricalBonusDetails.SavvySeller.map(data => {
+                                    return (
+                                      <tr className="tdbg">
+                                        <td className="bluecolor">{data.FromCustomerID}</td>
+                                        <td>{data.FromCustomerName}</td>
+                                        <td>{data.PaidLevel}</td>
+                                        <td className="textalignr">{data.SourceAmount}PV</td>
+                                        <td className="textalignr">{data.Percentage}%	</td>
+                                        <td className="textalignr">${data.CommissionAmount} USD</td>
+                                      </tr>
+                                    )
+                                  })
+                                }
+                                <tr>
+                                  <td colSpan="5"></td>
+                                  <td><div className="totalb textalignr">Total:${this.calculateSum(HistoricalBonusDetails.SavvySeller)}</div></td>
+                                </tr>
+                              </tbody>
+                            ) : null}
+
+
+                            {(HistoricalBonusDetails.SponsorBonus.length > 0) ? (
+                              <tbody>
+                                <tr>
+                                  <th colSpan="6">Bonus: Sponsoring Bonus</th>
+                                </tr>
+                                {
+                                  HistoricalBonusDetails.SponsorBonus.map(data => {
+                                    return (
+                                      <tr className="tdbg">
+                                        <td className="bluecolor">{data.FromCustomerID}</td>
+                                        <td>{data.FromCustomerName}</td>
+                                        <td>{data.PaidLevel}</td>
+                                        <td className="textalignr">{data.SourceAmount}PV</td>
+                                        <td className="textalignr">{data.Percentage}%	</td>
+                                        <td className="textalignr">${data.CommissionAmount} USD</td>
+                                      </tr>
+                                    )
+                                  })
+                                }
+                                <tr>
+                                  <td colSpan="5"></td>
+                                  <td><div className="totalb textalignr">Total:${this.calculateSum(HistoricalBonusDetails.SponsorBonus)}</div></td>
+                                </tr>
+                              </tbody>
+                            ) : null}
+
+
+                            {(HistoricalBonusDetails.CoachingBonus.length > 0) ? (
+                              <tbody>
+                                <tr>
+                                  <th colSpan="6">Bonus: Coaching Bonus</th>
+                                </tr>
+                                {
+                                  HistoricalBonusDetails.CoachingBonus.map(data => {
+                                    return (
+                                      <tr className="tdbg">
+                                        <td className="bluecolor">{data.FromCustomerID}</td>
+                                        <td>{data.FromCustomerName}</td>
+                                        <td>{data.PaidLevel}</td>
+                                        <td className="textalignr">{data.SourceAmount}PV</td>
+                                        <td className="textalignr">{data.Percentage}%	</td>
+                                        <td className="textalignr">${data.CommissionAmount} USD</td>
+                                      </tr>
+                                    )
+                                  })
+                                }
+                                <tr>
+                                  <td colSpan="5"></td>
+                                  <td><div className="totalb textalignr">Total:${this.calculateSum(HistoricalBonusDetails.CoachingBonus)}</div></td>
+                                </tr>
+                              </tbody>
+                            ) : null}
+
+
+                            {(HistoricalBonusDetails.CouturierBonus.length > 0) ? (
+                              <tbody>
+                                <tr>
+                                  <th colSpan="6">Bonus: Couturier Bonus</th>
+                                </tr>
+                                {
+                                  HistoricalBonusDetails.CouturierBonus.map(data => {
+                                    return (
+                                      <tr className="tdbg">
+                                        <td className="bluecolor">{data.FromCustomerID}</td>
+                                        <td>{data.FromCustomerName}</td>
+                                        <td>{data.PaidLevel}</td>
+                                        <td className="textalignr">${data.SourceAmount} USD</td>
+                                        <td className="textalignr">{data.Percentage}%	</td>
+                                        <td className="textalignr">${data.CommissionAmount} USD</td>
+                                      </tr>
+                                    )
+                                  })
+                                }
+                                <tr>
+                                  <td colSpan="5"></td>
+                                  <td><div className="totalb textalignr">Total:${this.calculateSum(HistoricalBonusDetails.CouturierBonus)}</div></td>
+                                </tr>
+                              </tbody>
+                            ) : null}
+                          </table>
+                        </div>
+                      ) :
+                        (
+                          <div></div>
+                        )}
                     </div>
+
 
 
                     {/* <div className="panel panel-default panelmb50">
@@ -378,18 +556,18 @@ class CommissionsScreen extends Component {
                         </div>
                       </div>
                       <div>
-                        <table className="table table-bordered tablemrb">
-                          <thead>
+                        <table className="table table-bordered tablemrb" style={{ overflowY: "scroll", height: "150px", display: "block" }}>
+                          <thead >
                             <tr className="tdbg">
-                              <th scope="col">From ID#</th>
-                              <th scope="col">From</th>
-                              <th scope="col">Paid Level</th>
-                              <th scope="col">Source</th>
-                              <th scope="col">%</th>
-                              <th scope="col">Earned</th>
+                              <th style={{ width: "20%" }} scope="col">From ID#</th>
+                              <th style={{ width: "20%" }} scope="col">From</th>
+                              <th style={{ width: "20%" }} scope="col">Paid Level</th>
+                              <th style={{ width: "15%" }} scope="col">Source</th>
+                              <th style={{ width: "10%" }} scope="col">%</th>
+                              <th style={{ width: "15%" }} scope="col">Earned</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody >
                             <tr>
                               <th colSpan="6">Bonus: Deferred Commission</th>
                             </tr>
@@ -426,14 +604,47 @@ class CommissionsScreen extends Component {
                               <td className="textalignr">$5.00 USD</td>
                             </tr>
                             <tr>
+                              <td className="bluecolor">872805</td>
+                              <td>Lainey Miller</td>
+                              <td>1</td>
+                              <td className="textalignr">$19.99 USD</td>
+                              <td className="textalignr">25%	</td>
+                              <td className="textalignr">$5.00 USD</td>
+                            </tr>
+                            <tr>
+                              <td className="bluecolor">872805</td>
+                              <td>Lainey Miller</td>
+                              <td>1</td>
+                              <td className="textalignr">$19.99 USD</td>
+                              <td className="textalignr">25%	</td>
+                              <td className="textalignr">$5.00 USD</td>
+                            </tr>
+                            <tr>
+                              <td className="bluecolor">872805</td>
+                              <td>Lainey Miller</td>
+                              <td>1</td>
+                              <td className="textalignr">$19.99 USD</td>
+                              <td className="textalignr">25%	</td>
+                              <td className="textalignr">$5.00 USD</td>
+                            </tr>
+                            <tr>
+                              <td className="bluecolor">872805</td>
+                              <td>Lainey Miller</td>
+                              <td>1</td>
+                              <td className="textalignr">$19.99 USD</td>
+                              <td className="textalignr">25%	</td>
+                              <td className="textalignr">$5.00 USD</td>
+                            </tr>
+
+                            <tr>
                               <td colSpan="5"></td>
                               <td><div className="totalb textalignr">Total: $53.36&nbsp;CAD<br></br> $5.00&nbsp;USD</div></td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
-                    </div>  */}
-
+                    </div>
+ */}
 
                   </div>
                 </div>
