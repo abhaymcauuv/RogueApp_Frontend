@@ -3,6 +3,7 @@ import HomeHeaderscreen from '../homeheader';
 import PageFooter from '../footer';
 import '../../styles/styles.css';
 const axios = require('axios');
+const BASE_URL = `http://localhost:6002/`;
 
 class RankScreen extends Component {
   state = {
@@ -42,7 +43,7 @@ class RankScreen extends Component {
   loadRankData = () => {
     axios({
       method: 'GET',
-      url: 'http://localhost:6002/rogue/commission/rankadvancement/getrank'
+      url: BASE_URL+'rogue/commission/rankadvancement/getrank'
     }).then(async (response) => {
       console.log(response.data.Items);
       const dt = await response.data.Items
@@ -55,7 +56,7 @@ class RankScreen extends Component {
 
 
   render() {
-    const { rankData } = this.state;
+    // const { rankData } = this.state;
     return (
       <div>
         <div className="container-fluid">
@@ -109,7 +110,7 @@ class RankScreen extends Component {
                             </span>
                             <select id="periodchoice" className="form-control" onChange={this.handleChange} >
                             <option value={0}>No Rank</option>
-                            {rankData.map((dt, i) => {
+                            {this.state.rankData.map((dt, i) => {
                               return (
                             <option key={i} value={dt.RankID}>{dt.RankDescription}</option>
                               )
