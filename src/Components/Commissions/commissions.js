@@ -122,7 +122,11 @@ class CommissionsScreen extends Component {
           IsLoadingCommission: false,
           HistoricalSummaryCommission: result.HistoricalSummaryCommission,
           HistoricalCommission: result.HistoricalCommission,
-          RealTimeCommission: result.RealTimeCommission
+          RealTimeCommission: result.RealTimeCommission,
+          UsdSum: !(JSON.stringify(result.HistoricalCommission.UsdSum) === JSON.stringify({})) ? result.HistoricalCommission.UsdSum : 0,
+          CadSum: !(JSON.stringify(result.HistoricalCommission.CadSum) === JSON.stringify({})) ? result.HistoricalCommission.CadSum : 0,
+          SavvySum: !(JSON.stringify(result.HistoricalCommission.SavvySum) === JSON.stringify({})) ? result.HistoricalCommission.SavvySum : 0,
+          TeamSum: !(JSON.stringify(result.HistoricalCommission.TeamSum) === JSON.stringify({})) ? result.HistoricalCommission.TeamSum : 0,
         });
       }
       else {
@@ -137,7 +141,7 @@ class CommissionsScreen extends Component {
 
   onExpandCommission = async (id) => {
     const { DeferredCommission, SavvySeller, SponsorBonus, CoachingBonus, CouturierBonus,
-      RunID, TeamSum } = this.state;
+      RunID } = this.state;
     if (id == 1) {
       if (DeferredCommission.length > 0) {
         return;
@@ -183,19 +187,19 @@ class CommissionsScreen extends Component {
       var result = await response.data.Items;
       switch (id) {
         case 1:
-          this.setState({ IsLoadingDeferredCommission: false, UsdSum: result.UsdSum, CadSum: result.CadSum, DeferredCommission: result.HistoricalBonusDetails });
+          this.setState({ IsLoadingDeferredCommission: false, DeferredCommission: result.HistoricalBonusDetails });
           break;
         case 4:
-          this.setState({ IsLoadingSavvySeller: false, SavvySum: result.SavvySum, SavvySeller: result.HistoricalBonusDetails });
+          this.setState({ IsLoadingSavvySeller: false, SavvySeller: result.HistoricalBonusDetails });
           break;
         case 5:
-          this.setState({ IsLoadingSponsorBonus: false, TeamSum: TeamSum + result.TeamSum, SponsorBonus: result.HistoricalBonusDetails });
+          this.setState({ IsLoadingSponsorBonus: false, SponsorBonus: result.HistoricalBonusDetails });
           break;
         case 6:
-          this.setState({ IsLoadingCoachingBonus: false, TeamSum: TeamSum + result.TeamSum, CoachingBonus: result.HistoricalBonusDetails });
+          this.setState({ IsLoadingCoachingBonus: false, CoachingBonus: result.HistoricalBonusDetails });
           break;
         case 7:
-          this.setState({ IsLoadingCouturierBonus: false, TeamSum: TeamSum + result.TeamSum, CouturierBonus: result.HistoricalBonusDetails });
+          this.setState({ IsLoadingCouturierBonus: false, CouturierBonus: result.HistoricalBonusDetails });
           break;
       }
     }).catch(function (error) {
@@ -600,7 +604,7 @@ class CommissionsScreen extends Component {
                           <th colSpan="6" style={{ cursor: "pointer" }} onClick={() => this.onExpandCommission(7)}>Bonus: Couturier Bonus</th>
                         </tr>
                         {!IsLoadingCouturierBonus ? (
-                           (CouturierBonus.length > 0) ? (
+                          (CouturierBonus.length > 0) ? (
                             <tbody>
                               {
                                 CouturierBonus.map(data => {
@@ -623,16 +627,16 @@ class CommissionsScreen extends Component {
                             </tbody>
                           ) : null
                         )
-                         :
-                         <tr>
-                           <td colSpan="6">
-                             <center>
-                               <ReactLoading type="bars" color="#000" height={50} width={50} />
-                             </center>
-                           </td>
-                         </tr>
-                       }
-                       
+                          :
+                          <tr>
+                            <td colSpan="6">
+                              <center>
+                                <ReactLoading type="bars" color="#000" height={50} width={50} />
+                              </center>
+                            </td>
+                          </tr>
+                        }
+
                       </table>
                       ) : null}
                     </div>
