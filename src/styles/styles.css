@@ -1254,6 +1254,14 @@ border-bottom: 1px solid #f0f0f0 !important;
     position: absolute;
     z-index: 999;
 }
+.rc-collapse > .rc-collapse-item > .rc-collapse-header {  
+    color: #202020 !important;
+     font-weight: 600;
+ }
+ .table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 2px;
+    width: 10%;
+}
 
 
 
