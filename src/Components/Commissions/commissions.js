@@ -18,14 +18,16 @@ class CommissionsScreen extends Component {
       CommissionPeriodList: [],
       IsLoadingPeriodList: true,
       IsLoadingCommission: false,
-      IsHideHistoricalBonus: true,
+      IsHideBonusGrid: true,
       error: {},
       HistoricalSummaryCommission: {},
       HistoricalCommission: {},
       RealTimeCommission: [],
+      NotEarnedCommission: false,
 
       DeferredCommission: [],
       IsLoadingDeferredCommission: false,
+
       SavvySeller: [],
       IsLoadingSavvySeller: false,
 
@@ -38,8 +40,7 @@ class CommissionsScreen extends Component {
       CouturierBonus: [],
       IsLoadingCouturierBonus: false,
 
-      RealTimeBonusDetails: {},
-      HistoricalBonusDetails: {},
+
 
       TeamSum: 0,
       UsdSum: 0,
@@ -55,37 +56,39 @@ class CommissionsScreen extends Component {
     this.bindCommissionPeriods();
   }
 
-  bindCommissionPeriods = () => {
+  bindCommissionPeriods = async () => {
     let customerId = 967;
     let entPoint = EndPoints.CommissionPeriodList.Url.replace('{CustomerId}', customerId);
     axios({
       method: 'GET',
       url: EndPoints.BaseUrl + entPoint
     }).then(async (response) => {
-      const result = await response.data.Items
-      this.setState({
+      const result = await response.data.Items;
+      await this.setState({
         CommissionPeriodList: result.CommissionPeriodList,
         IsLoadingPeriodList: false
       });
+      if (result.CommissionPeriodList.length > 0) {
+        let value = result.CommissionPeriodList[0].RunID + "-" + result.CommissionPeriodList[0].Period.PeriodID + "-" + result.CommissionPeriodList[0].CommissionType;
+        this.handleSelectedChange(value);
+      }
     })
       .catch(function (error) {
         this.setState({ error: error, IsLoadingPeriodList: false })
       });
   }
 
-  handleSelectedChange = async (e) => {
-    const val = e.target.value;
+  handleSelectedChange = async (val) => {
     if (!val) {
       return
     }
-
     let customerId = 967;
     var runId = val.split('-')[0];
     var periodId = val.split('-')[1];
-    var commissionType = val.split('-')[2];
-    let isHideHistoricalBonus = true;
+    var commissionType = Number(val.split('-')[2]);
+    let isHideBonusGrid = true;
     if (commissionType == 1) {
-      isHideHistoricalBonus = false;
+      isHideBonusGrid = false;
     }
     this.setState({
       selectedPeriod: val,
@@ -95,7 +98,7 @@ class CommissionsScreen extends Component {
       IsLoadingCommission: true,
       PeriodID: periodId,
       RunID: runId,
-      IsHideHistoricalBonus: isHideHistoricalBonus,
+      IsHideBonusGrid: isHideBonusGrid,
       DeferredCommission: [],
       SavvySeller: [],
       SponsorBonus: [],
@@ -126,6 +129,8 @@ class CommissionsScreen extends Component {
           HistoricalSummaryCommission: result.HistoricalSummaryCommission,
           HistoricalCommission: result.HistoricalCommission,
           RealTimeCommission: result.RealTimeCommission,
+          IsHideBonusGrid: ((result.RealTimeCommission.length > 0 && commissionType == 0) || commissionType == 1) ? false : true,
+          NotEarnedCommission: (result.RealTimeCommission.length == 0 && commissionType == 0) ? true : false,
           UsdSum: !(JSON.stringify(result.HistoricalCommission.UsdSum) === JSON.stringify({})) ? result.HistoricalCommission.UsdSum : 0,
           CadSum: !(JSON.stringify(result.HistoricalCommission.CadSum) === JSON.stringify({})) ? result.HistoricalCommission.CadSum : 0,
           SavvySum: !(JSON.stringify(result.HistoricalCommission.SavvySum) === JSON.stringify({})) ? result.HistoricalCommission.SavvySum : 0,
@@ -143,7 +148,8 @@ class CommissionsScreen extends Component {
   }
 
   onExpandCommission = async (activeKey) => {
-    this.setState({ activeKey, IsLoadingDeferredCommission: true });
+    alert("")
+    this.setState({ activeKey });
     const keys = this.state.activeKey;
     const openedKey = activeKey.filter(x => !keys.includes(x));
     if (openedKey.length == 0) {
@@ -232,13 +238,15 @@ class CommissionsScreen extends Component {
       IsLoadingCommission,
       HistoricalSummaryCommission,
       HistoricalCommission,
+      RealTimeCommission,
+      NotEarnedCommission,
       TeamSum, UsdSum, CadSum, SavvySum,
       DeferredCommission,
       SavvySeller,
       SponsorBonus,
       CoachingBonus,
       CouturierBonus,
-      IsHideHistoricalBonus,
+      IsHideBonusGrid,
       IsLoadingDeferredCommission,
       IsLoadingSavvySeller,
       IsLoadingSponsorBonus,
@@ -280,7 +288,7 @@ class CommissionsScreen extends Component {
                             <div className="panel-title">
                               <a href="/#/volumes" className="">
                                 Volumes
-                                </a>
+                              </a>
                             </div>
                           </div>
                         </div>
@@ -297,7 +305,7 @@ class CommissionsScreen extends Component {
                                 <button className="btn btn-default" type="button"><i className="fa fa-angle-left" aria-hidden="true"></i></button>
                               </span>
 
-                              <select value={this.state.selectedPeriod} onChange={(e) => this.handleSelectedChange(e)} id="periodchoice" className="form-control">
+                              <select value={this.state.selectedPeriod} onChange={(e) => this.handleSelectedChange(e.target.value)} id="periodchoice" className="form-control">
                                 {CommissionPeriodList.length > 0 ? (
                                   CommissionPeriodList.map((data, index) => {
                                     return (
@@ -313,9 +321,11 @@ class CommissionsScreen extends Component {
                                 <button className="btn btn-default" type="button"><i className="fa fa-angle-right" aria-hidden="true"></i></button>
                               </span>
                             </div>
-                          ) : <center>
+                          ) :
+                            <center>
                               <ReactLoading type="bars" color="#000" height={30} width={30} />
-                            </center>}
+                            </center>
+                          }
                         </div>
                       </div>
                     </div>
@@ -437,6 +447,77 @@ class CommissionsScreen extends Component {
 
                               </div>
                             )}
+
+                          {(RealTimeCommission.length > 0) ? (
+                            RealTimeCommission.map((data, index) => {
+                              return (<div key={index}>
+                                <div className="panel-body">
+                                  <h4>{data.Period.PeriodDescription} Commissions</h4>
+                                  <div className="row">
+                                    <div className="col-sm-5">
+                                      <div className="metric metric-sm">
+                                        <dl className="dl-metric">
+                                          {TeamSum > 0 ? <div><dt id="teamLabel"><strong>Team Commissions</strong></dt>
+                                            <dd id="teamID" >${TeamSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
+                                          {UsdSum > 0 ? <div>   <dt id="usdLabel" ><strong>USD Deferred Commissions</strong></dt>
+                                            <dd id="usdID" >${UsdSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
+                                          {CadSum > 0 ? <div><dt id="cadLabel" ><strong>CAD Deferred Commissions</strong></dt>
+                                            <dd id="cadID" >${CadSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} CAD</dd></div> : null}
+                                          {SavvySum > 0 ? <div> <dt id="savvyLabel" ><strong>Savvy Seller Bonus Total</strong></dt>
+                                            <dd id="savvyID" >${SavvySum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
+                                        </dl>
+                                      </div>
+                                    </div>
+                                    <div className="col-sm-6">
+                                      <div className="row padiingt10">
+                                        <div className="col-sm-6">
+                                          <dl className="dl-metric">
+                                            <dt>PV</dt>
+                                            <dd>{data.Volume.Volume2.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                            <dt>TV</dt>
+                                            <dd>{data.Volume.Volume5.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                            <dt>EV</dt>
+                                            <dd>{data.Volume.Volume6.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                          </dl>
+                                        </div>
+                                        <div className="col-sm-6">
+                                          <dl className="dl-metric">
+                                            <dt>PSQ</dt>
+                                            <dd>{data.Volume.Volume7}</dd>
+                                            <dt>Level 1 Mentors</dt>
+                                            <dd>{data.Volume.Volume8}</dd>
+                                            <dt>Master Mentor Legs</dt>
+                                            <dd>{data.Volume.Volume9}</dd>
+                                          </dl>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="row">
+                                    <div className="col-sm-8 h20">
+                                      <div className="metric metric-sm">
+                                        <div className="metric-title">
+                                          Qualifying as: <strong>{data.Volume.PayableAsRank}</strong>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="teamh">
+                                      <div className="metric metric-sm">
+                                        <div className="metric-title textalignr">*Team Commissions are displayed in USD</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>)
+                            })
+                          ) : (NotEarnedCommission ?
+                            <div className="panel-body">
+                              <center>
+                                You have not earned any commissions yet - check back soon!
+                              </center>
+                            </div>
+                            : null)
+                          }
                         </div>
                       ) :
                         <div className="panel-body">
@@ -446,7 +527,7 @@ class CommissionsScreen extends Component {
                         </div>
                       }
 
-                      {!IsHideHistoricalBonus ? (
+                      {!IsHideBonusGrid ? (
                         <div>
                           <Collapse
                             //accordion={true}
