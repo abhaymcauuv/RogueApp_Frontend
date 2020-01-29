@@ -4,15 +4,17 @@ import PageFooter from '../footer';
 import axios from 'axios';
 import '../../styles/styles.css';
 import EndPoints from '../../Config/ApiEndpoints/endpoints';
-import { Collapse, Button } from 'react-bootstrap';
 import ReactLoading from "react-loading";
+import 'rc-collapse/assets/index.css';
+import Collapse, { Panel } from 'rc-collapse';
 
 class CommissionsScreen extends Component {
   constructor() {
-    super()
+    super();
     this.handleSelectedChange = this.handleSelectedChange.bind(this);
     this.onExpandCommission = this.onExpandCommission.bind(this);
     this.state = {
+      activeKey: [],
       CommissionPeriodList: [],
       IsLoadingPeriodList: true,
       IsLoadingCommission: false,
@@ -99,6 +101,7 @@ class CommissionsScreen extends Component {
       SponsorBonus: [],
       CoachingBonus: [],
       CouturierBonus: [],
+      activeKey: []
     });
 
     if (runId > 0) {
@@ -122,7 +125,11 @@ class CommissionsScreen extends Component {
           IsLoadingCommission: false,
           HistoricalSummaryCommission: result.HistoricalSummaryCommission,
           HistoricalCommission: result.HistoricalCommission,
-          RealTimeCommission: result.RealTimeCommission
+          RealTimeCommission: result.RealTimeCommission,
+          UsdSum: !(JSON.stringify(result.HistoricalCommission.UsdSum) === JSON.stringify({})) ? result.HistoricalCommission.UsdSum : 0,
+          CadSum: !(JSON.stringify(result.HistoricalCommission.CadSum) === JSON.stringify({})) ? result.HistoricalCommission.CadSum : 0,
+          SavvySum: !(JSON.stringify(result.HistoricalCommission.SavvySum) === JSON.stringify({})) ? result.HistoricalCommission.SavvySum : 0,
+          TeamSum: !(JSON.stringify(result.HistoricalCommission.TeamSum) === JSON.stringify({})) ? result.HistoricalCommission.TeamSum : 0,
         });
       }
       else {
@@ -135,72 +142,79 @@ class CommissionsScreen extends Component {
     });
   }
 
-  onExpandCommission = async (id) => {
-    const { DeferredCommission, SavvySeller, SponsorBonus, CoachingBonus, CouturierBonus,
-      RunID, TeamSum } = this.state;
-    if (id == 1) {
+  onExpandCommission = async (activeKey) => {
+    this.setState({ activeKey, IsLoadingDeferredCommission: true });
+    const keys = this.state.activeKey;
+    const openedKey = activeKey.filter(x => !keys.includes(x));
+    if (openedKey.length == 0) {
+      return;
+    }
+    let bonusId = Number(openedKey[0]);
+    const { DeferredCommission, SavvySeller, SponsorBonus, CoachingBonus, CouturierBonus } = this.state;
+    if (bonusId == 1) {
       if (DeferredCommission.length > 0) {
         return;
       }
       this.setState({ IsLoadingDeferredCommission: true });
     }
-    else if (id == 4) {
+    else if (bonusId == 4) {
       if (SavvySeller.length > 0) {
         return;
       }
       this.setState({ IsLoadingSavvySeller: true });
     }
-    else if (id == 5) {
+    else if (bonusId == 5) {
       if (SponsorBonus.length > 0) {
         return;
       }
       this.setState({ IsLoadingSponsorBonus: true });
     }
-    else if (id == 6) {
+    else if (bonusId == 6) {
       if (CoachingBonus.length > 0) {
         return;
       }
       this.setState({ IsLoadingCoachingBonus: true });
     }
-    else if (id == 7) {
+    else if (bonusId == 7) {
       if (CouturierBonus.length > 0) {
         return;
       }
       this.setState({ IsLoadingCouturierBonus: true });
     }
-
+    const runId = this.state.RunID;
     axios({
       method: 'POST',
       url: EndPoints.BaseUrl + EndPoints.HistoricalBonus.Url,
       data: {
         CustomerID: 967,
-        CommissionRunID: RunID,
-        BonusID: id,
+        CommissionRunID: runId,
+        BonusID: bonusId,
         PageSize: 0,
         PageNo: 0
       }
     }).then(async (response) => {
       var result = await response.data.Items;
-      switch (id) {
+      switch (bonusId) {
         case 1:
-          this.setState({ IsLoadingDeferredCommission: false, UsdSum: result.UsdSum, CadSum: result.CadSum, DeferredCommission: result.HistoricalBonusDetails });
+          this.setState({ IsLoadingDeferredCommission: false, DeferredCommission: result.HistoricalBonusDetails });
           break;
         case 4:
-          this.setState({ IsLoadingSavvySeller: false, SavvySum: result.SavvySum, SavvySeller: result.HistoricalBonusDetails });
+          this.setState({ IsLoadingSavvySeller: false, SavvySeller: result.HistoricalBonusDetails });
           break;
         case 5:
-          this.setState({ IsLoadingSponsorBonus: false, TeamSum: TeamSum + result.TeamSum, SponsorBonus: result.HistoricalBonusDetails });
+          this.setState({ IsLoadingSponsorBonus: false, SponsorBonus: result.HistoricalBonusDetails });
           break;
         case 6:
-          this.setState({ IsLoadingCoachingBonus: false, TeamSum: TeamSum + result.TeamSum, CoachingBonus: result.HistoricalBonusDetails });
+          this.setState({ IsLoadingCoachingBonus: false, CoachingBonus: result.HistoricalBonusDetails });
           break;
         case 7:
-          this.setState({ IsLoadingCouturierBonus: false, TeamSum: TeamSum + result.TeamSum, CouturierBonus: result.HistoricalBonusDetails });
+          this.setState({ IsLoadingCouturierBonus: false, CouturierBonus: result.HistoricalBonusDetails });
           break;
       }
     }).catch(function (error) {
       console.log(error);
     });
+
   }
 
   calculateSum(commission) {
@@ -210,7 +224,10 @@ class CommissionsScreen extends Component {
     return total.toLocaleString(undefined, { maximumFractionDigits: 2 });
   }
 
+
+
   render() {
+    const activeKey = this.state.activeKey;
     const { CommissionPeriodList, IsLoadingPeriodList,
       IsLoadingCommission,
       HistoricalSummaryCommission,
@@ -253,8 +270,8 @@ class CommissionsScreen extends Component {
                           <div className="panel-heading ">
                             <div className="panel-title">
                               <a href="/#/rank" className="">
-                              <i class="fa fa-star lmenuicon" aria-hidden="true"></i> Rank Advancement
-                                </a>
+                                Rank Advancement
+                              </a>
                             </div>
                           </div>
                         </div>
@@ -292,7 +309,6 @@ class CommissionsScreen extends Component {
                                   )}
                               </select>
 
-
                               <span className="input-group-btn">
                                 <button className="btn btn-default" type="button"><i className="fa fa-angle-right" aria-hidden="true"></i></button>
                               </span>
@@ -303,7 +319,6 @@ class CommissionsScreen extends Component {
                         </div>
                       </div>
                     </div>
-
 
                     <div className="panel panel-default panelmb50">
                       {!IsLoadingCommission ? (
@@ -431,362 +446,310 @@ class CommissionsScreen extends Component {
                         </div>
                       }
 
-                      {!IsHideHistoricalBonus ? (<table className="table table-bordered tablemrb">
-                        <thead>
-                          <tr className="tdbg">
-                            <th scope="col">From ID#</th>
-                            <th scope="col">From</th>
-                            <th scope="col">Paid Level</th>
-                            <th scope="col">Source</th>
-                            <th scope="col">%</th>
-                            <th scope="col">Earned</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th colSpan="6" style={{ cursor: "pointer" }} onClick={() => this.onExpandCommission(1)}>
-                              Bonus: Deferred Commission
-                            </th>
-                          </tr>
-                        </tbody>
-                        {!IsLoadingDeferredCommission ? (
-                          (DeferredCommission.length > 0) ? (
-                            <tbody>
-                              {
-                                DeferredCommission.map(data => {
-                                  return (
+                      {!IsHideHistoricalBonus ? (
+                        <div>
+                          <Collapse
+                            //accordion={true}
+                            onChange={this.onExpandCommission}
+                            activeKey={activeKey}
+                          >
+                            <Panel header={`Bonus: Deferred Commission`} key="1">
+                              <Collapse defaultActiveKey="1">
+                                <table className="table table-bordered tablemrb">
+                                  <thead>
                                     <tr className="tdbg">
-                                      <td className="bluecolor">{data.FromCustomerID}</td>
-                                      <td>{data.FromCustomerName}</td>
-                                      <td>{data.PaidLevel}</td>
-                                      <td className="textalignr">${data.SourceAmount + ` ` + data.CurrencyCode}</td>
-                                      <td className="textalignr">{data.Percentage}%</td>
-                                      <td className="textalignr">${data.CommissionAmount + ` ` + data.CurrencyCode}</td>
+                                      <th scope="col">From ID#</th>
+                                      <th scope="col">From</th>
+                                      <th scope="col">Paid Level</th>
+                                      <th scope="col">Source</th>
+                                      <th scope="col">%</th>
+                                      <th scope="col">Earned</th>
                                     </tr>
-                                  )
-                                })
-                              }
-                              <tr>
-                                <td colSpan="5"></td>
-                                <td><div className="totalb textalignr">Total:${this.calculateSum(DeferredCommission)}</div></td>
-                              </tr>
-                            </tbody>
-                          ) : null
-                        ) :
-                          <tr>
-                            <td colSpan="6">
-                              <center>
-                                <ReactLoading type="bars" color="#000" height={50} width={50} />
-                              </center>
-                            </td>
-                          </tr>
-                        }
+                                  </thead>
+                                  {DeferredCommission.length > 0 ? (
+                                    <tbody>
+                                      {
+                                        DeferredCommission.map((data, index) => {
+                                          return (
+                                            <tr className="tdbg" key={index}>
+                                              <td className="bluecolor">{data.FromCustomerID}</td>
+                                              <td>{data.FromCustomerName}</td>
+                                              <td>{data.PaidLevel}</td>
+                                              <td className="textalignr">${data.SourceAmount + ` ` + data.CurrencyCode}</td>
+                                              <td className="textalignr">{data.Percentage}%</td>
+                                              <td className="textalignr">${data.CommissionAmount + ` ` + data.CurrencyCode}</td>
+                                            </tr>
+                                          )
+                                        })
+                                      }
+                                      <tr>
+                                        <td colSpan="5"></td>
+                                        <td><div className="totalb textalignr">Total:${this.calculateSum(DeferredCommission)}</div></td>
+                                      </tr>
+                                    </tbody>
+                                  ) :
+                                    (IsLoadingDeferredCommission) ? (
+                                      <tbody>
+                                        <tr>
+                                          <td colSpan="6">
+                                            <center>
+                                              <ReactLoading type="bars" color="#000" height={50} width={50} />
+                                            </center>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    ) : (
+                                        <tbody>
+                                          <tr>
+                                            <td colSpan="6">
+                                              No records Found
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      )
+                                  }
+                                </table>
+                              </Collapse>
+                            </Panel>
 
-
-                        <tr>
-                          <th colSpan="6" style={{ cursor: "pointer" }} onClick={() => this.onExpandCommission(4)}>Bonus: Savvy Seller Bonus</th>
-                        </tr>
-                        {!IsLoadingSavvySeller ? (
-                          (SavvySeller.length > 0) ? (
-                            <tbody>
-                              {
-                                SavvySeller.map(data => {
-                                  return (
+                            <Panel header={`Bonus: Savvy Seller Bonus`} key="4">
+                              <Collapse defaultActiveKey="1">
+                                <table className="table table-bordered tablemrb">
+                                  <thead>
                                     <tr className="tdbg">
-                                      <td className="bluecolor">{data.FromCustomerID}</td>
-                                      <td>{data.FromCustomerName}</td>
-                                      <td>{data.PaidLevel}</td>
-                                      <td className="textalignr">{data.SourceAmount}PV</td>
-                                      <td className="textalignr">{data.Percentage}%	</td>
-                                      <td className="textalignr">${data.CommissionAmount} USD</td>
+                                      <th scope="col">From ID#</th>
+                                      <th scope="col">From</th>
+                                      <th scope="col">Paid Level</th>
+                                      <th scope="col">Source</th>
+                                      <th scope="col">%</th>
+                                      <th scope="col">Earned</th>
                                     </tr>
-                                  )
-                                })
-                              }
-                              <tr>
-                                <td colSpan="5"></td>
-                                <td><div className="totalb textalignr">Total:${this.calculateSum(SavvySeller)}</div></td>
-                              </tr>
-                            </tbody>
-                          ) : null
-                        ) :
-                          <tr>
-                            <td colSpan="6">
-                              <center>
-                                <ReactLoading type="bars" color="#000" height={50} width={50} />
-                              </center>
-                            </td>
-                          </tr>
-                        }
+                                  </thead>
+                                  {SavvySeller.length > 0 ? (
+                                    <tbody>
+                                      {SavvySeller.map((data, index) => {
+                                        return (
+                                          <tr className="tdbg" key={index}>
+                                            <td className="bluecolor">{data.FromCustomerID}</td>
+                                            <td>{data.FromCustomerName}</td>
+                                            <td>{data.PaidLevel}</td>
+                                            <td className="textalignr">{data.SourceAmount}PV</td>
+                                            <td className="textalignr">{data.Percentage}%	</td>
+                                            <td className="textalignr">${data.CommissionAmount} USD</td>
+                                          </tr>
+                                        )
+                                      })}
+                                      <tr>
+                                        <td colSpan="5"></td>
+                                        <td><div className="totalb textalignr">Total:${this.calculateSum(SavvySeller)}</div></td>
+                                      </tr>
+                                    </tbody>
+                                  ) :
+                                    (IsLoadingSavvySeller) ? (
+                                      <tbody>
+                                        <tr>
+                                          <td colSpan="6">
+                                            <center>
+                                              <ReactLoading type="bars" color="#000" height={50} width={50} />
+                                            </center>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    ) : (
+                                        <tbody>
+                                          <tr>
+                                            <td colSpan="6">
+                                              No records Found
+                                            </td>
+                                          </tr>
+                                        </tbody>)
+                                  }
+                                </table>
+                              </Collapse>
+                            </Panel>
 
-
-
-
-                        <tr>
-                          <th colSpan="6" style={{ cursor: "pointer" }} onClick={() => this.onExpandCommission(5)}>Bonus: Sponsoring Bonus</th>
-                        </tr>
-                        {!IsLoadingSponsorBonus ? (
-                          (SponsorBonus.length > 0) ? (
-                            <tbody>
-                              {
-                                SponsorBonus.map(data => {
-                                  return (
+                            <Panel header={`Bonus: Sponsoring Bonus`} key="5">
+                              <Collapse defaultActiveKey="1">
+                                <table className="table table-bordered tablemrb">
+                                  <thead>
                                     <tr className="tdbg">
-                                      <td className="bluecolor">{data.FromCustomerID}</td>
-                                      <td>{data.FromCustomerName}</td>
-                                      <td>{data.PaidLevel}</td>
-                                      <td className="textalignr">{data.SourceAmount}PV</td>
-                                      <td className="textalignr">{data.Percentage}%	</td>
-                                      <td className="textalignr">${data.CommissionAmount} USD</td>
+                                      <th scope="col">From ID#</th>
+                                      <th scope="col">From</th>
+                                      <th scope="col">Paid Level</th>
+                                      <th scope="col">Source</th>
+                                      <th scope="col">%</th>
+                                      <th scope="col">Earned</th>
                                     </tr>
-                                  )
-                                })
-                              }
-                              <tr>
-                                <td colSpan="5"></td>
-                                <td><div className="totalb textalignr">Total:${this.calculateSum(SponsorBonus)}</div></td>
-                              </tr>
-                            </tbody>
-                          ) : null
-                        ) :
-                          <tr>
-                            <td colSpan="6">
-                              <center>
-                                <ReactLoading type="bars" color="#000" height={50} width={50} />
-                              </center>
-                            </td>
-                          </tr>
-                        }
+                                  </thead>
+                                  {SponsorBonus.length > 0 ? (
+                                    <tbody>
+                                      {
+                                        SponsorBonus.map((data, index) => {
+                                          return (
+                                            <tr className="tdbg" key={index}>
+                                              <td className="bluecolor">{data.FromCustomerID}</td>
+                                              <td>{data.FromCustomerName}</td>
+                                              <td>{data.PaidLevel}</td>
+                                              <td className="textalignr">{data.SourceAmount}PV</td>
+                                              <td className="textalignr">{data.Percentage}%	</td>
+                                              <td className="textalignr">${data.CommissionAmount} USD</td>
+                                            </tr>
+                                          )
+                                        })
+                                      }
+                                      <tr>
+                                        <td colSpan="5"></td>
+                                        <td><div className="totalb textalignr">Total:${this.calculateSum(SponsorBonus)}</div></td>
+                                      </tr>
+                                    </tbody>
+                                  ) :
+                                    (IsLoadingSponsorBonus) ? (
+                                      <tbody>
+                                        <tr>
+                                          <td colSpan="6">
+                                            <center>
+                                              <ReactLoading type="bars" color="#000" height={50} width={50} />
+                                            </center>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    ) : (
+                                        <tbody>
+                                          <tr>
+                                            <td colSpan="6">
+                                              No records Found
+                                         </td>
+                                          </tr>
+                                        </tbody>
+                                      )
+                                  }
+                                </table>
+                              </Collapse>
+                            </Panel>
 
 
-                        <tr>
-                          <th colSpan="6" style={{ cursor: "pointer" }} onClick={() => this.onExpandCommission(6)}>Bonus: Coaching Bonus</th>
-                        </tr>
-                        {!IsLoadingCoachingBonus ? (
-                          (CoachingBonus.length > 0) ? (
-                            <tbody>
-                              {
-                                CoachingBonus.map(data => {
-                                  return (
+                            <Panel header={`Bonus: Coaching Bonus`} key="6">
+                              <Collapse defaultActiveKey="1">
+                                <table className="table table-bordered tablemrb">
+                                  <thead>
                                     <tr className="tdbg">
-                                      <td className="bluecolor">{data.FromCustomerID}</td>
-                                      <td>{data.FromCustomerName}</td>
-                                      <td>{data.PaidLevel}</td>
-                                      <td className="textalignr">{data.SourceAmount}PV</td>
-                                      <td className="textalignr">{data.Percentage}%	</td>
-                                      <td className="textalignr">${data.CommissionAmount} USD</td>
+                                      <th scope="col">From ID#</th>
+                                      <th scope="col">From</th>
+                                      <th scope="col">Paid Level</th>
+                                      <th scope="col">Source</th>
+                                      <th scope="col">%</th>
+                                      <th scope="col">Earned</th>
                                     </tr>
-                                  )
-                                })
-                              }
-                              <tr>
-                                <td colSpan="5"></td>
-                                <td><div className="totalb textalignr">Total:${this.calculateSum(CoachingBonus)}</div></td>
-                              </tr>
-                            </tbody>
-                          ) : null
-                        ) :
-                          <tr>
-                            <td colSpan="6">
-                              <center>
-                                <ReactLoading type="bars" color="#000" height={50} width={50} />
-                              </center>
-                            </td>
-                          </tr>
-                        }
+                                  </thead>
+                                  {CoachingBonus.length > 0 ? (
+                                    <tbody>
+                                      {
+                                        CoachingBonus.map((data, index) => {
+                                          return (
+                                            <tr className="tdbg" key={index}>
+                                              <td className="bluecolor">{data.FromCustomerID}</td>
+                                              <td>{data.FromCustomerName}</td>
+                                              <td>{data.PaidLevel}</td>
+                                              <td className="textalignr">{data.SourceAmount}PV</td>
+                                              <td className="textalignr">{data.Percentage}%	</td>
+                                              <td className="textalignr">${data.CommissionAmount} USD</td>
+                                            </tr>
+                                          )
+                                        })
+                                      }
+                                      <tr>
+                                        <td colSpan="5"></td>
+                                        <td><div className="totalb textalignr">Total:${this.calculateSum(CoachingBonus)}</div></td>
+                                      </tr>
+                                    </tbody>
+                                  ) :
+                                    (IsLoadingCoachingBonus) ? (
+                                      <tbody>
+                                        <tr>
+                                          <td colSpan="6">
+                                            <center>
+                                              <ReactLoading type="bars" color="#000" height={50} width={50} />
+                                            </center>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    ) : (
+                                        <tbody>
+                                          <tr>
+                                            <td colSpan="6">
+                                              No records Found
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      )
+                                  }
+                                </table>
+                              </Collapse>
+                            </Panel>
 
-
-                        <tr>
-                          <th colSpan="6" style={{ cursor: "pointer" }} onClick={() => this.onExpandCommission(7)}>Bonus: Couturier Bonus</th>
-                        </tr>
-                        {!IsLoadingCouturierBonus ? (
-                           (CouturierBonus.length > 0) ? (
-                            <tbody>
-                              {
-                                CouturierBonus.map(data => {
-                                  return (
+                            <Panel header={`Bonus: Couturier Bonus`} key="7">
+                              <Collapse defaultActiveKey="1">
+                                <table className="table table-bordered tablemrb">
+                                  <thead>
                                     <tr className="tdbg">
-                                      <td className="bluecolor">{data.FromCustomerID}</td>
-                                      <td>{data.FromCustomerName}</td>
-                                      <td>{data.PaidLevel}</td>
-                                      <td className="textalignr">${data.SourceAmount} USD</td>
-                                      <td className="textalignr">{data.Percentage}%	</td>
-                                      <td className="textalignr">${data.CommissionAmount} USD</td>
+                                      <th scope="col">From ID#</th>
+                                      <th scope="col">From</th>
+                                      <th scope="col">Paid Level</th>
+                                      <th scope="col">Source</th>
+                                      <th scope="col">%</th>
+                                      <th scope="col">Earned</th>
                                     </tr>
-                                  )
-                                })
-                              }
-                              <tr>
-                                <td colSpan="5"></td>
-                                <td><div className="totalb textalignr">Total:${this.calculateSum(CouturierBonus)}</div></td>
-                              </tr>
-                            </tbody>
-                          ) : null
-                        )
-                         :
-                         <tr>
-                           <td colSpan="6">
-                             <center>
-                               <ReactLoading type="bars" color="#000" height={50} width={50} />
-                             </center>
-                           </td>
-                         </tr>
-                       }
-                       
-                      </table>
+                                  </thead>
+                                  {CouturierBonus.length > 0 ? (
+                                    <tbody>
+                                      {
+                                        CouturierBonus.map((data, index) => {
+                                          return (
+                                            <tr className="tdbg" key={index}>
+                                              <td className="bluecolor">{data.FromCustomerID}</td>
+                                              <td>{data.FromCustomerName}</td>
+                                              <td>{data.PaidLevel}</td>
+                                              <td className="textalignr">${data.SourceAmount} USD</td>
+                                              <td className="textalignr">{data.Percentage}%	</td>
+                                              <td className="textalignr">${data.CommissionAmount} USD</td>
+                                            </tr>
+                                          )
+                                        })
+                                      }
+                                      <tr>
+                                        <td colSpan="5"></td>
+                                        <td><div className="totalb textalignr">Total:${this.calculateSum(CouturierBonus)}</div></td>
+                                      </tr>
+                                    </tbody>
+                                  ) :
+                                    (IsLoadingCouturierBonus) ? (
+                                      <tbody>
+                                        <tr>
+                                          <td colSpan="6">
+                                            <center>
+                                              <ReactLoading type="bars" color="#000" height={50} width={50} />
+                                            </center>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    ) : (
+                                        <tbody>
+                                          <tr>
+                                            <td colSpan="6">
+                                              No records Found
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      )
+                                  }
+                                </table>
+                              </Collapse>
+                            </Panel>
+
+                          </Collapse>
+                        </div>
                       ) : null}
                     </div>
-
-
-
-                    {/* <div className="panel panel-default panelmb50">
-                      <div className="panel-body">
-                        <h4>Monthly 37 January 2020 Commissions</h4>
-                        <div className="row">
-                          <div className="col-sm-5">
-                            <div className="metric metric-sm">
-                              <dl className="dl-metric">
-                                <dt><strong>Team Commissions</strong></dt>
-                                <dd>$0.00&nbsp;USD</dd>
-                                <dt><strong>USD Deferred Commissions</strong></dt>
-                                <dd>$5.00&nbsp;USD</dd>
-                                <dt><strong>CAD Deferred Commissions</strong></dt>
-                                <dd>$53.36&nbsp;CAD</dd>
-
-                              </dl>
-                            </div>
-                          </div>
-                          <div className="col-sm-6">
-                            <div className="row padiingt10">
-                              <div className="col-sm-6">
-                                <dl className="dl-metric">
-                                  <dt>PV</dt>
-                                  <dd>107.92</dd>
-                                  <dt>TV</dt>
-                                  <dd>2,521.71</dd>
-                                  <dt>EV</dt>
-                                  <dd>3,786.12</dd>
-                                </dl>
-                              </div>
-                              <div className="col-sm-6">
-                                <dl className="dl-metric">
-                                  <dt>PSQ</dt>
-                                  <dd>3</dd>
-                                  <dt>Level 1 Mentors</dt>
-                                  <dd>0</dd>
-                                  <dt>Master Mentor Legs</dt>
-                                  <dd>0</dd>
-                                </dl>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-sm-8 h20">
-                            <div className="metric metric-sm">
-                              <div className="metric-title">
-                                Qualifying as: <strong>Qualified Designer</strong>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="teamh">
-                            <div className="metric metric-sm">
-                              <div className="metric-title textalignr">*Team Commissions are displayed in USD</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <table className="table table-bordered tablemrb" style={{ overflowY: "scroll", height: "150px", display: "block" }}>
-                          <thead >
-                            <tr className="tdbg">
-                              <th style={{ width: "20%" }} scope="col">From ID#</th>
-                              <th style={{ width: "20%" }} scope="col">From</th>
-                              <th style={{ width: "20%" }} scope="col">Paid Level</th>
-                              <th style={{ width: "15%" }} scope="col">Source</th>
-                              <th style={{ width: "10%" }} scope="col">%</th>
-                              <th style={{ width: "15%" }} scope="col">Earned</th>
-                            </tr>
-                          </thead>
-                          <tbody >
-                            <tr>
-                              <th colSpan="6">Bonus: Deferred Commission</th>
-                            </tr>
-                            <tr className="tdbg">
-                              <td className="bluecolor">872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
-                            </tr>
-                            <tr>
-                              <td className="bluecolor">872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
-                            </tr>
-                            <tr className="tdbg">
-                              <td className="bluecolor">872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
-                            </tr>
-                            <tr>
-                              <td className="bluecolor">872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
-                            </tr>
-                            <tr>
-                              <td className="bluecolor">872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
-                            </tr>
-                            <tr>
-                              <td className="bluecolor">872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
-                            </tr>
-                            <tr>
-                              <td className="bluecolor">872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
-                            </tr>
-                            <tr>
-                              <td className="bluecolor">872805</td>
-                              <td>Lainey Miller</td>
-                              <td>1</td>
-                              <td className="textalignr">$19.99 USD</td>
-                              <td className="textalignr">25%	</td>
-                              <td className="textalignr">$5.00 USD</td>
-                            </tr>
-
-                            <tr>
-                              <td colSpan="5"></td>
-                              <td><div className="totalb textalignr">Total: $53.36&nbsp;CAD<br></br> $5.00&nbsp;USD</div></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
- */}
-
                   </div>
                 </div>
 
@@ -794,9 +757,9 @@ class CommissionsScreen extends Component {
             </div>
           </div>
           <PageFooter />
-        </div>
+        </div >
 
-      </div>
+      </div >
     )
   }
 }
