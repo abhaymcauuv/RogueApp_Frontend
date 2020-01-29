@@ -22,31 +22,45 @@ class CommissionsScreen extends Component {
       error: {},
       HistoricalSummaryCommission: {},
       HistoricalCommission: {},
-      RealTimeCommission: [],
-      NotEarnedCommission: false,
+      RealTimeCommission: {
+        IsLoaded: false,
+        Commission: []
+      },
 
-      DeferredCommission: [],
-      IsLoadingDeferredCommission: false,
+      DeferredCommission: {
+        IsLoaded: false,
+        Commission: []
+      },
 
-      SavvySeller: [],
-      IsLoadingSavvySeller: false,
+      SavvySeller: {
+        IsLoaded: false,
+        Commission: []
+      },
 
-      SponsorBonus: [],
-      IsLoadingSponsorBonus: false,
-
-      CoachingBonus: [],
-      IsLoadingCoachingBonus: false,
-
-      CouturierBonus: [],
-      IsLoadingCouturierBonus: false,
+      SponsorBonus: {
+        IsLoaded: false,
+        Commission: []
+      },
 
 
+      CoachingBonus: {
+        IsLoaded: false,
+        Commission: []
+      },
+
+      CouturierBonus: {
+        IsLoaded: false,
+        Commission: []
+      },
+
+      CommissionType: '',
 
       TeamSum: 0,
       UsdSum: 0,
       CadSum: 0,
       SavvySum: 0,
       Total: 0,
+
       PeriodID: 0,
       RunID: 0
     }
@@ -83,11 +97,11 @@ class CommissionsScreen extends Component {
       return
     }
     let customerId = 967;
-    var runId = val.split('-')[0];
-    var periodId = val.split('-')[1];
-    var commissionType = Number(val.split('-')[2]);
+    var runId = Number(val.split('-')[0]);
+    var periodId = Number(val.split('-')[1]);
+    var commissionType = val.split('-')[2];
     let isHideBonusGrid = true;
-    if (commissionType == 1) {
+    if (commissionType == '1') {
       isHideBonusGrid = false;
     }
     this.setState({
@@ -99,12 +113,13 @@ class CommissionsScreen extends Component {
       PeriodID: periodId,
       RunID: runId,
       IsHideBonusGrid: isHideBonusGrid,
-      DeferredCommission: [],
-      SavvySeller: [],
-      SponsorBonus: [],
-      CoachingBonus: [],
-      CouturierBonus: [],
-      activeKey: []
+      DeferredCommission: { IsLoaded: false, Commission: [] },
+      SavvySeller: { IsLoaded: false, Commission: [] },
+      SponsorBonus: { IsLoaded: false, Commission: [] },
+      CoachingBonus: { IsLoaded: false, Commission: [] },
+      CouturierBonus: { IsLoaded: false, Commission: [] },
+      activeKey: [],
+      CommissionType: commissionType
     });
 
     if (runId > 0) {
@@ -128,9 +143,8 @@ class CommissionsScreen extends Component {
           IsLoadingCommission: false,
           HistoricalSummaryCommission: result.HistoricalSummaryCommission,
           HistoricalCommission: result.HistoricalCommission,
-          RealTimeCommission: result.RealTimeCommission,
-          IsHideBonusGrid: ((result.RealTimeCommission.length > 0 && commissionType == 0) || commissionType == 1) ? false : true,
-          NotEarnedCommission: (result.RealTimeCommission.length == 0 && commissionType == 0) ? true : false,
+          RealTimeCommission: { IsLoaded: (commissionType == '0' ? true : false), Commission: result.RealTimeCommission },
+          IsHideBonusGrid: ((result.RealTimeCommission.length > 0 && commissionType == '0') || commissionType == '1') ? false : true,
           UsdSum: !(JSON.stringify(result.HistoricalCommission.UsdSum) === JSON.stringify({})) ? result.HistoricalCommission.UsdSum : 0,
           CadSum: !(JSON.stringify(result.HistoricalCommission.CadSum) === JSON.stringify({})) ? result.HistoricalCommission.CadSum : 0,
           SavvySum: !(JSON.stringify(result.HistoricalCommission.SavvySum) === JSON.stringify({})) ? result.HistoricalCommission.SavvySum : 0,
@@ -138,9 +152,7 @@ class CommissionsScreen extends Component {
         });
       }
       else {
-        this.setState({
-          IsLoadingCommission: false
-        });
+        this.setState({ IsLoadingCommission: false });
       }
     }).catch(function (error) {
       console.log(error);
@@ -148,79 +160,90 @@ class CommissionsScreen extends Component {
   }
 
   onExpandCommission = async (activeKey) => {
-    alert("")
     this.setState({ activeKey });
     const keys = this.state.activeKey;
     const openedKey = activeKey.filter(x => !keys.includes(x));
     if (openedKey.length == 0) {
       return;
     }
+    let customerId = 967;
     let bonusId = Number(openedKey[0]);
-    const { DeferredCommission, SavvySeller, SponsorBonus, CoachingBonus, CouturierBonus } = this.state;
-    if (bonusId == 1) {
-      if (DeferredCommission.length > 0) {
-        return;
-      }
-      this.setState({ IsLoadingDeferredCommission: true });
-    }
-    else if (bonusId == 4) {
-      if (SavvySeller.length > 0) {
-        return;
-      }
-      this.setState({ IsLoadingSavvySeller: true });
-    }
-    else if (bonusId == 5) {
-      if (SponsorBonus.length > 0) {
-        return;
-      }
-      this.setState({ IsLoadingSponsorBonus: true });
-    }
-    else if (bonusId == 6) {
-      if (CoachingBonus.length > 0) {
-        return;
-      }
-      this.setState({ IsLoadingCoachingBonus: true });
-    }
-    else if (bonusId == 7) {
-      if (CouturierBonus.length > 0) {
-        return;
-      }
-      this.setState({ IsLoadingCouturierBonus: true });
-    }
-    const runId = this.state.RunID;
-    axios({
-      method: 'POST',
-      url: EndPoints.BaseUrl + EndPoints.HistoricalBonus.Url,
-      data: {
-        CustomerID: 967,
-        CommissionRunID: runId,
-        BonusID: bonusId,
-        PageSize: 0,
-        PageNo: 0
-      }
-    }).then(async (response) => {
-      var result = await response.data.Items;
-      switch (bonusId) {
-        case 1:
-          this.setState({ IsLoadingDeferredCommission: false, DeferredCommission: result.HistoricalBonusDetails });
-          break;
-        case 4:
-          this.setState({ IsLoadingSavvySeller: false, SavvySeller: result.HistoricalBonusDetails });
-          break;
-        case 5:
-          this.setState({ IsLoadingSponsorBonus: false, SponsorBonus: result.HistoricalBonusDetails });
-          break;
-        case 6:
-          this.setState({ IsLoadingCoachingBonus: false, CoachingBonus: result.HistoricalBonusDetails });
-          break;
-        case 7:
-          this.setState({ IsLoadingCouturierBonus: false, CouturierBonus: result.HistoricalBonusDetails });
-          break;
-      }
-    }).catch(function (error) {
-      console.log(error);
-    });
+    const { DeferredCommission, SavvySeller, SponsorBonus, CoachingBonus, CouturierBonus, CommissionType } = this.state;
 
+    if (bonusId == 1 && DeferredCommission.IsLoaded) {
+      return;
+    }
+    else if (bonusId == 4 && SavvySeller.IsLoaded) {
+      return;
+    }
+    else if (bonusId == 5 && SponsorBonus.IsLoaded) {
+      return;
+    }
+    else if (bonusId == 6 && CoachingBonus.IsLoaded) {
+      return;
+    }
+    else if (bonusId == 7 && CouturierBonus.IsLoaded) {
+      return;
+    }
+
+    if (CommissionType == '1') {
+      const runId = this.state.RunID;
+      axios({
+        method: 'POST',
+        url: EndPoints.BaseUrl + EndPoints.HistoricalBonus.Url,
+        data: {
+          CustomerID: customerId,
+          CommissionRunID: runId,
+          BonusID: bonusId,
+          PageSize: 0,
+          PageNo: 0
+        }
+      }).then(async (response) => {
+        var result = await response.data.Items;
+        switch (bonusId) {
+          case 1:
+            this.setState({ DeferredCommission: { IsLoaded: true, Commission: result.HistoricalBonusDetails } });
+            break;
+          case 4:
+            this.setState({ SavvySeller: { IsLoaded: true, Commission: result.HistoricalBonusDetails } });
+            break;
+          case 5:
+            this.setState({ SponsorBonus: { IsLoaded: true, Commission: result.HistoricalBonusDetails } });
+            break;
+          case 6:
+            this.setState({ CoachingBonus: { IsLoaded: true, Commission: result.HistoricalBonusDetails } });
+            break;
+          case 7:
+            this.setState({ CouturierBonus: { IsLoaded: true, Commission: result.HistoricalBonusDetails } });
+            break;
+        }
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+    else if (CommissionType == '0') {
+      const periodId = this.state.PeriodID;
+      axios({
+        method: 'POST',
+        url: EndPoints.BaseUrl + EndPoints.RealTimeBonus.Url,
+        data: {
+          CustomerID: customerId,
+          PeriodID: periodId,
+          BonusID: bonusId
+        }
+      }).then(async (response) => {
+        var result = await response.data.Items;
+        this.setState({
+          DeferredCommission: { IsLoaded: true, Commission: result.RealTimeBonusDetails.DeferredCommission },
+          SavvySeller: { IsLoaded: true, Commission: result.RealTimeBonusDetails.SavvySeller },
+          SponsorBonus: { IsLoaded: true, Commission: result.RealTimeBonusDetails.SponsorBonus },
+          CoachingBonus: { IsLoaded: true, Commission: result.RealTimeBonusDetails.CoachingBonus },
+          CouturierBonus: { IsLoaded: true, Commission: result.RealTimeBonusDetails.CouturierBonus }
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
   }
 
   calculateSum(commission) {
@@ -230,8 +253,6 @@ class CommissionsScreen extends Component {
     return total.toLocaleString(undefined, { maximumFractionDigits: 2 });
   }
 
-
-
   render() {
     const activeKey = this.state.activeKey;
     const { CommissionPeriodList, IsLoadingPeriodList,
@@ -239,19 +260,14 @@ class CommissionsScreen extends Component {
       HistoricalSummaryCommission,
       HistoricalCommission,
       RealTimeCommission,
-      NotEarnedCommission,
       TeamSum, UsdSum, CadSum, SavvySum,
       DeferredCommission,
       SavvySeller,
       SponsorBonus,
       CoachingBonus,
       CouturierBonus,
-      IsHideBonusGrid,
-      IsLoadingDeferredCommission,
-      IsLoadingSavvySeller,
-      IsLoadingSponsorBonus,
-      IsLoadingCoachingBonus,
-      IsLoadingCouturierBonus } = this.state;
+      IsHideBonusGrid
+    } = this.state;
 
     return (
       <div>
@@ -448,8 +464,8 @@ class CommissionsScreen extends Component {
                               </div>
                             )}
 
-                          {(RealTimeCommission.length > 0) ? (
-                            RealTimeCommission.map((data, index) => {
+                          {(RealTimeCommission.Commission.length > 0) ? (
+                            RealTimeCommission.Commission.map((data, index) => {
                               return (<div key={index}>
                                 <div className="panel-body">
                                   <h4>{data.Period.PeriodDescription} Commissions</h4>
@@ -510,7 +526,7 @@ class CommissionsScreen extends Component {
                                 </div>
                               </div>)
                             })
-                          ) : (NotEarnedCommission ?
+                          ) : (RealTimeCommission.IsLoaded ?
                             <div className="panel-body">
                               <center>
                                 You have not earned any commissions yet - check back soon!
@@ -547,10 +563,10 @@ class CommissionsScreen extends Component {
                                       <th scope="col">Earned</th>
                                     </tr>
                                   </thead>
-                                  {DeferredCommission.length > 0 ? (
+                                  {DeferredCommission.Commission.length > 0 ? (
                                     <tbody>
                                       {
-                                        DeferredCommission.map((data, index) => {
+                                        DeferredCommission.Commission.map((data, index) => {
                                           return (
                                             <tr className="tdbg" key={index}>
                                               <td className="bluecolor">{data.FromCustomerID}</td>
@@ -565,11 +581,11 @@ class CommissionsScreen extends Component {
                                       }
                                       <tr>
                                         <td colSpan="5"></td>
-                                        <td><div className="totalb textalignr">Total:${this.calculateSum(DeferredCommission)}</div></td>
+                                        <td><div className="totalb textalignr">Total:${this.calculateSum(DeferredCommission.Commission)}</div></td>
                                       </tr>
                                     </tbody>
                                   ) :
-                                    (IsLoadingDeferredCommission) ? (
+                                    (!DeferredCommission.IsLoaded) ? (
                                       <tbody>
                                         <tr>
                                           <td colSpan="6">
@@ -584,7 +600,7 @@ class CommissionsScreen extends Component {
                                           <tr>
                                             <td colSpan="6">
                                               No records Found
-                                            </td>
+                                        </td>
                                           </tr>
                                         </tbody>
                                       )
@@ -606,9 +622,9 @@ class CommissionsScreen extends Component {
                                       <th scope="col">Earned</th>
                                     </tr>
                                   </thead>
-                                  {SavvySeller.length > 0 ? (
+                                  {SavvySeller.Commission.length > 0 ? (
                                     <tbody>
-                                      {SavvySeller.map((data, index) => {
+                                      {SavvySeller.Commission.map((data, index) => {
                                         return (
                                           <tr className="tdbg" key={index}>
                                             <td className="bluecolor">{data.FromCustomerID}</td>
@@ -622,11 +638,11 @@ class CommissionsScreen extends Component {
                                       })}
                                       <tr>
                                         <td colSpan="5"></td>
-                                        <td><div className="totalb textalignr">Total:${this.calculateSum(SavvySeller)}</div></td>
+                                        <td><div className="totalb textalignr">Total:${this.calculateSum(SavvySeller.Commission)}</div></td>
                                       </tr>
                                     </tbody>
                                   ) :
-                                    (IsLoadingSavvySeller) ? (
+                                    (!SavvySeller.IsLoaded) ? (
                                       <tbody>
                                         <tr>
                                           <td colSpan="6">
@@ -662,10 +678,10 @@ class CommissionsScreen extends Component {
                                       <th scope="col">Earned</th>
                                     </tr>
                                   </thead>
-                                  {SponsorBonus.length > 0 ? (
+                                  {SponsorBonus.Commission.length > 0 ? (
                                     <tbody>
                                       {
-                                        SponsorBonus.map((data, index) => {
+                                        SponsorBonus.Commission.map((data, index) => {
                                           return (
                                             <tr className="tdbg" key={index}>
                                               <td className="bluecolor">{data.FromCustomerID}</td>
@@ -680,11 +696,11 @@ class CommissionsScreen extends Component {
                                       }
                                       <tr>
                                         <td colSpan="5"></td>
-                                        <td><div className="totalb textalignr">Total:${this.calculateSum(SponsorBonus)}</div></td>
+                                        <td><div className="totalb textalignr">Total:${this.calculateSum(SponsorBonus.Commission)}</div></td>
                                       </tr>
                                     </tbody>
                                   ) :
-                                    (IsLoadingSponsorBonus) ? (
+                                    (!SponsorBonus.IsLoaded) ? (
                                       <tbody>
                                         <tr>
                                           <td colSpan="6">
@@ -722,10 +738,10 @@ class CommissionsScreen extends Component {
                                       <th scope="col">Earned</th>
                                     </tr>
                                   </thead>
-                                  {CoachingBonus.length > 0 ? (
+                                  {CoachingBonus.Commission.length > 0 ? (
                                     <tbody>
                                       {
-                                        CoachingBonus.map((data, index) => {
+                                        CoachingBonus.Commission.map((data, index) => {
                                           return (
                                             <tr className="tdbg" key={index}>
                                               <td className="bluecolor">{data.FromCustomerID}</td>
@@ -740,11 +756,11 @@ class CommissionsScreen extends Component {
                                       }
                                       <tr>
                                         <td colSpan="5"></td>
-                                        <td><div className="totalb textalignr">Total:${this.calculateSum(CoachingBonus)}</div></td>
+                                        <td><div className="totalb textalignr">Total:${this.calculateSum(CoachingBonus.Commission)}</div></td>
                                       </tr>
                                     </tbody>
                                   ) :
-                                    (IsLoadingCoachingBonus) ? (
+                                    (!CoachingBonus.IsLoaded) ? (
                                       <tbody>
                                         <tr>
                                           <td colSpan="6">
@@ -781,10 +797,10 @@ class CommissionsScreen extends Component {
                                       <th scope="col">Earned</th>
                                     </tr>
                                   </thead>
-                                  {CouturierBonus.length > 0 ? (
+                                  {CouturierBonus.Commission.length > 0 ? (
                                     <tbody>
                                       {
-                                        CouturierBonus.map((data, index) => {
+                                        CouturierBonus.Commission.map((data, index) => {
                                           return (
                                             <tr className="tdbg" key={index}>
                                               <td className="bluecolor">{data.FromCustomerID}</td>
@@ -799,11 +815,11 @@ class CommissionsScreen extends Component {
                                       }
                                       <tr>
                                         <td colSpan="5"></td>
-                                        <td><div className="totalb textalignr">Total:${this.calculateSum(CouturierBonus)}</div></td>
+                                        <td><div className="totalb textalignr">Total:${this.calculateSum(CouturierBonus.Commission)}</div></td>
                                       </tr>
                                     </tbody>
                                   ) :
-                                    (IsLoadingCouturierBonus) ? (
+                                    (!CouturierBonus.IsLoaded) ? (
                                       <tbody>
                                         <tr>
                                           <td colSpan="6">
