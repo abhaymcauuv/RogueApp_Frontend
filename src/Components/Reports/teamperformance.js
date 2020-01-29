@@ -191,7 +191,7 @@ class TeamPerformanceScreen extends Component {
                             </nav>
                           </div>
                           <div className="col-sm-3 paddingt10">
-                            <span className="k-pager-info k-label">1 - 23 of {this.state.TotalRecord} items</span>
+                            <span className="k-pager-info k-label">{this.state.TotalRecord ==0?0:(this.state.PageNumber-1)*10+1} - {this.state.TotalRecord==0?0:this.state.PageNumber*10} of {this.state.TotalRecord} items</span>
                           </div>
 
                         </div>
