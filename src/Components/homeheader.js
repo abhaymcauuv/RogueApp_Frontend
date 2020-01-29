@@ -54,7 +54,7 @@ const animation = {
 const reactContainer = document.getElementById('__react-content');
 
 const nestSubMenu = (
-  <SubMenu title={<span className="submenu-title-wrapper">Reports</span>}key="0">
+  <SubMenu title={<span className="submenu-title-wrapper">Reports</span>} key="0">
     <MenuItem key="Customer List"><Link to="/customers">Customer List</Link></MenuItem>
     <MenuItem key="Club Couture Customer"><Link to="/clubcouture">Club Couture Customer</Link></MenuItem>
     <MenuItem key="Personally Enrolled Team"><Link to="/personallyenrolledteam">Personally Enrolled Team</Link></MenuItem>
@@ -103,6 +103,10 @@ const children1 = [
   </SubMenu>,
   <MenuItem key="6">Company News</MenuItem>,
   <MenuItem key="7">Yoofoo</MenuItem>,
+  <SubMenu title={<span className="submenu-title-wrapper">Plugins</span>} key="8">
+    <MenuItem key="Install"><Link to="/install">Install</Link></MenuItem>
+    <MenuItem key="Uninstall"><Link to="/uninstall">Uninstall</Link></MenuItem>
+  </SubMenu>,
 ];
 
 

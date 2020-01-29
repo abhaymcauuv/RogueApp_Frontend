@@ -1254,7 +1254,12 @@ border-bottom: 1px solid #f0f0f0 !important;
     position: absolute;
     z-index: 999;
 }
-
+.leftmenuwd{
+    min-width: 240px;
+}
+.formtext{
+    font-weight: normal;
+}
 
 
 

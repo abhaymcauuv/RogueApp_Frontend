@@ -19,6 +19,9 @@ import TreeViewerScreen from "./Reports/treeviewer";
 import TitlePromotionsScreen from "./Reports/titlepromotion";
 import IncentiveTripTrackerScreen from "./Reports/incentivetriptracker";
 import DesignerDebutTrackerScreen from "./Reports/designerdebuttracker";
+import InstallScreen from "./Plugins/install";
+import UninstallScreen from "./Plugins/uninstall";
+
 
 export default class Root extends Component { 
   render() {
@@ -44,6 +47,8 @@ export default class Root extends Component {
           <Route exact path="/titlepromotion" component={TitlePromotionsScreen} />
           <Route exact path="/incentivetriptracker" component={IncentiveTripTrackerScreen} /> 
           <Route exact path="/designerdebuttracker" component={DesignerDebutTrackerScreen} />   
+          <Route exact path="/install" component={InstallScreen} />  
+          <Route exact path="/uninstall" component={UninstallScreen} />   
         </div>
       </HashRouter>
     );

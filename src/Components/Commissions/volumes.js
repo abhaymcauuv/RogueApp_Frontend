@@ -51,7 +51,7 @@ class VolumesScreen extends Component {
                           <div className="panel-heading">
                             <div className="panel-title">
                               <a href="/#/commissions">
-                                Commissions
+                              <i class="fa fa-podcast lmenuicon" aria-hidden="true"></i> Commissions
                                 </a>
                             </div>
                           </div>
@@ -60,7 +60,7 @@ class VolumesScreen extends Component {
                           <div className="panel-heading ">
                             <div className="panel-title">
                               <a href="/#/rank">
-                                Rank Advancement
+                              <i class="fa fa-star lmenuicon" aria-hidden="true"></i> Rank Advancement
                                 </a>
                             </div>
                           </div>
@@ -69,7 +69,7 @@ class VolumesScreen extends Component {
                           <div className="panel-heading active">
                             <div className="panel-title">
                               <a href="/#/volumes" className="active">
-                                Volumes
+                              <i class="fa fa-file lmenuicon"></i> Volumes
                                 </a>
                             </div>
                           </div>

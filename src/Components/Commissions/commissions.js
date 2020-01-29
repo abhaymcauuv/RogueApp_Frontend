@@ -244,7 +244,7 @@ class CommissionsScreen extends Component {
                           <div className="panel-heading active">
                             <div className="panel-title">
                               <a href="/#/commissions" className="active">
-                                Commissions
+                              <i class="fa fa-podcast lmenuicon" aria-hidden="true"></i> Commissions
                               </a>
                             </div>
                           </div>
@@ -253,7 +253,7 @@ class CommissionsScreen extends Component {
                           <div className="panel-heading ">
                             <div className="panel-title">
                               <a href="/#/rank" className="">
-                                Rank Advancement
+                              <i class="fa fa-star lmenuicon" aria-hidden="true"></i> Rank Advancement
                                 </a>
                             </div>
                           </div>
@@ -262,7 +262,7 @@ class CommissionsScreen extends Component {
                           <div className="panel-heading ">
                             <div className="panel-title">
                               <a href="/#/volumes" className="">
-                                Volumes
+                              <i class="fa fa-file lmenuicon"></i> Volumes
                                 </a>
                             </div>
                           </div>

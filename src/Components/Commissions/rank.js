@@ -74,7 +74,7 @@ class RankScreen extends Component {
                           <div className="panel-heading">
                             <div className="panel-title">
                               <a href="/#/commissions">
-                                Commissions
+                              <i class="fa fa-podcast lmenuicon" aria-hidden="true"></i> Commissions
                                 </a>
                             </div>
                           </div>
@@ -83,7 +83,7 @@ class RankScreen extends Component {
                           <div className="panel-heading active">
                             <div className="panel-title">
                               <a href="/#/rank" className="active">
-                                Rank Advancement
+                              <i class="fa fa-star lmenuicon" aria-hidden="true"></i> Rank Advancement
                                 </a>
                             </div>
                           </div>
@@ -92,7 +92,7 @@ class RankScreen extends Component {
                           <div className="panel-heading ">
                             <div className="panel-title">
                               <a href="/#/volumes">
-                                Volumes
+                              <i class="fa fa-file lmenuicon"></i> Volumes
                                 </a>
                             </div>
                           </div>
