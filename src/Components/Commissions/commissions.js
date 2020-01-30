@@ -7,6 +7,7 @@ import EndPoints from '../../Config/ApiEndpoints/endpoints';
 import ReactLoading from "react-loading";
 import 'rc-collapse/assets/index.css';
 import Collapse, { Panel } from 'rc-collapse';
+import constants from '../../Config/Constants/constants';
 
 class CommissionsScreen extends Component {
   constructor() {
@@ -86,15 +87,14 @@ class CommissionsScreen extends Component {
         let value = result.CommissionPeriodList[0].RunID + "-" + result.CommissionPeriodList[0].Period.PeriodID + "-" + result.CommissionPeriodList[0].Period.PeriodTypeID + "-" + result.CommissionPeriodList[0].CommissionType;
         this.handleSelectedChange(value);
       }
-    })
-      .catch(function (error) {
-        this.setState({ error: error, IsLoadingPeriodList: false })
-      });
+    }).catch(function (error) {
+      this.setState({ error: error, IsLoadingPeriodList: false })
+    });
   }
 
   handleSelectedChange = async (val) => {
     if (!val) {
-      return
+      return;
     }
     let customerId = 967;
     var runId = Number(val.split('-')[0]);
@@ -171,23 +171,23 @@ class CommissionsScreen extends Component {
     let bonusId = Number(openedKey[0]);
     const { DeferredCommission, SavvySeller, SponsorBonus, CoachingBonus, CouturierBonus, CommissionType } = this.state;
 
-    if (bonusId == 1 && DeferredCommission.IsLoaded) {
+    if (bonusId == constants.BonusTypes.DeferredCommission && DeferredCommission.IsLoaded) {
       return;
     }
-    else if (bonusId == 4 && SavvySeller.IsLoaded) {
+    else if (bonusId == constants.BonusTypes.SavvySeller && SavvySeller.IsLoaded) {
       return;
     }
-    else if (bonusId == 5 && SponsorBonus.IsLoaded) {
+    else if (bonusId == constants.BonusTypes.SponsorBonus && SponsorBonus.IsLoaded) {
       return;
     }
-    else if (bonusId == 6 && CoachingBonus.IsLoaded) {
+    else if (bonusId == constants.BonusTypes.CoachingBonus && CoachingBonus.IsLoaded) {
       return;
     }
-    else if (bonusId == 7 && CouturierBonus.IsLoaded) {
+    else if (bonusId == constants.BonusTypes.CouturierBonus && CouturierBonus.IsLoaded) {
       return;
     }
 
-    if (CommissionType == '1') {
+    if (CommissionType == constants.CommissionTypes.HistoricalCommission) {
       const runId = this.state.RunID;
       axios({
         method: 'POST',
@@ -222,7 +222,7 @@ class CommissionsScreen extends Component {
         console.log(error);
       });
     }
-    else if (CommissionType == '0') {
+    else if (CommissionType == constants.CommissionTypes.CurrentCommission) {
       const periodId = this.state.PeriodID;
       const periodTypeId = this.state.PeriodTypeID;
       axios({
