@@ -42,7 +42,6 @@ class CommissionsScreen extends Component {
         Commission: []
       },
 
-
       CoachingBonus: {
         IsLoaded: false,
         Commission: []
@@ -62,7 +61,8 @@ class CommissionsScreen extends Component {
       Total: 0,
 
       PeriodID: 0,
-      RunID: 0
+      RunID: 0,
+      PeriodTypeID: 1
     }
   }
 
@@ -83,7 +83,7 @@ class CommissionsScreen extends Component {
         IsLoadingPeriodList: false
       });
       if (result.CommissionPeriodList.length > 0) {
-        let value = result.CommissionPeriodList[0].RunID + "-" + result.CommissionPeriodList[0].Period.PeriodID + "-" + result.CommissionPeriodList[0].CommissionType;
+        let value = result.CommissionPeriodList[0].RunID + "-" + result.CommissionPeriodList[0].Period.PeriodID + "-" + result.CommissionPeriodList[0].Period.PeriodTypeID + "-" + result.CommissionPeriodList[0].CommissionType;
         this.handleSelectedChange(value);
       }
     })
@@ -99,18 +99,19 @@ class CommissionsScreen extends Component {
     let customerId = 967;
     var runId = Number(val.split('-')[0]);
     var periodId = Number(val.split('-')[1]);
-    var commissionType = val.split('-')[2];
+    var periodTypeId = Number(val.split('-')[2]);
+    var commissionType = val.split('-')[3];
     let isHideBonusGrid = true;
-    if (commissionType == '1') {
+    if (commissionType == '1' || commissionType == '0') {
       isHideBonusGrid = false;
     }
     this.setState({
       selectedPeriod: val,
       HistoricalSummaryCommission: {},
       HistoricalCommission: {},
-      HistoricalBonusDetails: {},
       IsLoadingCommission: true,
       PeriodID: periodId,
+      PeriodTypeID: periodTypeId,
       RunID: runId,
       IsHideBonusGrid: isHideBonusGrid,
       DeferredCommission: { IsLoaded: false, Commission: [] },
@@ -119,7 +120,8 @@ class CommissionsScreen extends Component {
       CoachingBonus: { IsLoaded: false, Commission: [] },
       CouturierBonus: { IsLoaded: false, Commission: [] },
       activeKey: [],
-      CommissionType: commissionType
+      CommissionType: commissionType,
+      RealTimeCommission: { IsLoaded: false, Commission: [] }
     });
 
     if (runId > 0) {
@@ -144,7 +146,6 @@ class CommissionsScreen extends Component {
           HistoricalSummaryCommission: result.HistoricalSummaryCommission,
           HistoricalCommission: result.HistoricalCommission,
           RealTimeCommission: { IsLoaded: (commissionType == '0' ? true : false), Commission: result.RealTimeCommission },
-          IsHideBonusGrid: ((result.RealTimeCommission.length > 0 && commissionType == '0') || commissionType == '1') ? false : true,
           UsdSum: !(JSON.stringify(result.HistoricalCommission.UsdSum) === JSON.stringify({})) ? result.HistoricalCommission.UsdSum : 0,
           CadSum: !(JSON.stringify(result.HistoricalCommission.CadSum) === JSON.stringify({})) ? result.HistoricalCommission.CadSum : 0,
           SavvySum: !(JSON.stringify(result.HistoricalCommission.SavvySum) === JSON.stringify({})) ? result.HistoricalCommission.SavvySum : 0,
@@ -223,23 +224,35 @@ class CommissionsScreen extends Component {
     }
     else if (CommissionType == '0') {
       const periodId = this.state.PeriodID;
+      const periodTypeId = this.state.PeriodTypeID;
       axios({
         method: 'POST',
         url: EndPoints.BaseUrl + EndPoints.RealTimeBonus.Url,
         data: {
           CustomerID: customerId,
           PeriodID: periodId,
-          BonusID: bonusId
+          BonusID: bonusId,
+          PeriodTypeID: periodTypeId
         }
       }).then(async (response) => {
         var result = await response.data.Items;
-        this.setState({
-          DeferredCommission: { IsLoaded: true, Commission: result.RealTimeBonusDetails.DeferredCommission },
-          SavvySeller: { IsLoaded: true, Commission: result.RealTimeBonusDetails.SavvySeller },
-          SponsorBonus: { IsLoaded: true, Commission: result.RealTimeBonusDetails.SponsorBonus },
-          CoachingBonus: { IsLoaded: true, Commission: result.RealTimeBonusDetails.CoachingBonus },
-          CouturierBonus: { IsLoaded: true, Commission: result.RealTimeBonusDetails.CouturierBonus }
-        });
+        switch (bonusId) {
+          case 1:
+            this.setState({ DeferredCommission: { IsLoaded: true, Commission: result.RealTimeBonusDetails } });
+            break;
+          case 4:
+            this.setState({ SavvySeller: { IsLoaded: true, Commission: result.RealTimeBonusDetails } });
+            break;
+          case 5:
+            this.setState({ SponsorBonus: { IsLoaded: true, Commission: result.RealTimeBonusDetails } });
+            break;
+          case 6:
+            this.setState({ CoachingBonus: { IsLoaded: true, Commission: result.RealTimeBonusDetails } });
+            break;
+          case 7:
+            this.setState({ CouturierBonus: { IsLoaded: true, Commission: result.RealTimeBonusDetails } });
+            break;
+        }
       }).catch(function (error) {
         console.log(error);
       });
@@ -325,7 +338,7 @@ class CommissionsScreen extends Component {
                                 {CommissionPeriodList.length > 0 ? (
                                   CommissionPeriodList.map((data, index) => {
                                     return (
-                                      <option key={index} value={data.RunID + "-" + data.Period.PeriodID + "-" + data.CommissionType}> {"Current Commissions - " + data.Period.PeriodDescription} {"(" + data.Period.StartDate.split('T')[0] + " - " + data.Period.EndDate.split('T')[0] + ")"}</option>
+                                      <option key={index} value={data.RunID + "-" + data.Period.PeriodID + "-" + data.Period.PeriodTypeID + "-" + data.CommissionType}> {"Current Commissions - " + data.Period.PeriodDescription} {"(" + data.Period.StartDate.split('T')[0] + " - " + data.Period.EndDate.split('T')[0] + ")"}</option>
                                     )
                                   })
                                 ) : (
@@ -391,9 +404,8 @@ class CommissionsScreen extends Component {
                                 </div>
                               </div>
                             ) : (
-                              <div></div>
+                              null
                             )}
-
 
                           {!(JSON.stringify(HistoricalCommission) === JSON.stringify({})) ?
                             (
@@ -420,21 +432,21 @@ class CommissionsScreen extends Component {
                                         <div className="col-sm-6">
                                           <dl className="dl-metric">
                                             <dt>PV</dt>
-                                            <dd>{HistoricalCommission.Volume.Volume2.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                            <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume2.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
                                             <dt>TV</dt>
-                                            <dd>{HistoricalCommission.Volume.Volume5.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                            <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume5.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
                                             <dt>EV</dt>
-                                            <dd>{HistoricalCommission.Volume.Volume6.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                            <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume6.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
                                           </dl>
                                         </div>
                                         <div className="col-sm-6">
                                           <dl className="dl-metric">
                                             <dt>PSQ</dt>
-                                            <dd>{HistoricalCommission.Volume.Volume7}</dd>
+                                            <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume7}</dd>
                                             <dt>Level 1 Mentors</dt>
-                                            <dd>{HistoricalCommission.Volume.Volume8}</dd>
+                                            <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume8}</dd>
                                             <dt>Master Mentor Legs</dt>
-                                            <dd>{HistoricalCommission.Volume.Volume9}</dd>
+                                            <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume9}</dd>
                                           </dl>
                                         </div>
                                       </div>
@@ -455,13 +467,9 @@ class CommissionsScreen extends Component {
                                     </div>
                                   </div>
                                 </div>
-
-
                               </div>
                             ) : (
-                              <div>
-
-                              </div>
+                              null
                             )}
 
                           {(RealTimeCommission.Commission.length > 0) ? (
@@ -473,14 +481,14 @@ class CommissionsScreen extends Component {
                                     <div className="col-sm-5">
                                       <div className="metric metric-sm">
                                         <dl className="dl-metric">
-                                          {TeamSum > 0 ? <div><dt id="teamLabel"><strong>Team Commissions</strong></dt>
-                                            <dd id="teamID" >${TeamSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
-                                          {UsdSum > 0 ? <div>   <dt id="usdLabel" ><strong>USD Deferred Commissions</strong></dt>
-                                            <dd id="usdID" >${UsdSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
-                                          {CadSum > 0 ? <div><dt id="cadLabel" ><strong>CAD Deferred Commissions</strong></dt>
-                                            <dd id="cadID" >${CadSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} CAD</dd></div> : null}
-                                          {SavvySum > 0 ? <div> <dt id="savvyLabel" ><strong>Savvy Seller Bonus Total</strong></dt>
-                                            <dd id="savvyID" >${SavvySum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
+                                          {data.TeamSum > 0 ? <div><dt id="teamLabel"><strong>Team Commissions</strong></dt>
+                                            <dd id="teamID" >${data.TeamSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
+                                          {data.UsdSum > 0 ? <div>   <dt id="usdLabel" ><strong>USD Deferred Commissions</strong></dt>
+                                            <dd id="usdID" >${data.UsdSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
+                                          {data.CadSum > 0 ? <div><dt id="cadLabel" ><strong>CAD Deferred Commissions</strong></dt>
+                                            <dd id="cadID" >${data.CadSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} CAD</dd></div> : null}
+                                          {data.SavvySum > 0 ? <div> <dt id="savvyLabel" ><strong>Savvy Seller Bonus Total</strong></dt>
+                                            <dd id="savvyID" >${data.SavvySum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
                                         </dl>
                                       </div>
                                     </div>
@@ -489,21 +497,21 @@ class CommissionsScreen extends Component {
                                         <div className="col-sm-6">
                                           <dl className="dl-metric">
                                             <dt>PV</dt>
-                                            <dd>{data.Volume.Volume2.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                            <dd>{!data.Volume ? 0 : data.Volume.Volume2.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
                                             <dt>TV</dt>
-                                            <dd>{data.Volume.Volume5.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                            <dd>{!data.Volume ? 0 : data.Volume.Volume5.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
                                             <dt>EV</dt>
-                                            <dd>{data.Volume.Volume6.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                            <dd>{!data.Volume ? 0 : data.Volume.Volume6.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
                                           </dl>
                                         </div>
                                         <div className="col-sm-6">
                                           <dl className="dl-metric">
                                             <dt>PSQ</dt>
-                                            <dd>{data.Volume.Volume7}</dd>
+                                            <dd>{!data.Volume ? 0 : data.Volume.Volume7}</dd>
                                             <dt>Level 1 Mentors</dt>
-                                            <dd>{data.Volume.Volume8}</dd>
+                                            <dd>{!data.Volume ? 0 : data.Volume.Volume8}</dd>
                                             <dt>Master Mentor Legs</dt>
-                                            <dd>{data.Volume.Volume9}</dd>
+                                            <dd>{!data.Volume ? 0 : data.Volume.Volume9}</dd>
                                           </dl>
                                         </div>
                                       </div>
@@ -513,7 +521,7 @@ class CommissionsScreen extends Component {
                                     <div className="col-sm-8 h20">
                                       <div className="metric metric-sm">
                                         <div className="metric-title">
-                                          Qualifying as: <strong>{data.Volume.PayableAsRank}</strong>
+                                          Qualifying as: <strong>{!data.Volume ? ` ` : data.Volume.RankDescription[0]}</strong>
                                         </div>
                                       </div>
                                     </div>
@@ -572,9 +580,9 @@ class CommissionsScreen extends Component {
                                               <td className="bluecolor">{data.FromCustomerID}</td>
                                               <td>{data.FromCustomerName}</td>
                                               <td>{data.PaidLevel}</td>
-                                              <td className="textalignr">${data.SourceAmount + ` ` + data.CurrencyCode}</td>
+                                              <td className="textalignr">${Number(data.SourceAmount) + ` ` + data.CurrencyCode}</td>
                                               <td className="textalignr">{data.Percentage}%</td>
-                                              <td className="textalignr">${data.CommissionAmount + ` ` + data.CurrencyCode}</td>
+                                              <td className="textalignr">${Number(data.CommissionAmount) + ` ` + data.CurrencyCode}</td>
                                             </tr>
                                           )
                                         })
@@ -630,9 +638,9 @@ class CommissionsScreen extends Component {
                                             <td className="bluecolor">{data.FromCustomerID}</td>
                                             <td>{data.FromCustomerName}</td>
                                             <td>{data.PaidLevel}</td>
-                                            <td className="textalignr">{data.SourceAmount}PV</td>
+                                            <td className="textalignr">{Number(data.SourceAmount)}PV</td>
                                             <td className="textalignr">{data.Percentage}%	</td>
-                                            <td className="textalignr">${data.CommissionAmount} USD</td>
+                                            <td className="textalignr">${Number(data.CommissionAmount)} USD</td>
                                           </tr>
                                         )
                                       })}
@@ -687,9 +695,9 @@ class CommissionsScreen extends Component {
                                               <td className="bluecolor">{data.FromCustomerID}</td>
                                               <td>{data.FromCustomerName}</td>
                                               <td>{data.PaidLevel}</td>
-                                              <td className="textalignr">{data.SourceAmount}PV</td>
+                                              <td className="textalignr">{Number(data.SourceAmount)}PV</td>
                                               <td className="textalignr">{data.Percentage}%	</td>
-                                              <td className="textalignr">${data.CommissionAmount} USD</td>
+                                              <td className="textalignr">${Number(data.CommissionAmount)} USD</td>
                                             </tr>
                                           )
                                         })
@@ -724,7 +732,6 @@ class CommissionsScreen extends Component {
                               </Collapse>
                             </Panel>
 
-
                             <Panel header={`Bonus: Coaching Bonus`} key="6">
                               <Collapse defaultActiveKey="1">
                                 <table className="table table-bordered tablemrb">
@@ -747,9 +754,9 @@ class CommissionsScreen extends Component {
                                               <td className="bluecolor">{data.FromCustomerID}</td>
                                               <td>{data.FromCustomerName}</td>
                                               <td>{data.PaidLevel}</td>
-                                              <td className="textalignr">{data.SourceAmount}PV</td>
+                                              <td className="textalignr">{Number(data.SourceAmount)}PV</td>
                                               <td className="textalignr">{data.Percentage}%	</td>
-                                              <td className="textalignr">${data.CommissionAmount} USD</td>
+                                              <td className="textalignr">${Number(data.CommissionAmount)} USD</td>
                                             </tr>
                                           )
                                         })
@@ -806,9 +813,9 @@ class CommissionsScreen extends Component {
                                               <td className="bluecolor">{data.FromCustomerID}</td>
                                               <td>{data.FromCustomerName}</td>
                                               <td>{data.PaidLevel}</td>
-                                              <td className="textalignr">${data.SourceAmount} USD</td>
+                                              <td className="textalignr">${Number(data.SourceAmount)} USD</td>
                                               <td className="textalignr">{data.Percentage}%	</td>
-                                              <td className="textalignr">${data.CommissionAmount} USD</td>
+                                              <td className="textalignr">${Number(data.CommissionAmount)} USD</td>
                                             </tr>
                                           )
                                         })
