@@ -32,7 +32,8 @@ const EndPoints = {
         PostData: {
             CustomerID: 0,
             PeriodID: 0,
-            BonusID: 0
+            BonusID: 0,
+            PeriodTypeID:0
         }
     },
 
