@@ -8,6 +8,8 @@ import ReactLoading from "react-loading";
 import 'rc-collapse/assets/index.css';
 import Collapse, { Panel } from 'rc-collapse';
 import constants from '../../Config/Constants/constants';
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import "react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
 
 class CommissionsScreen extends Component {
   constructor() {
@@ -72,7 +74,7 @@ class CommissionsScreen extends Component {
   }
 
   bindCommissionPeriods = async () => {
-    let customerId = 967;
+    let customerId = 223;
     let entPoint = EndPoints.CommissionPeriodList.Url.replace('{CustomerId}', customerId);
     axios({
       method: 'GET',
@@ -96,7 +98,7 @@ class CommissionsScreen extends Component {
     if (!val) {
       return;
     }
-    let customerId = 967;
+    let customerId = 223;
     var runId = Number(val.split('-')[0]);
     var periodId = Number(val.split('-')[1]);
     var periodTypeId = Number(val.split('-')[2]);
@@ -167,7 +169,7 @@ class CommissionsScreen extends Component {
     if (openedKey.length == 0) {
       return;
     }
-    let customerId = 967;
+    let customerId = 223;
     let bonusId = Number(openedKey[0]);
     const { DeferredCommission, SavvySeller, SponsorBonus, CoachingBonus, CouturierBonus, CommissionType } = this.state;
 
@@ -265,6 +267,30 @@ class CommissionsScreen extends Component {
     }, 0);
     return total.toLocaleString(undefined, { maximumFractionDigits: 2 });
   }
+
+  percentageFormatter(cell, row, data) {
+    return row.Percentage + "%";
+  }
+
+  sourceFormatter(cell, row, data) {
+    if (row.BonusID == 1) {
+      return `$` + Number(row.SourceAmount) + ` ` + row.CurrencyCode;
+    }
+    else if (row.BonusID == 7) {
+      return `$` + Number(row.SourceAmount) + ` USD`;
+    }
+    else {
+      return Number(row.SourceAmount) + ` PV`;
+    }
+  }
+
+  earnedFormatter(cell, row, data) {
+    if (row.BonusID == 1) {
+      return `$` + Number(row.SourceAmount) + ` ` + row.CurrencyCode;
+    }
+    return `$` + Number(row.SourceAmount) + ` USD`;
+  }
+
 
   render() {
     const activeKey = this.state.activeKey;
@@ -560,293 +586,139 @@ class CommissionsScreen extends Component {
                           >
                             <Panel header={`Bonus: Deferred Commission`} key="1">
                               <Collapse defaultActiveKey="1">
-                                <table className="table table-bordered tablemrb">
-                                  <thead>
-                                    <tr className="tdbg">
-                                      <th scope="col">From ID#</th>
-                                      <th scope="col">From</th>
-                                      <th scope="col">Paid Level</th>
-                                      <th scope="col">Source</th>
-                                      <th scope="col">%</th>
-                                      <th scope="col">Earned</th>
-                                    </tr>
-                                  </thead>
-                                  {DeferredCommission.Commission.length > 0 ? (
-                                    <tbody>
-                                      {
-                                        DeferredCommission.Commission.map((data, index) => {
-                                          return (
-                                            <tr className="tdbg" key={index}>
-                                              <td className="bluecolor">{data.FromCustomerID}</td>
-                                              <td>{data.FromCustomerName}</td>
-                                              <td>{data.PaidLevel}</td>
-                                              <td className="textalignr">${Number(data.SourceAmount) + ` ` + data.CurrencyCode}</td>
-                                              <td className="textalignr">{data.Percentage}%</td>
-                                              <td className="textalignr">${Number(data.CommissionAmount) + ` ` + data.CurrencyCode}</td>
-                                            </tr>
-                                          )
-                                        })
-                                      }
-                                      <tr>
-                                        <td colSpan="5"></td>
-                                        <td><div className="totalb textalignr">Total:${this.calculateSum(DeferredCommission.Commission)}</div></td>
-                                      </tr>
-                                    </tbody>
-                                  ) :
-                                    (!DeferredCommission.IsLoaded) ? (
-                                      <tbody>
-                                        <tr>
-                                          <td colSpan="6">
-                                            <center>
-                                              <ReactLoading type="bars" color="#000" height={50} width={50} />
-                                            </center>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    ) : (
-                                        <tbody>
-                                          <tr>
-                                            <td colSpan="6">
-                                              No records Found
-                                        </td>
-                                          </tr>
-                                        </tbody>
-                                      )
-                                  }
-                                </table>
+                                {DeferredCommission.Commission.length > 0 ? (
+                                  <div>
+                                    <BootstrapTable ref='table' data={DeferredCommission.Commission} pagination>
+                                      <TableHeaderColumn dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
+                                      <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
+                                      <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataField='CommissionAmount'>Earned</TableHeaderColumn>
+                                    </BootstrapTable>
+                                    <div className="gridgraybg">
+                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(DeferredCommission.Commission)}</strong></div>
+                                    </div>
+                                  </div>
+                                ) : (!DeferredCommission.IsLoaded) ? (
+                                  <center>
+                                    <ReactLoading type="bars" color="#000" height={50} width={50} />
+                                  </center>
+                                ) : (
+                                      <span> No records Found</span>
+                                    )
+                                }
                               </Collapse>
                             </Panel>
 
                             <Panel header={`Bonus: Savvy Seller Bonus`} key="4">
                               <Collapse defaultActiveKey="1">
-                                <table className="table table-bordered tablemrb">
-                                  <thead>
-                                    <tr className="tdbg">
-                                      <th scope="col">From ID#</th>
-                                      <th scope="col">From</th>
-                                      <th scope="col">Paid Level</th>
-                                      <th scope="col">Source</th>
-                                      <th scope="col">%</th>
-                                      <th scope="col">Earned</th>
-                                    </tr>
-                                  </thead>
-                                  {SavvySeller.Commission.length > 0 ? (
-                                    <tbody>
-                                      {SavvySeller.Commission.map((data, index) => {
-                                        return (
-                                          <tr className="tdbg" key={index}>
-                                            <td className="bluecolor">{data.FromCustomerID}</td>
-                                            <td>{data.FromCustomerName}</td>
-                                            <td>{data.PaidLevel}</td>
-                                            <td className="textalignr">{Number(data.SourceAmount)}PV</td>
-                                            <td className="textalignr">{data.Percentage}%	</td>
-                                            <td className="textalignr">${Number(data.CommissionAmount)} USD</td>
-                                          </tr>
-                                        )
-                                      })}
-                                      <tr>
-                                        <td colSpan="5"></td>
-                                        <td><div className="totalb textalignr">Total:${this.calculateSum(SavvySeller.Commission)}</div></td>
-                                      </tr>
-                                    </tbody>
-                                  ) :
-                                    (!SavvySeller.IsLoaded) ? (
-                                      <tbody>
-                                        <tr>
-                                          <td colSpan="6">
-                                            <center>
-                                              <ReactLoading type="bars" color="#000" height={50} width={50} />
-                                            </center>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    ) : (
-                                        <tbody>
-                                          <tr>
-                                            <td colSpan="6">
-                                              No records Found
-                                            </td>
-                                          </tr>
-                                        </tbody>)
-                                  }
-                                </table>
+                                {SavvySeller.Commission.length > 0 ? (
+                                  <div>
+                                    <BootstrapTable ref='table' data={SavvySeller.Commission} pagination>
+                                      <TableHeaderColumn dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
+                                      <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
+                                      <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataField='CommissionAmount'>Earned</TableHeaderColumn>
+                                    </BootstrapTable>
+                                    <div className="gridgraybg">
+                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(SavvySeller.Commission)}</strong></div>
+                                    </div>
+                                  </div>
+                                ) : (!SavvySeller.IsLoaded) ? (
+                                  <center>
+                                    <ReactLoading type="bars" color="#000" height={50} width={50} />
+                                  </center>
+                                ) : (
+                                      <span> No records Found</span>
+                                    )
+                                }
                               </Collapse>
                             </Panel>
 
                             <Panel header={`Bonus: Sponsoring Bonus`} key="5">
                               <Collapse defaultActiveKey="1">
-                                <table className="table table-bordered tablemrb">
-                                  <thead>
-                                    <tr className="tdbg">
-                                      <th scope="col">From ID#</th>
-                                      <th scope="col">From</th>
-                                      <th scope="col">Paid Level</th>
-                                      <th scope="col">Source</th>
-                                      <th scope="col">%</th>
-                                      <th scope="col">Earned</th>
-                                    </tr>
-                                  </thead>
-                                  {SponsorBonus.Commission.length > 0 ? (
-                                    <tbody>
-                                      {
-                                        SponsorBonus.Commission.map((data, index) => {
-                                          return (
-                                            <tr className="tdbg" key={index}>
-                                              <td className="bluecolor">{data.FromCustomerID}</td>
-                                              <td>{data.FromCustomerName}</td>
-                                              <td>{data.PaidLevel}</td>
-                                              <td className="textalignr">{Number(data.SourceAmount)}PV</td>
-                                              <td className="textalignr">{data.Percentage}%	</td>
-                                              <td className="textalignr">${Number(data.CommissionAmount)} USD</td>
-                                            </tr>
-                                          )
-                                        })
-                                      }
-                                      <tr>
-                                        <td colSpan="5"></td>
-                                        <td><div className="totalb textalignr">Total:${this.calculateSum(SponsorBonus.Commission)}</div></td>
-                                      </tr>
-                                    </tbody>
-                                  ) :
-                                    (!SponsorBonus.IsLoaded) ? (
-                                      <tbody>
-                                        <tr>
-                                          <td colSpan="6">
-                                            <center>
-                                              <ReactLoading type="bars" color="#000" height={50} width={50} />
-                                            </center>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    ) : (
-                                        <tbody>
-                                          <tr>
-                                            <td colSpan="6">
-                                              No records Found
-                                         </td>
-                                          </tr>
-                                        </tbody>
-                                      )
-                                  }
-                                </table>
+
+                                {SponsorBonus.Commission.length > 0 ? (
+                                  <div>
+                                    <BootstrapTable ref='table' data={SponsorBonus.Commission} pagination>
+                                      <TableHeaderColumn dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
+                                      <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
+                                      <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataField='CommissionAmount'>Earned</TableHeaderColumn>
+                                    </BootstrapTable>
+                                    <div className="gridgraybg">
+                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(SponsorBonus.Commission)}</strong></div>
+                                    </div>
+                                  </div>
+                                ) : (!SponsorBonus.IsLoaded) ? (
+                                  <center>
+                                    <ReactLoading type="bars" color="#000" height={50} width={50} />
+                                  </center>
+                                ) : (
+                                      <span> No records Found</span>
+                                    )
+                                }
                               </Collapse>
                             </Panel>
 
                             <Panel header={`Bonus: Coaching Bonus`} key="6">
                               <Collapse defaultActiveKey="1">
-                                <table className="table table-bordered tablemrb">
-                                  <thead>
-                                    <tr className="tdbg">
-                                      <th scope="col">From ID#</th>
-                                      <th scope="col">From</th>
-                                      <th scope="col">Paid Level</th>
-                                      <th scope="col">Source</th>
-                                      <th scope="col">%</th>
-                                      <th scope="col">Earned</th>
-                                    </tr>
-                                  </thead>
-                                  {CoachingBonus.Commission.length > 0 ? (
-                                    <tbody>
-                                      {
-                                        CoachingBonus.Commission.map((data, index) => {
-                                          return (
-                                            <tr className="tdbg" key={index}>
-                                              <td className="bluecolor">{data.FromCustomerID}</td>
-                                              <td>{data.FromCustomerName}</td>
-                                              <td>{data.PaidLevel}</td>
-                                              <td className="textalignr">{Number(data.SourceAmount)}PV</td>
-                                              <td className="textalignr">{data.Percentage}%	</td>
-                                              <td className="textalignr">${Number(data.CommissionAmount)} USD</td>
-                                            </tr>
-                                          )
-                                        })
-                                      }
-                                      <tr>
-                                        <td colSpan="5"></td>
-                                        <td><div className="totalb textalignr">Total:${this.calculateSum(CoachingBonus.Commission)}</div></td>
-                                      </tr>
-                                    </tbody>
-                                  ) :
-                                    (!CoachingBonus.IsLoaded) ? (
-                                      <tbody>
-                                        <tr>
-                                          <td colSpan="6">
-                                            <center>
-                                              <ReactLoading type="bars" color="#000" height={50} width={50} />
-                                            </center>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    ) : (
-                                        <tbody>
-                                          <tr>
-                                            <td colSpan="6">
-                                              No records Found
-                                            </td>
-                                          </tr>
-                                        </tbody>
-                                      )
-                                  }
-                                </table>
+
+                                {CoachingBonus.Commission.length > 0 ? (
+                                  <div>
+                                    <BootstrapTable ref='table' data={CoachingBonus.Commission} pagination>
+                                      <TableHeaderColumn dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
+                                      <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
+                                      <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataField='CommissionAmount'>Earned</TableHeaderColumn>
+                                    </BootstrapTable>
+                                    <div className="gridgraybg">
+                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(CoachingBonus.Commission)}</strong></div>
+                                    </div>
+                                  </div>
+                                ) : (!CoachingBonus.IsLoaded) ? (
+                                  <center>
+                                    <ReactLoading type="bars" color="#000" height={50} width={50} />
+                                  </center>
+                                ) : (
+                                      <span> No records Found</span>
+                                    )
+                                }
                               </Collapse>
                             </Panel>
 
                             <Panel header={`Bonus: Couturier Bonus`} key="7">
                               <Collapse defaultActiveKey="1">
-                                <table className="table table-bordered tablemrb">
-                                  <thead>
-                                    <tr className="tdbg">
-                                      <th scope="col">From ID#</th>
-                                      <th scope="col">From</th>
-                                      <th scope="col">Paid Level</th>
-                                      <th scope="col">Source</th>
-                                      <th scope="col">%</th>
-                                      <th scope="col">Earned</th>
-                                    </tr>
-                                  </thead>
-                                  {CouturierBonus.Commission.length > 0 ? (
-                                    <tbody>
-                                      {
-                                        CouturierBonus.Commission.map((data, index) => {
-                                          return (
-                                            <tr className="tdbg" key={index}>
-                                              <td className="bluecolor">{data.FromCustomerID}</td>
-                                              <td>{data.FromCustomerName}</td>
-                                              <td>{data.PaidLevel}</td>
-                                              <td className="textalignr">${Number(data.SourceAmount)} USD</td>
-                                              <td className="textalignr">{data.Percentage}%	</td>
-                                              <td className="textalignr">${Number(data.CommissionAmount)} USD</td>
-                                            </tr>
-                                          )
-                                        })
-                                      }
-                                      <tr>
-                                        <td colSpan="5"></td>
-                                        <td><div className="totalb textalignr">Total:${this.calculateSum(CouturierBonus.Commission)}</div></td>
-                                      </tr>
-                                    </tbody>
-                                  ) :
-                                    (!CouturierBonus.IsLoaded) ? (
-                                      <tbody>
-                                        <tr>
-                                          <td colSpan="6">
-                                            <center>
-                                              <ReactLoading type="bars" color="#000" height={50} width={50} />
-                                            </center>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    ) : (
-                                        <tbody>
-                                          <tr>
-                                            <td colSpan="6">
-                                              No records Found
-                                            </td>
-                                          </tr>
-                                        </tbody>
-                                      )
-                                  }
-                                </table>
+
+                                {CouturierBonus.Commission.length > 0 ? (
+                                  <div>
+                                    <BootstrapTable ref='table' data={CouturierBonus.Commission} pagination>
+                                      <TableHeaderColumn  dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
+                                      <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
+                                      <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataField='CommissionAmount'>Earned</TableHeaderColumn>
+                                    </BootstrapTable>
+                                    <div className="gridgraybg">
+                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(CouturierBonus.Commission)}</strong></div>
+                                    </div>
+                                  </div>
+                                ) : (!CouturierBonus.IsLoaded) ? (
+                                  <center>
+                                    <ReactLoading type="bars" color="#000" height={50} width={50} />
+                                  </center>
+                                ) : (
+                                      <span> No records Found</span>
+                                    )
+                                }
                               </Collapse>
                             </Panel>
 
