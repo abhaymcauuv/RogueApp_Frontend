@@ -74,7 +74,7 @@ class CommissionsScreen extends Component {
   }
 
   bindCommissionPeriods = async () => {
-    let customerId = 223;
+    let customerId = 967;
     let entPoint = EndPoints.CommissionPeriodList.Url.replace('{CustomerId}', customerId);
     axios({
       method: 'GET',
@@ -98,7 +98,7 @@ class CommissionsScreen extends Component {
     if (!val) {
       return;
     }
-    let customerId = 223;
+    let customerId = 967;
     var runId = Number(val.split('-')[0]);
     var periodId = Number(val.split('-')[1]);
     var periodTypeId = Number(val.split('-')[2]);
@@ -169,7 +169,7 @@ class CommissionsScreen extends Component {
     if (openedKey.length == 0) {
       return;
     }
-    let customerId = 223;
+    let customerId = 967;
     let bonusId = Number(openedKey[0]);
     const { DeferredCommission, SavvySeller, SponsorBonus, CoachingBonus, CouturierBonus, CommissionType } = this.state;
 
@@ -286,9 +286,9 @@ class CommissionsScreen extends Component {
 
   earnedFormatter(cell, row, data) {
     if (row.BonusID == 1) {
-      return `$` + Number(row.SourceAmount) + ` ` + row.CurrencyCode;
+      return `$` + Number(row.CommissionAmount) + ` ` + row.CurrencyCode;
     }
-    return `$` + Number(row.SourceAmount) + ` USD`;
+    return `$` + Number(row.CommissionAmount) + ` USD`;
   }
 
 
@@ -324,7 +324,7 @@ class CommissionsScreen extends Component {
                           <div className="panel-heading active">
                             <div className="panel-title">
                               <a href="/#/commissions" className="active">
-                                Commissions
+                                <i class="fa fa-podcast lmenuicon" aria-hidden="true"></i> Commissions
                               </a>
                             </div>
                           </div>
@@ -333,7 +333,7 @@ class CommissionsScreen extends Component {
                           <div className="panel-heading ">
                             <div className="panel-title">
                               <a href="/#/rank" className="">
-                                Rank Advancement
+                                <i class="fa fa-star lmenuicon" aria-hidden="true"></i> Rank Advancement
                               </a>
                             </div>
                           </div>
@@ -342,7 +342,7 @@ class CommissionsScreen extends Component {
                           <div className="panel-heading ">
                             <div className="panel-title">
                               <a href="/#/volumes" className="">
-                                Volumes
+                                <i class="fa fa-file lmenuicon"></i> Volumes
                               </a>
                             </div>
                           </div>
@@ -589,15 +589,15 @@ class CommissionsScreen extends Component {
                                 {DeferredCommission.Commission.length > 0 ? (
                                   <div>
                                     <BootstrapTable ref='table' data={DeferredCommission.Commission} pagination>
-                                      <TableHeaderColumn dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
+                                      <TableHeaderColumn dataField='OrderID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
                                       <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
                                       <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
                                       <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
                                       <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataField='CommissionAmount'>Earned</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataSort={true} dataField='CommissionAmount'>Earned</TableHeaderColumn>
                                     </BootstrapTable>
                                     <div className="gridgraybg">
-                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(DeferredCommission.Commission)}</strong></div>
+                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(DeferredCommission.Commission)} USD</strong></div>
                                     </div>
                                   </div>
                                 ) : (!DeferredCommission.IsLoaded) ? (
@@ -621,10 +621,10 @@ class CommissionsScreen extends Component {
                                       <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
                                       <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
                                       <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataField='CommissionAmount'>Earned</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataSort={true} dataField='CommissionAmount'>Earned</TableHeaderColumn>
                                     </BootstrapTable>
                                     <div className="gridgraybg">
-                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(SavvySeller.Commission)}</strong></div>
+                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(SavvySeller.Commission)} USD</strong></div>
                                     </div>
                                   </div>
                                 ) : (!SavvySeller.IsLoaded) ? (
@@ -649,10 +649,10 @@ class CommissionsScreen extends Component {
                                       <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
                                       <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
                                       <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataField='CommissionAmount'>Earned</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataSort={true} dataField='CommissionAmount'>Earned</TableHeaderColumn>
                                     </BootstrapTable>
                                     <div className="gridgraybg">
-                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(SponsorBonus.Commission)}</strong></div>
+                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(SponsorBonus.Commission)} USD</strong></div>
                                     </div>
                                   </div>
                                 ) : (!SponsorBonus.IsLoaded) ? (
@@ -677,10 +677,10 @@ class CommissionsScreen extends Component {
                                       <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
                                       <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
                                       <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataField='CommissionAmount'>Earned</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataSort={true} dataField='CommissionAmount'>Earned</TableHeaderColumn>
                                     </BootstrapTable>
                                     <div className="gridgraybg">
-                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(CoachingBonus.Commission)}</strong></div>
+                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(CoachingBonus.Commission)} USD</strong></div>
                                     </div>
                                   </div>
                                 ) : (!CoachingBonus.IsLoaded) ? (
@@ -700,15 +700,15 @@ class CommissionsScreen extends Component {
                                 {CouturierBonus.Commission.length > 0 ? (
                                   <div>
                                     <BootstrapTable ref='table' data={CouturierBonus.Commission} pagination>
-                                      <TableHeaderColumn  dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
+                                      <TableHeaderColumn dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
                                       <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
                                       <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
                                       <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
                                       <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataField='CommissionAmount'>Earned</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataSort={true} dataField='CommissionAmount'>Earned</TableHeaderColumn>
                                     </BootstrapTable>
                                     <div className="gridgraybg">
-                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(CouturierBonus.Commission)}</strong></div>
+                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(CouturierBonus.Commission)} USD</strong></div>
                                     </div>
                                   </div>
                                 ) : (!CouturierBonus.IsLoaded) ? (
