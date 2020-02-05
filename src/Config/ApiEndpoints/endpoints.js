@@ -25,7 +25,18 @@ const EndPoints = {
             PageSize: 0,
             PageNo: 0
         }
-    }
+    },
+    RealTimeBonus: {
+        Url: `rogue/commission/getrealtimebonus`,
+        Method: 'POST',
+        PostData: {
+            CustomerID: 0,
+            PeriodID: 0,
+            BonusID: 0,
+            PeriodTypeID:0
+        }
+    },
+
 }
 
 export default EndPoints
