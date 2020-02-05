@@ -605,7 +605,7 @@ class CommissionsScreen extends Component {
                                     <ReactLoading type="bars" color="#000" height={50} width={50} />
                                   </center>
                                 ) : (
-                                      <span> No records Found</span>
+                                      <center> No records Found</center>
                                     )
                                 }
                               </Collapse>
@@ -632,7 +632,7 @@ class CommissionsScreen extends Component {
                                     <ReactLoading type="bars" color="#000" height={50} width={50} />
                                   </center>
                                 ) : (
-                                      <span> No records Found</span>
+                                      <center> No records Found</center>
                                     )
                                 }
                               </Collapse>
@@ -660,7 +660,7 @@ class CommissionsScreen extends Component {
                                     <ReactLoading type="bars" color="#000" height={50} width={50} />
                                   </center>
                                 ) : (
-                                      <span> No records Found</span>
+                                      <center> No records Found</center>
                                     )
                                 }
                               </Collapse>
@@ -688,7 +688,7 @@ class CommissionsScreen extends Component {
                                     <ReactLoading type="bars" color="#000" height={50} width={50} />
                                   </center>
                                 ) : (
-                                      <span> No records Found</span>
+                                      <center> No records Found</center>
                                     )
                                 }
                               </Collapse>
@@ -716,7 +716,7 @@ class CommissionsScreen extends Component {
                                     <ReactLoading type="bars" color="#000" height={50} width={50} />
                                   </center>
                                 ) : (
-                                      <span> No records Found</span>
+                                      <center> No records Found</center>
                                     )
                                 }
                               </Collapse>
