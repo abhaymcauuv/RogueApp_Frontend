@@ -3,10 +3,55 @@ import { Link } from "react-router-dom";
 import HomeHeaderscreen from '../homeheader';
 import ReportLeftmenuscreen from '../reportleftmenu';
 import PageFooter from '../footer';
+import axios from 'axios';
 import '../../styles/styles.css';
+import EndPoints from '../../Config/ApiEndpoints/endpoints';
+import ReactLoading from "react-loading";
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import "react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
 
 class CustomersScreen extends Component {
+  constructor() {
+    super();
+    this.state = {
+      activeKey: [],
+      error: {},
+      CustomerList: {
+        IsLoaded: false,
+        Customers: []
+      }
+    }
+  }
+
+  componentDidMount() {
+    this.loadCustomers();
+  }
+
+  customerDetailsFormatter(cell, row, data) {
+    return <Link to="/"><i className="far fa-address-book"></i></Link>;
+  }
+
+  loadCustomers = async () => {
+    let customerId = 967;
+    axios({
+      method: 'POST',
+      url: EndPoints.ReportBaseUrl + EndPoints.Customer.Url,
+      data: {
+        CustomerID: customerId,
+        PageSize: 0,
+        PageNo: 0
+      }
+    }).then(async (response) => {
+      var result = await response.data.Items;
+      console.log(result)
+      this.setState({ CustomerList: { IsLoaded: true, Customers: result } });
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
+
   render() {
+    const { CustomerList } = this.state;
     return (
       <div>
         <div className="container-fluid">
@@ -19,7 +64,25 @@ class CustomersScreen extends Component {
                   <ReportLeftmenuscreen />
                   <div className="col-md-9">
                     <div className="panel panel-default panelmb50">
-                      <div>
+                      {CustomerList.Customers.length > 0 ? (
+                        <BootstrapTable ref='table' data={CustomerList.Customers} pagination>
+                          <TableHeaderColumn dataFormat={this.customerDetailsFormatter} dataAlign='center' width='30'></TableHeaderColumn>
+                          <TableHeaderColumn dataField='CustomerID' isKey={true} dataSort={true}>ID</TableHeaderColumn>
+                          <TableHeaderColumn dataField='CustomerName' dataSort={true}>Customer Name</TableHeaderColumn>
+                          <TableHeaderColumn dataField='Email'>Email</TableHeaderColumn>
+                          <TableHeaderColumn dataField='Phone'>Phone</TableHeaderColumn>
+                          <TableHeaderColumn dataField='Address'>Address</TableHeaderColumn>
+                        </BootstrapTable>
+                      ) : (!CustomerList.IsLoaded) ? (
+                        <center>
+                          <ReactLoading type="bars" color="#000" height={50} width={50} />
+                        </center>
+                      ) : (
+                            <center> No records Found</center>
+                          )
+                      }
+
+                      {/* <div>
                         <table className="table table-bordered tablemrb">
                           <thead>
                             <tr>
@@ -113,9 +176,9 @@ class CustomersScreen extends Component {
                           <div className="col-sm-3 paddingt10">
                             <span className="k-pager-info k-label">1 - 23 of 23 items</span>
                           </div>
-
                         </div>
                       </div>
+                    */}
                     </div>
                   </div>
                 </div>
