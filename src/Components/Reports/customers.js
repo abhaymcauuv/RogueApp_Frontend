@@ -11,47 +11,95 @@ import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import "react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
 
 class CustomersScreen extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       activeKey: [],
       error: {},
-      CustomerList: {
-        IsLoaded: false,
-        Customers: []
-      }
+      isDataFetched: false,
+      isCount: false,
+      totalDataSize: 0,
+      sizePerPage: 0,
+      currentPage: 1,
+      CustomerList: []
     }
   }
 
   componentDidMount() {
-    this.loadCustomers();
+    this.loadCustomers(1, 10);
   }
 
-  customerDetailsFormatter(cell, row, data) {
-    return <Link to="/"><i className="far fa-address-book"></i></Link>;
-  }
-
-  loadCustomers = async () => {
+  loadCustomers = async (pageNo, pageSize) => {
     let customerId = 967;
     axios({
       method: 'POST',
       url: EndPoints.ReportBaseUrl + EndPoints.Customer.Url,
       data: {
         CustomerID: customerId,
-        PageSize: 0,
-        PageNo: 0
+        PageSize: pageSize,
+        PageNo: pageNo,
+        IsCount: this.state.isCount
       }
     }).then(async (response) => {
       var result = await response.data.Items;
-      console.log(result)
-      this.setState({ CustomerList: { IsLoaded: true, Customers: result } });
+      this.setState({
+        totalDataSize: this.state.isCount ? this.state.totalDataSize : result.Count,
+        sizePerPage: pageSize,
+        currentPage: pageNo,
+        CustomerList: result.Customers,
+        isDataFetched: true,
+        isCount: true
+      });
     }).catch(function (error) {
       console.log(error);
     });
   }
 
+  onPageChange(page, sizePerPage) {
+    this.setState({
+      currentPage: page,
+      isDataFetched: false,
+      CustomerList: []
+    });
+    this.loadCustomers(page, sizePerPage);
+  }
+
+  // onSizePerPageList(sizePerPage) {
+  //   alert(`sizePerPage: ${sizePerPage}`);
+  //   this.loadCustomers(this.state.currentPage, sizePerPage);
+  // }
+
+  onSortChange(sortName, sortOrder) {
+    if (sortOrder === 'asc') {
+      this.state.CustomerList.sort(function (a, b) {
+        if (a[sortName] > b[sortName]) {
+          return 1;
+        } else if (b[sortName] > a[sortName], 10) {
+          return -1;
+        }
+        return 0;
+      });
+    } else {
+      this.state.CustomerList.sort(function (a, b) {
+        if (a[sortName] > b[sortName]) {
+          return -1;
+        } else if (b[sortName] > a[sortName]) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+
+    this.setState({
+      CustomerList: this.state.CustomerList
+    });
+  }
+
+  onExportToCSV() {
+    return this.state.CustomerList;
+  }
+
   render() {
-    const { CustomerList } = this.state;
     return (
       <div>
         <div className="container-fluid">
@@ -64,121 +112,10 @@ class CustomersScreen extends Component {
                   <ReportLeftmenuscreen />
                   <div className="col-md-9">
                     <div className="panel panel-default panelmb50">
-                      {CustomerList.Customers.length > 0 ? (
-                        <BootstrapTable ref='table' data={CustomerList.Customers} pagination>
-                          <TableHeaderColumn dataFormat={this.customerDetailsFormatter} dataAlign='center' width='30'></TableHeaderColumn>
-                          <TableHeaderColumn dataField='CustomerID' isKey={true} dataSort={true}>ID</TableHeaderColumn>
-                          <TableHeaderColumn dataField='CustomerName' dataSort={true}>Customer Name</TableHeaderColumn>
-                          <TableHeaderColumn dataField='Email'>Email</TableHeaderColumn>
-                          <TableHeaderColumn dataField='Phone'>Phone</TableHeaderColumn>
-                          <TableHeaderColumn dataField='Address'>Address</TableHeaderColumn>
-                        </BootstrapTable>
-                      ) : (!CustomerList.IsLoaded) ? (
-                        <center>
-                          <ReactLoading type="bars" color="#000" height={50} width={50} />
-                        </center>
-                      ) : (
-                            <center> No records Found</center>
-                          )
-                      }
-
-                      {/* <div>
-                        <table className="table table-bordered tablemrb">
-                          <thead>
-                            <tr>
-                              <th colSpan="6" className="textalignr tdbg">
-                                <button type="button" className="k-grid-excel btn btn-primary hidden-print"><i className="fa fa-download"></i> Excel</button>
-                              </th>
-                            </tr>
-                            <tr className="tdbg">
-                              <th scope="col"></th>
-                              <th scope="col">ID</th>
-                              <th scope="col">Customer Name</th>
-                              <th scope="col">Email</th>
-                              <th scope="col">Phone</th>
-                              <th scope="col">Address</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr className="tdbg">
-                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
-                              <td>17050</td>
-                              <td className="textalignr">Aleshia Lindhardt</td>
-                              <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
-                              <td className="textalignr">1234</td>
-                              <td className="textalignr">123 Homewood Dr</td>
-                            </tr>
-                            <tr>
-                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
-                              <td>19893</td>
-                              <td className="textalignr">Carley Schaefer</td>
-                              <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
-                              <td className="textalignr">1234</td>
-                              <td className="textalignr">123 Yoofoo</td>
-                            </tr>
-                            <tr className="tdbg">
-                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
-                              <td>17050</td>
-                              <td className="textalignr">Aleshia Lindhardt</td>
-                              <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
-                              <td className="textalignr">1234</td>
-                              <td className="textalignr">123 Homewood Dr</td>
-                            </tr>
-                            <tr>
-                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
-                              <td>19893</td>
-                              <td className="textalignr">Carley Schaefer</td>
-                              <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
-                              <td className="textalignr">1234</td>
-                              <td className="textalignr">123 Yoofoo</td>
-                            </tr>
-                            <tr className="tdbg">
-                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
-                              <td>17050</td>
-                              <td className="textalignr">Aleshia Lindhardt</td>
-                              <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
-                              <td className="textalignr">1234</td>
-                              <td className="textalignr">123 Homewood Dr</td>
-                            </tr>
-                            <tr>
-                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
-                              <td>19893</td>
-                              <td className="textalignr">Carley Schaefer</td>
-                              <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
-                              <td className="textalignr">1234</td>
-                              <td className="textalignr">123 Yoofoo</td>
-                            </tr>
-
-                          </tbody>
-                        </table>
-                        <div className="row">
-                          <div className="col-sm-9">
-                            <nav aria-label="Page navigation example">
-                              <ul className="pagination">
-                                <li className="page-item">
-                                  <a className="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span className="sr-only">Previous</span>
-                                  </a>
-                                </li>
-                                <li className="page-item"><a className="page-link" href="#">1</a></li>
-                                <li className="page-item"><a className="page-link" href="#">2</a></li>
-                                <li className="page-item"><a className="page-link" href="#">3</a></li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span className="sr-only">Next</span>
-                                  </a>
-                                </li>
-                              </ul>
-                            </nav>
-                          </div>
-                          <div className="col-sm-3 paddingt10">
-                            <span className="k-pager-info k-label">1 - 23 of 23 items</span>
-                          </div>
-                        </div>
-                      </div>
-                    */}
+                      <RemotePaging onPageChange={this.onPageChange.bind(this)}
+                        onSortChange={this.onSortChange.bind(this)} onExportToCSV={this.onExportToCSV.bind(this)}  {...this.state} />
+                      {/* <RemotePaging onPageChange={this.onPageChange.bind(this)}
+                        onSizePerPageList={this.onSizePerPageList.bind(this)} {...this.state} /> */}
                     </div>
                   </div>
                 </div>
@@ -187,10 +124,53 @@ class CustomersScreen extends Component {
           </div>
           <PageFooter />
         </div>
-
       </div>
     )
   }
 }
 
 export default CustomersScreen;
+
+export class RemotePaging extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  customerDetailsFormatter(cell, row, data) {
+    return <Link to="/"><i className="far fa-address-book"></i></Link>;
+  }
+
+  setTableOption() {
+    if (this.props.isDataFetched) {
+      return "No records found";
+    } else {
+      return (
+        <center><ReactLoading type="bars" color="#000" height={30} width={30} /></center>
+      );
+    }
+  }
+
+  render() {
+    return (
+      <BootstrapTable data={this.props.CustomerList} remote={true} exportCSV={true} pagination={true}
+        fetchInfo={{ dataTotalSize: this.props.totalDataSize }}
+        options={{
+          sizePerPage: this.props.sizePerPage,
+          onPageChange: this.props.onPageChange,
+          sizePerPageList: [5, 10, 20],
+          page: this.props.currentPage,
+          //onSizePerPageList: this.props.onSizePerPageList,
+          noDataText: this.setTableOption(),
+          onSortChange: this.props.onSortChange,
+          onExportToCSV: this.props.onExportToCSV
+        }}>
+        <TableHeaderColumn export ={false} dataFormat={this.customerDetailsFormatter} dataAlign='center' width='30'></TableHeaderColumn>
+        <TableHeaderColumn dataField='CustomerID' isKey={true} dataSort={true}>ID</TableHeaderColumn>
+        <TableHeaderColumn dataField='CustomerName' dataSort={true}>Customer Name</TableHeaderColumn>
+        <TableHeaderColumn dataField='Email' dataSort={true}>Email</TableHeaderColumn>
+        <TableHeaderColumn dataField='Phone' dataSort={true}>Phone</TableHeaderColumn>
+        <TableHeaderColumn dataField='Address' dataSort={true}>Address</TableHeaderColumn>
+      </BootstrapTable>
+    );
+  }
+}
