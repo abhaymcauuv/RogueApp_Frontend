@@ -21,7 +21,8 @@ class CustomersScreen extends Component {
       totalDataSize: 0,
       sizePerPage: 0,
       currentPage: 1,
-      CustomerList: []
+      CustomerList: [],
+      isRemote: true,
     }
   }
 
@@ -56,12 +57,15 @@ class CustomersScreen extends Component {
   }
 
   onPageChange(page, sizePerPage) {
-    this.setState({
-      currentPage: page,
-      isDataFetched: false,
-      CustomerList: []
-    });
-    this.loadCustomers(page, sizePerPage);
+    if (this.state.isRemote) {
+      this.setState({
+        currentPage: page,
+        isDataFetched: false,
+        CustomerList: []
+      });
+      this.loadCustomers(page, sizePerPage);
+    }
+    return;
   }
 
   // onSizePerPageList(sizePerPage) {
@@ -95,8 +99,63 @@ class CustomersScreen extends Component {
     });
   }
 
-  onExportToCSV() {
-    return this.state.CustomerList;
+  // onExportToCSV() {
+  //   return this.state.CustomerList
+  // }
+
+  customerDetailsFormatter(cell, row, data) {
+    return <Link to="/"><i className="far fa-address-book"></i></Link>;
+  }
+
+  setTableOption() {
+    if (this.state.isDataFetched) {
+      return "No records found";
+    } else {
+      return (
+        <center><ReactLoading type="bars" color="#000" height={30} width={30} /></center>
+      );
+    }
+  }
+
+  handleExportCSVButtonClick = (onClick) => {
+    if (this.state.CustomerList.length === 0) {
+      return;
+    }
+
+    if (this.state.CustomerList.length !== this.state.totalDataSize) {
+      let customerId = 967;
+      axios({
+        method: 'POST',
+        url: EndPoints.ReportBaseUrl + EndPoints.Customer.Url,
+        data: {
+          CustomerID: customerId,
+          PageSize: 0,
+          PageNo: 0,
+          IsCount: true
+        }
+      }).then(async (response) => {
+        this.setState({ isRemote: false });
+        var result = await response.data.Items;
+        this.setState({
+          CustomerList: result.Customers,
+          totalDataSize: result.Customers.length
+        });
+        onClick();
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+    else {
+      onClick();
+    }
+  }
+
+  createCustomExportCSVButton = (onClick) => {
+    return (
+      <ExportCSVButton
+        btnText='Export'
+        onClick={() => this.handleExportCSVButtonClick(onClick)} />
+    );
   }
 
   render() {
@@ -112,8 +171,30 @@ class CustomersScreen extends Component {
                   <ReportLeftmenuscreen />
                   <div className="col-md-9">
                     <div className="panel panel-default panelmb50">
-                      <RemotePaging onPageChange={this.onPageChange.bind(this)}
-                        onSortChange={this.onSortChange.bind(this)} onExportToCSV={this.onExportToCSV.bind(this)}  {...this.state} />
+                      <BootstrapTable remote={this.state.isRemote} data={this.state.CustomerList} exportCSV={true} pagination={true}
+                        fetchInfo={{ dataTotalSize: this.props.totalDataSize }}
+                        options={{
+                          sizePerPage: this.state.sizePerPage,
+                          onPageChange: this.onPageChange.bind(this),
+                          sizePerPageList: [5, 10, 20],
+                          page: this.state.currentPage,
+                          //onSizePerPageList: this.props.onSizePerPageList,
+                          noDataText: this.setTableOption(),
+                          onSortChange: this.onSortChange.bind(this),
+                          exportCSVBtn: this.createCustomExportCSVButton.bind(this)
+                          // onExportToCSV: this.onExportToCSV.bind(this)
+                        }}>
+                        <TableHeaderColumn export={false} dataFormat={this.customerDetailsFormatter} dataAlign='center' width='30'></TableHeaderColumn>
+                        <TableHeaderColumn dataField='CustomerID' isKey={true} dataSort={true}>ID</TableHeaderColumn>
+                        <TableHeaderColumn dataField='CustomerName' dataSort={true}>Customer Name</TableHeaderColumn>
+                        <TableHeaderColumn dataField='Email' dataSort={true}>Email</TableHeaderColumn>
+                        <TableHeaderColumn dataField='Phone' dataSort={true}>Phone</TableHeaderColumn>
+                        <TableHeaderColumn dataField='Address' dataSort={true}>Address</TableHeaderColumn>
+                      </BootstrapTable>
+
+
+                      {/* <RemotePaging onPageChange={this.onPageChange.bind(this)}
+                        onSortChange={this.onSortChange.bind(this)} onExportToCSV={this.onExportToCSV.bind(this)}  {...this.state} /> */}
                       {/* <RemotePaging onPageChange={this.onPageChange.bind(this)}
                         onSizePerPageList={this.onSizePerPageList.bind(this)} {...this.state} /> */}
                     </div>
@@ -131,46 +212,46 @@ class CustomersScreen extends Component {
 
 export default CustomersScreen;
 
-export class RemotePaging extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+// export class RemotePaging extends React.Component {
+//   constructor(props) {
+//     super(props);
+//   }
 
-  customerDetailsFormatter(cell, row, data) {
-    return <Link to="/"><i className="far fa-address-book"></i></Link>;
-  }
+//   customerDetailsFormatter(cell, row, data) {
+//     return <Link to="/"><i className="far fa-address-book"></i></Link>;
+//   }
 
-  setTableOption() {
-    if (this.props.isDataFetched) {
-      return "No records found";
-    } else {
-      return (
-        <center><ReactLoading type="bars" color="#000" height={30} width={30} /></center>
-      );
-    }
-  }
+//   setTableOption() {
+//     if (this.props.isDataFetched) {
+//       return "No records found";
+//     } else {
+//       return (
+//         <center><ReactLoading type="bars" color="#000" height={30} width={30} /></center>
+//       );
+//     }
+//   }
 
-  render() {
-    return (
-      <BootstrapTable data={this.props.CustomerList} remote={true} exportCSV={true} pagination={true}
-        fetchInfo={{ dataTotalSize: this.props.totalDataSize }}
-        options={{
-          sizePerPage: this.props.sizePerPage,
-          onPageChange: this.props.onPageChange,
-          sizePerPageList: [5, 10, 20],
-          page: this.props.currentPage,
-          //onSizePerPageList: this.props.onSizePerPageList,
-          noDataText: this.setTableOption(),
-          onSortChange: this.props.onSortChange,
-          onExportToCSV: this.props.onExportToCSV
-        }}>
-        <TableHeaderColumn export ={false} dataFormat={this.customerDetailsFormatter} dataAlign='center' width='30'></TableHeaderColumn>
-        <TableHeaderColumn dataField='CustomerID' isKey={true} dataSort={true}>ID</TableHeaderColumn>
-        <TableHeaderColumn dataField='CustomerName' dataSort={true}>Customer Name</TableHeaderColumn>
-        <TableHeaderColumn dataField='Email' dataSort={true}>Email</TableHeaderColumn>
-        <TableHeaderColumn dataField='Phone' dataSort={true}>Phone</TableHeaderColumn>
-        <TableHeaderColumn dataField='Address' dataSort={true}>Address</TableHeaderColumn>
-      </BootstrapTable>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <BootstrapTable data={this.props.CustomerList} remote={true} exportCSV={true} pagination={true}
+//         fetchInfo={{ dataTotalSize: this.props.totalDataSize }}
+//         options={{
+//           sizePerPage: this.props.sizePerPage,
+//           onPageChange: this.props.onPageChange,
+//           sizePerPageList: [5, 10, 20],
+//           page: this.props.currentPage,
+//           //onSizePerPageList: this.props.onSizePerPageList,
+//           noDataText: this.setTableOption(),
+//           onSortChange: this.props.onSortChange,
+//           onExportToCSV: this.props.onExportToCSV
+//         }}>
+//         <TableHeaderColumn export={false} dataFormat={this.customerDetailsFormatter} dataAlign='center' width='30'></TableHeaderColumn>
+//         <TableHeaderColumn dataField='CustomerID' isKey={true} dataSort={true}>ID</TableHeaderColumn>
+//         <TableHeaderColumn dataField='CustomerName' dataSort={true}>Customer Name</TableHeaderColumn>
+//         <TableHeaderColumn dataField='Email' dataSort={true}>Email</TableHeaderColumn>
+//         <TableHeaderColumn dataField='Phone' dataSort={true}>Phone</TableHeaderColumn>
+//         <TableHeaderColumn dataField='Address' dataSort={true}>Address</TableHeaderColumn>
+//       </BootstrapTable>
+//     );
+//   }
+// }
