@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 import HomeHeaderscreen from './homeheader';
 import PageFooter from './footer';
 import '../styles/styles.css';
+import { useHistory } from 'react-router-dom';
 
 class HomeScreen extends Component {
+  constructor(props) {
+    super(props);
+  }
   onSignIn = () => {
-    this.props.history.push('/dashboard');
+    //console.log("click prop- ",this.props.history);
+    //this.props.history.push('/dashboard');
+    window.location.href="#/dashboard"
   }
   render() {
     return (

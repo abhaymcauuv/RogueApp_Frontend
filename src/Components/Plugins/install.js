@@ -4,8 +4,65 @@ import HomeHeaderscreen from '../homeheader';
 import PluginsLeftmenuscreen from '../pluginsleftmenu';
 import PageFooter from '../footer';
 import '../../styles/styles.css';
+import axios from 'axios';
 
 class InstallScreen extends Component {
+  constructor() {
+    super();
+    this.state = {
+      //name: '',
+      //selected: [],
+      //description: '',
+      file: undefined
+    };
+    this.submitForm = this.submitForm.bind(this)
+  }
+  validate(){
+    // if (!this.state.name) {
+    //    alert("Name can not be blank");
+    //    return false;
+    // }
+    // if(!this.state.description){
+    //     alert("Description can not be blank"); 
+    //     return false;
+    // }
+    // if(this.state.selected.length == 0){
+    //   alert("Please select packages"); 
+    //   return false;
+    // }
+    if(!this.state.file || this.state.file.length ==0){
+      alert("Selct a file"); 
+      return false;
+    }
+    return true;
+}
+submitForm(e) {
+  e.preventDefault();
+  const isValid = this.validate();
+  if(!isValid){
+    return;
+  }
+  //debugger;
+  const formData = new FormData();
+  formData.append("plugin", this.state.file);
+  formData.append("name",this.state.file.name);
+  //formData.append("description",this.state.description);
+  //formData.append("package",this.state.selected);
+  //console.log("Form data ",JSON.stringify(formData));
+  const config = {
+    headers: {
+      "content-type": "multipart/form-data"
+    },
+    timeout: 1000,
+    maxContentLength: 200000
+  };
+
+  axios.post("http://localhost:6006/rouge/plugin/install", formData, config)
+  .then(response => {
+    alert("The file is successfully uploaded");
+  })
+  .catch(error => {});
+}
   render() {
     return (
       <div>
@@ -18,18 +75,18 @@ class InstallScreen extends Component {
                 <div className="row">
                   <PluginsLeftmenuscreen />
                   <div className="col-md-9">
-                    <form class="form-horizontal">
-                      <div class="form-group">
+                    <form class="form-horizontal" onSubmit={this.submitForm} role="form">
+                      {/* <div class="form-group">
                         <label class="control-label col-sm-2 formtext">Plugin Name :</label>
                         <div class="col-sm-4">
-                          <input type="Install" class="form-control" placeholder="Plugin Name"></input>
+                          <input type="Install" class="form-control"  value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} placeholder="Plugin Name"></input>
                         </div>
-                      </div>
+                      </div> */}
                       <div class="form-group">
                         <label class="control-label col-sm-2 formtext">Upload File :</label>
                         <div class="col-sm-4">
                           <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFileLang" lang=""></input>
+                            <input type="file" onChange={(e) => this.setState({ file: e.target.files[0] })} class="custom-file-input" id="customFileLang" lang=""></input>
                             <label class="custom-file-label" for="customFileLang">Choose File</label>
                           </div>
                         </div>
@@ -37,11 +94,11 @@ class InstallScreen extends Component {
 
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-4 tabletopm30">
-                          <button type="button" class="btn btn-primary btn-lg btn-block">Install</button>
+                          <button type="submit" class="btn btn-primary btn-lg btn-block">Install</button>
                         </div>
                       </div>
                     </form>
-                    <div className="panel panel-default panelmb50">
+                    {/* <div className="panel panel-default panelmb50">
                       <div>
                         <table className="table table-bordered tablemrb">
                           <thead>
@@ -101,7 +158,7 @@ class InstallScreen extends Component {
 
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

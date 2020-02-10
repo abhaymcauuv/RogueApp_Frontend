@@ -1,0 +1,158 @@
+[
+    {
+        "name": "Commissions",
+        "items": [
+            {
+                "name": "Commissions",
+                "link":"/commissions"
+            },
+            {
+                "name": "Rank Advancement",
+                "link":"/rank"
+            },
+            {
+                "name": " Volumes",
+                "link":"/volumes"
+            }
+        ]
+    },
+    {
+        "name": "Reports",
+        "items": [
+            {
+                "name": " Customer List",
+                "link":"/customers"
+            },
+            {
+                "name": "Club Couture Customer",
+                "link":"/clubcouture"
+            },
+            {
+                "name": "Personally Enrolled Team",
+                "link":"/personallyenrolledteam"
+            },
+            {
+                "name": "Upcoming Promotions",
+                "link":"/upcomingpromotions"
+            },
+            {
+                "name": "Downline's Orders",
+                "link":"/downlineorders"
+            },
+            {
+                "name": "New Designers List",
+                "link":"/newdesigners"
+            },
+            {
+                "name": "Team Performance",
+                "link":"/teamperformance"
+            },
+            {
+                "name": "Recent Activity List",
+                "link":"/recentactivity"
+            },
+            {
+                "name": "Watts of Love Donations",
+                "link":"/wattsoflovedonations"
+            },
+            {
+                "name": "Tree Viewer",
+                "link":"/treeviewer"
+            },
+            {
+                "name": "First Time Title Promotions",
+                "link":"/titlepromotion"
+            },
+            {
+                "name": "Incentive Trip Tracker",
+                "link":"/incentivetriptracker"
+            },
+            {
+                "name": "Designer Debut Tracker",
+                "link":"/designerdebuttracker"
+            }
+        ]
+    },
+    {
+        "name": "Events",
+        "items": [
+            {
+                "name": "Calendar",
+                "link":"/"
+            },
+            {
+                "name": "Subscriptions",
+                "link":"/"
+            }
+        ]
+    },
+    {
+        "name": "Orders",
+        "items": [
+            {
+                "name": "Inventory Orders",
+                "link":"/"
+            },
+            {
+                "name": "Personal Use Orders",
+                "link":"/"
+            }
+            ,
+            {
+                "name": "Sales",
+                "link":"/"
+            }
+        ]
+    },
+    {
+        "name": "Resources",
+        "items": [
+            {
+                "name": "Resources Library",
+                "link":"/"
+            }
+        ]
+    },
+    {
+        "name": "Store",
+        "items": [
+            {
+                "name": "Products",
+                "link":"/"
+            },
+            {
+                "name": "My Cart",
+                "link":"/"
+            },
+            {
+                "name": "Bulk Order",
+                "link":"/"
+            }
+        ]
+    },
+    {
+        "name": "Company News",
+        "items": [
+            
+        ]
+    },
+    {
+        "name": "Yoofoo",
+        "items": [
+            
+        ]
+    },
+    {
+        "name": "Plugins",
+        "items": [
+            {
+                "name": "Install",
+                "link":"/install"
+            },
+            {
+                "name": "Uninstall",
+                "link":"/uninstall"
+            }
+        ]
+    }
+]

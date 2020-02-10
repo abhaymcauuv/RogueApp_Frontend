@@ -10,7 +10,7 @@ module.exports = {
     module:{
         rules:[{
             exclude: /node_modules/,
-            test: /\.js$/,
+            test: /\.(js|jsx)?$/,
             loader: 'babel-loader'
         },
             {
@@ -33,6 +33,9 @@ module.exports = {
                 test: /\.(png|jpg)$/,
                 loader: 'url-loader'
               }]
+    },
+   resolve: {
+      extensions: [".js", ".jsx"]
     },
     plugins:[
         new hwp({template:path.join(__dirname, '/src/index.html')})

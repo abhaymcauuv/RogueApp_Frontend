@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import { Route, HashRouter, Switch } from "react-router-dom";
+import { Route, HashRouter, Switch,BrowserRouter } from "react-router-dom";
 import Homescreen from "./home";
 import CartScreen from "./cart";
 import DashboardScreen from "./dashboard";
@@ -22,13 +22,25 @@ import DesignerDebutTrackerScreen from "./Reports/designerdebuttracker";
 import InstallScreen from "./Plugins/install";
 import UninstallScreen from "./Plugins/uninstall";
 
+import { LazyLoadModule } from "./../lazy";
+import myData from './../routeconfig.json';
+
 
 export default class Root extends Component { 
   render() {
     return (
       <HashRouter>
         <div>
-          <Route exact path="/" component={Homescreen} />
+          {
+            myData.map((item, index) => {
+              //console.log("item.route-",item.route,"item.component_name-",item.component_name);
+              //return <Route exact key={index} path={item.route} component={() => <LazyLoadModule resolve={() => import(`./${item.component_name}`)} />} />
+              const OtherComponent = React.lazy(() => import(`./${item.component_name}`));
+              // console.log("OtherComponent",OtherComponent);
+              return <Route key={index} exact path={item.route} component={() => <LazyLoadModule resolve={() => import(`./${item.component_name}`)} />} />
+            
+            }) 
+          /*{ <Route exact path="/" component={Homescreen} />
           <Route exact path="/cart" component={CartScreen} />
           <Route exact path="/dashboard" component={DashboardScreen} />
           <Route exact path="/commissions" component={CommissionsScreen} />
@@ -48,7 +60,9 @@ export default class Root extends Component {
           <Route exact path="/incentivetriptracker" component={IncentiveTripTrackerScreen} /> 
           <Route exact path="/designerdebuttracker" component={DesignerDebutTrackerScreen} />   
           <Route exact path="/install" component={InstallScreen} />  
-          <Route exact path="/uninstall" component={UninstallScreen} />   
+          <Route exact path="/uninstall" component={UninstallScreen} /> 
+          } */
+          }
         </div>
       </HashRouter>
     );
