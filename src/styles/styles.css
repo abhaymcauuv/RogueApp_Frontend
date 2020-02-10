@@ -243,10 +243,10 @@ h3{
     white-space: nowrap;
     vertical-align: middle;
 }
-.modal-body {
-    /* padding: 1rem 2rem 1rem 2rem; */
+/* .modal-body {
+    padding: 1rem 2rem 1rem 2rem;
     border: solid 1px #255c8f;
-}
+} */
 .login-body{
     padding: 10px 50px 10px 50px
 }
@@ -1324,12 +1324,47 @@ tr:nth-child(odd) {background: #FFF}
 }
 
 
+/*---------Customer Details---------*/
 
+.Customerh3{
+    font-size: 18px;
+    padding-top: 25px;
+}
+.textmuted {
+    font-size: 14px;
+    color: #777;
+}
+.margintop30{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.fa_icon1{
+    font-size: 14px;
+    margin-right: 10px;
+}
 
-
-
-
-
+.addresspara{
+    padding:0 2px 0 10px !important;
+}
+.wellbg{
+    background-color: #fff !important;
+    border-top: solid 1px #e9e9e9 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    border-radius: 0 !important;
+}
+.closeicon{
+    font-size: 25px !important;
+}
+.hdrh5{
+    font-size: 20px !important;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #fff !important;
+    background-color: #73afe6 !important; 
+    border-color: #dee2e6 #dee2e6 #fff;
+}
 
 
 
