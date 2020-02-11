@@ -8,13 +8,13 @@ import '../../styles/styles.css';
 import EndPoints from '../../Config/ApiEndpoints/endpoints';
 import ReactLoading from "react-loading";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-import ReactExport from "react-export-excel";
+//import ReactExport from "react-export-excel";
 import "react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
 let customerId = 967;
 
-const ExcelFile = ReactExport.ExcelFile;
-const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
+// const ExcelFile = ReactExport.ExcelFile;
+// const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+// const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 var products = [
   {
@@ -182,42 +182,46 @@ class CustomersScreen extends Component {
     }
   }
 
-  // handleExportCSVButtonClick = (onClick) => {
-  //   if (this.state.CustomerList.length === 0) {
-  //     return;
-  //   }
-
-  //   if (this.state.isRemote) {
-  //     axios({
-  //       method: 'POST',
-  //       url: EndPoints.ReportBaseUrl + EndPoints.Customer.Url,
-  //       data: {
-  //         CustomerID: customerId,
-  //         PageSize: 0,
-  //         PageNo: 0,
-  //         IsCount: true
-  //       }
-  //     }).then(async (response) => {
-  //       this.setState({ isRemote: false });
-  //       var result = await response.data.Items;
-  //       await this.setState({
-  //         CustomerList: result.Customers,
-  //         totalDataSize: result.Customers.length
-  //       });
-  //       onClick();
-  //     }).catch(function (error) {
-  //       console.log(error);
-  //     });
-  //   }
-  //   else {
-  //     onClick();
-  //   }
-  // }
+  handleExportCSVButtonClick = async (onClick) => {
+    if (this.state.CustomerList.length === 0) {
+      return;
+    }
+    await this.setState({ isFetchingExportData: true });
+    if (this.state.isRemote) {
+      axios({
+        method: 'POST',
+        url: EndPoints.ReportBaseUrl + EndPoints.Customer.Url,
+        data: {
+          CustomerID: customerId,
+          PageSize: 0,
+          PageNo: 0,
+          IsCount: true
+        }
+      }).then(async (response) => {
+        this.setState({ isRemote: false });
+        var result = await response.data.Items;
+        await this.setState({
+          CustomerList: result.Customers,
+          totalDataSize: result.Customers.length,
+          isFetchingExportData: false
+        });
+        onClick();
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+    else {
+      await this.setState({
+        isFetchingExportData: false
+      });
+      onClick();
+    }
+  }
 
   createCustomExportCSVButton = (onClick) => {
     return (
-      <button onClick={this.getDataForExport.bind(this)} disabled={this.state.isFetchingExportData} style={{ margin: "10px" }} type="button"  className="k-grid-excel btn btn-primary hidden-print"><i className="fa fa-download"></i>{this.state.isFetchingExportData ? 'Exporting..' : 'Export'}</button>
-      // <button style={{ margin: "10px" }} onClick={() => this.handleExportCSVButtonClick(onClick)} type="button" className="k-grid-excel btn btn-primary hidden-print"><i className="fa fa-download"></i> Export</button>
+      //<button onClick={this.getDataForExport.bind(this)} disabled={this.state.isFetchingExportData} style={{ margin: "10px" }} type="button"  className="k-grid-excel btn btn-primary hidden-print"><i className="fa fa-download"></i>{this.state.isFetchingExportData ? 'Exporting..' : 'Export'}</button>
+      <button disabled={this.state.isFetchingExportData} style={{ margin: "10px" }} onClick={() => this.handleExportCSVButtonClick(onClick)} type="button" className="k-grid-excel btn btn-primary hidden-print"><i className="fa fa-download"></i> {this.state.isFetchingExportData ? 'Exporting..' : 'Export'}</button>
     );
   }
 
@@ -259,7 +263,7 @@ class CustomersScreen extends Component {
         await this.setState({ isRemote: false });
         await this.setState({
           customerExportedData: result.Customers,
-          CustomerList: this.state.searchData  ? this.state.CustomerList : result.Customers,
+          CustomerList: this.state.searchData ? this.state.CustomerList : result.Customers,
           allCustomerList: result.Customers,
           totalDataSize: this.state.searchData ? this.state.totalDataSize : result.Customers.length,
           isFetchingExportData: false
@@ -292,7 +296,7 @@ class CustomersScreen extends Component {
                   <ReportLeftmenuscreen />
                   <div className="col-md-9">
                     <div className="panel panel-default panelmb50" style={{ backgroundColor: "#ebf2ff" }}>
-                      {this.state.customerExportedData.length > 0 ? (
+                      {/* {this.state.customerExportedData.length > 0 ? (
                         <ExcelFile hideElement={true} filename={"customers"}>
                           <ExcelSheet data={this.state.customerExportedData} name="Sheet1">
                             <ExcelColumn label="Customer ID" value="CustomerID" />
@@ -302,7 +306,7 @@ class CustomersScreen extends Component {
                             <ExcelColumn label="Address" value="Address" />
                           </ExcelSheet>
                         </ExcelFile>
-                      ) : null}
+                      ) : null} */}
                       <BootstrapTable search={true} searchPlaceholder='Search by Cusomer id/Name/Address' remote={this.state.isRemote} data={this.state.CustomerList} exportCSV={true} pagination={true}
                         fetchInfo={{ dataTotalSize: this.state.totalDataSize }}
                         options={{
@@ -332,101 +336,101 @@ class CustomersScreen extends Component {
 
 
                       <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title hdrh5" id="exampleModalLabel">Customer Details</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true" className="closeicon">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body">
-                                        <div class="row">
-                                          <div class="col-sm-2">
-                                            <img className="img-fluid logopdng1 avatar" src="../src/images/profiles/14113.png" alt="logo"></img>
-                                            {/* <img src="" class="avatar"></img> */}
-                                          </div>
-                                          <div class="col-sm-10">
-                                            <h3 className="Customerh3"><strong>Aleshia Lindhardt</strong> <small class="textmuted">#17050</small><br></br>
-                                            </h3>
-                                          </div>
-                                        </div>
-                                        <div>
-                                          <div className="col-sm-12">
-                                            <ul class="nav nav-tabs margintop30" id="myTab" role="tablist">
-                                              <li class="nav-item">
-                                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">General</a>
-                                              </li>
-                                              <li class="nav-item">
-                                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Orders</a>
-                                              </li>
-                                              <li class="nav-item">
-                                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Auto Orders</a>
-                                              </li>
-                                            </ul>
-                                            <div class="tab-content" id="myTabContent">
-                                              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="modal-dialog modal-lg">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title hdrh5" id="exampleModalLabel">Customer Details</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" className="closeicon">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="row">
+                                <div class="col-sm-2">
+                                  <img className="img-fluid logopdng1 avatar" src="../src/images/profiles/14113.png" alt="logo"></img>
+                                  {/* <img src="" class="avatar"></img> */}
+                                </div>
+                                <div class="col-sm-10">
+                                  <h3 className="Customerh3"><strong>Aleshia Lindhardt</strong> <small class="textmuted">#17050</small><br></br>
+                                  </h3>
+                                </div>
+                              </div>
+                              <div>
+                                <div className="col-sm-12">
+                                  <ul class="nav nav-tabs margintop30" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">General</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Orders</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Auto Orders</a>
+                                    </li>
+                                  </ul>
+                                  <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-                                                <div class="row">
-                                                  <div class="col-sm-6 padiingt10">
-                                                    <label>Contact Information</label>
-                                                    <div class="well well-white no-border wellbg">
-                                                      <div class="media">
-                                                        <i class="media-object fa fa-phone fa_icon1"></i>
-                                                        <div class="media-body">
-                                                          <a href="tel:">+1-800-741-8264</a>
-                                                        </div>
-                                                      </div>
-                                                      <div class="media">
-                                                        <i class="media-object fa fa-envelope fa_icon1"></i>
-                                                        <div class="media-body">
-                                                          <a href="mailto:info@yoofoo.com">info@yoofoo.com</a>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-
-                                                <div class="row">
-                                                  <div class="col-sm-6">
-                                                    <label>Addresses</label>
-                                                    <div class="well well-white no-border wellbg">
-                                                      <div class="media">
-                                                        <i class="media-object fa fa-home"></i>
-                                                        <div class="media-body">
-                                                          <p className="addresspara">YooFoo, LLC.</p>
-                                                          <p className="addresspara"> 9192 South 300 West Suite 3 Sandy,</p>
-                                                          <p className="addresspara">Utah 84070</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-
-                                                </div>
-
+                                      <div class="row">
+                                        <div class="col-sm-6 padiingt10">
+                                          <label>Contact Information</label>
+                                          <div class="well well-white no-border wellbg">
+                                            <div class="media">
+                                              <i class="media-object fa fa-phone fa_icon1"></i>
+                                              <div class="media-body">
+                                                <a href="tel:">+1-800-741-8264</a>
                                               </div>
-                                              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                                <BootstrapTable data={products} options={this.options} pagination>
-                                                  <TableHeaderColumn dataField='id' isKey dataSort>Order Date</TableHeaderColumn>
-                                                  <TableHeaderColumn dataField='name' dataSort>Total</TableHeaderColumn>                                                 
-                                                  <TableHeaderColumn dataField='price'>PV</TableHeaderColumn>
-                                                </BootstrapTable>
-
-                                              </div>
-                                              <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                                                 <BootstrapTable data={products} options={this.options} pagination>
-                                                  <TableHeaderColumn dataField='id' isKey dataSort>Order Date</TableHeaderColumn>
-                                                  <TableHeaderColumn dataField='name' dataSort>Total</TableHeaderColumn>                                                 
-                                                  <TableHeaderColumn dataField='price'>PV</TableHeaderColumn>
-                                                </BootstrapTable>
+                                            </div>
+                                            <div class="media">
+                                              <i class="media-object fa fa-envelope fa_icon1"></i>
+                                              <div class="media-body">
+                                                <a href="mailto:info@yoofoo.com">info@yoofoo.com</a>
                                               </div>
                                             </div>
                                           </div>
                                         </div>
                                       </div>
+
+                                      <div class="row">
+                                        <div class="col-sm-6">
+                                          <label>Addresses</label>
+                                          <div class="well well-white no-border wellbg">
+                                            <div class="media">
+                                              <i class="media-object fa fa-home"></i>
+                                              <div class="media-body">
+                                                <p className="addresspara">YooFoo, LLC.</p>
+                                                <p className="addresspara"> 9192 South 300 West Suite 3 Sandy,</p>
+                                                <p className="addresspara">Utah 84070</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                      </div>
+
+                                    </div>
+                                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                      <BootstrapTable data={products} options={this.options} pagination>
+                                        <TableHeaderColumn dataField='id' isKey dataSort>Order Date</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='name' dataSort>Total</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='price'>PV</TableHeaderColumn>
+                                      </BootstrapTable>
+
+                                    </div>
+                                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                      <BootstrapTable data={products} options={this.options} pagination>
+                                        <TableHeaderColumn dataField='id' isKey dataSort>Order Date</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='name' dataSort>Total</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='price'>PV</TableHeaderColumn>
+                                      </BootstrapTable>
                                     </div>
                                   </div>
                                 </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
                       {/* <RemotePaging onPageChange={this.onPageChange.bind(this)}
                         onSortChange={this.onSortChange.bind(this)} onExportToCSV={this.onExportToCSV.bind(this)}  {...this.state} /> */}
