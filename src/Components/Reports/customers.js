@@ -201,9 +201,11 @@ class CustomersScreen extends Component {
         this.setState({ isRemote: false });
         var result = await response.data.Items;
         await this.setState({
-          CustomerList: result.Customers,
+          CustomerList: this.state.searchData ? this.state.CustomerList : result.Customers,
           totalDataSize: result.Customers.length,
-          isFetchingExportData: false
+          isFetchingExportData: false,
+          allCustomerList: result.Customers,
+          totalDataSize: this.state.searchData ? this.state.totalDataSize : result.Customers.length,
         });
         onClick();
       }).catch(function (error) {
