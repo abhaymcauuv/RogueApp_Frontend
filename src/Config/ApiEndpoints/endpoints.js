@@ -1,5 +1,6 @@
 const EndPoints = {
-    BaseUrl: `http://localhost:6002/`,
+    CommissionBaseUrl: `http://localhost:6002/`,
+    ReportBaseUrl:`http://localhost:6003/`,
     CommissionPeriodList: {
         Url: `rogue/commission/getcommissionperiodlist/{CustomerId}`,
         Method: 'GET'
@@ -34,6 +35,19 @@ const EndPoints = {
             PeriodID: 0,
             BonusID: 0,
             PeriodTypeID:0
+        }
+    },
+    Customer: {
+        Url: `rogue/report/customerlist`,
+        Method: 'POST',
+        PostData: {
+            CustomerID: 0,
+            PageSize: 0,
+            PageNo: 0,
+            IsCount: false,
+            SortName: '',
+            SortOrder: '',
+            SearchData:''
         }
     },
 

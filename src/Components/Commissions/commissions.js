@@ -78,7 +78,7 @@ class CommissionsScreen extends Component {
     let entPoint = EndPoints.CommissionPeriodList.Url.replace('{CustomerId}', customerId);
     axios({
       method: 'GET',
-      url: EndPoints.BaseUrl + entPoint
+      url: EndPoints.CommissionBaseUrl + entPoint
     }).then(async (response) => {
       const result = await response.data.Items;
       await this.setState({
@@ -132,7 +132,7 @@ class CommissionsScreen extends Component {
 
     axios({
       method: 'POST',
-      url: EndPoints.BaseUrl + EndPoints.Commission.Url,
+      url: EndPoints.CommissionBaseUrl + EndPoints.Commission.Url,
       data: {
         CustomerID: customerId,
         CommissionRunID: runId,
@@ -193,7 +193,7 @@ class CommissionsScreen extends Component {
       const runId = this.state.RunID;
       axios({
         method: 'POST',
-        url: EndPoints.BaseUrl + EndPoints.HistoricalBonus.Url,
+        url: EndPoints.CommissionBaseUrl + EndPoints.HistoricalBonus.Url,
         data: {
           CustomerID: customerId,
           CommissionRunID: runId,
@@ -229,7 +229,7 @@ class CommissionsScreen extends Component {
       const periodTypeId = this.state.PeriodTypeID;
       axios({
         method: 'POST',
-        url: EndPoints.BaseUrl + EndPoints.RealTimeBonus.Url,
+        url: EndPoints.CommissionBaseUrl + EndPoints.RealTimeBonus.Url,
         data: {
           CustomerID: customerId,
           PeriodID: periodId,
