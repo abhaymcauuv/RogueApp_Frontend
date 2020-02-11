@@ -31,7 +31,11 @@ class CustomersScreen extends Component {
       CustomerList: [],
       isRemote: true,
       sortName: '',
-      sortOrder: ''
+      sortOrder: '',
+      searchData: '',
+      customerExportedData: [],
+      isFetchingExportData: false,
+      allCustomerList: []
     }
   }
 
@@ -49,7 +53,8 @@ class CustomersScreen extends Component {
         PageNo: this.state.currentPage,
         IsCount: this.state.isCount,
         SortName: this.state.sortName,
-        SortOrder: this.state.sortOrder
+        SortOrder: this.state.sortOrder,
+        SearchData: this.state.searchData
       }
     }).then(async (response) => {
       var result = await response.data.Items;
@@ -121,6 +126,31 @@ class CustomersScreen extends Component {
     }
   }
 
+  onSearchChange = async (searchText, colInfos, multiColumnSearch) => {
+    const text = searchText.trim();
+    if (!text && this.state.allCustomerList.length > 0) {
+      await this.setState({
+        CustomerList: this.state.allCustomerList
+      });
+      return;
+    }
+    if (this.state.isRemote) {
+      await this.setState({
+        isDataFetched: false,
+        CustomerList: [],
+        sortName: '',
+        sortOrder: '',
+        currentPage: 1,
+        totalDataSize: 0,
+        searchData: text,
+        isCount: false
+      });
+      this.loadCustomers();
+    } else {
+      return;
+    }
+  }
+
   //  onExportToCSV() {
   //     return this.state.CustomerList
   //  }
@@ -139,41 +169,42 @@ class CustomersScreen extends Component {
     }
   }
 
-  handleExportCSVButtonClick = (onClick) => {
-    if (this.state.CustomerList.length === 0) {
-      return;
-    }
+  // handleExportCSVButtonClick = (onClick) => {
+  //   if (this.state.CustomerList.length === 0) {
+  //     return;
+  //   }
 
-    if (this.state.isRemote) {
-      axios({
-        method: 'POST',
-        url: EndPoints.ReportBaseUrl + EndPoints.Customer.Url,
-        data: {
-          CustomerID: customerId,
-          PageSize: 0,
-          PageNo: 0,
-          IsCount: true
-        }
-      }).then(async (response) => {
-        this.setState({ isRemote: false });
-        var result = await response.data.Items;
-        await this.setState({
-          CustomerList: result.Customers,
-          totalDataSize: result.Customers.length
-        });
-        onClick();
-      }).catch(function (error) {
-        console.log(error);
-      });
-    }
-    else {
-      onClick();
-    }
-  }
+  //   if (this.state.isRemote) {
+  //     axios({
+  //       method: 'POST',
+  //       url: EndPoints.ReportBaseUrl + EndPoints.Customer.Url,
+  //       data: {
+  //         CustomerID: customerId,
+  //         PageSize: 0,
+  //         PageNo: 0,
+  //         IsCount: true
+  //       }
+  //     }).then(async (response) => {
+  //       this.setState({ isRemote: false });
+  //       var result = await response.data.Items;
+  //       await this.setState({
+  //         CustomerList: result.Customers,
+  //         totalDataSize: result.Customers.length
+  //       });
+  //       onClick();
+  //     }).catch(function (error) {
+  //       console.log(error);
+  //     });
+  //   }
+  //   else {
+  //     onClick();
+  //   }
+  // }
 
   createCustomExportCSVButton = (onClick) => {
     return (
-      <button style={{ margin: "10px" }} onClick={() => this.handleExportCSVButtonClick(onClick)} type="button" className="k-grid-excel btn btn-primary hidden-print"><i className="fa fa-download"></i> Export</button>
+      <button onClick={this.getDataForExport.bind(this)} disabled={this.state.isFetchingExportData} style={{ margin: "10px" }} type="button"  className="k-grid-excel btn btn-primary hidden-print"><i className="fa fa-download"></i>{this.state.isFetchingExportData ? 'Exporting..' : 'Export'}</button>
+      // <button style={{ margin: "10px" }} onClick={() => this.handleExportCSVButtonClick(onClick)} type="button" className="k-grid-excel btn btn-primary hidden-print"><i className="fa fa-download"></i> Export</button>
     );
   }
 
@@ -198,18 +229,41 @@ class CustomersScreen extends Component {
     );
   }
 
-  onSearchChange = async (searchText, colInfos, multiColumnSearch) => {
-    alert(searchText)
-    if (this.state.CustomerList.length === 0) {
-      return;
-    }
+  getDataForExport = async () => {
+    await this.setState({ isFetchingExportData: true });
     if (this.state.isRemote) {
+      axios({
+        method: 'POST',
+        url: EndPoints.ReportBaseUrl + EndPoints.Customer.Url,
+        data: {
+          CustomerID: customerId,
+          PageSize: 0,
+          PageNo: 0,
+          IsCount: true
+        }
+      }).then(async (response) => {
+        var result = await response.data.Items;
+        await this.setState({ isRemote: false });
+        await this.setState({
+          customerExportedData: result.Customers,
+          CustomerList: this.state.searchData  ? this.state.CustomerList : result.Customers,
+          allCustomerList: result.Customers,
+          totalDataSize: this.state.searchData ? this.state.totalDataSize : result.Customers.length,
+          isFetchingExportData: false
+        });
+        await this.setState({
+          customerExportedData: []
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
     }
-    return;
-  }
-
-  onExport = async () => {
-    
+    else {
+      await this.setState({
+        customerExportedData: this.state.CustomerList,
+        isFetchingExportData: false
+      });
+    }
   }
 
   render() {
@@ -224,27 +278,28 @@ class CustomersScreen extends Component {
                 <div className="row">
                   <ReportLeftmenuscreen />
                   <div className="col-md-9">
-                    <div className="panel panel-default panelmb50">
-
-                      {/* <table className="table table-bordered tablemrb">
-                        <thead>
-                          <tr>
-                            <th colSpan="10" className="textalignr tdbg">
-                              <Download onClick={this.onExport.bind(this)} {...this.state} />
-                            </th>
-                          </tr>
-                        </thead>
-                      </table> */}
-                      <BootstrapTable search={false} searchPlaceholder='Search by Cusomer id/Name/Address' remote={this.state.isRemote} data={this.state.CustomerList} exportCSV={true} pagination={true}
-                        fetchInfo={{ dataTotalSize: this.props.totalDataSize }}
+                    <div className="panel panel-default panelmb50" style={{ backgroundColor: "#ebf2ff" }}>
+                      {this.state.customerExportedData.length > 0 ? (
+                        <ExcelFile hideElement={true} filename={"customers"}>
+                          <ExcelSheet data={this.state.customerExportedData} name="Sheet1">
+                            <ExcelColumn label="Customer ID" value="CustomerID" />
+                            <ExcelColumn label="Customer Name" value="CustomerName" />
+                            <ExcelColumn label="Email" value="Email" />
+                            <ExcelColumn label="Phone" value="Phone" />
+                            <ExcelColumn label="Address" value="Address" />
+                          </ExcelSheet>
+                        </ExcelFile>
+                      ) : null}
+                      <BootstrapTable search={true} searchPlaceholder='Search by Cusomer id/Name/Address' remote={this.state.isRemote} data={this.state.CustomerList} exportCSV={true} pagination={true}
+                        fetchInfo={{ dataTotalSize: this.state.totalDataSize }}
                         options={{
                           defaultSearch: '',
-                          searchDelayTime: 3000,
+                          searchDelayTime: 2000,
                           sizePerPage: this.state.sizePerPage,
                           onPageChange: this.onPageChange.bind(this),
                           sizePerPageList: [5, 10, 20],
                           page: this.state.currentPage,
-                          //onSizePerPageList: this.props.onSizePerPageList,
+                          //onSizePerPageList: this.state.onSizePerPageList,
                           noDataText: this.setTableOption(),
                           onSortChange: this.onSortChange.bind(this),
                           exportCSVBtn: this.createCustomExportCSVButton.bind(this),
@@ -328,43 +383,9 @@ export default CustomersScreen;
 
 export class MySearchPanel extends React.Component {
   render() {
-    console.log(this.props)
     return (
       <div style={{ margin: "10px" }}>
         {this.props.searchField}
-      </div>
-    );
-  }
-}
-
-
-
-
-export class Download extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div>
-        {this.props.CustomerList.length > 0 ? (
-          <ExcelFile element={<button type="button" onClick={this.props.onClick} className="k-grid-excel btn btn-primary hidden-print"><i className="fa fa-download"></i> Export</button>}>
-            <ExcelSheet data={this.props.CustomerList.slice(0, 50)} name="Sheet1">
-              <ExcelColumn label="Customer ID" value="CustomerID" />
-              <ExcelColumn label="Customer Name" value="CustomerName" />
-              <ExcelColumn label="Email" value="Email" />
-              <ExcelColumn label="Phone" value="Phone" />
-              <ExcelColumn label="Address" value="Address" />
-            </ExcelSheet>
-            <ExcelSheet data={this.props.CustomerList.slice(50, 100)} name="Sheet2">
-              <ExcelColumn label="Customer ID" value="CustomerID" />
-              <ExcelColumn label="Customer Name" value="CustomerName" />
-              <ExcelColumn label="Email" value="Email" />
-              <ExcelColumn label="Phone" value="Phone" />
-              <ExcelColumn label="Address" value="Address" />
-            </ExcelSheet>
-          </ExcelFile>
-        ) : null}
       </div>
     );
   }
