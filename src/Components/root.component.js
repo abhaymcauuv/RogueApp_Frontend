@@ -22,8 +22,8 @@ import DesignerDebutTrackerScreen from "./Reports/designerdebuttracker";
 import InstallScreen from "./Plugins/install";
 import UninstallScreen from "./Plugins/uninstall";
 
-import { LazyLoadModule } from "./../lazy";
-import myData from './../routeconfig.json';
+import { LazyLoadModule } from "../helpers/lazy";
+import myData from './../data/routeconfig.json';
 
 
 export default class Root extends Component { 
@@ -35,9 +35,8 @@ export default class Root extends Component {
             myData.map((item, index) => {
               //console.log("item.route-",item.route,"item.component_name-",item.component_name);
               //return <Route exact key={index} path={item.route} component={() => <LazyLoadModule resolve={() => import(`./${item.component_name}`)} />} />
-              const OtherComponent = React.lazy(() => import(`./${item.component_name}`));
               // console.log("OtherComponent",OtherComponent);
-              return <Route key={index} exact path={item.route} component={() => <LazyLoadModule resolve={() => import(`./${item.component_name}`)} />} />
+              return <Route key={index} exact path={item.route} component={() => <LazyLoadModule resolve={() => import(`${item.component_name}`)} />} />
             
             }) 
           /*{ <Route exact path="/" component={Homescreen} />

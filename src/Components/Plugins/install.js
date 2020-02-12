@@ -5,6 +5,7 @@ import PluginsLeftmenuscreen from '../pluginsleftmenu';
 import PageFooter from '../footer';
 import '../../styles/styles.css';
 import axios from 'axios';
+import header from '../../data/headerconfig.json';
 
 class InstallScreen extends Component {
   constructor() {
@@ -17,7 +18,7 @@ class InstallScreen extends Component {
     };
     this.submitForm = this.submitForm.bind(this)
   }
-  validate(){
+  validate() {
     // if (!this.state.name) {
     //    alert("Name can not be blank");
     //    return false;
@@ -30,39 +31,39 @@ class InstallScreen extends Component {
     //   alert("Please select packages"); 
     //   return false;
     // }
-    if(!this.state.file || this.state.file.length ==0){
-      alert("Selct a file"); 
+    if (!this.state.file || this.state.file.length == 0) {
+      alert("Selct a file");
       return false;
     }
     return true;
-}
-submitForm(e) {
-  e.preventDefault();
-  const isValid = this.validate();
-  if(!isValid){
-    return;
   }
-  //debugger;
-  const formData = new FormData();
-  formData.append("plugin", this.state.file);
-  formData.append("name",this.state.file.name);
-  //formData.append("description",this.state.description);
-  //formData.append("package",this.state.selected);
-  //console.log("Form data ",JSON.stringify(formData));
-  const config = {
-    headers: {
-      "content-type": "multipart/form-data"
-    },
-    timeout: 1000,
-    maxContentLength: 200000
-  };
+  submitForm(e) {
+    e.preventDefault();
+    const isValid = this.validate();
+    if (!isValid) {
+      return;
+    }
+    //debugger;
+    const formData = new FormData();
+    formData.append("plugin", this.state.file);
+    formData.append("name", this.state.file.name);
+    //formData.append("description",this.state.description);
+    //formData.append("package",this.state.selected);
+    //console.log("Form data ",JSON.stringify(formData));
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data"
+      },
+      timeout: 1000,
+      maxContentLength: 200000
+    };
 
-  axios.post("http://localhost:6006/rouge/plugin/install", formData, config)
-  .then(response => {
-    alert("The file is successfully uploaded");
-  })
-  .catch(error => {});
-}
+    axios.post("http://localhost:6006/rouge/plugin/install", formData, config)
+      .then(response => {
+        alert("The file is successfully uploaded");
+      })
+      .catch(error => { });
+  }
   render() {
     return (
       <div>
@@ -98,36 +99,32 @@ submitForm(e) {
                         </div>
                       </div>
                     </form>
-                    {/* <div className="panel panel-default panelmb50">
+                    <div className="panel panel-default panelmb50">
                       <div>
                         <table className="table table-bordered tablemrb">
                           <thead>
                             <tr className="tdbg">
-                              <th scope="col"></th>
+                              {/* <th scope="col"></th> */}
                               <th scope="col">ID</th>
-                              <th scope="col">Customer Name</th>
-                              <th scope="col">Email</th>
+                              <th scope="col">Plugin Name</th>
+                              {/* <th scope="col">Email</th>
                               <th scope="col">Phone</th>
-                              <th scope="col">Address</th>
+                              <th scope="col">Address</th> */}
                             </tr>
                           </thead>
                           <tbody>
-                            <tr className="tdbg">
-                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
-                              <td>17050</td>
-                              <td className="textalignr">Aleshia Lindhardt</td>
-                              <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
-                              <td className="textalignr">1234</td>
-                              <td className="textalignr">123 Homewood Dr</td>
-                            </tr>
-                            <tr>
-                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
-                              <td>19893</td>
-                              <td className="textalignr">Carley Schaefer</td>
-                              <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
-                              <td className="textalignr">1234</td>
-                              <td className="textalignr">123 Yoofoo</td>
-                            </tr>
+                            {
+                              header.map((item, index) => {
+                                return <tr className="tdbg">
+                                  {/* <td><Link to="/"><i className="far fa-address-book"></i></Link></td> */}
+                              <td>{item.id}</td>
+                                  <td className="textalignr">{item.name}</td>
+                                  {/* <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
+                                  <td className="textalignr">1234</td>
+                                  <td className="textalignr">123 Homewood Dr</td> */}
+                                </tr>
+                              })
+                            }
                           </tbody>
                         </table>
                         <div className="row">
@@ -158,7 +155,7 @@ submitForm(e) {
 
                         </div>
                       </div>
-                    </div> */}
+                    </div>
                   </div>
                 </div>
               </div>
