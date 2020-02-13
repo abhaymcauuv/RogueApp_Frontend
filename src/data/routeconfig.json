@@ -1,1 +1,107 @@
-[{"id":1,"route":"/","component_name":"./home"},{"id":2,"route":"/cart","component_name":"./cart"},{"id":3,"route":"/dashboard","component_name":"./dashboard"},{"id":4,"route":"/commissions","component_name":"./Commissions/commissions"},{"id":5,"route":"/rank","component_name":"./Commissions/rank"},{"id":6,"route":"/volumes","component_name":"./Commissions/volumes"},{"id":7,"route":"/customers","component_name":"./Reports/customers"},{"id":8,"route":"/clubcouture","component_name":"./Reports/clubcouture"},{"id":9,"route":"/personallyenrolledteam","component_name":"./Reports/personallyenrolledteam"},{"id":10,"route":"/upcomingpromotions","component_name":"./Reports/upcomingpromotions"},{"id":11,"route":"/downlineorders","component_name":"./Reports/downlineorders"},{"id":12,"route":"/newdesigners","component_name":"./Reports/newdesigners"},{"id":13,"route":"/teamperformance","component_name":"./Reports/teamperformance"},{"id":14,"route":"/recentactivity","component_name":"./Reports/recentactivity"},{"id":15,"route":"/wattsoflovedonations","component_name":"./Reports/wattsoflovedonations"},{"id":16,"route":"/treeviewer","component_name":"./Reports/treeviewer"},{"id":17,"route":"/titlepromotion","component_name":"./Reports/titlepromotion"},{"id":18,"route":"/incentivetriptracker","component_name":"./Reports/incentivetriptracker"},{"id":19,"route":"/designerdebuttracker","component_name":"./Reports/designerdebuttracker"},{"id":20,"route":"/install","component_name":"./Plugins/install"},{"id":21,"route":"/uninstall","component_name":"./Plugins/uninstall"},{"id":22,"route":"/upload/menuone","component_name":"./Upload/testmodule/menuone"}]
+[
+    {
+        "id": 1,
+        "route": "/",
+        "component_name": "./home"
+    },
+    {
+        "id": 2,
+        "route": "/cart",
+        "component_name": "./cart"
+    },
+    {
+        "id": 3,
+        "route": "/dashboard",
+        "component_name": "./dashboard"
+    },
+    {
+        "id": 4,
+        "route": "/commissions",
+        "component_name": "./Commissions/commissions"
+    },
+    {
+        "id": 5,
+        "route": "/rank",
+        "component_name": "./Commissions/rank"
+    },
+    {
+        "id": 6,
+        "route": "/volumes",
+        "component_name": "./Commissions/volumes"
+    },
+    {
+        "id": 7,
+        "route": "/customers",
+        "component_name": "./Reports/customers"
+    },
+    {
+        "id": 8,
+        "route": "/clubcouture",
+        "component_name": "./Reports/clubcouture"
+    },
+    {
+        "id": 9,
+        "route": "/personallyenrolledteam",
+        "component_name": "./Reports/personallyenrolledteam"
+    },
+    {
+        "id": 10,
+        "route": "/upcomingpromotions",
+        "component_name": "./Reports/upcomingpromotions"
+    },
+    {
+        "id": 11,
+        "route": "/downlineorders",
+        "component_name": "./Reports/downlineorders"
+    },
+    {
+        "id": 12,
+        "route": "/newdesigners",
+        "component_name": "./Reports/newdesigners"
+    },
+    {
+        "id": 13,
+        "route": "/teamperformance",
+        "component_name": "./Reports/teamperformance"
+    },
+    {
+        "id": 14,
+        "route": "/recentactivity",
+        "component_name": "./Reports/recentactivity"
+    },
+    {
+        "id": 15,
+        "route": "/wattsoflovedonations",
+        "component_name": "./Reports/wattsoflovedonations"
+    },
+    {
+        "id": 16,
+        "route": "/treeviewer",
+        "component_name": "./Reports/treeviewer"
+    },
+    {
+        "id": 17,
+        "route": "/titlepromotion",
+        "component_name": "./Reports/titlepromotion"
+    },
+    {
+        "id": 18,
+        "route": "/incentivetriptracker",
+        "component_name": "./Reports/incentivetriptracker"
+    },
+    {
+        "id": 19,
+        "route": "/designerdebuttracker",
+        "component_name": "./Reports/designerdebuttracker"
+    },
+    {
+        "id": 20,
+        "route": "/install",
+        "component_name": "./Plugins/install"
+    },
+    {
+        "id": 21,
+        "route": "/uninstall",
+        "component_name": "./Plugins/uninstall"
+    }
+]

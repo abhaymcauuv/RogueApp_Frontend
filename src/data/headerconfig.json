@@ -1,1 +1,175 @@
-[{"id":1,"name":"Commissions","items":[{"name":"Commissions","link":"/commissions"},{"name":"Rank Advancement","link":"/rank"},{"name":" Volumes","link":"/volumes"}]},{"id":2,"name":"Reports","items":[{"name":" Customer List","link":"/customers"},{"name":"Club Couture Customer","link":"/clubcouture"},{"name":"Personally Enrolled Team","link":"/personallyenrolledteam"},{"name":"Upcoming Promotions","link":"/upcomingpromotions"},{"name":"Downline's Orders","link":"/downlineorders"},{"name":"New Designers List","link":"/newdesigners"},{"name":"Team Performance","link":"/teamperformance"},{"name":"Recent Activity List","link":"/recentactivity"},{"name":"Watts of Love Donations","link":"/wattsoflovedonations"},{"name":"Tree Viewer","link":"/treeviewer"},{"name":"First Time Title Promotions","link":"/titlepromotion"},{"name":"Incentive Trip Tracker","link":"/incentivetriptracker"},{"name":"Designer Debut Tracker","link":"/designerdebuttracker"}]},{"id":3,"name":"Events","items":[{"name":"Calendar","link":"/"},{"name":"Subscriptions","link":"/"}]},{"id":4,"name":"Orders","items":[{"name":"Inventory Orders","link":"/"},{"name":"Personal Use Orders","link":"/"},{"name":"Sales","link":"/"}]},{"id":5,"name":"Resources","items":[{"name":"Resources Library","link":"/"},{"name":"New Resources Library","link":"/"}]},{"id":6,"name":"Store","items":[{"name":"Products","link":"/"},{"name":"My Cart","link":"/"},{"name":"Bulk Order","link":"/"}]},{"id":7,"name":"Company News","items":[]},{"id":8,"name":"Yoofoo","items":[]},{"id":9,"name":"Plugins","items":[{"name":"Install","link":"/install"},{"name":"Uninstall","link":"/uninstall"}]},{"id":10,"name":"PluginOne","items":[{"name":"menuone","link":"/upload/menuone"}]}]
+[
+    {
+        "id": 1,
+        "name": "Commissions",
+        "directory": "",
+        "items": [
+            {
+                "name": "Commissions",
+                "link": "/commissions"
+            },
+            {
+                "name": "Rank Advancement",
+                "link": "/rank"
+            },
+            {
+                "name": " Volumes",
+                "link": "/volumes"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Reports",
+        "directory": "",
+        "items": [
+            {
+                "name": " Customer List",
+                "link": "/customers"
+            },
+            {
+                "name": "Club Couture Customer",
+                "link": "/clubcouture"
+            },
+            {
+                "name": "Personally Enrolled Team",
+                "link": "/personallyenrolledteam"
+            },
+            {
+                "name": "Upcoming Promotions",
+                "link": "/upcomingpromotions"
+            },
+            {
+                "name": "Downline's Orders",
+                "link": "/downlineorders"
+            },
+            {
+                "name": "New Designers List",
+                "link": "/newdesigners"
+            },
+            {
+                "name": "Team Performance",
+                "link": "/teamperformance"
+            },
+            {
+                "name": "Recent Activity List",
+                "link": "/recentactivity"
+            },
+            {
+                "name": "Watts of Love Donations",
+                "link": "/wattsoflovedonations"
+            },
+            {
+                "name": "Tree Viewer",
+                "link": "/treeviewer"
+            },
+            {
+                "name": "First Time Title Promotions",
+                "link": "/titlepromotion"
+            },
+            {
+                "name": "Incentive Trip Tracker",
+                "link": "/incentivetriptracker"
+            },
+            {
+                "name": "Designer Debut Tracker",
+                "link": "/designerdebuttracker"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Events",
+        "directory": "",
+        "items": [
+            {
+                "name": "Calendar",
+                "link": "/"
+            },
+            {
+                "name": "Subscriptions",
+                "link": "/"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Orders",
+        "directory": "",
+        "items": [
+            {
+                "name": "Inventory Orders",
+                "link": "/"
+            },
+            {
+                "name": "Personal Use Orders",
+                "link": "/"
+            },
+            {
+                "name": "Sales",
+                "link": "/"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Resources",
+        "directory": "",
+        "items": [
+            {
+                "name": "Resources Library",
+                "link": "/"
+            },
+            {
+                "name": "New Resources Library",
+                "link": "/"
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Store",
+        "directory": "",
+        "items": [
+            {
+                "name": "Products",
+                "link": "/"
+            },
+            {
+                "name": "My Cart",
+                "link": "/"
+            },
+            {
+                "name": "Bulk Order",
+                "link": "/"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Company News",
+        "directory": "",
+        "items": []
+    },
+    {
+        "id": 8,
+        "directory": "",
+        "name": "Yoofoo",
+        "items": []
+    },
+    {
+        "id": 9,
+        "name": "Plugins",
+        "directory": "",
+        "items": [
+            {
+                "name": "Install",
+                "link": "/install"
+            },
+            {
+                "name": "Uninstall",
+                "link": "/uninstall"
+            }
+        ]
+    }
+]

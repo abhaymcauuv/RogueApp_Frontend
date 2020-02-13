@@ -4,8 +4,36 @@ import HomeHeaderscreen from '../homeheader';
 import PluginsLeftmenuscreen from '../pluginsleftmenu';
 import PageFooter from '../footer';
 import '../../styles/styles.css';
+import header from '../../data/headerconfig.json';
+import axios from 'axios';
 
 class UninstallScreen extends Component {
+  constructor(props) {
+    super(props);
+  }
+  onDelete = (e) => {
+    //console.log(e.target.value);
+    const r = window.confirm("Do you really want to Uninstall ?");
+    if (r == true) { 
+      console.log("Del Id", e.target.value)
+      const formData = new FormData();
+      formData.append("pluginId", e.target.value);
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data"
+        },
+        timeout: 1000,
+        maxContentLength: 200000
+      };
+  
+      axios.post("http://localhost:6006/rouge/plugin/uninstall", formData, config)
+        .then(response => {
+          alert("The file is successfully uploaded");
+        })
+        .catch(error => { });
+
+    }
+  }
   render() {
     return (
       <div>
@@ -18,7 +46,7 @@ class UninstallScreen extends Component {
                 <div className="row">
                   <PluginsLeftmenuscreen />
                   <div className="col-md-9">
-                    <form class="form-horizontal">
+                    {/* <form class="form-horizontal">
                       <div class="form-group">
                         <label class="control-label col-sm-2 formtext">Plugin Name :</label>
                         <div class="col-sm-4">
@@ -30,37 +58,30 @@ class UninstallScreen extends Component {
                           <button type="button" class="btn btn-primary btn-lg btn-block">Uninstall</button>
                         </div>
                       </div>
-                    </form>
-                    <div className="panel panel-default panelmb50">
+                    </form> */}
+                    <div className="panel panel-default panelmb50" >
                       <div>
-                        <table className="table table-bordered tablemrb">
+                        <table className="table table-bordered tablemrb" style={{ "text-align": "center" }}>
                           <thead>
                             <tr className="tdbg">
-                              <th scope="col"></th>
                               <th scope="col">ID</th>
-                              <th scope="col">Customer Name</th>
-                              <th scope="col">Email</th>
-                              <th scope="col">Phone</th>
-                              <th scope="col">Address</th>
+                              <th scope="col">Plugin Name</th>
+                              <th scope="col">Uninstall</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr className="tdbg">
-                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
-                              <td>17050</td>
-                              <td className="textalignr">Aleshia Lindhardt</td>
-                              <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
-                              <td className="textalignr">1234</td>
-                              <td className="textalignr">123 Homewood Dr</td>
-                            </tr>
-                            <tr>
-                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
-                              <td>19893</td>
-                              <td className="textalignr">Carley Schaefer</td>
-                              <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
-                              <td className="textalignr">1234</td>
-                              <td className="textalignr">123 Yoofoo</td>
-                            </tr>
+                            {
+                              header.map((item, index) => {
+                                return <tr className="tdbg">
+                                  {/* <td><Link to="/"><i className="far fa-address-book"></i></Link></td> */}
+                                  <td>{item.id}</td>
+                                  <td>{item.name}</td>
+                                  <button type="button" class="btn btn-default btn-sm">
+                                    <li key={item.id} value={item.id} onClick={(e) => this.onDelete(e)} class="glyphicon glyphicon-trash"></li>
+                                  </button>
+                                </tr>
+                              })
+                            }
                           </tbody>
                         </table>
                         <div className="row">

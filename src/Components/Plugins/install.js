@@ -101,7 +101,7 @@ class InstallScreen extends Component {
                     </form>
                     <div className="panel panel-default panelmb50">
                       <div>
-                        <table className="table table-bordered tablemrb">
+                        <table className="table table-bordered tablemrb" style={{"text-align": "center"}}>
                           <thead>
                             <tr className="tdbg">
                               {/* <th scope="col"></th> */}
@@ -118,7 +118,7 @@ class InstallScreen extends Component {
                                 return <tr className="tdbg">
                                   {/* <td><Link to="/"><i className="far fa-address-book"></i></Link></td> */}
                               <td>{item.id}</td>
-                                  <td className="textalignr">{item.name}</td>
+                                  <td>{item.name}</td>
                                   {/* <td className="textalignr"><a href="/yoofoo@.com">yoofoo@.com</a></td>
                                   <td className="textalignr">1234</td>
                                   <td className="textalignr">123 Homewood Dr</td> */}
