@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  frontend:
+    image: webpack
+    build:
+      context: .
+    ports:
+      - 8090:8090
+    volumes:
+      - ./src:/bindmount:rw
+      - node_modules:/bindmount/node_modules
+
+volumes:
+  node_modules:
+
+    
