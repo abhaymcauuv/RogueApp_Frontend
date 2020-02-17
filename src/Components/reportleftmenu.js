@@ -5,7 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'rc-menu/assets/index.css';
 
 export default class ReportLeftmenuscreen extends Component {
-
+  constructor(props) {
+    super(props);
+  }
   render() {
     const BASE_URL = '#'
     return (
@@ -14,16 +16,16 @@ export default class ReportLeftmenuscreen extends Component {
           <nav className="view-navigation">
             <div className="panel-group">
               <div className="panel panel-default no-border">
-                <div className="panel-heading active">
+                <div className={this.props.name == "customers" ? "panel-heading active" : "panel-heading"}>
                   <div className="panel-title">
-                    <a href="/#/customers" className="active"><i className="fa fa-address-card lmenuicon" aria-hidden="true"></i> Customer List</a>
+                    <a href="/#/customers"><i className="fa fa-address-card lmenuicon" aria-hidden="true"></i> Customer List</a>
                   </div>
                 </div>
               </div>
               <div className="panel panel-default no-border">
-                <div className="panel-heading">
+                <div className={this.props.name == "clubcouture" ? "panel-heading active" : "panel-heading"}>
                   <div className="panel-title">
-                    <a href="/#/clubcouture" className="active"><i className="fa fa-address-book lmenuicon" aria-hidden="true"></i> Club Couture Customer</a>
+                    <a href="/#/clubcouture"><i className="fa fa-address-book lmenuicon" aria-hidden="true"></i> Club Couture Customer</a>
                   </div>
                 </div>
               </div>

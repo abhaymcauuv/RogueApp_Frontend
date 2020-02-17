@@ -84,7 +84,36 @@ const EndPoints = {
             SortOrder: ''
         }
     },
-
+    ClubCoutureCustomer: {
+        Url: `rogue/report/clubcouturecustomerlist`,
+        Method: 'POST',
+        PostData: {
+            CustomerID: 0,
+            PageSize: 0,
+            PageNo: 0,
+            IsCount: false,
+            IncludeClosedAccounts: false,
+            SortName: '',
+            SortOrder: '',
+            SearchData: ''
+        }
+    },
+    VolumeList: {
+        Url: `rogue/report/volumes`,
+        Method: 'POST',
+        PostData: {
+            ID: 0,
+            PageSize: 10,
+            PageNo: 1,
+            IsCount: false,
+            SortName: '',
+            SortOrder: ''
+        }
+    },
+    Activity: {
+        Url: `rogue/report/activity/{id}`,
+        Method: 'GET'
+    }
 }
 
 export default EndPoints

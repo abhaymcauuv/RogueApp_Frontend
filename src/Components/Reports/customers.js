@@ -35,7 +35,7 @@ class CustomersScreen extends Component {
       isLoadingDetails: false,
       customerDetails: {},
       id: '',
-      
+
 
       //for orders 
       Order: {
@@ -566,7 +566,7 @@ class CustomersScreen extends Component {
               <div className="col-sm-12">
                 <h2 className="h2hdr">Customer List</h2>
                 <div className="row">
-                  <ReportLeftmenuscreen />
+                  <ReportLeftmenuscreen {...{ "name": "customers" }} />
                   <div className="col-md-9">
                     <div className="panel panel-default panelmb50" style={{ backgroundColor: "#ebf2ff" }}>
                       <BootstrapTable search={true} searchPlaceholder='Search Customer' remote={this.state.isRemote} data={this.state.CustomerList} exportCSV={true} pagination={true}
