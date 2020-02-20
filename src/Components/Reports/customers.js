@@ -148,12 +148,12 @@ class CustomersScreen extends Component {
 
   onSearchChange = async (searchText, colInfos, multiColumnSearch) => {
     const text = searchText.trim();
-    if (!text && this.state.allCustomerList.length > 0) {
-      await this.setState({
-        CustomerList: this.state.allCustomerList
-      });
-      return;
-    }
+    // if (!text && this.state.allCustomerList.length > 0) {
+    //   await this.setState({
+    //     CustomerList: this.state.allCustomerList
+    //   });
+    //   return;
+    // }
     if (this.state.isRemote) {
       await this.setState({
         isDataFetched: false,
@@ -206,6 +206,7 @@ class CustomersScreen extends Component {
           allCustomerList: result.Customers,
           totalDataSize: this.state.searchData ? this.state.totalDataSize : result.Customers.length,
         });
+        this.setState({ isRemote: true });
         onClick();
       }).catch(function (error) {
         console.log(error);

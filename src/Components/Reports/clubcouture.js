@@ -30,8 +30,6 @@ class ClubCoutureScreen extends Component {
       isFetchingExportData: false,
       allClubCoutureCustomerList: [],
       includeClosedAccounts: false,
-
-      //for customer details
       activeTab: 1,
       isLoadingDetails: false,
       customerDetails: {},
@@ -42,8 +40,6 @@ class ClubCoutureScreen extends Component {
       isActive: false,
       volumes: {},
       id: '',
-
-      //for orders 
       Order: {
         isDataFetched: false,
         isCount: false,
@@ -55,19 +51,17 @@ class ClubCoutureScreen extends Component {
         sortName: '',
         sortOrder: '',
       },
-      //for auto orders 
       AutoOrder: {
         isDataFetched: false,
         isCount: false,
         totalDataSize: 0,
         sizePerPage: 10,
         currentPage: 1,
-        OrderList: [],
+        AutoOrderList: [],
         isRemote: true,
         sortName: '',
         sortOrder: ''
       },
-      //for volumes
       Volume: {
         isDataFetched: false,
         isCount: false,
@@ -79,18 +73,14 @@ class ClubCoutureScreen extends Component {
         sortName: '',
         sortOrder: ''
       },
-
-      //for customer recent activity
       Activity: {
         isDataFetched: false,
         CustomerRecentActivity: []
       },
-
       Rank: {
-        isDataFetched: true,
+        isDataFetched: false,
         Rank: {}
       }
-
     }
   }
 
@@ -193,12 +183,12 @@ class ClubCoutureScreen extends Component {
 
   onSearchChange = async (searchText, colInfos, multiColumnSearch) => {
     const text = searchText.trim();
-    if (!text && this.state.allClubCoutureCustomerList.length > 0) {
-      await this.setState({
-        ClubCoutureCustomerList: this.state.allClubCoutureCustomerList
-      });
-      return;
-    }
+    // if (!text && this.state.allClubCoutureCustomerList.length > 0) {
+    //   await this.setState({
+    //     ClubCoutureCustomerList: this.state.allClubCoutureCustomerList
+    //   });
+    //   return;
+    // }
     if (this.state.isRemote) {
       await this.setState({
         isDataFetched: false,
@@ -252,7 +242,9 @@ class ClubCoutureScreen extends Component {
           allClubCoutureCustomerList: result.ClubCoutureCustomers,
           totalDataSize: this.state.searchData ? this.state.totalDataSize : result.ClubCoutureCustomers.length,
         });
+        this.setState({ isRemote: true });
         onClick();
+
       }).catch(function (error) {
         console.log(error);
       });
@@ -293,14 +285,18 @@ class ClubCoutureScreen extends Component {
   }
 
   getCustomerDetails = async (row) => {
-    this.setState({
+    let isDistributor = false;
+    if (Number(row.CustomerTypeID) == 4) {
+      isDistributor = true
+    }
+    await this.setState({
       activeTab: 1,
       isLoadingDetails: true,
       id: row.CustomerID,
       customerDetails: {},
       sponsorDetails: {},
       enrollerDetails: {},
-      isDistributor: false,
+      isDistributor: isDistributor,
       isInEnrollerTree: false,
       isActive: false,
       volumes: {},
@@ -322,7 +318,7 @@ class ClubCoutureScreen extends Component {
         totalDataSize: 0,
         sizePerPage: 10,
         currentPage: 1,
-        OrderList: [],
+        AutoOrderList: [],
         isRemote: true,
         sortName: '',
         sortOrder: ''
@@ -341,6 +337,10 @@ class ClubCoutureScreen extends Component {
       Activity: {
         isDataFetched: false,
         CustomerRecentActivity: []
+      },
+      Rank: {
+        isDataFetched: false,
+        Rank: {}
       }
     });
     axios({
@@ -357,7 +357,7 @@ class ClubCoutureScreen extends Component {
         customerDetails: result.Customer,
         sponsorDetails: result.Sponsor !== undefined ? result.Sponsor : {},
         enrollerDetails: result.Enroller !== undefined ? result.Enroller : {},
-        isDistributor: result.IsDistributor,
+        // isDistributor: result.IsDistributor,
         isInEnrollerTree: result.IsInEnrollerTree !== undefined ? result.IsInEnrollerTree : false,
         isActive: result.IsActive !== undefined ? result.IsActive : false,
         volumes: result.Volumes !== undefined ? result.Volumes : {}
@@ -388,10 +388,10 @@ class ClubCoutureScreen extends Component {
   }
 
   getCustomerRecentActivity = async () => {
-    let entPoint = EndPoints.Activity.Url.replace('{id}', this.state.id);
+    let endPoint = EndPoints.Activity.Url.replace('{id}', this.state.id);
     axios({
       method: 'GET',
-      url: EndPoints.ReportBaseUrl + entPoint
+      url: EndPoints.ReportBaseUrl + endPoint
     }).then(async (response) => {
       var result = await response.data.Items;
       this.setState({
@@ -669,6 +669,10 @@ class ClubCoutureScreen extends Component {
       let date = row.NextRunDate.split('T');
       return date[0];
     }
+    else {
+      let date = row.StartDate.split('T');
+      return date[0];
+    }
   }
 
   //#endregion
@@ -785,7 +789,25 @@ class ClubCoutureScreen extends Component {
 
   //#region Rank
   handleRankClick = async () => {
-    this.setState({ activeTab: 3 });
+    await this.setState({ activeTab: 3 });
+    if (this.state.Rank.isDataFetched) {
+      return;
+    }
+    let endPoint = EndPoints.Rank.Url.replace('{id}', this.state.id);
+    axios({
+      method: 'GET',
+      url: EndPoints.ReportBaseUrl + endPoint
+    }).then(async (response) => {
+      var result = await response.data.Items;
+      await this.setState({
+        Rank: {
+          isDataFetched: true,
+          Rank: result
+        }
+      });
+    }).catch(function (error) {
+      console.log(error);
+    });
   }
   //#endregion
 
@@ -826,13 +848,18 @@ class ClubCoutureScreen extends Component {
                           onSearchChange: this.onSearchChange.bind(this)
                         }}>
                         <TableHeaderColumn export={false} dataFormat={this.customerDetailsFormatter.bind(this)} dataAlign='center' width='30'></TableHeaderColumn>
-                        <TableHeaderColumn dataField='CustomerID' isKey={true} dataSort={true}>ID</TableHeaderColumn>
+                        <TableHeaderColumn dataField='CustomerID' csvHeader='Customer ID' isKey={true} dataSort={true}>ID</TableHeaderColumn>
                         <TableHeaderColumn dataField='CustomerName' dataSort={true}>Customer Name</TableHeaderColumn>
                         <TableHeaderColumn dataField='Email' dataSort={true}>Email</TableHeaderColumn>
                         <TableHeaderColumn dataField='Phone' searchable={true} dataSort={true}>Phone</TableHeaderColumn>
                         <TableHeaderColumn dataField='JoinDate' dataSort={true}>Join Date</TableHeaderColumn>
-                        <TableHeaderColumn dataField='CustomerStatusDescription' searchable={false} dataSort={true}>Status</TableHeaderColumn>
+                        <TableHeaderColumn dataField='CustomerStatusDescription' csvHeader='Status' searchable={false} dataSort={true}>Status</TableHeaderColumn>
+                        <TableHeaderColumn dataField='EndDate' hidden={true} export={true}>End Date</TableHeaderColumn>
+                        <TableHeaderColumn dataField='NumberShipmentsReceived' hidden={true} export={true}>NumberShipmentsReceived</TableHeaderColumn>
                         <TableHeaderColumn dataField='Address' dataSort={true}>Address</TableHeaderColumn>
+                        <TableHeaderColumn dataField='City' hidden={true} export={true}>City</TableHeaderColumn>
+                        <TableHeaderColumn dataField='State' hidden={true} export={true}>State</TableHeaderColumn>
+                        <TableHeaderColumn dataField='Country' hidden={true} export={true}>Country</TableHeaderColumn>
                       </BootstrapTable>
 
                       <div className="modal fade bd-example-modal-lg" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -859,7 +886,16 @@ class ClubCoutureScreen extends Component {
                                         {/* <img src="" class="avatar"></img> */}
                                       </div>
                                       <div className="col-sm-10">
-                                        <h3 className="Customerh3"><strong>{customerDetails.FirstName + " " + customerDetails.LastName}</strong> <small class="textmuted">#{customerDetails.CustomerID}</small><br></br>
+                                        <h3 className="Customerh3">
+                                          <strong>{customerDetails.FirstName + " " + customerDetails.LastName}</strong>
+                                          <small class="textmuted"> #{customerDetails.CustomerID}</small><br></br>
+                                          {customerDetails.Date1 ? (
+                                            <small class="textmuted">Join Date : {customerDetails.Date1.split('T')[0]}</small>
+                                          ) : null}
+                                          <br></br>
+                                          {this.state.isDistributor ? (
+                                            <small class="textmuted">LifetimeRank : {customerDetails.RankDescription}</small>
+                                          ) : null}
                                         </h3>
                                       </div>
                                     </div>
@@ -915,7 +951,7 @@ class ClubCoutureScreen extends Component {
                                               )}
                                           </div>
 
-                                          {this.state.isDistributor ? (
+                                          {this.state.isDistributor && !this.state.isLoadingDetails ? (
                                             <div className="col-sm-6 padiingt10">
                                               <label>Placement</label>
                                               <div className="well well-white no-border wellbg">
@@ -992,7 +1028,7 @@ class ClubCoutureScreen extends Component {
                                               )}
                                           </div>
 
-                                          {this.state.isDistributor ? (
+                                          {this.state.isDistributor && !this.state.isLoadingDetails ? (
                                             <div className="col-sm-6">
                                               <label>Actions</label>
                                               <div className="well well-white no-border wellbg">
@@ -1002,14 +1038,14 @@ class ClubCoutureScreen extends Component {
                                           ) : null}
                                         </div>
 
-                                        {this.state.isDistributor ? (
+                                        {this.state.isDistributor && !this.state.isLoadingDetails ? (
                                           <div className="row">
                                             <div className="col-sm-12 col-md-12">
                                               <label>Volumes</label>
                                               <div className="well well-white no-border">
                                                 <dl class="dl-metric no-margin">
                                                   <dt>Active</dt>
-                                                  <dd>{this.state.isActive ? <span class="text-success">1</span> : <span class="text-success">0</span>}</dd>
+                                                  <dd>{this.state.isActive ? <span class="text-success fa fa-check"></span> : <span class="text-success fa fa-times"></span>}</dd>
                                                   <dt>PV</dt>
                                                   <dd>{volumes.Volume2 ? <span class="text-success">{volumes.Volume2}</span> : <span class="text-success">0</span>}</dd>
                                                   <dt>CFPV Current</dt>
@@ -1056,33 +1092,14 @@ class ClubCoutureScreen extends Component {
                                                 </div>
                                               )
                                             })
-                                            : <center>Your team has no recent activity.</center>}
+                                            : <div style={{ padding: "20px" }}><center>Your team has no recent activity.</center></div>}
                                         </div> :
                                           <center><ReactLoading type="bars" color="#000" height={30} width={30} /></center>}
                                       </div>
 
                                       <div className={activeTab == 3 ? "tab-pane fade show active" : "tab-pane fade"} id="rank" role="tabpanel" aria-labelledby="rank-tab">
-                                        {Rank.isDataFetched ? <div>
-                                          <div className="panel panel-default panelmb25">
-                                            <div className="panel panel-default">
-                                              <div className="panel-body">
-                                                <div className="row">
-                                                  <div className="col-sm-12">
-                                                    <h3>No Rank</h3>
-                                                    <div className="metric metric-sm">
-                                                      <div className="metric-body text-info">0%</div>
-                                                      <div className="metric-title">
-                                                        Complete
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div>
-                                            </div>
-                                          </div>
-                                        </div> :
+                                        {Rank.isDataFetched ?
+                                          <RankQualificationDetails {...Rank.Rank} /> :
                                           <center><ReactLoading type="bars" color="#000" height={30} width={30} /></center>}
                                       </div>
 
@@ -1168,6 +1185,126 @@ export class MySearchPanel extends React.Component {
     return (
       <div style={{ margin: "10px" }}>
         {this.props.searchField}
+      </div>
+    );
+  }
+}
+
+export class RankQualificationDetails extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        {this.props.IsQualified ? (
+          <div className="panel panel-success">
+            <div className="panel-body">
+              <div className="text-center">
+                <strong className="lead text-success">QualifiedAs: {this.props.Rank.RankDescription}</strong>
+              </div>
+            </div>
+          </div>
+        ) : (
+            <div>
+              <div className="panel panel-default">
+                <div className="panel-body">
+                  <h3>{this.props.Rank.RankDescription ? this.props.Rank.RankDescription : "No Rank"}</h3>
+                  <div className="row">
+                    <div className="col-sm-4">
+                      <div className="metric metric-sm">
+                        <div className="metric-body text-info">{Math.round(this.props.TotalPercentComplete) + '%'}</div>
+                        <div className="metric-title">
+                          Complete
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-sm-8">
+                    </div>
+                  </div>
+                </div>
+                {/* {this.props.QualificationLegs.length == 1 ? (
+                  <div>
+                    <div className="panel-body">
+                      <h4> {this.props.Rank.RankDescription} </h4>
+                    </div>
+                    <div className="list-group">
+                      {this.props.QualificationLegs[0].Requirements.map((data, index) => {
+                        return (
+                          <RankRequirement key={index} {...data} />
+                        )
+                      })}
+                    </div>
+                  </div>
+                ) : null} */}
+
+              </div>
+              {this.props.QualificationLegs.length > 0 ? (
+                <div className="row">
+                  {this.props.QualificationLegs.map((data, index) => {
+                    return (<div key={index} className="col-sm-12">
+                      <div className="panel panel-default">
+                        <div className="panel-heading">
+                          <h4 className="panel-title">Qualification Requirements</h4>
+                        </div>
+                        <div className="list-group">
+                          {data.Requirements.map((requirement, i) => {
+                            return <RankRequirement key={i} {...requirement} />
+                          })}
+                        </div>
+                      </div>
+                    </div>)
+                  })}
+                </div>
+              ) : null}
+            </div>
+          )}
+      </div>
+    );
+  }
+}
+
+export class RankRequirement extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log(this.props);
+  }
+
+  render() {
+    return (
+      <div>
+        {this.props.IsQualified ? (
+          <div className="list-group-item">
+            <div className="media">
+              <div style={{ width: "18px", marginTop: "5px" }} className="media-object pull-left fa fa-check text-success"></div>
+              <div className="media-body">
+                {this.props.RequirementDescription}
+              </div>
+            </div>
+          </div>
+        ) : (
+            <div className="list-group-item">
+              <div className="media">
+                <div style={{ width: "18px", marginTop: "5px" }} className="media-object pull-left fa fa-times text-danger"></div>
+                <div className="media-body">
+                  {this.props.RequirementDescription}
+                  <div>
+                    {!this.props.IsBoolean ? (
+                      <div>
+                        <div className="space-10"></div>
+                        <div className="progress progress-sm no-margin">
+                          <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow={"" + this.props.RequiredToActualAsPercent + ""} aria-valuemin="0" aria-valuemax="100" style={{ width: "" + this.props.RequiredToActualAsPercent + "%" }}>
+                            <span class="sr-only">{this.props.RequiredToActualAsPercent + '% Complete'} </span>
+                          </div>
+                        </div>
+                        <small class="text-muted">{this.props.ActualValueAsDecimal + " of " + this.props.RequiredValueAsDecimal}  </small>
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
       </div>
     );
   }

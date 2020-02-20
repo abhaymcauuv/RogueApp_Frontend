@@ -113,6 +113,10 @@ const EndPoints = {
     Activity: {
         Url: `rogue/report/activity/{id}`,
         Method: 'GET'
+    },
+    Rank: {
+        Url: `rogue/report/rankadvancement/{id}`,
+        Method: 'GET'
     }
 }
 
