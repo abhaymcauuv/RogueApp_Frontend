@@ -71,7 +71,7 @@ class CustomersScreen extends Component {
   loadCustomers = () => {
     axios({
       method: 'POST',
-      url: EndPoints.ReportBaseUrl + EndPoints.Customer.Url,
+      url: EndPoints.Report.CustomerListUrl + EndPoints.Customer.Url,
       data: {
         CustomerID: customerId,
         PageSize: this.state.sizePerPage,
@@ -190,7 +190,7 @@ class CustomersScreen extends Component {
     if (this.state.isRemote) {
       axios({
         method: 'POST',
-        url: EndPoints.ReportBaseUrl + EndPoints.Customer.Url,
+        url: EndPoints.Report.CustomerListUrl + EndPoints.Customer.Url,
         data: {
           CustomerID: customerId,
           PageSize: 0,
@@ -276,7 +276,7 @@ class CustomersScreen extends Component {
     });
     axios({
       method: 'POST',
-      url: EndPoints.ReportBaseUrl + EndPoints.CustomerDetails.Url,
+      url: EndPoints.Report.CustomerListUrl + EndPoints.CustomerDetails.Url,
       data: {
         CustomerID: customerId,
         ID: row.CustomerID
@@ -304,7 +304,7 @@ class CustomersScreen extends Component {
   loadOrders = async () => {
     axios({
       method: 'POST',
-      url: EndPoints.ReportBaseUrl + EndPoints.OrderList.Url,
+      url: EndPoints.Report.CustomerListUrl + EndPoints.OrderList.Url,
       data: {
         CustomerID: customerId,
         ID: this.state.id,
@@ -433,7 +433,7 @@ class CustomersScreen extends Component {
   loadAutoOrders = async () => {
     axios({
       method: 'POST',
-      url: EndPoints.ReportBaseUrl + EndPoints.AutoOrderList.Url,
+      url: EndPoints.Report.CustomerListUrl + EndPoints.AutoOrderList.Url,
       data: {
         CustomerID: customerId,
         ID: this.state.id,

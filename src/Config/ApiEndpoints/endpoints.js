@@ -1,6 +1,9 @@
 const EndPoints = {
     CommissionBaseUrl: `http://localhost:6002/`,
-    ReportBaseUrl: `http://localhost:6003/`,
+    Report: {
+        CustomerListUrl: `http://localhost:6003/`,
+        ClubCoutureCustomer: `http://localhost:6004/`
+    },
     CommissionPeriodList: {
         Url: `rogue/commission/getcommissionperiodlist/{CustomerId}`,
         Method: 'GET'

@@ -91,7 +91,7 @@ class ClubCoutureScreen extends Component {
   loadClubCoutureCustomers = () => {
     axios({
       method: 'POST',
-      url: EndPoints.ReportBaseUrl + EndPoints.ClubCoutureCustomer.Url,
+      url: EndPoints.Report.ClubCoutureCustomer + EndPoints.ClubCoutureCustomer.Url,
       data: {
         CustomerID: customerId,
         PageSize: this.state.sizePerPage,
@@ -225,7 +225,7 @@ class ClubCoutureScreen extends Component {
     if (this.state.isRemote) {
       axios({
         method: 'POST',
-        url: EndPoints.ReportBaseUrl + EndPoints.ClubCoutureCustomer.Url,
+        url: EndPoints.Report.ClubCoutureCustomer + EndPoints.ClubCoutureCustomer.Url,
         data: {
           CustomerID: customerId,
           PageSize: 0,
@@ -345,7 +345,7 @@ class ClubCoutureScreen extends Component {
     });
     axios({
       method: 'POST',
-      url: EndPoints.ReportBaseUrl + EndPoints.CustomerDetails.Url,
+      url: EndPoints.Report.ClubCoutureCustomer + EndPoints.CustomerDetails.Url,
       data: {
         CustomerID: customerId,
         ID: row.CustomerID
@@ -391,7 +391,7 @@ class ClubCoutureScreen extends Component {
     let endPoint = EndPoints.Activity.Url.replace('{id}', this.state.id);
     axios({
       method: 'GET',
-      url: EndPoints.ReportBaseUrl + endPoint
+      url: EndPoints.Report.ClubCoutureCustomer + endPoint
     }).then(async (response) => {
       var result = await response.data.Items;
       this.setState({
@@ -420,7 +420,7 @@ class ClubCoutureScreen extends Component {
   loadOrders = async () => {
     axios({
       method: 'POST',
-      url: EndPoints.ReportBaseUrl + EndPoints.OrderList.Url,
+      url: EndPoints.Report.ClubCoutureCustomer + EndPoints.OrderList.Url,
       data: {
         CustomerID: customerId,
         ID: this.state.id,
@@ -550,7 +550,7 @@ class ClubCoutureScreen extends Component {
   loadAutoOrders = async () => {
     axios({
       method: 'POST',
-      url: EndPoints.ReportBaseUrl + EndPoints.AutoOrderList.Url,
+      url: EndPoints.Report.ClubCoutureCustomer + EndPoints.AutoOrderList.Url,
       data: {
         CustomerID: customerId,
         ID: this.state.id,
@@ -690,7 +690,7 @@ class ClubCoutureScreen extends Component {
   loadVolumes = async () => {
     axios({
       method: 'POST',
-      url: EndPoints.ReportBaseUrl + EndPoints.VolumeList.Url,
+      url: EndPoints.Report.ClubCoutureCustomer + EndPoints.VolumeList.Url,
       data: {
         ID: this.state.id,
         PageSize: this.state.Volume.sizePerPage,
@@ -796,7 +796,7 @@ class ClubCoutureScreen extends Component {
     let endPoint = EndPoints.Rank.Url.replace('{id}', this.state.id);
     axios({
       method: 'GET',
-      url: EndPoints.ReportBaseUrl + endPoint
+      url: EndPoints.Report.ClubCoutureCustomer + endPoint
     }).then(async (response) => {
       var result = await response.data.Items;
       await this.setState({
