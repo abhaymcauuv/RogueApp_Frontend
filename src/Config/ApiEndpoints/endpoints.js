@@ -41,7 +41,7 @@ const EndPoints = {
         }
     },
     Customer: {
-        Url: `rogue/report/customerlist`,
+        Url: `rogue/report/customer`,
         Method: 'POST',
         PostData: {
             CustomerID: 0,
@@ -88,7 +88,7 @@ const EndPoints = {
         }
     },
     ClubCoutureCustomer: {
-        Url: `rogue/report/clubcouturecustomerlist`,
+        Url: `rogue/report/clubcouturecustomer`,
         Method: 'POST',
         PostData: {
             CustomerID: 0,
