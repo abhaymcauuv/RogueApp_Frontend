@@ -4,6 +4,13 @@ const EndPoints = {
         CustomerListUrl: `http://localhost:6003/`,
         ClubCoutureCustomer: `http://localhost:6004/`
     },
+    Order: {
+        BaseUrl: `http://localhost:6005/`,
+        InventoryOrders: {
+            Url: `rogue/report/inventoryorders`,
+            Method: 'POST',
+        }
+    },
     CommissionPeriodList: {
         Url: `rogue/commission/getcommissionperiodlist/{CustomerId}`,
         Method: 'GET'
