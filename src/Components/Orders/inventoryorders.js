@@ -4,49 +4,11 @@ import PageFooter from '../footer';
 import axios from 'axios';
 import '../../styles/styles.css';
 import EndPoints from '../../Config/ApiEndpoints/endpoints';
+import ReactLoading from "react-loading";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import "react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
 
 let customerId = 967;
-
-var products = [
-  {
-    id: 1,
-    total: "Product1",
-    pv: 221.48,
-    type: "Shopping Cart",
-    status: "Shipped",
-    date_field: "2/17/2020"
-  },
-  {
-    id: 2,
-    total: "Product2",
-    pv: 421.78,
-    type: "Shopping Cart2",
-    status: "Shipped",
-    date_field: "3/12/2020"
-  },
-  {
-    id: 3,
-    total: "Product3",
-    pv: 321.21,
-    type: "Shopping Cart3",
-    status: "Shipped",
-    date_field: "4/14/2020"
-  },
-  {
-    id: 4,
-    total: "Product4",
-    pv: 121.40,
-    type: "Shopping Cart4",
-    status: "Shipped",
-    date_field: "3/20/2020"
-  }
-];
-
-function random() {
-  return parseInt(Math.random() * 10, 10) + 1;
-}
 
 class InventoryOrdersScreen extends Component {
   constructor() {
@@ -99,6 +61,166 @@ class InventoryOrdersScreen extends Component {
     });
   }
 
+  onPageChange = async (page, sizePerPage) => {
+    if (this.state.isRemote) {
+      await this.setState({
+        currentPage: page,
+        sizePerPage: sizePerPage,
+        isDataFetched: false,
+        OrderList: [],
+      });
+      this.loadOrders();
+    }
+    return;
+  }
+
+  onSortChange = async (sortName, sortOrder) => {
+    if (this.state.OrderList.length === 0) {
+      return;
+    }
+    if (this.state.isRemote) {
+      await this.setState({
+        isDataFetched: false,
+        OrderList: [],
+        sortName: sortName,
+        sortOrder: sortOrder
+      });
+      this.loadOrders();
+    }
+    else {
+      if (sortOrder === 'asc') {
+        this.state.OrderList.sort(function (a, b) {
+          if (a[sortName] > b[sortName]) {
+            return 1;
+          } else if (b[sortName] > a[sortName], 10) {
+            return -1;
+          }
+          return 0;
+        });
+      } else {
+        this.state.OrderList.sort(function (a, b) {
+          if (a[sortName] > b[sortName]) {
+            return -1;
+          } else if (b[sortName] > a[sortName]) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+      this.setState({
+        OrderList: this.state.OrderList
+      });
+    }
+  }
+
+  onSearchChange = async (searchText, colInfos, multiColumnSearch) => {
+    const text = searchText.trim();
+    if (this.state.isRemote) {
+      await this.setState({
+        isDataFetched: false,
+        OrderList: [],
+        sortName: '',
+        sortOrder: '',
+        currentPage: 1,
+        totalDataSize: 0,
+        searchData: text,
+        isCount: false
+      });
+      this.loadOrders();
+    } else {
+      return;
+    }
+  }
+
+  checkOrderFetchedData() {
+    if (this.state.isDataFetched) {
+      return "No records found";
+    } else {
+      return (
+        <center><ReactLoading type="bars" color="#000" height={30} width={30} /></center>
+      );
+    }
+  }
+
+  handleExportCSVButtonClick = async (onClick) => {
+    await this.setState({ isFetchingExportData: true });
+    if (this.state.isRemote) {
+      axios({
+        method: 'POST',
+        url: EndPoints.Order.BaseUrl + EndPoints.Order.InventoryOrders.Url,
+        data: {
+          CustomerID: customerId,
+          PageSize: 0,
+          PageNo: 0,
+          IsCount: true
+        }
+      }).then(async (response) => {
+        this.setState({ isRemote: false });
+        var result = await response.data.Items;
+        await this.setState({
+          OrderList: this.state.searchData ? this.state.OrderList : result.Orders,
+          isFetchingExportData: false,
+          totalDataSize: this.state.searchData ? this.state.totalDataSize : result.Orders.length,
+        });
+        this.setState({ isRemote: true });
+        onClick();
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+    else {
+      await this.setState({
+        isFetchingExportData: false
+      });
+      onClick();
+    }
+  }
+
+  createCustomExportCSVButton = (onClick) => {
+    return (
+      <button disabled={this.state.isFetchingExportData} style={{ margin: "10px" }} onClick={() => this.handleExportCSVButtonClick(onClick)} type="button" className="k-grid-excel btn btn-primary hidden-print"><i className="fa fa-download"></i> {this.state.isFetchingExportData ? 'Exporting..' : 'Export'}</button>
+    );
+  }
+
+  createCustomToolBar = props => {
+    return (
+      <div style={{ width: "100%" }}>
+        <div className='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+          {props.components.searchPanel}
+        </div>
+        <div style={{ textAlign: "right", float: "right" }} className='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
+          {props.components.btnGroup}
+        </div>
+      </div>
+    );
+  }
+
+  createCustomSearchField = (props) => {
+    return (
+      <SearchField
+        defaultValue={props.defaultValue}
+        placeholder={props.placeholder} />
+    );
+  }
+
+  orderDateFormatter(cell, row, data) {
+    if (row.OrderDate) {
+      let date = row.OrderDate.split('T');
+      return date[0];
+    }
+  }
+
+  orderTotalFormatter(cell, row, data) {
+    if (row.CurrencyCode) {
+      return `$` + Number(row.Total) + ` ` + row.CurrencyCode.toUpperCase();
+    }
+    return `$` + Number(row.Total);
+  }
+
+  orderPVFormatter(cell, row, data) {
+    return Number(row.PV) + ` PV`;
+  }
+
   render() {
     return (
       <div>
@@ -110,7 +232,6 @@ class InventoryOrdersScreen extends Component {
                 <h2 className="h2hdr">Inventory Orders</h2>
                 <div className="row">
                   <div className="col-sm-3">
-
                     <nav className="view-navigation">
                       <div className="panel-group">
                         <div className="panel panel-default no-border">
@@ -118,7 +239,7 @@ class InventoryOrdersScreen extends Component {
                             <div className="panel-title">
                               <a href="/#/inventoryorders" className="active">
                                 Inventory Orders
-                                </a>
+                              </a>
                             </div>
                           </div>
                         </div>
@@ -127,7 +248,7 @@ class InventoryOrdersScreen extends Component {
                             <div className="panel-title">
                               <a href="/#/">
                                 Personal Use Orders
-                                </a>
+                              </a>
                             </div>
                           </div>
                         </div>
@@ -136,7 +257,7 @@ class InventoryOrdersScreen extends Component {
                             <div className="panel-title">
                               <a href="/#/">
                                 Sales
-                                </a>
+                              </a>
                             </div>
                           </div>
                         </div>
@@ -168,45 +289,33 @@ class InventoryOrdersScreen extends Component {
                           </div>
 
                           <div id="InventoryOrders" className="container tab-pane active">
-
                             <div className="col-sm-12 textalignr textbpdng">All Orders Are Displayed In Mountain Standard Time</div>
                             <div className="panel panel-default panelmb50 clear" style={{ backgroundColor: "#ebf2ff" }}>
                               <div>
-                                {/* <div className="Inventorybg">
-                                  <button type="button" className="btn btn-primary hidden-print"><i className="fa fa-download"></i> Excel</button>
-                                </div> */}
-                                <BootstrapTable search={true} searchPlaceholder='Search Order By Order Number' remote={this.state.isRemote} data={this.state.OrderList} exportCSV={true} pagination={true}
+                                <BootstrapTable search={false} searchPlaceholder='Search Order By Order Number' remote={this.state.isRemote} data={this.state.OrderList} exportCSV={true} pagination={true}
                                   fetchInfo={{ dataTotalSize: this.state.totalDataSize }}
                                   options={{
                                     defaultSearch: '',
                                     searchDelayTime: 2000,
                                     sizePerPage: this.state.sizePerPage,
-                                    //onPageChange: this.onPageChange.bind(this),
+                                    onPageChange: this.onPageChange.bind(this),
                                     sizePerPageList: [5, 10, 20],
                                     page: this.state.currentPage,
-                                    // noDataText: this.checkOrderFetchedData(),
-                                    //onSortChange: this.onSortChange.bind(this),
-                                    //exportCSVBtn: this.createCustomExportCSVButton.bind(this),
-                                    //toolBar: this.createCustomToolBar.bind(this),
-                                    //searchPanel: (props) => (<MySearchPanel {...props} />),
-                                    // searchField: this.createCustomSearchField.bind(this),
-                                    //onSearchChange: this.onSearchChange.bind(this)
+                                    noDataText: this.checkOrderFetchedData(),
+                                    onSortChange: this.onSortChange.bind(this),
+                                    exportCSVBtn: this.createCustomExportCSVButton.bind(this),
+                                    toolBar: this.createCustomToolBar.bind(this),
+                                    searchPanel: (props) => (<MySearchPanel {...props} />),
+                                    searchField: this.createCustomSearchField.bind(this),
+                                    onSearchChange: this.onSearchChange.bind(this)
                                   }}>
                                   <TableHeaderColumn dataField='OrderID' isKey={true} dataSort={true}>Order Number</TableHeaderColumn>
-                                  <TableHeaderColumn dataField='Total' dataSort={true}>Total</TableHeaderColumn>
-                                  <TableHeaderColumn dataField='PV' dataSort={true}>PV</TableHeaderColumn>
+                                  <TableHeaderColumn dataField='Total' dataFormat={this.orderTotalFormatter.bind(this)} dataSort={true}>Total</TableHeaderColumn>
+                                  <TableHeaderColumn dataField='PV' dataFormat={this.orderPVFormatter.bind(this)} dataSort={true}>PV</TableHeaderColumn>
                                   <TableHeaderColumn dataField='TypeDescription' dataSort={false}>Type</TableHeaderColumn>
                                   <TableHeaderColumn dataField='StatusDescription' dataSort={false}>Status</TableHeaderColumn>
-                                  <TableHeaderColumn dataField='OrderDate' dataSort={true}>Order Date</TableHeaderColumn>
+                                  <TableHeaderColumn dataField='OrderDate' dataFormat={this.orderDateFormatter.bind(this)} dataSort={true}>Order Date</TableHeaderColumn>
                                 </BootstrapTable>
-                                {/* <BootstrapTable data={products} options={this.options} pagination>
-                                  <TableHeaderColumn dataField='id' isKey dataSort>Order Number</TableHeaderColumn>
-                                  <TableHeaderColumn dataField='total' dataSort>Total</TableHeaderColumn>
-                                  <TableHeaderColumn dataField='pv' dataSort>PV</TableHeaderColumn>
-                                  <TableHeaderColumn dataField='type' dataSort>Type</TableHeaderColumn>
-                                  <TableHeaderColumn dataField='status' dataSort>Status</TableHeaderColumn>
-                                  <TableHeaderColumn dataField='date_field' dataSort>Order Date</TableHeaderColumn>
-                                </BootstrapTable> */}
                               </div>
                             </div>
 
