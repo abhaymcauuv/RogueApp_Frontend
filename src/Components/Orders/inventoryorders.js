@@ -37,7 +37,7 @@ class InventoryOrdersScreen extends Component {
   loadOrders = () => {
     axios({
       method: 'POST',
-      url: EndPoints.Order.BaseUrl + EndPoints.Order.InventoryOrders.Url,
+      url: EndPoints.Order.InventoryOrders.Url,
       data: {
         CustomerID: customerId,
         PageSize: this.state.sizePerPage,
@@ -147,7 +147,7 @@ class InventoryOrdersScreen extends Component {
     if (this.state.isRemote) {
       axios({
         method: 'POST',
-        url: EndPoints.Order.BaseUrl + EndPoints.Order.InventoryOrders.Url,
+        url: EndPoints.Order.InventoryOrders.Url,
         data: {
           CustomerID: customerId,
           PageSize: 0,
@@ -237,7 +237,7 @@ class InventoryOrdersScreen extends Component {
                         <div className="panel panel-default no-border">
                           <div className="panel-heading active">
                             <div className="panel-title">
-                              <a href="/#/inventoryorders" className="active">
+                              <a href="/#/" className="active">
                                 Inventory Orders
                               </a>
                             </div>

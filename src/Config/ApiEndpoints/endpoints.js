@@ -5,9 +5,12 @@ const EndPoints = {
         ClubCoutureCustomer: `http://localhost:6004/`
     },
     Order: {
-        BaseUrl: `http://localhost:6005/`,
         InventoryOrders: {
-            Url: `rogue/report/inventoryorders`,
+            Url: `http://localhost:6005/rogue/report/inventoryorders`,
+            Method: 'POST',
+        },
+        PersonalUseOrders: {
+            Url: `http://localhost:6006/rogue/report/personaluseorders`,
             Method: 'POST',
         }
     },
