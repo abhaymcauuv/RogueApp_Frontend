@@ -10,7 +10,7 @@ import "react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
 
 let customerId = 967;
 
-class InventoryOrdersScreen extends Component {
+class PersonalUseOrdersScreen extends Component {
   constructor() {
     super();
     this.state = {
@@ -37,7 +37,7 @@ class InventoryOrdersScreen extends Component {
   loadOrders = () => {
     axios({
       method: 'POST',
-      url: EndPoints.Order.InventoryOrders.Url,
+      url: EndPoints.Order.PersonalUseOrders.Url,
       data: {
         CustomerID: customerId,
         PageSize: this.state.sizePerPage,
@@ -49,7 +49,6 @@ class InventoryOrdersScreen extends Component {
       }
     }).then(async (response) => {
       var result = await response.data.Items;
-      //console.log(result)
       await this.setState({
         totalDataSize: this.state.isCount ? this.state.totalDataSize : result.Count,
         OrderList: result.Orders,
@@ -147,7 +146,7 @@ class InventoryOrdersScreen extends Component {
     if (this.state.isRemote) {
       axios({
         method: 'POST',
-        url: EndPoints.Order.InventoryOrders.Url,
+        url: EndPoints.Order.PersonalUseOrders.Url,
         data: {
           CustomerID: customerId,
           PageSize: 0,
@@ -165,7 +164,7 @@ class InventoryOrdersScreen extends Component {
         this.setState({ isRemote: true });
         onClick();
       }).catch(function (error) {
-        //console.log(error);
+        console.log(error);
       });
     }
     else {
@@ -229,24 +228,24 @@ class InventoryOrdersScreen extends Component {
           <div className="row content">
             <div className="container">
               <div className="col-sm-12">
-                <h2 className="h2hdr">Inventory Orders</h2>
+                <h2 className="h2hdr">Personal Use Orders</h2>
                 <div className="row">
                   <div className="col-sm-3">
                     <nav className="view-navigation">
                       <div className="panel-group">
                         <div className="panel panel-default no-border">
-                          <div className="panel-heading active">
+                          <div className="panel-heading">
                             <div className="panel-title">
-                              <a className="active">
+                              <a href="/#/orders" >
                                 Inventory Orders
                               </a>
                             </div>
                           </div>
                         </div>
                         <div className="panel panel-default no-border">
-                          <div className="panel-heading ">
+                          <div className="panel-heading active">
                             <div className="panel-title">
-                              <a href="/#/personaluseorders">
+                              <a className="active">
                                 Personal Use Orders
                               </a>
                             </div>
@@ -272,11 +271,11 @@ class InventoryOrdersScreen extends Component {
                             <a className="nav-link" data-toggle="tab" href="#RecentOrders">Recent Orders</a>
                           </li>
                           <li className="nav-item">
-                            {/* <a className="nav-link " data-toggle="tab" href="#PersonalUseOrders">Personal Use Orders</a> */}
-                            <a className="nav-link" href="/#/personaluseorders">Personal Use Orders</a>
+                            <a className="nav-link active" data-toggle="tab" href="#PersonalUseOrders">Personal Use Orders</a>
                           </li>
                           <li className="nav-item">
-                            <a className="nav-link active" data-toggle="tab" href="#InventoryOrders">Inventory Orders</a>
+                            {/* <a className="nav-link" data-toggle="tab" href="#InventoryOrders">Inventory Orders</a> */}
+                            <a className="nav-link" href="/#/orders">Inventory Orders</a>
                           </li>
                         </ul>
 
@@ -285,11 +284,7 @@ class InventoryOrdersScreen extends Component {
                             <h3>Recent Orders</h3>
                           </div>
 
-                          <div id="PersonalUseOrders" className="container tab-pane">
-                            <h3>Personal Use Orders</h3>
-                          </div>
-
-                          <div id="InventoryOrders" className="container tab-pane active">
+                          <div id="PersonalUseOrders" className="container tab-pane active">
                             <div className="col-sm-12 textalignr textbpdng">All Orders Are Displayed In Mountain Standard Time</div>
                             <div className="panel panel-default panelmb50 clear" style={{ backgroundColor: "#ebf2ff" }}>
                               <div>
@@ -319,8 +314,12 @@ class InventoryOrdersScreen extends Component {
                                 </BootstrapTable>
                               </div>
                             </div>
-
                           </div>
+
+                          <div id="InventoryOrders" className="container tab-pane">
+                            <h3>Inventory Orders</h3>
+                          </div>
+
                         </div>
                       </div>
                     </div>
@@ -338,7 +337,7 @@ class InventoryOrdersScreen extends Component {
   }
 }
 
-export default InventoryOrdersScreen;
+export default PersonalUseOrdersScreen;
 
 export class MySearchPanel extends React.Component {
   render() {
