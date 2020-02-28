@@ -103,5 +103,15 @@
         "id": 21,
         "route": "/uninstall",
         "component_name": "./Plugins/uninstall"
+    },
+    {
+        "id": 22,
+        "route": "/orders",
+        "component_name": "./Orders/inventoryorders"
+    },
+    {
+        "id": 23,
+        "route": "/personaluseorders",
+        "component_name": "./Orders/personaluseorders"
     }
 ]

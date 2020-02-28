@@ -99,11 +99,11 @@
         "items": [
             {
                 "name": "Inventory Orders",
-                "link": "/"
+                "link": "/orders"
             },
             {
                 "name": "Personal Use Orders",
-                "link": "/"
+                "link": "/personaluseorders"
             },
             {
                 "name": "Sales",

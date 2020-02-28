@@ -1367,6 +1367,28 @@ tr:nth-child(odd) {background: #FFF}
 }
 
 
+.Inventorybg{
+    text-align: right;
+    padding: 5px;
+    background-color: #ebf2ff;
+}
+.textbpdng{
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #fff;
+    cursor: default;
+    background-color: #73afe6 !important;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+.nav-tabs {
+    border-bottom: none !important;
+}
+
+
 
 
 
