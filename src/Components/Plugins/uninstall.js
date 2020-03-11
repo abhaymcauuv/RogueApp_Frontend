@@ -14,7 +14,7 @@ class UninstallScreen extends Component {
   onDelete = (e) => {
     //console.log(e.target.value);
     const r = window.confirm("Do you really want to Uninstall ?");
-    if (r == true) { 
+    if (r == true) {
       console.log("Del Id", e.target.value)
       const formData = new FormData();
       formData.append("pluginId", e.target.value);
@@ -25,7 +25,7 @@ class UninstallScreen extends Component {
         timeout: 1000,
         maxContentLength: 200000
       };
-  
+
       axios.post("http://localhost:6006/rouge/plugin/uninstall", formData, config)
         .then(response => {
           alert("The file is successfully uploaded");
@@ -39,23 +39,25 @@ class UninstallScreen extends Component {
       <div>
         <div className="container-fluid">
           <HomeHeaderscreen />
-          <div className="row content">
-            <div className="container">
+          <div className="content">
+            <div className="">
               <div className="col-sm-12">
                 <h2 className="h2hdr">Plugin Uninstall</h2>
                 <div className="row">
-                  <PluginsLeftmenuscreen />
-                  <div className="col-md-9">
-                    {/* <form class="form-horizontal">
-                      <div class="form-group">
-                        <label class="control-label col-sm-2 formtext">Plugin Name :</label>
-                        <div class="col-sm-4">
-                          <input type="Install" class="form-control" placeholder="Plugin Name"></input>
+                  <div className="col-md-2">
+                    <PluginsLeftmenuscreen />
+                  </div>
+                  <div className="col-md-10">
+                    {/* <form className="form-horizontal">
+                      <div className="form-group">
+                        <label className="control-label col-sm-2 formtext">Plugin Name :</label>
+                        <div className="col-sm-4">
+                          <input type="Install" className="form-control" placeholder="Plugin Name"></input>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-4 tabletopm30">
-                          <button type="button" class="btn btn-primary btn-lg btn-block">Uninstall</button>
+                      <div className="form-group">
+                        <div className="col-sm-offset-2 col-sm-4 tabletopm30">
+                          <button type="button" className="btn btn-primary btn-lg btn-block">Uninstall</button>
                         </div>
                       </div>
                     </form> */}
@@ -76,8 +78,8 @@ class UninstallScreen extends Component {
                                   {/* <td><Link to="/"><i className="far fa-address-book"></i></Link></td> */}
                                   <td>{item.id}</td>
                                   <td>{item.name}</td>
-                                  <button type="button" class="btn btn-default btn-sm">
-                                    <li key={item.id} value={item.id} onClick={(e) => this.onDelete(e)} class="glyphicon glyphicon-trash"></li>
+                                  <button type="button" className="btn btn-default btn-sm">
+                                    <li key={item.id} value={item.id} onClick={(e) => this.onDelete(e)} className="glyphicon glyphicon-trash"></li>
                                   </button>
                                 </tr>
                               })

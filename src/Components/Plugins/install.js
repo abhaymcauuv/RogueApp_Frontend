@@ -69,33 +69,35 @@ class InstallScreen extends Component {
       <div>
         <div className="container-fluid">
           <HomeHeaderscreen />
-          <div className="row content">
-            <div className="container">
+          <div className="content">
+            <div className="">
               <div className="col-sm-12">
                 <h2 className="h2hdr">Plugin Install</h2>
                 <div className="row">
+                <div className="col-md-2">
                   <PluginsLeftmenuscreen />
-                  <div className="col-md-9">
-                    <form class="form-horizontal" onSubmit={this.submitForm} role="form">
-                      {/* <div class="form-group">
-                        <label class="control-label col-sm-2 formtext">Plugin Name :</label>
-                        <div class="col-sm-4">
-                          <input type="Install" class="form-control"  value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} placeholder="Plugin Name"></input>
+                  </div>
+                  <div className="col-md-10">
+                    <form className="form-horizontal" onSubmit={this.submitForm} role="form">
+                      {/* <div className="form-group">
+                        <label className="control-label col-sm-2 formtext">Plugin Name :</label>
+                        <div className="col-sm-4">
+                          <input type="Install" className="form-control"  value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} placeholder="Plugin Name"></input>
                         </div>
                       </div> */}
-                      <div class="form-group">
-                        <label class="control-label col-sm-2 formtext">Upload File :</label>
-                        <div class="col-sm-4">
-                          <div class="custom-file">
-                            <input type="file" onChange={(e) => this.setState({ file: e.target.files[0] })} class="custom-file-input" id="customFileLang" lang=""></input>
-                            <label class="custom-file-label" for="customFileLang">Choose File</label>
+                      <div className="form-group">
+                        <label className="control-label col-sm-2 formtext">Upload File :</label>
+                        <div className="col-sm-3">
+                          <div className="custom-file">
+                            <input type="file" onChange={(e) => this.setState({ file: e.target.files[0] })} className="custom-file-input" id="customFileLang" lang=""></input>
+                            <label className="custom-file-label" for="customFileLang">Choose File</label>
                           </div>
                         </div>
                       </div>
 
-                      <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-4 tabletopm30">
-                          <button type="submit" class="btn btn-primary btn-lg btn-block">Install</button>
+                      <div className="form-group">
+                        <div className="col-sm-offset-2 col-sm-3 tabletopm30">
+                          <button type="submit" className="btn btn-primary btn-lg btn-block">Install</button>
                         </div>
                       </div>
                     </form>

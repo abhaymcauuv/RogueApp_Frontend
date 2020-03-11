@@ -11,23 +11,25 @@ class NewDesignersListScreen extends Component {
       <div>
         <div className="container-fluid">
           <HomeHeaderscreen />
-          <div className="row content">
-            <div className="container">
+          <div className="content">
+            <div className="">
               <div className="col-sm-12">
                 <h2 className="h2hdr">New Designers List</h2>
-                <div className="row">
-                  <ReportLeftmenuscreen />
-                  <div className="col-md-9">
+                <div className="row pl10">
+                  <div className="col-md-2">
+                    <ReportLeftmenuscreen />
+                  </div>
+                  <div className="col-md-10">
                     <div className="panel panel-default panelmb50">
                       <div>
                         <table className="table table-bordered tablemrb">
-                          <thead>                           
+                          <thead>
                             <tr className="tdbg">
                               <th scope="col"></th>
                               <th scope="col">ID</th>
                               <th scope="col">First Name</th>
                               <th scope="col">Last Name</th>
-                              <th scope="col">Join Date</th>                              
+                              <th scope="col">Join Date</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -36,43 +38,43 @@ class NewDesignersListScreen extends Component {
                               <td>17050</td>
                               <td className="textalignr">Lindzi</td>
                               <td className="textalignr">Fitzwater</td>
-                              <td className="textalignr">1/3/2020</td>                             
+                              <td className="textalignr">1/3/2020</td>
                             </tr>
                             <tr>
                               <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>19893</td>
                               <td className="textalignr">McKenzie</td>
                               <td className="textalignr">Mitchell</td>
-                              <td className="textalignr">1/3/2020</td>                              
-                            </tr>    
-                            <tr className="tdbg">
-                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
-                              <td>17050</td>
-                              <td className="textalignr">Lindzi</td>
-                              <td className="textalignr">Fitzwater</td>
-                              <td className="textalignr">1/3/2020</td>                             
-                            </tr>
-                            <tr>
-                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
-                              <td>19893</td>
-                              <td className="textalignr">McKenzie</td>
-                              <td className="textalignr">Mitchell</td>
-                              <td className="textalignr">1/3/2020</td>                              
+                              <td className="textalignr">1/3/2020</td>
                             </tr>
                             <tr className="tdbg">
                               <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>17050</td>
                               <td className="textalignr">Lindzi</td>
                               <td className="textalignr">Fitzwater</td>
-                              <td className="textalignr">1/3/2020</td>                             
+                              <td className="textalignr">1/3/2020</td>
                             </tr>
                             <tr>
                               <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
                               <td>19893</td>
                               <td className="textalignr">McKenzie</td>
                               <td className="textalignr">Mitchell</td>
-                              <td className="textalignr">1/3/2020</td>                              
-                            </tr>                                                
+                              <td className="textalignr">1/3/2020</td>
+                            </tr>
+                            <tr className="tdbg">
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
+                              <td>17050</td>
+                              <td className="textalignr">Lindzi</td>
+                              <td className="textalignr">Fitzwater</td>
+                              <td className="textalignr">1/3/2020</td>
+                            </tr>
+                            <tr>
+                              <td><Link to="/"><i className="far fa-address-book"></i></Link></td>
+                              <td>19893</td>
+                              <td className="textalignr">McKenzie</td>
+                              <td className="textalignr">Mitchell</td>
+                              <td className="textalignr">1/3/2020</td>
+                            </tr>
 
                           </tbody>
                         </table>

@@ -11,11 +11,11 @@ class TreeViewerScreen extends Component {
       <div>
         <div className="container-fluid">
           <HomeHeaderscreen />
-          <div className="row content">
-            <div className="container">
+          <div className="content">
+            <div className="">
               <div className="col-sm-12">
                 <h2 className="h2hdr">Tree Viewer</h2>
-                <div className="row">                 
+                <div className="row pl10">                 
                 <div className="col-sm-12"></div>
                 </div>
               </div>

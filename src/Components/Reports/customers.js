@@ -229,7 +229,7 @@ class CustomersScreen extends Component {
   createCustomToolBar = props => {
     return (
       <div style={{ width: "100%" }}>
-        <div className='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+        <div className='col-xs-5 col-sm-5 col-md-5 col-lg-5'>
           {props.components.searchPanel}
         </div>
         <div style={{ textAlign: "right", float: "right" }} className='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
@@ -562,13 +562,15 @@ class CustomersScreen extends Component {
       <div>
         <div className="container-fluid">
           <HomeHeaderscreen />
-          <div className="row content">
-            <div className="container">
+          <div className="content">
+            <div className="">
               <div className="col-sm-12">
                 <h2 className="h2hdr">Customer List</h2>
-                <div className="row">
-                  <ReportLeftmenuscreen {...{ "name": "customers" }} />
-                  <div className="col-md-9">
+                <div className="row pl10">
+                  <div className="col-md-2">
+                    <ReportLeftmenuscreen {...{ "name": "customers" }} />
+                  </div>
+                  <div className="col-md-10">
                     <div className="panel panel-default panelmb50" style={{ backgroundColor: "#ebf2ff" }}>
                       <BootstrapTable search={true} searchPlaceholder='Search Customer' remote={this.state.isRemote} data={this.state.CustomerList} exportCSV={true} pagination={true}
                         fetchInfo={{ dataTotalSize: this.state.totalDataSize }}
@@ -617,10 +619,10 @@ class CustomersScreen extends Component {
                                     <div className="row">
                                       <div className="col-sm-2">
                                         <img className="img-fluid logopdng1 avatar" src="../src/images/profiles/14113.png" alt="logo"></img>
-                                        {/* <img src="" class="avatar"></img> */}
+                                        {/* <img src="" className="avatar"></img> */}
                                       </div>
                                       <div className="col-sm-10">
-                                        <h3 className="Customerh3"><strong>{customerDetails.FirstName + " " + customerDetails.LastName}</strong> <small class="textmuted">#{customerDetails.CustomerID}</small><br></br>
+                                        <h3 className="Customerh3"><strong>{customerDetails.FirstName + " " + customerDetails.LastName}</strong> <small className="textmuted">#{customerDetails.CustomerID}</small><br></br>
                                         </h3>
                                       </div>
                                     </div>

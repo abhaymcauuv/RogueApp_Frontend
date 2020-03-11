@@ -4,108 +4,100 @@ import '../styles/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'rc-menu/assets/index.css';
 
-export default class ReportLeftmenuscreen extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default class StoreLeftmenuscreen extends Component {
+
   render() {
     const BASE_URL = '#'
     return (
       <div>
-        <div className="">
+        <div>
           <nav className="view-navigation">
             <div className="panel-group leftmenuwd">
               <div className="panel panel-default no-border">
-                <div className={this.props.name == "customers" ? "panel-heading active" : "panel-heading"}>
+                <div className="panel-heading active">
                   <div className="panel-title">
-                    <a href="/#/customers"><i className="fa fa-address-card lmenuicon" aria-hidden="true"></i> Customer List</a>
-                  </div>
-                </div>
-              </div>
-              <div className="panel panel-default no-border">
-                <div className={this.props.name == "clubcouture" ? "panel-heading active" : "panel-heading"}>
-                  <div className="panel-title">
-                    <a href="/#/clubcouture"><i className="fa fa-address-book lmenuicon" aria-hidden="true"></i> Club Couture Customer</a>
-                  </div>
-                </div>
-              </div>
-              <div className="panel panel-default no-border">
-                <div className="panel-heading ">
-                  <div className="panel-title">
-                    <a href="/#/personallyenrolledteam"><i className="fa fa-users lmenuicon" aria-hidden="true"></i> Personally Enrolled Team</a>
+                    <a href="/#/WhatsNew" className="active"><i className="fa fa-star lmenuicon" aria-hidden="true"></i> What's New</a>
                   </div>
                 </div>
               </div>
               <div className="panel panel-default no-border">
                 <div className="panel-heading">
                   <div className="panel-title">
-                    <a href="/#/upcomingpromotions"><i className="fa fa-calendar-check lmenuicon" aria-hidden="true"></i> Upcoming Promotions</a>
+                    <a href="/#/roguetransfer" className="active"><i className="fa fa-handshake lmenuicon" aria-hidden="true"></i> Rogue Transfer™</a>
                   </div>
                 </div>
               </div>
               <div className="panel panel-default no-border">
                 <div className="panel-heading">
                   <div className="panel-title">
-                    <a href="/#/downlineorders"><i className="fa fa-sitemap lmenuicon" aria-hidden="true"></i> Downline's Orders</a>
+                    <a href="/#/roguepaste" className="active"><i className="fa fa-clipboard lmenuicon" aria-hidden="true"></i> Rogue Paste™</a>
                   </div>
                 </div>
               </div>
               <div className="panel panel-default no-border">
                 <div className="panel-heading">
                   <div className="panel-title">
-                    <a href="/#/newdesigners"><i className="fa fa-list-alt lmenuicon" aria-hidden="true"></i> New Designers List</a>
+                    <a href="/#/rogueink" className="active"><i className="fa fa-link lmenuicon" aria-hidden="true"></i> Rogue Ink™</a>
                   </div>
                 </div>
               </div>
               <div className="panel panel-default no-border">
                 <div className="panel-heading">
                   <div className="panel-title">
-                    <a href="/#/teamperformance"><i className="fas fa fa-user lmenuicon"></i> Team Performance</a>
+                    <a href="/#/surfaces" className="active"><i className="fa fa-clone lmenuicon" aria-hidden="true"></i> Surfaces </a>
                   </div>
                 </div>
               </div>
               <div className="panel panel-default no-border">
                 <div className="panel-heading">
                   <div className="panel-title">
-                    <a href="/#/recentactivity"><i className="fa fa-id-card lmenuicon" aria-hidden="true"></i> Recent Activity List</a>
+                    <a href="/#/accessories" className="active"><i className="fa fa-desktop lmenuicon" aria-hidden="true"></i> Accessories</a>
                   </div>
                 </div>
               </div>
               <div className="panel panel-default no-border">
                 <div className="panel-heading">
                   <div className="panel-title">
-                    <a href="/#/wattsoflovedonations"><i className="fa fa-heart lmenuicon" aria-hidden="true"></i> Watts of Love Donations</a>
+                    <a href="/#/businesssupplies" className="active"><i className="fa fa-cubes lmenuicon" aria-hidden="true"></i> Business Supplies</a>
                   </div>
                 </div>
               </div>
               <div className="panel panel-default no-border">
                 <div className="panel-heading">
                   <div className="panel-title">
-                    <a href="/#/treeviewer"><i className="fa fa-tree lmenuicon" aria-hidden="true"></i> Tree Viewer</a>
+                    <a href="/#/wattsoflove" className="active"><i className="fa fa-heart lmenuicon" aria-hidden="true"></i> Watts of Love</a>
                   </div>
                 </div>
               </div>
               <div className="panel panel-default no-border">
                 <div className="panel-heading">
                   <div className="panel-title">
-                    <a href="/#/titlepromotion"><i className="fa fa-tag lmenuicon" aria-hidden="true"></i> First Time Title Promotions</a>
+                    <a href="/#/promotional" className="active"><i className="fa fa-user lmenuicon" aria-hidden="true"></i> Promotional</a>
                   </div>
                 </div>
               </div>
               <div className="panel panel-default no-border">
                 <div className="panel-heading">
                   <div className="panel-title">
-                    <a href="/#/incentivetriptracker"><i className="fa fa-street-view lmenuicon" aria-hidden="true"></i> Incentive Trip Tracker</a>
+                    <a href="/#/specials" className="active"><i className="fa fa-podcast lmenuicon" aria-hidden="true"></i> Specials and Deals</a>
                   </div>
                 </div>
               </div>
               <div className="panel panel-default no-border">
                 <div className="panel-heading">
                   <div className="panel-title">
-                    <a href="/#/designerdebuttracker"><i className="fa fa-map-marker lmenuicon" aria-hidden="true"></i> Designer Debut Tracker</a>
+                    <a href="/#/lastchance" className="active"><i className="fa fa-bullhorn lmenuicon" aria-hidden="true"></i> Last Chance</a>
                   </div>
                 </div>
               </div>
+              <div className="panel panel-default no-border">
+                <div className="panel-heading">
+                  <div className="panel-title">
+                    <a href="/#/boxkit" className="active"><i className="fa fa-briefcase lmenuicon" aria-hidden="true"></i> Rogue Box™ Kit</a>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </nav>
 

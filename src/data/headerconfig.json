@@ -133,11 +133,11 @@
         "items": [
             {
                 "name": "Products",
-                "link": "/"
+                "link": "/products"
             },
             {
                 "name": "My Cart",
-                "link": "/"
+                "link": "/mycart"
             },
             {
                 "name": "Bulk Order",

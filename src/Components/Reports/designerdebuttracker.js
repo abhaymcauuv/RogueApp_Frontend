@@ -11,21 +11,23 @@ class DesignerDebutTrackerScreen extends Component {
       <div>
         <div className="container-fluid">
           <HomeHeaderscreen />
-          <div className="row content">
-            <div className="container">
+          <div className="content">
+            <div className="">
               <div className="col-sm-12">
                 <h2 className="h2hdr">Designer Debut Team Tracker</h2>
-                <div className="row">
-                  <ReportLeftmenuscreen />
-                  <div className="col-md-9">
-                  <div className="well-sm">
+                <div className="row pl10">
+                  <div className="col-md-2">
+                    <ReportLeftmenuscreen />
+                  </div>
+                  <div className="col-md-10">
+                    <div className="well-sm">
                       <button type="button" id="btnActive" className="btn btn-primary hidden-print">PARTICIPATING</button>
                     </div>
-                    <div className="checkbox cheboxpl">
+                    <div className="checkbox cheboxpl pl20">
                       <label>
                         <input type="checkbox" />  Include Closed Accounts
                           </label>
-                    </div>                   
+                    </div>
                     <div className="panel panel-default panelmb50">
                       <div>
                         <table className="table table-bordered tablemrb">

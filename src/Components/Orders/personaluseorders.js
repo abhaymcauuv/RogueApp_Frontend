@@ -225,19 +225,19 @@ class PersonalUseOrdersScreen extends Component {
       <div>
         <div className="container-fluid">
           <HomeHeaderscreen />
-          <div className="row content">
-            <div className="container">
+          <div className="content">
+            <div className="">
               <div className="col-sm-12">
                 <h2 className="h2hdr">Personal Use Orders</h2>
                 <div className="row">
-                  <div className="col-sm-3">
+                  <div className="col-sm-2">
                     <nav className="view-navigation">
-                      <div className="panel-group">
+                      <div className="panel-group leftmenuwd">
                         <div className="panel panel-default no-border">
                           <div className="panel-heading">
                             <div className="panel-title">
                               <a href="/#/orders" >
-                                Inventory Orders
+                              <i class="fa fa-list-alt lmenuicon" aria-hidden="true"></i> Inventory Orders
                               </a>
                             </div>
                           </div>
@@ -246,7 +246,7 @@ class PersonalUseOrdersScreen extends Component {
                           <div className="panel-heading active">
                             <div className="panel-title">
                               <a className="active">
-                                Personal Use Orders
+                              <i class="fa fa-list-ul lmenuicon" aria-hidden="true"></i> Personal Use Orders
                               </a>
                             </div>
                           </div>
@@ -255,7 +255,7 @@ class PersonalUseOrdersScreen extends Component {
                           <div className="panel-heading">
                             <div className="panel-title">
                               <a href="/#/">
-                                Sales
+                              <i class="fa fa-tags lmenuicon" aria-hidden="true"></i> Sales
                               </a>
                             </div>
                           </div>
@@ -263,9 +263,9 @@ class PersonalUseOrdersScreen extends Component {
                       </div>
                     </nav>
                   </div>
-                  <div className="col-md-9">
+                  <div className="col-md-10">
                     <div className="col-sm-12">
-                      <div className="container mt-3">
+                      <div className="">
                         <ul className="nav nav-tabs">
                           <li className="nav-item">
                             <a className="nav-link" data-toggle="tab" href="#RecentOrders">Recent Orders</a>
@@ -280,11 +280,11 @@ class PersonalUseOrdersScreen extends Component {
                         </ul>
 
                         <div className="tab-content">
-                          <div id="RecentOrders" className="container tab-pane">
+                          <div id="RecentOrders" className="tab-pane">
                             <h3>Recent Orders</h3>
                           </div>
 
-                          <div id="PersonalUseOrders" className="container tab-pane active">
+                          <div id="PersonalUseOrders" className="tab-pane active">
                             <div className="col-sm-12 textalignr textbpdng">All Orders Are Displayed In Mountain Standard Time</div>
                             <div className="panel panel-default panelmb50 clear" style={{ backgroundColor: "#ebf2ff" }}>
                               <div>
@@ -316,7 +316,7 @@ class PersonalUseOrdersScreen extends Component {
                             </div>
                           </div>
 
-                          <div id="InventoryOrders" className="container tab-pane">
+                          <div id="InventoryOrders" className="tab-pane">
                             <h3>Inventory Orders</h3>
                           </div>
 

@@ -206,7 +206,7 @@ export default class HomeHeaderscreen extends Component {
     const { children, overflowedIndicator } = this.state;
     return (
       <div>
-        <div className="container">
+        <div>
           <div className="row Header">
             <div className="col-md-12">
               <div className="row">
@@ -217,7 +217,6 @@ export default class HomeHeaderscreen extends Component {
                 </div>
                 <div className="col-md-6"></div>
                 <div className="col-md-3">
-
                   <div className="dropdown margintop-5">
                     <a className="dropdown-toggle" data-toggle="dropdown">
                       <img src="../src/images/profiles/jeff.png" className="avatar avatar-xs"></img> Jeff Boonmee <b className="caret"></b>
@@ -238,18 +237,20 @@ export default class HomeHeaderscreen extends Component {
                                 <h5>Jeff Boonmee</h5>
                                 <small className="text-muted">ID# 12345</small>
                                 <div className="space-10"></div>
-                                <a id="" href="/">View Profile</a>
+                                <div className="viewpro">
+                                <a href="/">View Profile</a>
+                                </div>
                               </div>
                             </div>
                           </div>
                           <div className="panel-footer">
                             <div className="row">
                               <div className="col-sm-6">
-                                <a href="/account/settings" className="btn btn-default btn-sm">Change settings</a>
+                              <button type="button" className="btn btn-primary btn-sm">Change settings</button>                               
                               </div>
                               <div className="col-sm-6">
-                                <Link to="/">
-                                  <a href="/#/home" className="btn btn-default btn-sm pull-right">Sign out</a>
+                                <Link to="/#/home">
+                                <button type="button" className="btn btn-primary btn-sm pull-right">Sign out</button>                                   
                                 </Link>
                               </div>
                             </div>
@@ -260,11 +261,10 @@ export default class HomeHeaderscreen extends Component {
                   </div>
                 </div>
               </div>
-
             </div>
             <div className="col-md-12">
-              <div className="row">
-                <div className="col-md-10 pr0">
+              <div>
+                <div className="col-md-11 pr0">
                   <div>
                     {this.props.updateChildrenAndOverflowedIndicator && <div>
                       <button onClick={this.toggleChildren}>toggle children</button>

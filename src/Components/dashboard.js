@@ -9,10 +9,9 @@ class DashboardScreen extends Component {
       <div>
         <div className="container-fluid">
           <HomeHeaderscreen />
-          <div className="row content">
-            <div className="container">
+          <div className="content">
+            <div>
               <div className="col-sm-12">
-
                 <div className="row padiingt10">
                   <div className="col-sm-6 col-md-4">
                     <div className="card card-default">
@@ -58,7 +57,7 @@ class DashboardScreen extends Component {
                   <div className="col-sm-6 col-md-4">
                     <div className="card card-default">
                       <div className="card-heading">
-                        <h3 className="card-title borderbtm">
+                        <h3 className="card-title">
                           Your Inventory Orders
                     </h3>
                       </div>
@@ -76,7 +75,7 @@ class DashboardScreen extends Component {
                                     <span className="text-muted">#876074</span>
                                   </div>
                                   <div className="col-xs-2">
-                                    <div className="text-right">
+                                    <div className="text-right pdt10">
                                       <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                     </div>
                                   </div>
@@ -96,7 +95,7 @@ class DashboardScreen extends Component {
                                     <span className="text-muted">#874130</span>
                                   </div>
                                   <div className="col-xs-2">
-                                    <div className="text-right">
+                                    <div className="text-right pdt10">
                                       <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                     </div>
                                   </div>
@@ -116,7 +115,7 @@ class DashboardScreen extends Component {
                                     <span className="text-muted">#873049</span>
                                   </div>
                                   <div className="col-xs-2">
-                                    <div className="text-right">
+                                    <div className="text-right pdt10">
                                       <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                     </div>
                                   </div>
@@ -136,7 +135,7 @@ class DashboardScreen extends Component {
                                     <span className="text-muted">#873035</span>
                                   </div>
                                   <div className="col-xs-2">
-                                    <div className="text-right">
+                                    <div className="text-right pdt10">
                                       <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                     </div>
                                   </div>

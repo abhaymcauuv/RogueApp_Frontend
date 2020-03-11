@@ -21,6 +21,9 @@ import IncentiveTripTrackerScreen from "./Reports/incentivetriptracker";
 import DesignerDebutTrackerScreen from "./Reports/designerdebuttracker";
 import InstallScreen from "./Plugins/install";
 import UninstallScreen from "./Plugins/uninstall";
+import ProductsScreen from "./Store/products";
+import MyCartScreen from "./Store/mycart";
+import DetailsScreen from "./Store/details";
 
 import { LazyLoadModule } from "../helpers/lazy";
 import myData from './../data/routeconfig.json';

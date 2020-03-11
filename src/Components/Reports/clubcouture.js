@@ -266,7 +266,7 @@ class ClubCoutureScreen extends Component {
   createCustomToolBar = props => {
     return (
       <div style={{ width: "100%" }}>
-        <div className='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+        <div className='col-xs-5 col-sm-5 col-md-5 col-lg-5'>
           {props.components.searchPanel}
         </div>
         <div style={{ textAlign: "right", float: "right" }} className='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
@@ -817,13 +817,15 @@ class ClubCoutureScreen extends Component {
       <div>
         <div className="container-fluid">
           <HomeHeaderscreen />
-          <div className="row content">
-            <div className="container">
+          <div className="content">
+            <div className="">
               <div className="col-sm-12">
                 <h2 className="h2hdr">Club Couture</h2>
-                <div className="row">
-                  <ReportLeftmenuscreen {...{ "name": "clubcouture" }} />
-                  <div className="col-md-9">
+                <div className="row pl10">
+                  <div className="col-md-2">
+                    <ReportLeftmenuscreen {...{ "name": "clubcouture" }} />
+                  </div>
+                  <div className="col-md-10">
                     <div className="checkbox cheboxpl">
                       <label>
                         <input type="checkbox" onChange={this.includeClosedAccountsChecked.bind(this)} /> Include Cancelled/Paused Customers
@@ -883,18 +885,18 @@ class ClubCoutureScreen extends Component {
                                     <div className="row">
                                       <div className="col-sm-2">
                                         <img className="img-fluid logopdng1 avatar" src="../src/images/profiles/14113.png" alt="logo"></img>
-                                        {/* <img src="" class="avatar"></img> */}
+                                        {/* <img src="" className="avatar"></img> */}
                                       </div>
                                       <div className="col-sm-10">
                                         <h3 className="Customerh3">
                                           <strong>{customerDetails.FirstName + " " + customerDetails.LastName}</strong>
-                                          <small class="textmuted"> #{customerDetails.CustomerID}</small><br></br>
+                                          <small className="textmuted"> #{customerDetails.CustomerID}</small><br></br>
                                           {customerDetails.Date1 ? (
-                                            <small class="textmuted">Join Date : {customerDetails.Date1.split('T')[0]}</small>
+                                            <small className="textmuted">Join Date : {customerDetails.Date1.split('T')[0]}</small>
                                           ) : null}
                                           <br></br>
                                           {this.state.isDistributor ? (
-                                            <small class="textmuted">LifetimeRank : {customerDetails.RankDescription}</small>
+                                            <small className="textmuted">LifetimeRank : {customerDetails.RankDescription}</small>
                                           ) : null}
                                         </h3>
                                       </div>
@@ -955,7 +957,7 @@ class ClubCoutureScreen extends Component {
                                             <div className="col-sm-6 padiingt10">
                                               <label>Placement</label>
                                               <div className="well well-white no-border wellbg">
-                                                <dl class="dl-metric no-margin">
+                                                <dl className="dl-metric no-margin">
                                                   <dt>Placement</dt>
                                                   <dd>{JSON.stringify(sponsorDetails) !== JSON.stringify({}) ? (<span>
                                                     {sponsorDetails.FirstName + " " + sponsorDetails.LastName} ({sponsorDetails.CustomerID})
@@ -1043,31 +1045,31 @@ class ClubCoutureScreen extends Component {
                                             <div className="col-sm-12 col-md-12">
                                               <label>Volumes</label>
                                               <div className="well well-white no-border">
-                                                <dl class="dl-metric no-margin">
+                                                <dl className="dl-metric no-margin">
                                                   <dt>Active</dt>
-                                                  <dd>{this.state.isActive ? <span class="text-success fa fa-check"></span> : <span class="text-success fa fa-times"></span>}</dd>
+                                                  <dd>{this.state.isActive ? <span className="text-success fa fa-check"></span> : <span className="text-success fa fa-times"></span>}</dd>
                                                   <dt>PV</dt>
-                                                  <dd>{volumes.Volume2 ? <span class="text-success">{volumes.Volume2}</span> : <span class="text-success">0</span>}</dd>
+                                                  <dd>{volumes.Volume2 ? <span className="text-success">{volumes.Volume2}</span> : <span className="text-success">0</span>}</dd>
                                                   <dt>CFPV Current</dt>
-                                                  <dd>{volumes.Volume3 ? <span class="text-success">{volumes.Volume3}</span> : <span class="text-success">0</span>}</dd>
+                                                  <dd>{volumes.Volume3 ? <span className="text-success">{volumes.Volume3}</span> : <span className="text-success">0</span>}</dd>
                                                   <dt>CFPV Previous</dt>
-                                                  <dd>{volumes.Volume4 ? <span class="text-success">{volumes.Volume4}</span> : <span class="text-success">0</span>}</dd>
+                                                  <dd>{volumes.Volume4 ? <span className="text-success">{volumes.Volume4}</span> : <span className="text-success">0</span>}</dd>
                                                   <dt>TV</dt>
-                                                  <dd>{volumes.Volume5 ? <span class="text-success">{volumes.Volume5}</span> : <span class="text-success">0</span>}</dd>
+                                                  <dd>{volumes.Volume5 ? <span className="text-success">{volumes.Volume5}</span> : <span className="text-success">0</span>}</dd>
                                                   <dt>EV</dt>
-                                                  <dd>{volumes.Volume6 ? <span class="text-success">{volumes.Volume6}</span> : <span class="text-success">0</span>}</dd>
+                                                  <dd>{volumes.Volume6 ? <span className="text-success">{volumes.Volume6}</span> : <span className="text-success">0</span>}</dd>
                                                   <dt>PSQ</dt>
-                                                  <dd>{volumes.Volume7 ? <span class="text-success">{volumes.Volume7}</span> : <span class="text-success">0</span>}</dd>
+                                                  <dd>{volumes.Volume7 ? <span className="text-success">{volumes.Volume7}</span> : <span className="text-success">0</span>}</dd>
                                                   <dt>Level 1 Mentors</dt>
-                                                  <dd>{volumes.Volume8 ? <span class="text-success">{volumes.Volume8}</span> : <span class="text-success">0</span>}</dd>
+                                                  <dd>{volumes.Volume8 ? <span className="text-success">{volumes.Volume8}</span> : <span className="text-success">0</span>}</dd>
                                                   <dt>Unilevel Master Mentor Legs</dt>
-                                                  <dd>{volumes.Volume9 ? <span class="text-success">{volumes.Volume9}</span> : <span class="text-success">0</span>}</dd>
+                                                  <dd>{volumes.Volume9 ? <span className="text-success">{volumes.Volume9}</span> : <span className="text-success">0</span>}</dd>
                                                   <dt>Unilevel Couturier Legs</dt>
-                                                  <dd>{volumes.Volume10 ? <span class="text-success">{volumes.Volume10}</span> : <span class="text-success">0</span>}</dd>
+                                                  <dd>{volumes.Volume10 ? <span className="text-success">{volumes.Volume10}</span> : <span className="text-success">0</span>}</dd>
                                                   <dt>Unilevel Executive Couturier Legs</dt>
-                                                  <dd>{volumes.Volume11 ? <span class="text-success">{volumes.Volume11}</span> : <span class="text-success">0</span>}</dd>
+                                                  <dd>{volumes.Volume11 ? <span className="text-success">{volumes.Volume11}</span> : <span className="text-success">0</span>}</dd>
                                                   <dt>Designer Dollars Earned</dt>
-                                                  <dd>{volumes.Volume12 ? <span class="text-success">{volumes.Volume12}</span> : <span class="text-success">0</span>}</dd>
+                                                  <dd>{volumes.Volume12 ? <span className="text-success">{volumes.Volume12}</span> : <span className="text-success">0</span>}</dd>
                                                 </dl>
                                               </div>
                                             </div>
@@ -1083,12 +1085,12 @@ class ClubCoutureScreen extends Component {
                                               return (
                                                 <div key={index}>
                                                   <span>{data.Text}</span><br />
-                                                  <div class="text-muted text-sm">
-                                                    <ul class="list-unstyled list-inline no-margin">
-                                                      <li><i class="fa-calendar"></i> {data.EntryDate}</li>
+                                                  <div className="text-muted text-sm">
+                                                    <ul className="list-unstyled list-inline no-margin">
+                                                      <li><i className="fa-calendar"></i> {data.EntryDate}</li>
                                                     </ul>
                                                   </div>
-                                                  <div class="space-20"></div>
+                                                  <div className="space-20"></div>
                                                 </div>
                                               )
                                             })
@@ -1294,10 +1296,10 @@ export class RankRequirement extends React.Component {
                         <div className="space-10"></div>
                         <div className="progress progress-sm no-margin">
                           <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow={"" + this.props.RequiredToActualAsPercent + ""} aria-valuemin="0" aria-valuemax="100" style={{ width: "" + this.props.RequiredToActualAsPercent + "%" }}>
-                            <span class="sr-only">{this.props.RequiredToActualAsPercent + '% Complete'} </span>
+                            <span className="sr-only">{this.props.RequiredToActualAsPercent + '% Complete'} </span>
                           </div>
                         </div>
-                        <small class="text-muted">{this.props.ActualValueAsDecimal + " of " + this.props.RequiredValueAsDecimal}  </small>
+                        <small className="text-muted">{this.props.ActualValueAsDecimal + " of " + this.props.RequiredValueAsDecimal}  </small>
                       </div>
                     ) : null}
                   </div>

@@ -10,7 +10,7 @@ export default class PluginsLeftmenuscreen extends Component {
     const BASE_URL = '#'
     return (
       <div>
-        <div className="container">
+        <div className="">
           <nav className="view-navigation">
             <div className="panel-group">
               <div className="panel panel-default no-border leftmenuwd">

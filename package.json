@@ -11,6 +11,7 @@
   "author": "Surendra",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^4.9.5",
     "axios": "^0.19.1",
     "bootstrap": "^4.3.1",
     "clsx": "^1.0.4",
@@ -31,6 +32,8 @@
     "react-dom": "^16.11.0",
     "react-export-excel": "^0.5.3",
     "react-flags-select": "^1.1.10",
+    "react-image-gallery": "^1.0.6",
+    "react-image-magnify": "^2.7.4",
     "react-loading": "^2.0.3",
     "react-router-dom": "^5.1.2",
     "single-spa": "^4.4.1",

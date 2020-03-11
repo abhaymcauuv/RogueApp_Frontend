@@ -312,19 +312,19 @@ class CommissionsScreen extends Component {
       <div>
         <div className="container-fluid">
           <HomeHeaderscreen />
-          <div className="row content">
-            <div className="container">
+          <div className="content">
+            <div className="">
               <div className="col-sm-12">
                 <h2 className="h2hdr">Commissions</h2>
                 <div className="row">
-                  <div className="col-sm-3">
+                  <div className="col-md-2">
                     <nav className="view-navigation">
-                      <div className="panel-group">
+                      <div className="panel-group leftmenuwd">
                         <div className="panel panel-default no-border">
                           <div className="panel-heading active">
                             <div className="panel-title">
                               <a href="/#/commissions" className="active">
-                                <i class="fa fa-podcast lmenuicon" aria-hidden="true"></i> Commissions
+                                <i className="fa fa-podcast lmenuicon" aria-hidden="true"></i> Commissions
                               </a>
                             </div>
                           </div>
@@ -333,7 +333,7 @@ class CommissionsScreen extends Component {
                           <div className="panel-heading ">
                             <div className="panel-title">
                               <a href="/#/rank" className="">
-                                <i class="fa fa-star lmenuicon" aria-hidden="true"></i> Rank Advancement
+                                <i className="fa fa-star lmenuicon" aria-hidden="true"></i> Rank Advancement
                               </a>
                             </div>
                           </div>
@@ -342,7 +342,7 @@ class CommissionsScreen extends Component {
                           <div className="panel-heading ">
                             <div className="panel-title">
                               <a href="/#/volumes" className="">
-                                <i class="fa fa-file lmenuicon"></i> Volumes
+                                <i className="fa fa-file lmenuicon"></i> Volumes
                               </a>
                             </div>
                           </div>
@@ -350,7 +350,7 @@ class CommissionsScreen extends Component {
                       </div>
                     </nav>
                   </div>
-                  <div className="col-md-9">
+                  <div className="col-md-10">
                     <div className="well well-sm">
                       <div className="row">
                         <div className="col-sm-12">

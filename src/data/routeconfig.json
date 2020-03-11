@@ -113,5 +113,21 @@
         "id": 23,
         "route": "/personaluseorders",
         "component_name": "./Orders/personaluseorders"
+    },
+    {
+        "id": 24,
+        "route": "/products",
+        "component_name": "./Store/products"
+    },
+    {
+        "id": 25,
+        "route": "/details",
+        "component_name": "./Store/details"
+    },
+    {
+        "id": 26,
+        "route": "/mycart",
+        "component_name": "./Store/mycart"
     }
 ]
+

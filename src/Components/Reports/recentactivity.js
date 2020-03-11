@@ -41,13 +41,15 @@ class RecentActivityScreen extends Component {
       <div>
         <div className="container-fluid">
           <HomeHeaderscreen />
-          <div className="row content">
-            <div className="container">
+          <div className="content">
+            <div className="">
               <div className="col-sm-12">
                 <h2 className="h2hdr">Your Team's Recent Activity</h2>
-                <div className="row">
-                  <ReportLeftmenuscreen />
-                  <div className="col-md-9">
+                <div className="row pl10">
+                <div className="col-md-2">
+                    <ReportLeftmenuscreen />
+                  </div>
+                  <div className="col-md-10">
                     <ul className="list-group">
                     {this.state.ActivityData.map((val, i)=>{
                         return( <li className="list-group-item">

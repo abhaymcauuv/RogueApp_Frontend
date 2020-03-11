@@ -11,13 +11,15 @@ class TitlePromotionsScreen extends Component {
       <div>
         <div className="container-fluid">
           <HomeHeaderscreen />
-          <div className="row content">
-            <div className="container">
+          <div className="content">
+            <div className="">
               <div className="col-sm-12">
                 <h2 className="h2hdr">First Time Title Promotions</h2>
-                <div className="row">
-                  <ReportLeftmenuscreen />
-                  <div className="col-md-9">
+                <div className="row pl10">
+                  <div className="col-md-2">
+                    <ReportLeftmenuscreen />
+                  </div>
+                  <div className="col-md-10">
                     <div className="panel panel-default panelmb50">
                       <div>
                         <table className="table table-bordered tablemrb">
@@ -64,7 +66,7 @@ class TitlePromotionsScreen extends Component {
                               <td className="textalignr">240</td>
                               <td className="textalignr">0</td>
                               <td className="textalignr">3/16/2018</td>
-                            </tr>                            
+                            </tr>
 
                           </tbody>
                         </table>

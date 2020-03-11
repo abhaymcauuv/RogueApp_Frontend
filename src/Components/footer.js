@@ -9,8 +9,8 @@ export default class PageFooter extends Component {
   render() {   
     return (
       <div>
-         <div className="row">
-            <div className="col-md-12 Footer" onClick = {this.props.handler}>Copyright © 2019 Rogue All Rights Reserved</div>
+         <div className="row">         
+            <div className="col-md-12 Footer" onClick = {this.props.handler}>Copyright © {new Date().getFullYear()} Rogue All Rights Reserved</div>
           </div>
       </div>
     )

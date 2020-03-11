@@ -17,16 +17,16 @@ class HomeScreen extends Component {
     return (
       <div>
         <div className="container-fluid">
-          <div className="row content">
-            <div className="container">
+          <div className="content">
+            <div className="">
               <div className="row">
                 <div className="col-sm-4"> </div>
                 <div className="col-sm-4">
                   <div className="loginform">
                     <form>
-                      <h2 className="text-center">
-                      <img className="img-fluid logopdng1" src="../src/images/logo.png" alt="logo"></img>
-                      </h2>
+                      <div className="text-center">
+                      <img className="logopdng1 pl0 pr0" src="../src/images/rogue_logo.png" alt="logo"></img>
+                      </div>
                       <div className="form-group">
                         <input type="text" className="form-control forminput" placeholder="Username" required="required"></input>
                       </div>

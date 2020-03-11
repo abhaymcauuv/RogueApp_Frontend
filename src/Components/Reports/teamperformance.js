@@ -49,9 +49,9 @@ class TeamPerformanceScreen extends Component {
     await this.setState({ PageNumber: Number(e.target.text) });
     await this.ReloadGridData()
   }
-  pageChange= async (e) => {
+  pageChange = async (e) => {
 
-    let pgNo = this.state.PageNumber+e <=0?1:this.state.PageNumber+e;
+    let pgNo = this.state.PageNumber + e <= 0 ? 1 : this.state.PageNumber + e;
     await this.setState({ PageNumber: pgNo });
     await this.ReloadGridData()
   }
@@ -79,9 +79,9 @@ class TeamPerformanceScreen extends Component {
 
   paginationRecords = () => {
     const paging = [];
-    let count=Math.ceil(this.state.TotalRecord/10);
+    let count = Math.ceil(this.state.TotalRecord / 10);
     for (var i = 1; i <= count; i++) {
-     paging.push(<li className="page-item" key={i}><a className="page-link" key={i} onClick={(val) => this.pageChanged(val)}>{i}</a></li>)
+      paging.push(<li className="page-item" key={i}><a className="page-link" key={i} onClick={(val) => this.pageChanged(val)}>{i}</a></li>)
     }
     return paging;
   }
@@ -91,17 +91,19 @@ class TeamPerformanceScreen extends Component {
       <div>
         <div className="container-fluid">
           <HomeHeaderscreen />
-          <div className="row content">
-            <div className="container">
+          <div className="content">
+            <div className="">
               <div className="col-sm-12">
                 <h2 className="h2hdr">Team Performance</h2>
-                <div className="row">
-                  <ReportLeftmenuscreen />
-                  <div className="col-md-9">
+                <div className="row pl10">
+                  <div className="col-md-2">
+                    <ReportLeftmenuscreen />
+                  </div>
+                  <div className="col-md-10">
                     <div>
                       <div className="well well-sm">
                         <div className="row">
-                          <div className="col-sm-12">
+                          <div className="col-sm-5">
                             <div className="input-group">
                               <span className="input-group-btn">
                                 <button className="btn btn-default" type="button"><i className="fa fa-chevron-left"></i></button>
@@ -122,7 +124,7 @@ class TeamPerformanceScreen extends Component {
                         </div>
                       </div>
                     </div>
-                    <div className="checkbox cheboxpl">
+                    <div className="checkbox cheboxpl pl20">
                       <label>
                         <input type="checkbox" checked={this.state.isInactive} onChange={(val) => this.toggleCheckbox(val)} />  Include Closed Accounts
                           </label>
@@ -170,7 +172,7 @@ class TeamPerformanceScreen extends Component {
                             <nav aria-label="Page navigation example">
                               <ul className="pagination">
                                 <li className="page-item">
-                                  <a className="page-link" href="javascript:void(0);"  onClick={() => this.pageChange(-1)} aria-label="Previous">
+                                  <a className="page-link" href="javascript:void(0);" onClick={() => this.pageChange(-1)} aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                     <span className="sr-only">Previous</span>
                                   </a>
@@ -191,7 +193,7 @@ class TeamPerformanceScreen extends Component {
                             </nav>
                           </div>
                           <div className="col-sm-3 paddingt10">
-                            <span className="k-pager-info k-label">{this.state.TotalRecord ==0?0:(this.state.PageNumber-1)*10+1} - {this.state.TotalRecord==0?0:this.state.PageNumber*10} of {this.state.TotalRecord} items</span>
+                            <span className="k-pager-info k-label">{this.state.TotalRecord == 0 ? 0 : (this.state.PageNumber - 1) * 10 + 1} - {this.state.TotalRecord == 0 ? 0 : this.state.PageNumber * 10} of {this.state.TotalRecord} items</span>
                           </div>
 
                         </div>

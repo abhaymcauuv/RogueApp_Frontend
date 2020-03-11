@@ -11,17 +11,19 @@ class IncentiveTripTrackerScreen extends Component {
       <div>
         <div className="container-fluid">
           <HomeHeaderscreen />
-          <div className="row content">
-            <div className="container">
+          <div className="content">
+            <div className="">
               <div className="col-sm-12">
                 <h2 className="h2hdr">Incentive Trip Tracker</h2>
-                <div className="row">
-                  <ReportLeftmenuscreen />
-                  <div className="col-md-9">
+                <div className="row pl10">
+                  <div className="col-md-2">
+                    <ReportLeftmenuscreen />
+                  </div>
+                  <div className="col-md-10">
                     <div>
                       <div className="well well-sm">
                         <div className="row">
-                          <div className="col-sm-12">
+                          <div className="col-sm-6">
                             <div className="input-group">
                               <span className="input-group-btn">
                                 <button className="btn btn-default" type="button"><i className="fa fa-chevron-left"></i></button>
