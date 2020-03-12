@@ -310,10 +310,12 @@ class CommissionsScreen extends Component {
 
     return (
       <div>
-        <div className="container-fluid">
+        <div className="col-sm-12">
           <HomeHeaderscreen />
+        </div>
+        <div className="container-fluid page_container">
           <div className="content">
-            <div className="">
+            <div>
               <div className="col-sm-12">
                 <h2 className="h2hdr">Commissions</h2>
                 <div className="row">
@@ -332,7 +334,7 @@ class CommissionsScreen extends Component {
                         <div className="panel panel-default no-border">
                           <div className="panel-heading ">
                             <div className="panel-title">
-                              <a href="/#/rank" className="">
+                              <a href="/#/rank">
                                 <i className="fa fa-star lmenuicon" aria-hidden="true"></i> Rank Advancement
                               </a>
                             </div>
@@ -341,7 +343,7 @@ class CommissionsScreen extends Component {
                         <div className="panel panel-default no-border">
                           <div className="panel-heading ">
                             <div className="panel-title">
-                              <a href="/#/volumes" className="">
+                              <a href="/#/volumes">
                                 <i className="fa fa-file lmenuicon"></i> Volumes
                               </a>
                             </div>
@@ -351,390 +353,393 @@ class CommissionsScreen extends Component {
                     </nav>
                   </div>
                   <div className="col-md-10">
-                    <div className="well well-sm">
-                      <div className="row">
-                        <div className="col-sm-12">
-                          {!IsLoadingPeriodList ? (
-                            <div className="input-group">
-                              <span className="input-group-btn">
-                                <button className="btn btn-default" type="button"><i className="fa fa-angle-left" aria-hidden="true"></i></button>
-                              </span>
+                    <div className="gridlpdng">
+                      <div className="well well-sm">
+                        <div className="row">
+                          <div className="col-sm-12">
+                            {!IsLoadingPeriodList ? (
+                              <div className="input-group">
+                                <span className="input-group-btn">
+                                  <button className="btn btn-default" type="button"><i className="fa fa-angle-left" aria-hidden="true"></i></button>
+                                </span>
 
-                              <select value={this.state.selectedPeriod} onChange={(e) => this.handleSelectedChange(e.target.value)} id="periodchoice" className="form-control">
-                                {CommissionPeriodList.length > 0 ? (
-                                  CommissionPeriodList.map((data, index) => {
-                                    return (
-                                      <option key={index} value={data.RunID + "-" + data.Period.PeriodID + "-" + data.Period.PeriodTypeID + "-" + data.CommissionType}> {"Current Commissions - " + data.Period.PeriodDescription} {"(" + data.Period.StartDate.split('T')[0] + " - " + data.Period.EndDate.split('T')[0] + ")"}</option>
-                                    )
-                                  })
-                                ) : (
-                                    <option value=""></option>
-                                  )}
-                              </select>
+                                <select value={this.state.selectedPeriod} onChange={(e) => this.handleSelectedChange(e.target.value)} id="periodchoice" className="form-control">
+                                  {CommissionPeriodList.length > 0 ? (
+                                    CommissionPeriodList.map((data, index) => {
+                                      return (
+                                        <option key={index} value={data.RunID + "-" + data.Period.PeriodID + "-" + data.Period.PeriodTypeID + "-" + data.CommissionType}> {"Current Commissions - " + data.Period.PeriodDescription} {"(" + data.Period.StartDate.split('T')[0] + " - " + data.Period.EndDate.split('T')[0] + ")"}</option>
+                                      )
+                                    })
+                                  ) : (
+                                      <option value=""></option>
+                                    )}
+                                </select>
 
-                              <span className="input-group-btn">
-                                <button className="btn btn-default" type="button"><i className="fa fa-angle-right" aria-hidden="true"></i></button>
-                              </span>
-                            </div>
-                          ) :
-                            <center>
-                              <ReactLoading type="bars" color="#000" height={30} width={30} />
-                            </center>
-                          }
+                                <span className="input-group-btn">
+                                  <button className="btn btn-default" type="button"><i className="fa fa-angle-right" aria-hidden="true"></i></button>
+                                </span>
+                              </div>
+                            ) :
+                              <center>
+                                <ReactLoading type="bars" color="#000" height={30} width={30} />
+                              </center>
+                            }
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="panel panel-default panelmb50">
-                      {!IsLoadingCommission ? (
-                        <div>
-                          {!(JSON.stringify(HistoricalSummaryCommission) === JSON.stringify({})) ?
-                            (
+                      <div className="panel panel-default panelmb50">
+                        {!IsLoadingCommission ? (
+                          <div>
+                            {!(JSON.stringify(HistoricalSummaryCommission) === JSON.stringify({})) ?
+                              (
+                                <div className="panel-body">
+                                  <h4>{HistoricalSummaryCommission.PeriodDescription} Commissions</h4>
+                                  <div className="row">
+                                    <div className="col-sm-5">
+                                      <div className="metric metric-sm">
+                                        <div className="metric-body text-info">
+                                          ${HistoricalSummaryCommission.Commission.toLocaleString(undefined, { maximumFractionDigits: 2 })} <span style={{ fontSize: "15px" }}>USD</span>
+                                        </div>
+                                        <div className="metric-title">
+                                          QualifiedAs: <strong>{HistoricalSummaryCommission.PaidAsTitle}</strong>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="col-sm-6">
+                                      <div className="row padiingt10">
+                                        <div className="col-sm-6">
+                                          <dl className="dl-metric">
+                                            <dt>PV</dt>
+                                            <dd>{HistoricalSummaryCommission.PV.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                            <dt>TV</dt>
+                                            <dd>{HistoricalSummaryCommission.TV.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                            <dt>EV</dt>
+                                            <dd>{HistoricalSummaryCommission.EV.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                          </dl>
+                                        </div>
+                                        <div className="col-sm-6">
+                                          <dl className="dl-metric">
+                                            <dt>PSQ</dt>
+                                            <dd>{HistoricalSummaryCommission.PSQ}</dd>
+                                            <dt>Level 1 Mentors</dt>
+                                            <dd>{HistoricalSummaryCommission.L1M}</dd>
+                                            <dt>Master Mentor Legs</dt>
+                                            <dd>{HistoricalSummaryCommission.MML}</dd>
+                                          </dl>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ) : (
+                                null
+                              )}
+
+                            {!(JSON.stringify(HistoricalCommission) === JSON.stringify({})) ?
+                              (
+                                <div>
+                                  <div className="panel-body">
+                                    <h4>{HistoricalCommission.PeriodDescription} Commissions</h4>
+                                    <div className="row">
+                                      <div className="col-sm-5">
+                                        <div className="metric metric-sm">
+                                          <dl className="dl-metric">
+                                            {TeamSum > 0 ? <div><dt id="teamLabel"><strong>Team Commissions</strong></dt>
+                                              <dd id="teamID" >${TeamSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
+                                            {UsdSum > 0 ? <div>   <dt id="usdLabel" ><strong>USD Deferred Commissions</strong></dt>
+                                              <dd id="usdID" >${UsdSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
+                                            {CadSum > 0 ? <div><dt id="cadLabel" ><strong>CAD Deferred Commissions</strong></dt>
+                                              <dd id="cadID" >${CadSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} CAD</dd></div> : null}
+                                            {SavvySum > 0 ? <div> <dt id="savvyLabel" ><strong>Savvy Seller Bonus Total</strong></dt>
+                                              <dd id="savvyID" >${SavvySum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
+                                          </dl>
+                                        </div>
+                                      </div>
+                                      <div className="col-sm-6">
+                                        <div className="row padiingt10">
+                                          <div className="col-sm-6">
+                                            <dl className="dl-metric">
+                                              <dt>PV</dt>
+                                              <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume2.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                              <dt>TV</dt>
+                                              <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume5.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                              <dt>EV</dt>
+                                              <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume6.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                            </dl>
+                                          </div>
+                                          <div className="col-sm-6">
+                                            <dl className="dl-metric">
+                                              <dt>PSQ</dt>
+                                              <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume7}</dd>
+                                              <dt>Level 1 Mentors</dt>
+                                              <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume8}</dd>
+                                              <dt>Master Mentor Legs</dt>
+                                              <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume9}</dd>
+                                            </dl>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="row">
+                                      <div className="col-sm-8 h20">
+                                        <div className="metric metric-sm">
+                                          <div className="metric-title">
+                                            Qualifying as: <strong>{HistoricalCommission.RankDescription}</strong>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div className="teamh">
+                                        <div className="metric metric-sm">
+                                          <div className="metric-title textalignr">*Team Commissions are displayed in USD</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ) : (
+                                null
+                              )}
+
+                            {(RealTimeCommission.Commission.length > 0) ? (
+                              RealTimeCommission.Commission.map((data, index) => {
+                                return (<div key={index}>
+                                  <div className="panel-body">
+                                    <h4>{data.Period.PeriodDescription} Commissions</h4>
+                                    <div className="row">
+                                      <div className="col-sm-5">
+                                        <div className="metric metric-sm">
+                                          <dl className="dl-metric">
+                                            {data.TeamSum > 0 ? <div><dt id="teamLabel"><strong>Team Commissions</strong></dt>
+                                              <dd id="teamID" >${data.TeamSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
+                                            {data.UsdSum > 0 ? <div>   <dt id="usdLabel" ><strong>USD Deferred Commissions</strong></dt>
+                                              <dd id="usdID" >${data.UsdSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
+                                            {data.CadSum > 0 ? <div><dt id="cadLabel" ><strong>CAD Deferred Commissions</strong></dt>
+                                              <dd id="cadID" >${data.CadSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} CAD</dd></div> : null}
+                                            {data.SavvySum > 0 ? <div> <dt id="savvyLabel" ><strong>Savvy Seller Bonus Total</strong></dt>
+                                              <dd id="savvyID" >${data.SavvySum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
+                                          </dl>
+                                        </div>
+                                      </div>
+                                      <div className="col-sm-6">
+                                        <div className="row padiingt10">
+                                          <div className="col-sm-6">
+                                            <dl className="dl-metric">
+                                              <dt>PV</dt>
+                                              <dd>{!data.Volume ? 0 : data.Volume.Volume2.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                              <dt>TV</dt>
+                                              <dd>{!data.Volume ? 0 : data.Volume.Volume5.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                              <dt>EV</dt>
+                                              <dd>{!data.Volume ? 0 : data.Volume.Volume6.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
+                                            </dl>
+                                          </div>
+                                          <div className="col-sm-6">
+                                            <dl className="dl-metric">
+                                              <dt>PSQ</dt>
+                                              <dd>{!data.Volume ? 0 : data.Volume.Volume7}</dd>
+                                              <dt>Level 1 Mentors</dt>
+                                              <dd>{!data.Volume ? 0 : data.Volume.Volume8}</dd>
+                                              <dt>Master Mentor Legs</dt>
+                                              <dd>{!data.Volume ? 0 : data.Volume.Volume9}</dd>
+                                            </dl>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="row">
+                                      <div className="col-sm-8 h20">
+                                        <div className="metric metric-sm">
+                                          <div className="metric-title">
+                                            Qualifying as: <strong>{!data.Volume ? ` ` : data.Volume.RankDescription[0]}</strong>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div className="teamh">
+                                        <div className="metric metric-sm">
+                                          <div className="metric-title textalignr">*Team Commissions are displayed in USD</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>)
+                              })
+                            ) : (RealTimeCommission.IsLoaded ?
                               <div className="panel-body">
-                                <h4>{HistoricalSummaryCommission.PeriodDescription} Commissions</h4>
-                                <div className="row">
-                                  <div className="col-sm-5">
-                                    <div className="metric metric-sm">
-                                      <div className="metric-body text-info">
-                                        ${HistoricalSummaryCommission.Commission.toLocaleString(undefined, { maximumFractionDigits: 2 })} <span style={{ fontSize: "15px" }}>USD</span>
-                                      </div>
-                                      <div className="metric-title">
-                                        QualifiedAs: <strong>{HistoricalSummaryCommission.PaidAsTitle}</strong>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="col-sm-6">
-                                    <div className="row padiingt10">
-                                      <div className="col-sm-6">
-                                        <dl className="dl-metric">
-                                          <dt>PV</dt>
-                                          <dd>{HistoricalSummaryCommission.PV.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
-                                          <dt>TV</dt>
-                                          <dd>{HistoricalSummaryCommission.TV.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
-                                          <dt>EV</dt>
-                                          <dd>{HistoricalSummaryCommission.EV.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
-                                        </dl>
-                                      </div>
-                                      <div className="col-sm-6">
-                                        <dl className="dl-metric">
-                                          <dt>PSQ</dt>
-                                          <dd>{HistoricalSummaryCommission.PSQ}</dd>
-                                          <dt>Level 1 Mentors</dt>
-                                          <dd>{HistoricalSummaryCommission.L1M}</dd>
-                                          <dt>Master Mentor Legs</dt>
-                                          <dd>{HistoricalSummaryCommission.MML}</dd>
-                                        </dl>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            ) : (
-                              null
-                            )}
-
-                          {!(JSON.stringify(HistoricalCommission) === JSON.stringify({})) ?
-                            (
-                              <div>
-                                <div className="panel-body">
-                                  <h4>{HistoricalCommission.PeriodDescription} Commissions</h4>
-                                  <div className="row">
-                                    <div className="col-sm-5">
-                                      <div className="metric metric-sm">
-                                        <dl className="dl-metric">
-                                          {TeamSum > 0 ? <div><dt id="teamLabel"><strong>Team Commissions</strong></dt>
-                                            <dd id="teamID" >${TeamSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
-                                          {UsdSum > 0 ? <div>   <dt id="usdLabel" ><strong>USD Deferred Commissions</strong></dt>
-                                            <dd id="usdID" >${UsdSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
-                                          {CadSum > 0 ? <div><dt id="cadLabel" ><strong>CAD Deferred Commissions</strong></dt>
-                                            <dd id="cadID" >${CadSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} CAD</dd></div> : null}
-                                          {SavvySum > 0 ? <div> <dt id="savvyLabel" ><strong>Savvy Seller Bonus Total</strong></dt>
-                                            <dd id="savvyID" >${SavvySum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
-                                        </dl>
-                                      </div>
-                                    </div>
-                                    <div className="col-sm-6">
-                                      <div className="row padiingt10">
-                                        <div className="col-sm-6">
-                                          <dl className="dl-metric">
-                                            <dt>PV</dt>
-                                            <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume2.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
-                                            <dt>TV</dt>
-                                            <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume5.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
-                                            <dt>EV</dt>
-                                            <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume6.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
-                                          </dl>
-                                        </div>
-                                        <div className="col-sm-6">
-                                          <dl className="dl-metric">
-                                            <dt>PSQ</dt>
-                                            <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume7}</dd>
-                                            <dt>Level 1 Mentors</dt>
-                                            <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume8}</dd>
-                                            <dt>Master Mentor Legs</dt>
-                                            <dd>{!HistoricalCommission.Volume ? 0 : HistoricalCommission.Volume.Volume9}</dd>
-                                          </dl>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="row">
-                                    <div className="col-sm-8 h20">
-                                      <div className="metric metric-sm">
-                                        <div className="metric-title">
-                                          Qualifying as: <strong>{HistoricalCommission.RankDescription}</strong>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div className="teamh">
-                                      <div className="metric metric-sm">
-                                        <div className="metric-title textalignr">*Team Commissions are displayed in USD</div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            ) : (
-                              null
-                            )}
-
-                          {(RealTimeCommission.Commission.length > 0) ? (
-                            RealTimeCommission.Commission.map((data, index) => {
-                              return (<div key={index}>
-                                <div className="panel-body">
-                                  <h4>{data.Period.PeriodDescription} Commissions</h4>
-                                  <div className="row">
-                                    <div className="col-sm-5">
-                                      <div className="metric metric-sm">
-                                        <dl className="dl-metric">
-                                          {data.TeamSum > 0 ? <div><dt id="teamLabel"><strong>Team Commissions</strong></dt>
-                                            <dd id="teamID" >${data.TeamSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
-                                          {data.UsdSum > 0 ? <div>   <dt id="usdLabel" ><strong>USD Deferred Commissions</strong></dt>
-                                            <dd id="usdID" >${data.UsdSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
-                                          {data.CadSum > 0 ? <div><dt id="cadLabel" ><strong>CAD Deferred Commissions</strong></dt>
-                                            <dd id="cadID" >${data.CadSum.toLocaleString(undefined, { maximumFractionDigits: 2 })} CAD</dd></div> : null}
-                                          {data.SavvySum > 0 ? <div> <dt id="savvyLabel" ><strong>Savvy Seller Bonus Total</strong></dt>
-                                            <dd id="savvyID" >${data.SavvySum.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</dd></div> : null}
-                                        </dl>
-                                      </div>
-                                    </div>
-                                    <div className="col-sm-6">
-                                      <div className="row padiingt10">
-                                        <div className="col-sm-6">
-                                          <dl className="dl-metric">
-                                            <dt>PV</dt>
-                                            <dd>{!data.Volume ? 0 : data.Volume.Volume2.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
-                                            <dt>TV</dt>
-                                            <dd>{!data.Volume ? 0 : data.Volume.Volume5.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
-                                            <dt>EV</dt>
-                                            <dd>{!data.Volume ? 0 : data.Volume.Volume6.toLocaleString(undefined, { maximumFractionDigits: 2 })}</dd>
-                                          </dl>
-                                        </div>
-                                        <div className="col-sm-6">
-                                          <dl className="dl-metric">
-                                            <dt>PSQ</dt>
-                                            <dd>{!data.Volume ? 0 : data.Volume.Volume7}</dd>
-                                            <dt>Level 1 Mentors</dt>
-                                            <dd>{!data.Volume ? 0 : data.Volume.Volume8}</dd>
-                                            <dt>Master Mentor Legs</dt>
-                                            <dd>{!data.Volume ? 0 : data.Volume.Volume9}</dd>
-                                          </dl>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="row">
-                                    <div className="col-sm-8 h20">
-                                      <div className="metric metric-sm">
-                                        <div className="metric-title">
-                                          Qualifying as: <strong>{!data.Volume ? ` ` : data.Volume.RankDescription[0]}</strong>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div className="teamh">
-                                      <div className="metric metric-sm">
-                                        <div className="metric-title textalignr">*Team Commissions are displayed in USD</div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>)
-                            })
-                          ) : (RealTimeCommission.IsLoaded ?
-                            <div className="panel-body">
-                              <center>
-                                You have not earned any commissions yet - check back soon!
+                                <center>
+                                  You have not earned any commissions yet - check back soon!
                               </center>
-                            </div>
-                            : null)
-                          }
-                        </div>
-                      ) :
-                        <div className="panel-body">
-                          <center>
-                            <ReactLoading type="bars" color="#000" height={50} width={50} />
-                          </center>
-                        </div>
-                      }
+                              </div>
+                              : null)
+                            }
+                          </div>
+                        ) :
+                          <div className="panel-body">
+                            <center>
+                              <ReactLoading type="bars" color="#000" height={50} width={50} />
+                            </center>
+                          </div>
+                        }
 
-                      {!IsHideBonusGrid ? (
-                        <div>
-                          <Collapse
-                            //accordion={true}
-                            onChange={this.onExpandCommission}
-                            activeKey={activeKey}
-                          >
-                            <Panel header={`Bonus: Deferred Commission`} key="1">
-                              <Collapse defaultActiveKey="1">
-                                {DeferredCommission.Commission.length > 0 ? (
-                                  <div>
-                                    <BootstrapTable ref='table' data={DeferredCommission.Commission} pagination>
-                                      <TableHeaderColumn dataField='OrderID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
-                                      <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
-                                      <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataSort={true} dataField='CommissionAmount'>Earned</TableHeaderColumn>
-                                    </BootstrapTable>
-                                    <div className="gridgraybg">
-                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(DeferredCommission.Commission)} USD</strong></div>
+                        {!IsHideBonusGrid ? (
+                          <div>
+                            <Collapse
+                              //accordion={true}
+                              onChange={this.onExpandCommission}
+                              activeKey={activeKey}
+                            >
+                              <Panel header={`Bonus: Deferred Commission`} key="1">
+                                <Collapse defaultActiveKey="1">
+                                  {DeferredCommission.Commission.length > 0 ? (
+                                    <div>
+                                      <BootstrapTable ref='table' data={DeferredCommission.Commission} pagination>
+                                        <TableHeaderColumn dataField='OrderID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
+                                        <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
+                                        <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
+                                        <TableHeaderColumn dataFormat={this.earnedFormatter} dataSort={true} dataField='CommissionAmount'>Earned</TableHeaderColumn>
+                                      </BootstrapTable>
+                                      <div className="gridgraybg">
+                                        <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(DeferredCommission.Commission)} USD</strong></div>
+                                      </div>
                                     </div>
-                                  </div>
-                                ) : (!DeferredCommission.IsLoaded) ? (
-                                  <center>
-                                    <ReactLoading type="bars" color="#000" height={50} width={50} />
-                                  </center>
-                                ) : (
-                                      <center> No records Found</center>
-                                    )
-                                }
-                              </Collapse>
-                            </Panel>
+                                  ) : (!DeferredCommission.IsLoaded) ? (
+                                    <center>
+                                      <ReactLoading type="bars" color="#000" height={50} width={50} />
+                                    </center>
+                                  ) : (
+                                        <center> No records Found</center>
+                                      )
+                                  }
+                                </Collapse>
+                              </Panel>
 
-                            <Panel header={`Bonus: Savvy Seller Bonus`} key="4">
-                              <Collapse defaultActiveKey="1">
-                                {SavvySeller.Commission.length > 0 ? (
-                                  <div>
-                                    <BootstrapTable ref='table' data={SavvySeller.Commission} pagination>
-                                      <TableHeaderColumn dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
-                                      <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
-                                      <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataSort={true} dataField='CommissionAmount'>Earned</TableHeaderColumn>
-                                    </BootstrapTable>
-                                    <div className="gridgraybg">
-                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(SavvySeller.Commission)} USD</strong></div>
+                              <Panel header={`Bonus: Savvy Seller Bonus`} key="4">
+                                <Collapse defaultActiveKey="1">
+                                  {SavvySeller.Commission.length > 0 ? (
+                                    <div>
+                                      <BootstrapTable ref='table' data={SavvySeller.Commission} pagination>
+                                        <TableHeaderColumn dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
+                                        <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
+                                        <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
+                                        <TableHeaderColumn dataFormat={this.earnedFormatter} dataSort={true} dataField='CommissionAmount'>Earned</TableHeaderColumn>
+                                      </BootstrapTable>
+                                      <div className="gridgraybg">
+                                        <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(SavvySeller.Commission)} USD</strong></div>
+                                      </div>
                                     </div>
-                                  </div>
-                                ) : (!SavvySeller.IsLoaded) ? (
-                                  <center>
-                                    <ReactLoading type="bars" color="#000" height={50} width={50} />
-                                  </center>
-                                ) : (
-                                      <center> No records Found</center>
-                                    )
-                                }
-                              </Collapse>
-                            </Panel>
+                                  ) : (!SavvySeller.IsLoaded) ? (
+                                    <center>
+                                      <ReactLoading type="bars" color="#000" height={50} width={50} />
+                                    </center>
+                                  ) : (
+                                        <center> No records Found</center>
+                                      )
+                                  }
+                                </Collapse>
+                              </Panel>
 
-                            <Panel header={`Bonus: Sponsoring Bonus`} key="5">
-                              <Collapse defaultActiveKey="1">
+                              <Panel header={`Bonus: Sponsoring Bonus`} key="5">
+                                <Collapse defaultActiveKey="1">
 
-                                {SponsorBonus.Commission.length > 0 ? (
-                                  <div>
-                                    <BootstrapTable ref='table' data={SponsorBonus.Commission} pagination>
-                                      <TableHeaderColumn dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
-                                      <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
-                                      <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataSort={true} dataField='CommissionAmount'>Earned</TableHeaderColumn>
-                                    </BootstrapTable>
-                                    <div className="gridgraybg">
-                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(SponsorBonus.Commission)} USD</strong></div>
+                                  {SponsorBonus.Commission.length > 0 ? (
+                                    <div>
+                                      <BootstrapTable ref='table' data={SponsorBonus.Commission} pagination>
+                                        <TableHeaderColumn dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
+                                        <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
+                                        <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
+                                        <TableHeaderColumn dataFormat={this.earnedFormatter} dataSort={true} dataField='CommissionAmount'>Earned</TableHeaderColumn>
+                                      </BootstrapTable>
+                                      <div className="gridgraybg">
+                                        <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(SponsorBonus.Commission)} USD</strong></div>
+                                      </div>
                                     </div>
-                                  </div>
-                                ) : (!SponsorBonus.IsLoaded) ? (
-                                  <center>
-                                    <ReactLoading type="bars" color="#000" height={50} width={50} />
-                                  </center>
-                                ) : (
-                                      <center> No records Found</center>
-                                    )
-                                }
-                              </Collapse>
-                            </Panel>
+                                  ) : (!SponsorBonus.IsLoaded) ? (
+                                    <center>
+                                      <ReactLoading type="bars" color="#000" height={50} width={50} />
+                                    </center>
+                                  ) : (
+                                        <center> No records Found</center>
+                                      )
+                                  }
+                                </Collapse>
+                              </Panel>
 
-                            <Panel header={`Bonus: Coaching Bonus`} key="6">
-                              <Collapse defaultActiveKey="1">
+                              <Panel header={`Bonus: Coaching Bonus`} key="6">
+                                <Collapse defaultActiveKey="1">
 
-                                {CoachingBonus.Commission.length > 0 ? (
-                                  <div>
-                                    <BootstrapTable ref='table' data={CoachingBonus.Commission} pagination>
-                                      <TableHeaderColumn dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
-                                      <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
-                                      <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataSort={true} dataField='CommissionAmount'>Earned</TableHeaderColumn>
-                                    </BootstrapTable>
-                                    <div className="gridgraybg">
-                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(CoachingBonus.Commission)} USD</strong></div>
+                                  {CoachingBonus.Commission.length > 0 ? (
+                                    <div>
+                                      <BootstrapTable ref='table' data={CoachingBonus.Commission} pagination>
+                                        <TableHeaderColumn dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
+                                        <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
+                                        <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
+                                        <TableHeaderColumn dataFormat={this.earnedFormatter} dataSort={true} dataField='CommissionAmount'>Earned</TableHeaderColumn>
+                                      </BootstrapTable>
+                                      <div className="gridgraybg">
+                                        <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(CoachingBonus.Commission)} USD</strong></div>
+                                      </div>
                                     </div>
-                                  </div>
-                                ) : (!CoachingBonus.IsLoaded) ? (
-                                  <center>
-                                    <ReactLoading type="bars" color="#000" height={50} width={50} />
-                                  </center>
-                                ) : (
-                                      <center> No records Found</center>
-                                    )
-                                }
-                              </Collapse>
-                            </Panel>
+                                  ) : (!CoachingBonus.IsLoaded) ? (
+                                    <center>
+                                      <ReactLoading type="bars" color="#000" height={50} width={50} />
+                                    </center>
+                                  ) : (
+                                        <center> No records Found</center>
+                                      )
+                                  }
+                                </Collapse>
+                              </Panel>
 
-                            <Panel header={`Bonus: Couturier Bonus`} key="7">
-                              <Collapse defaultActiveKey="1">
+                              <Panel header={`Bonus: Couturier Bonus`} key="7">
+                                <Collapse defaultActiveKey="1">
 
-                                {CouturierBonus.Commission.length > 0 ? (
-                                  <div>
-                                    <BootstrapTable ref='table' data={CouturierBonus.Commission} pagination>
-                                      <TableHeaderColumn dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
-                                      <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
-                                      <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.earnedFormatter} dataSort={true} dataField='CommissionAmount'>Earned</TableHeaderColumn>
-                                    </BootstrapTable>
-                                    <div className="gridgraybg">
-                                      <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(CouturierBonus.Commission)} USD</strong></div>
+                                  {CouturierBonus.Commission.length > 0 ? (
+                                    <div>
+                                      <BootstrapTable ref='table' data={CouturierBonus.Commission} pagination>
+                                        <TableHeaderColumn dataField='FromCustomerID' isKey={true} dataSort={true}>From ID#</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='FromCustomerName' dataSort={true}>From</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='PaidLevel'>Paid Level</TableHeaderColumn>
+                                        <TableHeaderColumn dataFormat={this.sourceFormatter} dataField='SourceAmount'>Source</TableHeaderColumn>
+                                        <TableHeaderColumn dataFormat={this.percentageFormatter} dataField='Percentage'>%</TableHeaderColumn>
+                                        <TableHeaderColumn dataFormat={this.earnedFormatter} dataSort={true} dataField='CommissionAmount'>Earned</TableHeaderColumn>
+                                      </BootstrapTable>
+                                      <div className="gridgraybg">
+                                        <div style={{ textAlign: "right" }}><strong style={{ fontSize: "12px" }}>Total: ${this.calculateSum(CouturierBonus.Commission)} USD</strong></div>
+                                      </div>
                                     </div>
-                                  </div>
-                                ) : (!CouturierBonus.IsLoaded) ? (
-                                  <center>
-                                    <ReactLoading type="bars" color="#000" height={50} width={50} />
-                                  </center>
-                                ) : (
-                                      <center> No records Found</center>
-                                    )
-                                }
-                              </Collapse>
-                            </Panel>
-
-                          </Collapse>
-                        </div>
-                      ) : null}
+                                  ) : (!CouturierBonus.IsLoaded) ? (
+                                    <center>
+                                      <ReactLoading type="bars" color="#000" height={50} width={50} />
+                                    </center>
+                                  ) : (
+                                        <center> No records Found</center>
+                                      )
+                                  }
+                                </Collapse>
+                              </Panel>
+                            </Collapse>
+                          </div>
+                        ) : null}
+                      </div>
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
-          <PageFooter />
-        </div >
-
+        </div>
+        <div>
+          <div className="col-sm-12">
+            <PageFooter />
+          </div>
+        </div>
       </div >
     )
   }

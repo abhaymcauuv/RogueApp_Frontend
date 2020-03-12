@@ -8,8 +8,10 @@ class ProductsScreen extends Component {
   render() {
     return (
       <div>
-        <div className="container-fluid">
+        <div className="col-sm-12">
           <HomeHeaderscreen />
+        </div>
+        <div className="container-fluid page_container">
           <div className="content">
             <div>
               <div className="col-sm-12">
@@ -19,7 +21,7 @@ class ProductsScreen extends Component {
                   </div>
                   <div className="col-sm-6"></div>
                   <div className="col-sm-3">
-                    <div className="input-group pt10 pr35">
+                    <div className="input-group pt10 pr8">
                       <input type="text" className="form-control inputht" placeholder="Search.."></input>
                       <span className="input-group-btn"><button className="btn btn-primary inputht" type="submit"><i className="fa fa-search"></i></button></span>
                     </div>
@@ -31,7 +33,7 @@ class ProductsScreen extends Component {
                     <StoreLeftmenuscreen />
                   </div>
                   <div className="col-md-10">
-                    <div>
+                    <div className="gridlpdng">
                       <div className="feature-grids">
                         <div className="col-md-3 col-sm-12 feature-grid">
                           <a href="/#/details"><img src="../src/images/products/img1.jpg" alt="1"></img>
@@ -157,7 +159,11 @@ class ProductsScreen extends Component {
               </div>
             </div>
           </div>
-          <PageFooter />
+        </div>
+        <div>
+          <div className="col-sm-12">
+            <PageFooter />
+          </div>
         </div>
 
       </div>

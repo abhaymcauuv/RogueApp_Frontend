@@ -57,29 +57,29 @@ class RankScreen extends Component {
     if (this.state.rankData != undefined && this.state.rankData[0].PayeeQualificationLegs[1] != undefined) {
       let result = this.state.rankData[0].PayeeQualificationLegs[1].RequirementDescription;
       //console.log("Result- ", this.state.rankData[0].PayeeQualificationLegs);
-      return( <div className="list-group-item">
-      <div className="media">
-        <div className="media-object pull-left fa fa-check fafonts15 text-success"></div>
-        <div className="media-body">
-          {result}
-        </div>
-      </div>
-    </div>)
-    }
-  }
-  row2 = () => {
-    if (this.state.rankData != undefined && this.state.rankData[0].PayeeQualificationLegs[0] != undefined) {
-      let result = this.state.rankData[0].PayeeQualificationLegs[0].RequirementDescription;
-      //console.log("Result- ", result.RequirementDescription);
-      return(
-        <div className="list-group-item">
+      return (<div className="list-group-item">
         <div className="media">
           <div className="media-object pull-left fa fa-check fafonts15 text-success"></div>
           <div className="media-body">
             {result}
           </div>
         </div>
-      </div>
+      </div>)
+    }
+  }
+  row2 = () => {
+    if (this.state.rankData != undefined && this.state.rankData[0].PayeeQualificationLegs[0] != undefined) {
+      let result = this.state.rankData[0].PayeeQualificationLegs[0].RequirementDescription;
+      //console.log("Result- ", result.RequirementDescription);
+      return (
+        <div className="list-group-item">
+          <div className="media">
+            <div className="media-object pull-left fa fa-check fafonts15 text-success"></div>
+            <div className="media-body">
+              {result}
+            </div>
+          </div>
+        </div>
       )
     }
   }
@@ -87,22 +87,22 @@ class RankScreen extends Component {
     if (this.state.rankData != undefined && this.state.rankData[0].PayeeQualificationLegs[2] != undefined) {
       let result = this.state.rankData[0].PayeeQualificationLegs[2].RequirementDescription;
       //console.log("Result- ", result.RequirementDescription);
-      return(
+      return (
         <div className="list-group-item">
-        <div className="media">
-          <div className="media-object pull-left fa fa-times fafonts15 text-danger"></div>
-          <div className="media-body">
-            {result}
-            <div className="space-10"></div>
-            <div className="progress progress-sm no-margin">
-              <div className="progress-bar progress-bar-info barwd" role="progressbar" aria-valuenow="53.9600" aria-valuemin="0" aria-valuemax="100">
-                <span className="sr-only">53.9600% Complete</span>
+          <div className="media">
+            <div className="media-object pull-left fa fa-times fafonts15 text-danger"></div>
+            <div className="media-body">
+              {result}
+              <div className="space-10"></div>
+              <div className="progress progress-sm no-margin">
+                <div className="progress-bar progress-bar-info barwd" role="progressbar" aria-valuenow="53.9600" aria-valuemin="0" aria-valuemax="100">
+                  <span className="sr-only">53.9600% Complete</span>
+                </div>
               </div>
+              <small className="text-muted">{parseInt(this.state.rankData[0].PayeeQualificationLegs[2].Actual)} of {parseInt(this.state.rankData[0].PayeeQualificationLegs[2].Required)} </small>
             </div>
-            <small className="text-muted">{parseInt(this.state.rankData[0].PayeeQualificationLegs[2].Actual)} of {parseInt(this.state.rankData[0].PayeeQualificationLegs[2].Required)} </small>
           </div>
         </div>
-      </div>
       )
     }
   }
@@ -110,15 +110,15 @@ class RankScreen extends Component {
     if (this.state.rankData != undefined && this.state.rankData[0].PayeeQualificationLegs[3] != undefined) {
       let result = this.state.rankData[0].PayeeQualificationLegs[3].RequirementDescription;
       //console.log("Result- ", result.RequirementDescription);
-      return(
+      return (
         <div className="list-group-item">
-        <div className="media">
-          <div className="media-object pull-left fa fa-check fafonts15 text-success"></div>
-          <div className="media-body">
-            {result}
+          <div className="media">
+            <div className="media-object pull-left fa fa-check fafonts15 text-success"></div>
+            <div className="media-body">
+              {result}
+            </div>
           </div>
         </div>
-      </div>
       )
     }
   }
@@ -168,13 +168,13 @@ class RankScreen extends Component {
             </div>
             <div className="list-group">
 
-                    {this.row1()}
+              {this.row1()}
 
-                    {this.row2()}
+              {this.row2()}
 
-                    {this.row3()}
+              {this.row3()}
 
-                    {this.row4()}
+              {this.row4()}
 
             </div>
           </div>
@@ -188,21 +188,23 @@ class RankScreen extends Component {
   render() {
     return (
       <div>
-        <div className="container-fluid">
+        <div className="col-sm-12">
           <HomeHeaderscreen />
+        </div>
+        <div className="container-fluid page_container">
           <div className="content">
-            <div className="">
+            <div>
               <div className="col-sm-12">
                 <h2 className="h2hdr">Rank Advancement</h2>
                 <div className="row">
                   <div className="col-sm-2">
                     <nav className="view-navigation">
-                      <div className="panel-group">
+                      <div className="panel-group leftmenuwd">
                         <div className="panel panel-default no-border">
                           <div className="panel-heading">
                             <div className="panel-title">
                               <a href="/#/commissions">
-                              <i className="fa fa-podcast lmenuicon" aria-hidden="true"></i> Commissions
+                                <i className="fa fa-podcast lmenuicon" aria-hidden="true"></i> Commissions
                                 </a>
                             </div>
                           </div>
@@ -211,7 +213,7 @@ class RankScreen extends Component {
                           <div className="panel-heading active">
                             <div className="panel-title">
                               <a href="/#/rank" className="active">
-                              <i className="fa fa-star lmenuicon" aria-hidden="true"></i> Rank Advancement
+                                <i className="fa fa-star lmenuicon" aria-hidden="true"></i> Rank Advancement
                                 </a>
                             </div>
                           </div>
@@ -220,7 +222,7 @@ class RankScreen extends Component {
                           <div className="panel-heading ">
                             <div className="panel-title">
                               <a href="/#/volumes">
-                              <i className="fa fa-file lmenuicon"></i> Volumes
+                                <i className="fa fa-file lmenuicon"></i> Volumes
                                 </a>
                             </div>
                           </div>
@@ -229,37 +231,43 @@ class RankScreen extends Component {
                     </nav>
                   </div>
                   <div className="col-md-10">
-                    <div className="well well-sm">
-                      <div className="row">
-                        <div className="col-sm-6">
-                          <div className="input-group">
-                            <span className="input-group-btn">
-                              <button className="btn btn-default" type="button"><i className="fa fa-angle-left" aria-hidden="true"></i></button>
-                            </span>
-                            <select id="periodchoice" className="form-control" onChange={this.handleChange} >
-                              <option value={0}>No Rank</option>
-                              {this.state.rankPeriodData.map((dt, i) => {
-                                return (
-                                  <option key={i} value={dt.RankID}>{dt.RankDescription}</option>
-                                )
-                              })}
-                            </select>
-                            <span className="input-group-btn">
-                              <button className="btn btn-default" type="button"><i className="fa fa-angle-right" aria-hidden="true"></i></button>
-                            </span>
+                    <div className="gridlpdng">
+                      <div className="well well-sm">
+                        <div className="row">
+                          <div className="col-sm-6">
+                            <div className="input-group">
+                              <span className="input-group-btn">
+                                <button className="btn btn-default" type="button"><i className="fa fa-angle-left" aria-hidden="true"></i></button>
+                              </span>
+                              <select id="periodchoice" className="form-control" onChange={this.handleChange} >
+                                <option value={0}>No Rank</option>
+                                {this.state.rankPeriodData.map((dt, i) => {
+                                  return (
+                                    <option key={i} value={dt.RankID}>{dt.RankDescription}</option>
+                                  )
+                                })}
+                              </select>
+                              <span className="input-group-btn">
+                                <button className="btn btn-default" type="button"><i className="fa fa-angle-right" aria-hidden="true"></i></button>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    {this.seactionOne()}
+                      {this.seactionOne()}
 
-                    {this.seactionTwo()}
+                      {this.seactionTwo()}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <PageFooter />
+        </div>
+        <div>
+          <div className="col-sm-12">
+            <PageFooter />
+          </div>
         </div>
       </div>
     )

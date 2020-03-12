@@ -9,8 +9,10 @@ class MyCartScreen extends Component {
   render() {
     return (
       <div>
-        <div className="container-fluid">
+        <div className="col-sm-12">
           <HomeHeaderscreen />
+        </div>
+        <div className="container-fluid page_container">
           <div className="col-sm-12 content">
             <div className="col-sm-12 carthdr">Cart</div>
             <div className="row">
@@ -76,17 +78,17 @@ class MyCartScreen extends Component {
                   </div>
                 </div>
               </div>
-
             </div>
             <div className="col-sm-2 backtp">
               <Link to="/products"><button type="button" className="btn btn-primary btn-block">
                 <i className="fa fa-chevron-left"></i> Back to Products</button></Link>
             </div>
-
-
-
           </div>
-          <PageFooter />
+        </div>
+        <div>
+          <div className="col-sm-12">
+            <PageFooter />
+          </div>
         </div>
 
       </div>

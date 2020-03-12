@@ -7,8 +7,10 @@ class DashboardScreen extends Component {
   render() {
     return (
       <div>
-        <div className="container-fluid">
+        <div className="col-sm-12">
           <HomeHeaderscreen />
+        </div>
+        <div className="container-fluid page_container">
           <div className="content">
             <div>
               <div className="col-sm-12">
@@ -145,7 +147,7 @@ class DashboardScreen extends Component {
                           </li>
                         </ul>
                       </div>
-                      <a href="/orders" className="card-footer block text-right">
+                      <a href="/" className="card-footer block text-right">
                         View all orders <i className="fa fa-chevron-right" aria-hidden="true"></i>
                       </a>
                     </div>
@@ -155,7 +157,11 @@ class DashboardScreen extends Component {
               </div>
             </div>
           </div>
-          <PageFooter />
+        </div>
+        <div>
+          <div className="col-sm-12">
+            <PageFooter />
+          </div>
         </div>
 
       </div>

@@ -9,19 +9,25 @@ class TreeViewerScreen extends Component {
   render() {
     return (
       <div>
-        <div className="container-fluid">
+        <div className="col-sm-12">
           <HomeHeaderscreen />
+        </div>
+        <div className="container-fluid page_container">
           <div className="content">
-            <div className="">
+            <div>
               <div className="col-sm-12">
                 <h2 className="h2hdr">Tree Viewer</h2>
-                <div className="row pl10">                 
-                <div className="col-sm-12"></div>
+                <div className="row">
+                  <div className="col-sm-12"></div>
                 </div>
               </div>
             </div>
           </div>
-          <PageFooter />
+        </div>
+        <div>
+          <div className="col-sm-12">
+            <PageFooter />
+          </div>
         </div>
 
       </div>

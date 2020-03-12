@@ -89,113 +89,116 @@ class TeamPerformanceScreen extends Component {
   render() {
     return (
       <div>
-        <div className="container-fluid">
+        <div className="col-sm-12">
           <HomeHeaderscreen />
+        </div>
+        <div className="container-fluid page_container">
           <div className="content">
-            <div className="">
+            <div>
               <div className="col-sm-12">
                 <h2 className="h2hdr">Team Performance</h2>
-                <div className="row pl10">
+                <div className="row">
                   <div className="col-md-2">
                     <ReportLeftmenuscreen />
                   </div>
                   <div className="col-md-10">
-                    <div>
-                      <div className="well well-sm">
-                        <div className="row">
-                          <div className="col-sm-5">
-                            <div className="input-group">
-                              <span className="input-group-btn">
-                                <button className="btn btn-default" type="button"><i className="fa fa-chevron-left"></i></button>
-                              </span>
-                              <select id="periods" className="form-control" onChange={(val) => this.handleChange(val)}>
-                                {/* <option value={0}>No Rank</option> */}
-                                {this.state.teamPeriodData.map((dt, i) => {
-                                  return (
-                                    <option key={i} value={dt.PeriodID}>{dt.PeriodDescription}</option>
-                                  )
-                                })}
-                              </select>
-                              <span className="input-group-btn">
-                                <button className="btn btn-default" type="button"><i className="fa fa-chevron-right"></i></button>
-                              </span>
+                    <div className="gridlpdng">
+                      <div>
+                        <div className="well well-sm">
+                          <div className="row">
+                            <div className="col-sm-5">
+                              <div className="input-group">
+                                <span className="input-group-btn">
+                                  <button className="btn btn-default" type="button"><i className="fa fa-chevron-left"></i></button>
+                                </span>
+                                <select id="periods" className="form-control" onChange={(val) => this.handleChange(val)}>
+                                  {/* <option value={0}>No Rank</option> */}
+                                  {this.state.teamPeriodData.map((dt, i) => {
+                                    return (
+                                      <option key={i} value={dt.PeriodID}>{dt.PeriodDescription}</option>
+                                    )
+                                  })}
+                                </select>
+                                <span className="input-group-btn">
+                                  <button className="btn btn-default" type="button"><i className="fa fa-chevron-right"></i></button>
+                                </span>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="checkbox cheboxpl pl20">
-                      <label>
-                        <input type="checkbox" checked={this.state.isInactive} onChange={(val) => this.toggleCheckbox(val)} />  Include Closed Accounts
+                      <div className="checkbox cheboxpl pl20">
+                        <label>
+                          <input type="checkbox" checked={this.state.isInactive} onChange={(val) => this.toggleCheckbox(val)} />  Include Closed Accounts
                           </label>
-                    </div>
-                    <div className="panel panel-default panelmb50">
-                      <div>
-                        <table className="table table-bordered tablemrb">
-                          <thead>
-                            <tr>
-                              <th colSpan="10" className="textalignr tdbg">
-                                <button type="button" className="k-grid-excel btn btn-primary hidden-print"><i className="fa fa-download"></i> Excel</button>
-                              </th>
-                            </tr>
-                            <tr className="tdbg">
-                              <th scope="col"></th>
-                              <th scope="col">ID</th>
-                              <th scope="col">Full Name</th>
-                              <th scope="col">Level</th>
-                              <th scope="col">Paid as Title</th>
-                              <th scope="col">PV</th>
-                              <th scope="col">TV</th>
-                              <th scope="col">PSQ</th>
-                            </tr>
-                          </thead>
-                          <tbody>
+                      </div>
+                      <div className="panel panel-default panelmb50">
+                        <div>
+                          <table className="table table-bordered tablemrb">
+                            <thead>
+                              <tr>
+                                <th colSpan="10" className="textalignr tdbg">
+                                  <button type="button" className="k-grid-excel btn btn-primary hidden-print"><i className="fa fa-download"></i> Excel</button>
+                                </th>
+                              </tr>
+                              <tr className="tdbg">
+                                <th scope="col"></th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Level</th>
+                                <th scope="col">Paid as Title</th>
+                                <th scope="col">PV</th>
+                                <th scope="col">TV</th>
+                                <th scope="col">PSQ</th>
+                              </tr>
+                            </thead>
+                            <tbody>
 
-                            {this.state.teamPerformanceData.map((dt, i) => {
-                              return (
-                                <tr className="tdbg" key={i}>
-                                  <td><Link to="#" key={dt.CustomerID}><i className="far fa-address-book"></i></Link></td>
-                                  <td>{dt.CustomerID}</td>
-                                  <td className="">{dt.FullName}</td>
-                                  <td className="textalignr">{dt.Level}</td>
-                                  <td className="">{dt.PaidAsTitle}</td>
-                                  <td className="textalignr">{dt.PV}</td>
-                                  <td className="textalignr">{dt.TV}</td>
-                                  <td className="textalignr">{dt.PSQ}</td>
-                                </tr>)
-                            })}
+                              {this.state.teamPerformanceData.map((dt, i) => {
+                                return (
+                                  <tr className="tdbg" key={i}>
+                                    <td><Link to="#" key={dt.CustomerID}><i className="far fa-address-book"></i></Link></td>
+                                    <td>{dt.CustomerID}</td>
+                                    <td className="">{dt.FullName}</td>
+                                    <td className="textalignr">{dt.Level}</td>
+                                    <td className="">{dt.PaidAsTitle}</td>
+                                    <td className="textalignr">{dt.PV}</td>
+                                    <td className="textalignr">{dt.TV}</td>
+                                    <td className="textalignr">{dt.PSQ}</td>
+                                  </tr>)
+                              })}
 
-                          </tbody>
-                        </table>
-                        <div className="row">
-                          <div className="col-sm-9">
-                            <nav aria-label="Page navigation example">
-                              <ul className="pagination">
-                                <li className="page-item">
-                                  <a className="page-link" href="javascript:void(0);" onClick={() => this.pageChange(-1)} aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span className="sr-only">Previous</span>
-                                  </a>
-                                </li>
+                            </tbody>
+                          </table>
+                          <div className="row">
+                            <div className="col-sm-9">
+                              <nav aria-label="Page navigation example">
+                                <ul className="pagination">
+                                  <li className="page-item">
+                                    <a className="page-link" href="javascript:void(0);" onClick={() => this.pageChange(-1)} aria-label="Previous">
+                                      <span aria-hidden="true">&laquo;</span>
+                                      <span className="sr-only">Previous</span>
+                                    </a>
+                                  </li>
 
-                                {this.paginationRecords()}
-                                {/* <li className="page-item"><a className="page-link" href="#">1</a></li>
+                                  {this.paginationRecords()}
+                                  {/* <li className="page-item"><a className="page-link" href="#">1</a></li>
                                 <li className="page-item"><a className="page-link" href="#">2</a></li>
                                 <li className="page-item"><a className="page-link" href="#">3</a></li> */}
 
-                                <li className="page-item">
-                                  <a className="page-link" href="javascript:void(0);" aria-label="Next" onClick={() => this.pageChange(1)}>
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span className="sr-only">Next</span>
-                                  </a>
-                                </li>
-                              </ul>
-                            </nav>
+                                  <li className="page-item">
+                                    <a className="page-link" href="javascript:void(0);" aria-label="Next" onClick={() => this.pageChange(1)}>
+                                      <span aria-hidden="true">&raquo;</span>
+                                      <span className="sr-only">Next</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </nav>
+                            </div>
+                            <div className="col-sm-3 paddingt10">
+                              <span className="k-pager-info k-label">{this.state.TotalRecord == 0 ? 0 : (this.state.PageNumber - 1) * 10 + 1} - {this.state.TotalRecord == 0 ? 0 : this.state.PageNumber * 10} of {this.state.TotalRecord} items</span>
+                            </div>
                           </div>
-                          <div className="col-sm-3 paddingt10">
-                            <span className="k-pager-info k-label">{this.state.TotalRecord == 0 ? 0 : (this.state.PageNumber - 1) * 10 + 1} - {this.state.TotalRecord == 0 ? 0 : this.state.PageNumber * 10} of {this.state.TotalRecord} items</span>
-                          </div>
-
                         </div>
                       </div>
                     </div>
@@ -204,7 +207,11 @@ class TeamPerformanceScreen extends Component {
               </div>
             </div>
           </div>
-          <PageFooter />
+        </div>
+        <div>
+          <div className="col-sm-12">
+            <PageFooter />
+          </div>
         </div>
 
       </div>

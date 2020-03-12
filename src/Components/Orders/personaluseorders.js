@@ -223,10 +223,12 @@ class PersonalUseOrdersScreen extends Component {
   render() {
     return (
       <div>
-        <div className="container-fluid">
+        <div className="col-sm-12">
           <HomeHeaderscreen />
+        </div>
+        <div className="container-fluid page_container">
           <div className="content">
-            <div className="">
+            <div>
               <div className="col-sm-12">
                 <h2 className="h2hdr">Personal Use Orders</h2>
                 <div className="row">
@@ -237,7 +239,7 @@ class PersonalUseOrdersScreen extends Component {
                           <div className="panel-heading">
                             <div className="panel-title">
                               <a href="/#/orders" >
-                              <i class="fa fa-list-alt lmenuicon" aria-hidden="true"></i> Inventory Orders
+                                <i className="fa fa-list-alt lmenuicon" aria-hidden="true"></i> Inventory Orders
                               </a>
                             </div>
                           </div>
@@ -246,7 +248,7 @@ class PersonalUseOrdersScreen extends Component {
                           <div className="panel-heading active">
                             <div className="panel-title">
                               <a className="active">
-                              <i class="fa fa-list-ul lmenuicon" aria-hidden="true"></i> Personal Use Orders
+                                <i className="fa fa-list-ul lmenuicon" aria-hidden="true"></i> Personal Use Orders
                               </a>
                             </div>
                           </div>
@@ -255,7 +257,7 @@ class PersonalUseOrdersScreen extends Component {
                           <div className="panel-heading">
                             <div className="panel-title">
                               <a href="/#/">
-                              <i class="fa fa-tags lmenuicon" aria-hidden="true"></i> Sales
+                                <i className="fa fa-tags lmenuicon" aria-hidden="true"></i> Sales
                               </a>
                             </div>
                           </div>
@@ -265,7 +267,7 @@ class PersonalUseOrdersScreen extends Component {
                   </div>
                   <div className="col-md-10">
                     <div className="col-sm-12">
-                      <div className="">
+                      <div>
                         <ul className="nav nav-tabs">
                           <li className="nav-item">
                             <a className="nav-link" data-toggle="tab" href="#RecentOrders">Recent Orders</a>
@@ -329,7 +331,11 @@ class PersonalUseOrdersScreen extends Component {
               </div>
             </div>
           </div>
-          <PageFooter />
+        </div>
+        <div>
+          <div className="col-sm-12">
+            <PageFooter />
+          </div>
         </div>
 
       </div>

@@ -560,199 +560,202 @@ class CustomersScreen extends Component {
     const { isLoadingDetails, customerDetails } = this.state
     return (
       <div>
-        <div className="container-fluid">
+        <div className="col-sm-12">
           <HomeHeaderscreen />
+        </div>
+        <div className="container-fluid page_container">         
           <div className="content">
-            <div className="">
+            <div>
               <div className="col-sm-12">
                 <h2 className="h2hdr">Customer List</h2>
-                <div className="row pl10">
+                <div className="row">
                   <div className="col-md-2">
                     <ReportLeftmenuscreen {...{ "name": "customers" }} />
                   </div>
                   <div className="col-md-10">
-                    <div className="panel panel-default panelmb50" style={{ backgroundColor: "#ebf2ff" }}>
-                      <BootstrapTable search={true} searchPlaceholder='Search Customer' remote={this.state.isRemote} data={this.state.CustomerList} exportCSV={true} pagination={true}
-                        fetchInfo={{ dataTotalSize: this.state.totalDataSize }}
-                        options={{
-                          defaultSearch: '',
-                          searchDelayTime: 2000,
-                          sizePerPage: this.state.sizePerPage,
-                          onPageChange: this.onPageChange.bind(this),
-                          sizePerPageList: [5, 10, 20],
-                          page: this.state.currentPage,
-                          noDataText: this.checkCustomerFetchedData(),
-                          onSortChange: this.onSortChange.bind(this),
-                          exportCSVBtn: this.createCustomExportCSVButton.bind(this),
-                          toolBar: this.createCustomToolBar.bind(this),
-                          searchPanel: (props) => (<MySearchPanel {...props} />),
-                          searchField: this.createCustomSearchField.bind(this),
-                          onSearchChange: this.onSearchChange.bind(this)
-                        }}>
-                        <TableHeaderColumn export={false} dataFormat={this.customerDetailsFormatter.bind(this)} dataAlign='center' width='30'></TableHeaderColumn>
-                        <TableHeaderColumn dataField='CustomerID' isKey={true} dataSort={true}>ID</TableHeaderColumn>
-                        <TableHeaderColumn dataField='CustomerName' dataSort={true}>Customer Name</TableHeaderColumn>
-                        <TableHeaderColumn dataField='Email' dataSort={true}>Email</TableHeaderColumn>
-                        <TableHeaderColumn dataField='Phone' searchable={true} dataSort={true}>Phone</TableHeaderColumn>
-                        <TableHeaderColumn dataField='Address' dataSort={true}>Address</TableHeaderColumn>
-                      </BootstrapTable>
+                    <div className="gridlpdng">
+                      <div className="panel panel-default panelmb50" style={{ backgroundColor: "#ebf2ff" }}>
+                        <BootstrapTable search={true} searchPlaceholder='Search Customer' remote={this.state.isRemote} data={this.state.CustomerList} exportCSV={true} pagination={true}
+                          fetchInfo={{ dataTotalSize: this.state.totalDataSize }}
+                          options={{
+                            defaultSearch: '',
+                            searchDelayTime: 2000,
+                            sizePerPage: this.state.sizePerPage,
+                            onPageChange: this.onPageChange.bind(this),
+                            sizePerPageList: [5, 10, 20],
+                            page: this.state.currentPage,
+                            noDataText: this.checkCustomerFetchedData(),
+                            onSortChange: this.onSortChange.bind(this),
+                            exportCSVBtn: this.createCustomExportCSVButton.bind(this),
+                            toolBar: this.createCustomToolBar.bind(this),
+                            searchPanel: (props) => (<MySearchPanel {...props} />),
+                            searchField: this.createCustomSearchField.bind(this),
+                            onSearchChange: this.onSearchChange.bind(this)
+                          }}>
+                          <TableHeaderColumn export={false} dataFormat={this.customerDetailsFormatter.bind(this)} dataAlign='center' width='30'></TableHeaderColumn>
+                          <TableHeaderColumn dataField='CustomerID' isKey={true} dataSort={true}>ID</TableHeaderColumn>
+                          <TableHeaderColumn dataField='CustomerName' dataSort={true}>Customer Name</TableHeaderColumn>
+                          <TableHeaderColumn dataField='Email' dataSort={true}>Email</TableHeaderColumn>
+                          <TableHeaderColumn dataField='Phone' searchable={true} dataSort={true}>Phone</TableHeaderColumn>
+                          <TableHeaderColumn dataField='Address' dataSort={true}>Address</TableHeaderColumn>
+                        </BootstrapTable>
 
 
-                      <div className="modal fade bd-example-modal-lg" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                        <div className="modal-dialog modal-lg">
-                          <div className="modal-content">
-                            <div className="modal-header">
-                              <h5 className="modal-title hdrh5" id="exampleModalLabel">Customer Details</h5>
-                              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true" className="closeicon">&times;</span>
-                              </button>
-                            </div>
-                            <div className="modal-body">
-                              <div>
-                                {isLoadingDetails ? (
-                                  <div className="row">
-                                    <div className="col-sm-12 col-xs-12 col-md-6 col-lg-6">
-                                      <center><ReactLoading type="bars" color="#000" height={30} width={30} /></center>
-                                    </div>
-                                  </div>
-                                ) : (
-                                    <div className="row">
-                                      <div className="col-sm-2">
-                                        <img className="img-fluid logopdng1 avatar" src="../src/images/profiles/14113.png" alt="logo"></img>
-                                        {/* <img src="" className="avatar"></img> */}
-                                      </div>
-                                      <div className="col-sm-10">
-                                        <h3 className="Customerh3"><strong>{customerDetails.FirstName + " " + customerDetails.LastName}</strong> <small className="textmuted">#{customerDetails.CustomerID}</small><br></br>
-                                        </h3>
-                                      </div>
-                                    </div>
-                                  )
-                                }
+                        <div className="modal fade bd-example-modal-lg" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                          <div className="modal-dialog modal-lg">
+                            <div className="modal-content">
+                              <div className="modal-header">
+                                <h5 className="modal-title hdrh5" id="exampleModalLabel">Customer Details</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true" className="closeicon">&times;</span>
+                                </button>
+                              </div>
+                              <div className="modal-body">
                                 <div>
-                                  <div className="col-sm-12">
-                                    <ul className="nav nav-tabs margintop30" id="myTab" role="tablist">
-                                      <li className="nav-item">
-                                        <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">General</a>
-                                      </li>
-                                      <li onClick={this.handleOrderClick} className="nav-item">
-                                        <a className="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false">Orders</a>
-                                      </li>
-                                      <li onClick={this.handleAutoOrderClick} className="nav-item">
-                                        <a className="nav-link" id="autoorders-tab" data-toggle="tab" href="#autoorders" role="tab" aria-controls="autoorders" aria-selected="false">Auto Orders</a>
-                                      </li>
-                                    </ul>
-                                    <div className="tab-content" id="myTabContent">
-                                      <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                  {isLoadingDetails ? (
+                                    <div className="row">
+                                      <div className="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+                                        <center><ReactLoading type="bars" color="#000" height={30} width={30} /></center>
+                                      </div>
+                                    </div>
+                                  ) : (
+                                      <div className="row">
+                                        <div className="col-sm-2">
+                                          <img className="img-fluid logopdng1 avatar" src="../src/images/profiles/14113.png" alt="logo"></img>
+                                          {/* <img src="" className="avatar"></img> */}
+                                        </div>
+                                        <div className="col-sm-10">
+                                          <h3 className="Customerh3"><strong>{customerDetails.FirstName + " " + customerDetails.LastName}</strong> <small className="textmuted">#{customerDetails.CustomerID}</small><br></br>
+                                          </h3>
+                                        </div>
+                                      </div>
+                                    )
+                                  }
+                                  <div>
+                                    <div className="col-sm-12">
+                                      <ul className="nav nav-tabs margintop30" id="myTab" role="tablist">
+                                        <li className="nav-item">
+                                          <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">General</a>
+                                        </li>
+                                        <li onClick={this.handleOrderClick} className="nav-item">
+                                          <a className="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false">Orders</a>
+                                        </li>
+                                        <li onClick={this.handleAutoOrderClick} className="nav-item">
+                                          <a className="nav-link" id="autoorders-tab" data-toggle="tab" href="#autoorders" role="tab" aria-controls="autoorders" aria-selected="false">Auto Orders</a>
+                                        </li>
+                                      </ul>
+                                      <div className="tab-content" id="myTabContent">
+                                        <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-                                        <div className="row">
-                                          <div className="col-sm-6 padiingt10">
-                                            <label>Contact Information</label>
-                                            {isLoadingDetails ? (
-                                              <div className="well well-white no-border wellbg">
-                                                <center><ReactLoading type="bars" color="#000" height={30} width={30} /></center>
-                                              </div>
-                                            ) : (
+                                          <div className="row">
+                                            <div className="col-sm-6 padiingt10">
+                                              <label>Contact Information</label>
+                                              {isLoadingDetails ? (
                                                 <div className="well well-white no-border wellbg">
-                                                  <div className="media">
-                                                    <i className="media-object fa fa-phone fa_icon1"></i>
-                                                    <div className="media-body">
-                                                      <a href="tel:">{customerDetails.PrimaryPhone}</a>
-                                                    </div>
-                                                  </div>
-                                                  <div className="media">
-                                                    <i className="media-object fa fa-envelope fa_icon1"></i>
-                                                    <div className="media-body">
-                                                      <a href={"mailto:" + customerDetails.LoginName}>{customerDetails.LoginName}</a>
-                                                    </div>
-                                                  </div>
+                                                  <center><ReactLoading type="bars" color="#000" height={30} width={30} /></center>
                                                 </div>
-                                              )}
+                                              ) : (
+                                                  <div className="well well-white no-border wellbg">
+                                                    <div className="media">
+                                                      <i className="media-object fa fa-phone fa_icon1"></i>
+                                                      <div className="media-body">
+                                                        <a href="tel:">{customerDetails.PrimaryPhone}</a>
+                                                      </div>
+                                                    </div>
+                                                    <div className="media">
+                                                      <i className="media-object fa fa-envelope fa_icon1"></i>
+                                                      <div className="media-body">
+                                                        <a href={"mailto:" + customerDetails.LoginName}>{customerDetails.LoginName}</a>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                )}
+                                            </div>
                                           </div>
-                                        </div>
 
-                                        <div className="row">
-                                          <div className="col-sm-6">
-                                            <label>Addresses</label>
-                                            {isLoadingDetails ? (
-                                              <center>
-                                                <ReactLoading type="bars" color="#000" height={30} width={30} />
-                                              </center>
-                                            ) : (
-                                                <div>
-                                                  {JSON.stringify(customerDetails) !== JSON.stringify({}) ? (<div className="well well-white no-border wellbg">
-                                                    {customerDetails.MainAddress.trim() ? (
-                                                      <div className="media">
-                                                        <i className="media-object fa fa-home"></i>
-                                                        <div className="media-body">
-                                                          <p className="addresspara">{customerDetails.MainAddress}</p>
-                                                          <p className="addresspara">{customerDetails.MainCity + " " + customerDetails.MainState}</p>
-                                                          <p className="addresspara">{customerDetails.MainCountry + " " + customerDetails.MainZip}</p>
+                                          <div className="row">
+                                            <div className="col-sm-6">
+                                              <label>Addresses</label>
+                                              {isLoadingDetails ? (
+                                                <center>
+                                                  <ReactLoading type="bars" color="#000" height={30} width={30} />
+                                                </center>
+                                              ) : (
+                                                  <div>
+                                                    {JSON.stringify(customerDetails) !== JSON.stringify({}) ? (<div className="well well-white no-border wellbg">
+                                                      {customerDetails.MainAddress.trim() ? (
+                                                        <div className="media">
+                                                          <i className="media-object fa fa-home"></i>
+                                                          <div className="media-body">
+                                                            <p className="addresspara">{customerDetails.MainAddress}</p>
+                                                            <p className="addresspara">{customerDetails.MainCity + " " + customerDetails.MainState}</p>
+                                                            <p className="addresspara">{customerDetails.MainCountry + " " + customerDetails.MainZip}</p>
+                                                          </div>
                                                         </div>
-                                                      </div>
-                                                    ) : null}
-                                                    {customerDetails.MailAddress.trim() ? (
-                                                      <div className="media">
-                                                        <i className="media-object fa fa-home"></i>
-                                                        <div className="media-body">
-                                                          <p className="addresspara">{customerDetails.MailAddress}</p>
-                                                          <p className="addresspara">{customerDetails.MailCity + " " + customerDetails.MailState}</p>
-                                                          <p className="addresspara">{customerDetails.MailCountry + " " + customerDetails.MailZip}</p>
+                                                      ) : null}
+                                                      {customerDetails.MailAddress.trim() ? (
+                                                        <div className="media">
+                                                          <i className="media-object fa fa-home"></i>
+                                                          <div className="media-body">
+                                                            <p className="addresspara">{customerDetails.MailAddress}</p>
+                                                            <p className="addresspara">{customerDetails.MailCity + " " + customerDetails.MailState}</p>
+                                                            <p className="addresspara">{customerDetails.MailCountry + " " + customerDetails.MailZip}</p>
+                                                          </div>
                                                         </div>
-                                                      </div>
-                                                    ) : null}
-                                                    {customerDetails.OtherAddress.trim() ? (
-                                                      <div className="media">
-                                                        <i className="media-object fa fa-home"></i>
-                                                        <div className="media-body">
-                                                          <p className="addresspara">{customerDetails.OtherAddress}</p>
-                                                          <p className="addresspara">{customerDetails.OtherCity + " " + customerDetails.OtherState}</p>
-                                                          <p className="addresspara">{customerDetails.OtherCountry + " " + customerDetails.OtherZip}</p>
+                                                      ) : null}
+                                                      {customerDetails.OtherAddress.trim() ? (
+                                                        <div className="media">
+                                                          <i className="media-object fa fa-home"></i>
+                                                          <div className="media-body">
+                                                            <p className="addresspara">{customerDetails.OtherAddress}</p>
+                                                            <p className="addresspara">{customerDetails.OtherCity + " " + customerDetails.OtherState}</p>
+                                                            <p className="addresspara">{customerDetails.OtherCountry + " " + customerDetails.OtherZip}</p>
+                                                          </div>
                                                         </div>
-                                                      </div>
-                                                    ) : null}
-                                                  </div>) : (null)}
-                                                </div>
-                                              )}
+                                                      ) : null}
+                                                    </div>) : (null)}
+                                                  </div>
+                                                )}
+                                            </div>
                                           </div>
                                         </div>
-                                      </div>
-                                      <div className="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-                                        <BootstrapTable remote={this.state.Order.isRemote} data={this.state.Order.OrderList} pagination={true}
-                                          fetchInfo={{ dataTotalSize: this.state.Order.totalDataSize }}
-                                          options={{
-                                            sizePerPage: this.state.Order.sizePerPage,
-                                            onPageChange: this.onOrderPageChange.bind(this),
-                                            sizePerPageList: [5, 10],
-                                            page: this.state.Order.currentPage,
-                                            noDataText: this.checkOrderFetchedData(),
-                                            onSortChange: this.onOrderSortChange.bind(this),
-                                          }}>
-                                          <TableHeaderColumn dataField='OrderDate' dataFormat={this.orderDateFormatter.bind(this)} isKey={true} dataSort={true}>Order Date</TableHeaderColumn>
-                                          <TableHeaderColumn dataField='SubTotal' dataFormat={this.orderTotalFormatter.bind(this)} dataSort={true}>Total</TableHeaderColumn>
-                                          <TableHeaderColumn dataField='BusinessVolumeTotal' dataFormat={this.orderPVFormatter.bind(this)} dataSort={true}>PV</TableHeaderColumn>
-                                        </BootstrapTable>
-                                      </div>
-                                      <div className="tab-pane fade" id="autoorders" role="tabpanel" aria-labelledby="autoorders-tab">
-                                        <BootstrapTable remote={this.state.AutoOrder.isRemote} data={this.state.AutoOrder.AutoOrderList} pagination={true}
-                                          fetchInfo={{ dataTotalSize: this.state.AutoOrder.totalDataSize }}
-                                          options={{
-                                            sizePerPage: this.state.AutoOrder.sizePerPage,
-                                            onPageChange: this.onAutoOrderPageChange.bind(this),
-                                            sizePerPageList: [5, 10],
-                                            page: this.state.AutoOrder.currentPage,
-                                            noDataText: this.checkAutoOrderFetchedData(),
-                                            onSortChange: this.onAutoOrderSortChange.bind(this),
-                                          }}>
-                                          <TableHeaderColumn dataField='LastRunDate' dataFormat={this.autoOrderLastRunDateFormatter.bind(this)} isKey={true} dataSort={true}>Last Process Date</TableHeaderColumn>
-                                          <TableHeaderColumn dataField='NextRunDate' dataFormat={this.autoOrderNextRunDateFormatter.bind(this)} dataSort={true}>Next Process Date</TableHeaderColumn>
-                                          <TableHeaderColumn dataField='SubTotal' dataFormat={this.autoOrderTotalFormatter.bind(this)} dataSort={true}>Subtotal</TableHeaderColumn>
-                                          <TableHeaderColumn dataField='BusinessVolumeTotal' dataFormat={this.autoOrderPVFormatter.bind(this)} dataSort={true}>PV</TableHeaderColumn>
-                                        </BootstrapTable>
+                                        <div className="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                                          <BootstrapTable remote={this.state.Order.isRemote} data={this.state.Order.OrderList} pagination={true}
+                                            fetchInfo={{ dataTotalSize: this.state.Order.totalDataSize }}
+                                            options={{
+                                              sizePerPage: this.state.Order.sizePerPage,
+                                              onPageChange: this.onOrderPageChange.bind(this),
+                                              sizePerPageList: [5, 10],
+                                              page: this.state.Order.currentPage,
+                                              noDataText: this.checkOrderFetchedData(),
+                                              onSortChange: this.onOrderSortChange.bind(this),
+                                            }}>
+                                            <TableHeaderColumn dataField='OrderDate' dataFormat={this.orderDateFormatter.bind(this)} isKey={true} dataSort={true}>Order Date</TableHeaderColumn>
+                                            <TableHeaderColumn dataField='SubTotal' dataFormat={this.orderTotalFormatter.bind(this)} dataSort={true}>Total</TableHeaderColumn>
+                                            <TableHeaderColumn dataField='BusinessVolumeTotal' dataFormat={this.orderPVFormatter.bind(this)} dataSort={true}>PV</TableHeaderColumn>
+                                          </BootstrapTable>
+                                        </div>
+                                        <div className="tab-pane fade" id="autoorders" role="tabpanel" aria-labelledby="autoorders-tab">
+                                          <BootstrapTable remote={this.state.AutoOrder.isRemote} data={this.state.AutoOrder.AutoOrderList} pagination={true}
+                                            fetchInfo={{ dataTotalSize: this.state.AutoOrder.totalDataSize }}
+                                            options={{
+                                              sizePerPage: this.state.AutoOrder.sizePerPage,
+                                              onPageChange: this.onAutoOrderPageChange.bind(this),
+                                              sizePerPageList: [5, 10],
+                                              page: this.state.AutoOrder.currentPage,
+                                              noDataText: this.checkAutoOrderFetchedData(),
+                                              onSortChange: this.onAutoOrderSortChange.bind(this),
+                                            }}>
+                                            <TableHeaderColumn dataField='LastRunDate' dataFormat={this.autoOrderLastRunDateFormatter.bind(this)} isKey={true} dataSort={true}>Last Process Date</TableHeaderColumn>
+                                            <TableHeaderColumn dataField='NextRunDate' dataFormat={this.autoOrderNextRunDateFormatter.bind(this)} dataSort={true}>Next Process Date</TableHeaderColumn>
+                                            <TableHeaderColumn dataField='SubTotal' dataFormat={this.autoOrderTotalFormatter.bind(this)} dataSort={true}>Subtotal</TableHeaderColumn>
+                                            <TableHeaderColumn dataField='BusinessVolumeTotal' dataFormat={this.autoOrderPVFormatter.bind(this)} dataSort={true}>PV</TableHeaderColumn>
+                                          </BootstrapTable>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-
                               </div>
                             </div>
                           </div>
@@ -763,6 +766,10 @@ class CustomersScreen extends Component {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div>
+          <div className="col-sm-12">
             <PageFooter />
           </div>
         </div>

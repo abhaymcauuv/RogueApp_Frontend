@@ -9,7 +9,7 @@ const BASE_URL = `http://localhost:6003/`;
 
 class RecentActivityScreen extends Component {
   state = {
-  ActivityData:[]
+    ActivityData: []
   }
   componentDidMount() {
     // Send a POST request
@@ -25,13 +25,13 @@ class RecentActivityScreen extends Component {
       }
     }).then(async (response) => {
       const dt = await response.data.Items;
-      let dtt=[];
-      dtt.push({"data":"Virginia Murphy has just placed an order [887099].","time":"6 hours ago"});
-      dtt.push({"data":"Robyn Hansen has just placed an order [887004].","time":"7 hours ago"});
+      let dtt = [];
+      dtt.push({ "data": "Virginia Murphy has just placed an order [887099].", "time": "6 hours ago" });
+      dtt.push({ "data": "Robyn Hansen has just placed an order [887004].", "time": "7 hours ago" });
       console.log(dtt);
       //await this.setState({ TotalRecord: dt[0].TotalRecordCount });
       //console.log("TotalRecordCount",dt[0].TotalRecordCount);
-      this.setState({ ActivityData: dt.length<=0? dtt:dt});
+      this.setState({ ActivityData: dt.length <= 0 ? dtt : dt });
     }).catch(function (error) {
       console.log(error);
     });
@@ -39,30 +39,39 @@ class RecentActivityScreen extends Component {
   render() {
     return (
       <div>
-        <div className="container-fluid">
+        <div className="col-sm-12">
           <HomeHeaderscreen />
+        </div>
+        <div className="container-fluid page_container">
           <div className="content">
-            <div className="">
+            <div>
               <div className="col-sm-12">
                 <h2 className="h2hdr">Your Team's Recent Activity</h2>
-                <div className="row pl10">
-                <div className="col-md-2">
+                <div className="row">
+                  <div className="col-md-2">
                     <ReportLeftmenuscreen />
                   </div>
                   <div className="col-md-10">
-                    <ul className="list-group">
-                    {this.state.ActivityData.map((val, i)=>{
-                        return( <li className="list-group-item">
-                        <div>{val.data}</div>
-                        <small>{val.time}</small>
-                      </li>)})}
-                    </ul>
+                    <div className="gridlpdng">
+                      <ul className="list-group">
+                        {this.state.ActivityData.map((val, i) => {
+                          return (<li className="list-group-item">
+                            <div>{val.data}</div>
+                            <small>{val.time}</small>
+                          </li>)
+                        })}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <PageFooter />
+        </div>
+        <div>
+          <div className="col-sm-12">
+            <PageFooter />
+          </div>
         </div>
 
       </div>

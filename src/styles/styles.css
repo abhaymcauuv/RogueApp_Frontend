@@ -109,11 +109,16 @@ h3{
   }
 
 .Header{
-   padding: 5px 0 5px 0;
+    padding-left: 3.25rem !important;
+    padding-right: 5.25rem !important;
     color: #454545;
     background-color:#fff;
+    border-bottom: solid 1px #ebebeb;
 }
-
+.menupdng{
+    padding-left: 5.25rem !important;
+    /* padding-right: 5.25rem !important; */
+}
 /* .container{
     width: 80%;
     margin: 0 auto; 
@@ -138,7 +143,7 @@ h3{
 }
 .content{
     background-color: #fff;
-    min-height: 589px;
+    min-height: 724px;
     padding-top: 0px;
 }
 .innercontent{
@@ -163,10 +168,10 @@ h3{
     width: 100%; 
     height: 50px;
     text-align: center;
-    padding-top: 15px;       
+    padding-top: 12px;       
     color: #454545;
-    background-color: #e8eced;
-    border-top: solid 1px #e4e4e4;
+    background-color: #e9e9e9;
+    border-top: solid 1px #d9d9d9;
 
 }
 .navlinks{
@@ -936,9 +941,9 @@ dd {
   
   @media screen  and (max-width: 979px) /* Tablet */ {
     .flag-select {         
-        margin-top: 0px;
-        
+        margin-top: 0px;        
     }
+    
   }
   
   @media screen and (max-width: 500px) /* Mobile */ {
@@ -963,11 +968,11 @@ dd {
     text-shadow: none !important;
 }
 .h2hdr{
-    font-size: 26px;
+    font-size: 23px;
     padding-top: 15px;
     padding-bottom: 15px;
     color: #255c8f;
-    padding-left: 15px;
+    padding-left: 0px;
 }
 .dropdown-menu.show {  
     border-color: transparent !important;
@@ -983,6 +988,7 @@ dd {
   }
 .forminput{
     height: 40px !important;
+    padding-left: 3.5rem !important;
 }
 .btnmgn{
     margin-top: 25px;
@@ -1002,10 +1008,22 @@ dd {
     padding: 55px;
     border: solid 1px #f1f1f1;
 }
+.rc-menu {
+    outline: none;
+    margin-bottom: 0;
+    padding-left: 0px;
+    padding-right: 0;
+    list-style: none;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0 0 4px #d9d9d9;
+    border-radius: 3px;
+    color: #666;
+}
 .rc-menu-horizontal {
-    background-color: #f7f7f8 !important;
+    padding-left: 48px !important;
+    background-color: #fff !important;
     border: none;
-    border-bottom: 1px solid #f0f0f0 !important;
+    border-bottom: 1px solid #ebebeb !important;
     box-shadow: none;
     white-space: nowrap;
     overflow: hidden;
@@ -1016,7 +1034,7 @@ dd {
 }
 .rc-menu-horizontal > .rc-menu-submenu-active, .rc-menu-horizontal > .rc-menu-item-active {
     border-bottom: 2px solid #4b9be5 !important;
-    background-color: #f3f5f7;
+    background-color: #fff;
     color: #4b9be5 !important;
 }
 .rc-menu-item a{
@@ -1025,7 +1043,7 @@ dd {
 .margintop-5 {
     margin-top: 20px;
     text-align: right;
-    padding-right: 45px;
+    padding-right: 20px;
 }
 .avatar.avatar-xs {
     padding: 0;
@@ -1057,11 +1075,11 @@ dd {
     padding-right: 0 !important;
 }
 .mycart{
-padding-top: 15px;
-padding-bottom: 17px;
-background-color: #f7f7f8 !important;
-border: none;
-border-bottom: 1px solid #f0f0f0 !important;
+    padding: 15px 23px 17px 0;
+    text-align: center;
+    background-color: #fff !important;
+    border: none;
+    border-bottom: 1px solid #ebebeb !important;
 }
 /*---------------*/
 /* .view-navigation .panel-default>.panel-heading.active {
@@ -1162,6 +1180,7 @@ border-bottom: 1px solid #f0f0f0 !important;
 }
 .padiingt10{
     padding-top: 20px;
+    padding-bottom: 60px;
 }
 .bluecolor{
     color: #296091;
@@ -1353,7 +1372,7 @@ tr:nth-child(odd) {background: #FFF}
     margin-bottom: 5px;
 }
 .dropdown, .dropleft, .dropright, .dropup {   
-    margin-left: 10px;
+    margin-left: 0px;
 }
 
 
@@ -1475,7 +1494,7 @@ tr:nth-child(odd) {background: #FFF}
   }
   .feature-grid img{
       width:100%;
-      padding:0em 2em 1em 2em;
+      padding:1em 2em 0em 2em;
   }
   .feature-grid{
       position:relative;
@@ -1547,7 +1566,7 @@ span.disc{
     margin-top: 15px;
 }
 .deatilshdr{   
-    font-size: 23px;
+    font-size: 20px;
     color: #f28365;
     font-weight: bold;
 }
@@ -1672,8 +1691,8 @@ span.disc{
 .pt10{
     padding-top: 10px;
 }
-.pr35{
-    padding-right: 35px;
+.pr8{
+    padding-right: 8px;
 }
 .inputht{
     min-height: 36px !important;
@@ -1684,7 +1703,23 @@ span.disc{
 .fbold{
     font-weight: 600;
 }
-
+.usericon{
+    color: #cbcbcb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 27px;
+    left: 10px;
+}
+.page_container{
+    display: block;
+    padding-left: 5.25rem !important;
+    padding-right: 5.25rem !important;
+}
+.gridlpdng{
+    padding-left: 2rem;
+}
 
 
 
@@ -1707,6 +1742,22 @@ span.disc{
 .shrt{
   padding: 0.5em 0.8em;
   font-size: 1.3em;
+}
+.Header{
+    padding-left: .25rem !important;
+    padding-right: .25rem !important;    
+}
+.rc-menu-horizontal {
+    padding-left: 5px !important;    
+}
+.page_container {   
+    padding-left: .25rem !important;
+    padding-right: .25rem !important;
+}
+.margintop-5 {
+    margin-top: 10px;
+    text-align: right;
+    padding-right: 20px;
 }
 
 }

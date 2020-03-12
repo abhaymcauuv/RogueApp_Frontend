@@ -37,10 +37,12 @@ class UninstallScreen extends Component {
   render() {
     return (
       <div>
-        <div className="container-fluid">
+        <div className="col-sm-12">
           <HomeHeaderscreen />
+        </div>
+        <div className="container-fluid page_container">
           <div className="content">
-            <div className="">
+            <div>
               <div className="col-sm-12">
                 <h2 className="h2hdr">Plugin Uninstall</h2>
                 <div className="row">
@@ -48,7 +50,8 @@ class UninstallScreen extends Component {
                     <PluginsLeftmenuscreen />
                   </div>
                   <div className="col-md-10">
-                    {/* <form className="form-horizontal">
+                    <div className="gridlpdng">
+                      {/* <form className="form-horizontal">
                       <div className="form-group">
                         <label className="control-label col-sm-2 formtext">Plugin Name :</label>
                         <div className="col-sm-4">
@@ -61,57 +64,57 @@ class UninstallScreen extends Component {
                         </div>
                       </div>
                     </form> */}
-                    <div className="panel panel-default panelmb50" >
-                      <div>
-                        <table className="table table-bordered tablemrb" style={{ "text-align": "center" }}>
-                          <thead>
-                            <tr className="tdbg">
-                              <th scope="col">ID</th>
-                              <th scope="col">Plugin Name</th>
-                              <th scope="col">Uninstall</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {
-                              header.map((item, index) => {
-                                return <tr className="tdbg">
-                                  {/* <td><Link to="/"><i className="far fa-address-book"></i></Link></td> */}
-                                  <td>{item.id}</td>
-                                  <td>{item.name}</td>
-                                  <button type="button" className="btn btn-default btn-sm">
-                                    <li key={item.id} value={item.id} onClick={(e) => this.onDelete(e)} className="glyphicon glyphicon-trash"></li>
-                                  </button>
-                                </tr>
-                              })
-                            }
-                          </tbody>
-                        </table>
-                        <div className="row">
-                          <div className="col-sm-9">
-                            <nav aria-label="Page navigation example">
-                              <ul className="pagination">
-                                <li className="page-item">
-                                  <a className="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span className="sr-only">Previous</span>
-                                  </a>
-                                </li>
-                                <li className="page-item"><a className="page-link" href="#">1</a></li>
-                                <li className="page-item"><a className="page-link" href="#">2</a></li>
-                                <li className="page-item"><a className="page-link" href="#">3</a></li>
-                                <li className="page-item">
-                                  <a className="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span className="sr-only">Next</span>
-                                  </a>
-                                </li>
-                              </ul>
-                            </nav>
+                      <div className="panel panel-default panelmb50" >
+                        <div>
+                          <table className="table table-bordered tablemrb" style={{ "text-align": "center" }}>
+                            <thead>
+                              <tr className="tdbg">
+                                <th scope="col">ID</th>
+                                <th scope="col">Plugin Name</th>
+                                <th scope="col">Uninstall</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {
+                                header.map((item, index) => {
+                                  return <tr className="tdbg">
+                                    {/* <td><Link to="/"><i className="far fa-address-book"></i></Link></td> */}
+                                    <td>{item.id}</td>
+                                    <td>{item.name}</td>
+                                    <button type="button" className="btn btn-default btn-sm">
+                                      <li key={item.id} value={item.id} onClick={(e) => this.onDelete(e)} className="glyphicon glyphicon-trash"></li>
+                                    </button>
+                                  </tr>
+                                })
+                              }
+                            </tbody>
+                          </table>
+                          <div className="row">
+                            <div className="col-sm-9">
+                              <nav aria-label="Page navigation example">
+                                <ul className="pagination">
+                                  <li className="page-item">
+                                    <a className="page-link" href="#" aria-label="Previous">
+                                      <span aria-hidden="true">&laquo;</span>
+                                      <span className="sr-only">Previous</span>
+                                    </a>
+                                  </li>
+                                  <li className="page-item"><a className="page-link" href="#">1</a></li>
+                                  <li className="page-item"><a className="page-link" href="#">2</a></li>
+                                  <li className="page-item"><a className="page-link" href="#">3</a></li>
+                                  <li className="page-item">
+                                    <a className="page-link" href="#" aria-label="Next">
+                                      <span aria-hidden="true">&raquo;</span>
+                                      <span className="sr-only">Next</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </nav>
+                            </div>
+                            <div className="col-sm-3 paddingt10">
+                              <span className="k-pager-info k-label">1 - 23 of 23 items</span>
+                            </div>
                           </div>
-                          <div className="col-sm-3 paddingt10">
-                            <span className="k-pager-info k-label">1 - 23 of 23 items</span>
-                          </div>
-
                         </div>
                       </div>
                     </div>
@@ -120,7 +123,11 @@ class UninstallScreen extends Component {
               </div>
             </div>
           </div>
-          <PageFooter />
+        </div>
+        <div>
+          <div className="col-sm-12">
+            <PageFooter />
+          </div>
         </div>
 
       </div>

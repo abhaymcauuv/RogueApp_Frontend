@@ -8,10 +8,12 @@ class MyCartScreen extends Component {
   render() {
     return (
       <div>
-        <div className="container-fluid">
+        <div className="col-sm-12">
           <HomeHeaderscreen />
-          <div className="row content">
-            <div className="container">   
+        </div>
+        <div className="container-fluid page_container">
+          <div className="content">
+            <div>
               <div className="col-sm-12">
                 <div className="row padiingt10">
                   <div className="col-sm-12"><h2>Cart</h2></div>
@@ -24,7 +26,11 @@ class MyCartScreen extends Component {
               </div>
             </div>
           </div>
-          <PageFooter />
+        </div>
+        <div>
+          <div className="col-sm-12">
+            <PageFooter />
+          </div>
         </div>
 
       </div>

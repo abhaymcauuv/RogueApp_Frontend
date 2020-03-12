@@ -117,104 +117,107 @@ class WattsofLoveDonationsScreen extends Component {
 
     return (
       <div>
-        <div className="container-fluid">
+        <div className="col-sm-12">
           <HomeHeaderscreen />
+        </div>
+        <div className="container-fluid page_container">
           <div className="content">
-            <div className="">
+            <div>
               <div className="col-sm-12">
                 <h2 className="h2hdr">Watts of Love Donations</h2>
-                <div className="row pl10">
-                <div className="col-md-2">
+                <div className="row">
+                  <div className="col-md-2">
                     <ReportLeftmenuscreen />
                   </div>
                   <div className="col-md-10">
-                    <div>
-                      <div className="well well-sm">
-                        <div className="row">
-                          <div className="col-sm-5">
-                            <div className="input-group">
-                              <span className="input-group-btn">
-                                <button className="btn btn-default" type="button"><i className="fa fa-chevron-left"></i></button>
-                              </span>
-                              <select id="periods" className="form-control" onChange={(val) => this.handleChange(val)}>
-                                {this.state.wolPeriodData.map((dt, i) => {
-                                  return (
-                                    <option key={i} value={dt.PeriodID}>{dt.PeriodDescription}</option>
-                                  )
-                                })}
-                              </select>
-                              <span className="input-group-btn">
-                                <button className="btn btn-default" type="button"><i className="fa fa-chevron-right"></i></button>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="panel panel-default panelmb50">
-                      <div className="panel-body">
-                        <h4>Total Monthly Donations</h4>
-                        <div className="row">
-                          <div className="col-sm-4">
-                            <div className="metric metric-sm">
-                              <span className="metric-body text-info"> ${
-                                this.state.TotalDonation
-                              }</span>
-                              <span>USD</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                    <div className="gridlpdng">
                       <div>
-                        <table className="table table-bordered tablemrb">
-                          <thead>
-                            <tr className="tdbg">
-                              <th scope="col"></th>
-                              <th scope="col">Order Date</th>
-                              <th scope="col">Order Number</th>
-                              <th scope="col">Dollar Amount</th>
-                              <th scope="col">Customer Name</th>
-                              <th scope="col">ID</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {this.state.wolData.map((dt, i) => {
-                              return (
-                                <tr className="tdbg" key={i}>
-                                  <td><Link to="#" key={dt.CustomerID}><i className="far fa-address-book"></i></Link></td>
-                                  <td>{new Date(dt.OrderDate).getMonth() + 1 + "/" + new Date(dt.OrderDate).getDate() + "/" + new Date(dt.OrderDate).getFullYear()}</td>
-                                  <td>{dt.OrderID}</td>
-                                  <td>{dt.CustomerName}</td>
-                                  <td>{dt.CustomerID}</td>
-                                  <td>{dt.TotalofDonations}</td>
-                                </tr>)
-                            })}
-                          </tbody>
-                        </table>
-                        <div className="row">
-                          <div className="col-sm-9">
-                            <nav aria-label="Page navigation example">
-                              <ul className="pagination">
-                                <li className="page-item">
-                                  <a className="page-link" href="javascript:void(0);" onClick={() => this.pageChange(-1)} aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span className="sr-only">Previous</span>
-                                  </a>
-                                </li>
-                                {this.paginationRecords()}
-                                <li className="page-item">
-                                  <a className="page-link" href="javascript:void(0);" aria-label="Next" onClick={() => this.pageChange(1)}>
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span className="sr-only">Next</span>
-                                  </a>
-                                </li>
-                              </ul>
-                            </nav>
+                        <div className="well well-sm">
+                          <div className="row">
+                            <div className="col-sm-5">
+                              <div className="input-group">
+                                <span className="input-group-btn">
+                                  <button className="btn btn-default" type="button"><i className="fa fa-chevron-left"></i></button>
+                                </span>
+                                <select id="periods" className="form-control" onChange={(val) => this.handleChange(val)}>
+                                  {this.state.wolPeriodData.map((dt, i) => {
+                                    return (
+                                      <option key={i} value={dt.PeriodID}>{dt.PeriodDescription}</option>
+                                    )
+                                  })}
+                                </select>
+                                <span className="input-group-btn">
+                                  <button className="btn btn-default" type="button"><i className="fa fa-chevron-right"></i></button>
+                                </span>
+                              </div>
+                            </div>
                           </div>
-                          <div className="col-sm-3 paddingt10">
-                            <span className="k-pager-info k-label">{this.state.TotalRecord == 0 ? 0 : (this.state.PageNumber - 1) * 10 + 1} - {this.state.TotalRecord == 0 ? 0 : this.state.PageNumber * 10} of {this.state.TotalRecord} items</span>
+                        </div>
+                      </div>
+                      <div className="panel panel-default panelmb50">
+                        <div className="panel-body">
+                          <h4>Total Monthly Donations</h4>
+                          <div className="row">
+                            <div className="col-sm-4">
+                              <div className="metric metric-sm">
+                                <span className="metric-body text-info"> ${
+                                  this.state.TotalDonation
+                                }</span>
+                                <span>USD</span>
+                              </div>
+                            </div>
                           </div>
-
+                        </div>
+                        <div>
+                          <table className="table table-bordered tablemrb">
+                            <thead>
+                              <tr className="tdbg">
+                                <th scope="col"></th>
+                                <th scope="col">Order Date</th>
+                                <th scope="col">Order Number</th>
+                                <th scope="col">Dollar Amount</th>
+                                <th scope="col">Customer Name</th>
+                                <th scope="col">ID</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {this.state.wolData.map((dt, i) => {
+                                return (
+                                  <tr className="tdbg" key={i}>
+                                    <td><Link to="#" key={dt.CustomerID}><i className="far fa-address-book"></i></Link></td>
+                                    <td>{new Date(dt.OrderDate).getMonth() + 1 + "/" + new Date(dt.OrderDate).getDate() + "/" + new Date(dt.OrderDate).getFullYear()}</td>
+                                    <td>{dt.OrderID}</td>
+                                    <td>{dt.CustomerName}</td>
+                                    <td>{dt.CustomerID}</td>
+                                    <td>{dt.TotalofDonations}</td>
+                                  </tr>)
+                              })}
+                            </tbody>
+                          </table>
+                          <div className="row">
+                            <div className="col-sm-9">
+                              <nav aria-label="Page navigation example">
+                                <ul className="pagination">
+                                  <li className="page-item">
+                                    <a className="page-link" href="javascript:void(0);" onClick={() => this.pageChange(-1)} aria-label="Previous">
+                                      <span aria-hidden="true">&laquo;</span>
+                                      <span className="sr-only">Previous</span>
+                                    </a>
+                                  </li>
+                                  {this.paginationRecords()}
+                                  <li className="page-item">
+                                    <a className="page-link" href="javascript:void(0);" aria-label="Next" onClick={() => this.pageChange(1)}>
+                                      <span aria-hidden="true">&raquo;</span>
+                                      <span className="sr-only">Next</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </nav>
+                            </div>
+                            <div className="col-sm-3 paddingt10">
+                              <span className="k-pager-info k-label">{this.state.TotalRecord == 0 ? 0 : (this.state.PageNumber - 1) * 10 + 1} - {this.state.TotalRecord == 0 ? 0 : this.state.PageNumber * 10} of {this.state.TotalRecord} items</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -223,7 +226,11 @@ class WattsofLoveDonationsScreen extends Component {
               </div>
             </div>
           </div>
-          <PageFooter />
+        </div>
+        <div>
+          <div className="col-sm-12">
+            <PageFooter />
+          </div>
         </div>
 
       </div>

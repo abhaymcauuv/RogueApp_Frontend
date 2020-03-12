@@ -224,10 +224,12 @@ class InventoryOrdersScreen extends Component {
   render() {
     return (
       <div>
-        <div className="container-fluid">
+        <div className="col-sm-12">
           <HomeHeaderscreen />
+        </div>
+        <div className="container-fluid page_container">
           <div className="content">
-            <div className="">
+            <div>
               <div className="col-sm-12">
                 <h2 className="h2hdr">Inventory Orders</h2>
                 <div className="row">
@@ -238,7 +240,7 @@ class InventoryOrdersScreen extends Component {
                           <div className="panel-heading active">
                             <div className="panel-title">
                               <a className="active">
-                              <i class="fa fa-list-alt lmenuicon" aria-hidden="true"></i> Inventory Orders
+                                <i className="fa fa-list-alt lmenuicon" aria-hidden="true"></i> Inventory Orders
                               </a>
                             </div>
                           </div>
@@ -247,7 +249,7 @@ class InventoryOrdersScreen extends Component {
                           <div className="panel-heading ">
                             <div className="panel-title">
                               <a href="/#/personaluseorders">
-                              <i class="fa fa-list-ul lmenuicon" aria-hidden="true"></i> Personal Use Orders
+                                <i className="fa fa-list-ul lmenuicon" aria-hidden="true"></i> Personal Use Orders
                               </a>
                             </div>
                           </div>
@@ -256,7 +258,7 @@ class InventoryOrdersScreen extends Component {
                           <div className="panel-heading">
                             <div className="panel-title">
                               <a href="/#/">
-                              <i class="fa fa-tags lmenuicon" aria-hidden="true"></i>  Sales
+                                <i className="fa fa-tags lmenuicon" aria-hidden="true"></i>  Sales
                               </a>
                             </div>
                           </div>
@@ -265,73 +267,77 @@ class InventoryOrdersScreen extends Component {
                     </nav>
                   </div>
                   <div className="col-md-10">
-                    <div className="">
-                    <div className="col-sm-12">
-                      <div className="">
-                        <ul className="nav nav-tabs">
-                          <li className="nav-item">
-                            <a className="nav-link" data-toggle="tab" href="#RecentOrders">Recent Orders</a>
-                          </li>
-                          <li className="nav-item">
-                            {/* <a className="nav-link " data-toggle="tab" href="#PersonalUseOrders">Personal Use Orders</a> */}
-                            <a className="nav-link" href="/#/personaluseorders">Personal Use Orders</a>
-                          </li>
-                          <li className="nav-item">
-                            <a className="nav-link active" data-toggle="tab" href="#InventoryOrders">Inventory Orders</a>
-                          </li>
-                        </ul>
+                    <div>
+                      <div className="col-sm-12">
+                        <div>
+                          <ul className="nav nav-tabs">
+                            <li className="nav-item">
+                              <a className="nav-link" data-toggle="tab" href="#RecentOrders">Recent Orders</a>
+                            </li>
+                            <li className="nav-item">
+                              {/* <a className="nav-link " data-toggle="tab" href="#PersonalUseOrders">Personal Use Orders</a> */}
+                              <a className="nav-link" href="/#/personaluseorders">Personal Use Orders</a>
+                            </li>
+                            <li className="nav-item">
+                              <a className="nav-link active" data-toggle="tab" href="#InventoryOrders">Inventory Orders</a>
+                            </li>
+                          </ul>
 
-                        <div className="tab-content">
-                          <div id="RecentOrders" className="tab-pane">
-                            <h3>Recent Orders</h3>
-                          </div>
-
-                          <div id="PersonalUseOrders" className="tab-pane">
-                            <h3>Personal Use Orders</h3>
-                          </div>
-
-                          <div id="InventoryOrders" className="tab-pane active">
-                            <div className="col-sm-12 textalignr textbpdng">All Orders Are Displayed In Mountain Standard Time</div>
-                            <div className="panel panel-default panelmb50 clear" style={{ backgroundColor: "#ebf2ff" }}>
-                              <div>
-                                <BootstrapTable search={false} searchPlaceholder='Search Order By Order Number' remote={this.state.isRemote} data={this.state.OrderList} exportCSV={true} pagination={true}
-                                  fetchInfo={{ dataTotalSize: this.state.totalDataSize }}
-                                  options={{
-                                    defaultSearch: '',
-                                    searchDelayTime: 2000,
-                                    sizePerPage: this.state.sizePerPage,
-                                    onPageChange: this.onPageChange.bind(this),
-                                    sizePerPageList: [5, 10, 20],
-                                    page: this.state.currentPage,
-                                    noDataText: this.checkOrderFetchedData(),
-                                    onSortChange: this.onSortChange.bind(this),
-                                    exportCSVBtn: this.createCustomExportCSVButton.bind(this),
-                                    toolBar: this.createCustomToolBar.bind(this),
-                                    searchPanel: (props) => (<MySearchPanel {...props} />),
-                                    searchField: this.createCustomSearchField.bind(this),
-                                    onSearchChange: this.onSearchChange.bind(this)
-                                  }}>
-                                  <TableHeaderColumn dataField='OrderID' isKey={true} dataSort={true}>Order Number</TableHeaderColumn>
-                                  <TableHeaderColumn dataField='Total' dataFormat={this.orderTotalFormatter.bind(this)} dataSort={true}>Total</TableHeaderColumn>
-                                  <TableHeaderColumn dataField='PV' dataFormat={this.orderPVFormatter.bind(this)} dataSort={true}>PV</TableHeaderColumn>
-                                  <TableHeaderColumn dataField='TypeDescription' dataSort={false}>Type</TableHeaderColumn>
-                                  <TableHeaderColumn dataField='StatusDescription' dataSort={false}>Status</TableHeaderColumn>
-                                  <TableHeaderColumn dataField='OrderDate' dataFormat={this.orderDateFormatter.bind(this)} dataSort={true}>Order Date</TableHeaderColumn>
-                                </BootstrapTable>
-                              </div>
+                          <div className="tab-content">
+                            <div id="RecentOrders" className="tab-pane">
+                              <h3>Recent Orders</h3>
                             </div>
 
+                            <div id="PersonalUseOrders" className="tab-pane">
+                              <h3>Personal Use Orders</h3>
+                            </div>
+
+                            <div id="InventoryOrders" className="tab-pane active">
+                              <div className="col-sm-12 textalignr textbpdng">All Orders Are Displayed In Mountain Standard Time</div>
+                              <div className="panel panel-default panelmb50 clear" style={{ backgroundColor: "#ebf2ff" }}>
+                                <div>
+                                  <BootstrapTable search={false} searchPlaceholder='Search Order By Order Number' remote={this.state.isRemote} data={this.state.OrderList} exportCSV={true} pagination={true}
+                                    fetchInfo={{ dataTotalSize: this.state.totalDataSize }}
+                                    options={{
+                                      defaultSearch: '',
+                                      searchDelayTime: 2000,
+                                      sizePerPage: this.state.sizePerPage,
+                                      onPageChange: this.onPageChange.bind(this),
+                                      sizePerPageList: [5, 10, 20],
+                                      page: this.state.currentPage,
+                                      noDataText: this.checkOrderFetchedData(),
+                                      onSortChange: this.onSortChange.bind(this),
+                                      exportCSVBtn: this.createCustomExportCSVButton.bind(this),
+                                      toolBar: this.createCustomToolBar.bind(this),
+                                      searchPanel: (props) => (<MySearchPanel {...props} />),
+                                      searchField: this.createCustomSearchField.bind(this),
+                                      onSearchChange: this.onSearchChange.bind(this)
+                                    }}>
+                                    <TableHeaderColumn dataField='OrderID' isKey={true} dataSort={true}>Order Number</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='Total' dataFormat={this.orderTotalFormatter.bind(this)} dataSort={true}>Total</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='PV' dataFormat={this.orderPVFormatter.bind(this)} dataSort={true}>PV</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='TypeDescription' dataSort={false}>Type</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='StatusDescription' dataSort={false}>Status</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='OrderDate' dataFormat={this.orderDateFormatter.bind(this)} dataSort={true}>Order Date</TableHeaderColumn>
+                                  </BootstrapTable>
+                                </div>
+                              </div>
+
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <PageFooter />
+        </div>
+        <div>
+          <div className="col-sm-12">
+            <PageFooter />
+          </div>
         </div>
 
       </div>
