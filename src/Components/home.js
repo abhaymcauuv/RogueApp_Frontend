@@ -36,7 +36,7 @@ class HomeScreen extends Component {
                         <input type="password" className="form-control forminput" placeholder="Password" required="required"></input>
                       </div>
                       <div className="form-group btnmgn">
-                        <button type="submit" className="btn btn-primary btn-sm btnpdng" onClick={this.onSignIn}>Sign in</button>
+                        <button type="submit" className="col-sm-6 btn btn-primary btn-sm btnpdng" onClick={this.onSignIn}>Sign in</button>
                         <a href="#" className="pull-right">Forgot Password?</a>
                       </div>
                     </form>

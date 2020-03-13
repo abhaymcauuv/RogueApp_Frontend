@@ -133,6 +133,17 @@
         "id": 27,
         "route": "/bulkorder",
         "component_name": "./Store/bulkorder"
+    },
+    {
+        "id": 28,
+        "route": "/yoofoo",
+        "component_name": "./Yoofoo/yoofoo"
+    }
+    ,
+    {
+        "id": 29,
+        "route": "/companynews",
+        "component_name": "./CompanyNews/companynews"
     }
 ]
 

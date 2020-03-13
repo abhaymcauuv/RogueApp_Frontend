@@ -148,14 +148,24 @@
     {
         "id": 7,
         "name": "Company News",
-        "directory": "",
-        "items": []
+        "directory": "companynews",
+        "items": [
+            {
+                "name": "Company News",
+                "link": "/companynews"
+            }
+        ]
     },
     {
         "id": 8,
         "directory": "",
         "name": "Yoofoo",
-        "items": []
+        "items": [
+            {
+                "name": "Yoofoo",
+                "link": "/yoofoo"
+            }
+        ]
     },
     {
         "id": 9,
