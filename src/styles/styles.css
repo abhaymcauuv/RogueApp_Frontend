@@ -1723,8 +1723,8 @@ span.disc{
     padding-left: 2rem;
 }
 .company_hdr{
-    font-size: 30px;   
-    text-align: center;
+    /* font-size: 30px;    */
+    text-align: left;
     padding-top: 15px;
 }
 .yoofoo_hdr{
@@ -1829,11 +1829,54 @@ svg.g-transition-0_3 polygon {
     -webkit-box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.15);
     box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.15);
 }
-
-
-
-
-
+.subs_hdr, .subs_hdr1{
+    font-size: 20px;
+    font-weight: bold;
+    color: #0656bb;
+    padding-top: 10px;
+    text-align: left;
+}
+.subs_hdr1{
+    font-weight: 500;
+    font-size: 16px;
+    padding: 0 0 15px 15px;
+}
+.subs_p{
+    font-size: 16px;
+    color: #202020;
+    font-weight: normal;  
+    padding-top: 10px;
+    text-align: left;
+}
+.addsub{
+    padding-top: 40px !important;
+    min-height: 300px;
+    border: none !important;
+}
+.viewbox{
+    background-color: #fff;
+    min-height: 300px;
+    border: solid 1px #e3e3e3;
+    border-radius: 6px;
+    padding-top: 10px;
+}
+.subhdr_res{
+    font-size: 14px;
+    color: #00a0dc;
+    font-weight: 600;
+    padding:  5px 0 5px 0;
+}
+.pdficon{
+    font-size: 23px;
+    color: #FF3500;
+}
+.gridhdrbg{
+    background-color: #73afe6 !important;
+    color: #fff !important;
+}
+.gridmrtop{
+    margin-top: 15px;
+}
 
 
 

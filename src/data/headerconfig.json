@@ -119,10 +119,6 @@
             {
                 "name": "Resources Library",
                 "link": "/resources"
-            },
-            {
-                "name": "New Resources Library",
-                "link": "/newresources"
             }
         ]
     },

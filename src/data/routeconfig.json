@@ -163,11 +163,6 @@
         "id": 33,
         "route": "/resources",
         "component_name": "./Resources/resources"
-    },
-    {
-        "id": 34,
-        "route": "/newresources",
-        "component_name": "./Resources/newresources"
     }
 ]
 
