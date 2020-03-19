@@ -28,11 +28,11 @@ class HomeScreen extends Component {
                       <img className="logopdng1 pl0 pr0" src="../src/images/rogue_logo.png" alt="logo"></img>
                       </div>
                       <div className="form-group">
-                      <i class="fa fa-user usericon" aria-hidden="true"></i>
+                      <i className="fa fa-user usericon" aria-hidden="true"></i>
                         <input type="text" className="form-control forminput" placeholder="Username" required="required"></input>
                       </div>
                       <div className="form-group">
-                      <i class="fa fa-lock usericon" aria-hidden="true"></i>
+                      <i className="fa fa-lock usericon" aria-hidden="true"></i>
                         <input type="password" className="form-control forminput" placeholder="Password" required="required"></input>
                       </div>
                       <div className="form-group btnmgn">

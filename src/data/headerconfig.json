@@ -84,11 +84,11 @@
         "items": [
             {
                 "name": "Calendar",
-                "link": "/"
+                "link": "/calendar"
             },
             {
                 "name": "Subscriptions",
-                "link": "/"
+                "link": "/subscriptions"
             }
         ]
     },
@@ -107,7 +107,7 @@
             },
             {
                 "name": "Sales",
-                "link": "/"
+                "link": "/sales"
             }
         ]
     },
@@ -118,11 +118,11 @@
         "items": [
             {
                 "name": "Resources Library",
-                "link": "/"
+                "link": "/resources"
             },
             {
                 "name": "New Resources Library",
-                "link": "/"
+                "link": "/newresources"
             }
         ]
     },

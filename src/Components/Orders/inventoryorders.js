@@ -239,14 +239,14 @@ class InventoryOrdersScreen extends Component {
                         <div className="panel panel-default no-border">
                           <div className="panel-heading active">
                             <div className="panel-title">
-                              <a className="active">
+                              <a href="/#/orders" className="active">
                                 <i className="fa fa-list-alt lmenuicon" aria-hidden="true"></i> Inventory Orders
                               </a>
                             </div>
                           </div>
                         </div>
                         <div className="panel panel-default no-border">
-                          <div className="panel-heading ">
+                          <div className="panel-heading">
                             <div className="panel-title">
                               <a href="/#/personaluseorders">
                                 <i className="fa fa-list-ul lmenuicon" aria-hidden="true"></i> Personal Use Orders
@@ -257,8 +257,8 @@ class InventoryOrdersScreen extends Component {
                         <div className="panel panel-default no-border">
                           <div className="panel-heading">
                             <div className="panel-title">
-                              <a href="/#/">
-                                <i className="fa fa-tags lmenuicon" aria-hidden="true"></i>  Sales
+                              <a href="/#/sales">
+                                <i className="fa fa-tags lmenuicon" aria-hidden="true"></i> Sales
                               </a>
                             </div>
                           </div>

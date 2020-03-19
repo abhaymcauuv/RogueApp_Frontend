@@ -26,37 +26,37 @@ class CompanyNewsScreen extends Component {
                     <div>
                       <div className="row company_hdr">
 
-                      <div class="col-lg-3 col-md-4 col-sm-5 col-5 g-mb-30">
-                          <a href="#" class="u-link-v5 d-block u-shadow-v1-5 u-shadow-v21--hover g-transition-0_3 g-font-weight-600 g-py-20">
-                            <i class="fa fa-handshake iconcolor"></i>
-                            <p class="text-uppercase g-font-size-13 g-mb-5">Welcome! <br></br> <small className="g-color-black">6/28/2018</small></p>
+                      <div className="col-lg-3 col-md-4 col-sm-5 col-5 g-mb-30">
+                          <a href="#" className="u-link-v5 d-block u-shadow-v1-5 u-shadow-v21--hover g-transition-0_3 g-font-weight-600 g-py-20">
+                            <i className="fa fa-handshake iconcolor"></i>
+                            <p className="text-uppercase g-font-size-13 g-mb-5">Welcome! <br></br> <small className="g-color-black">6/28/2018</small></p>
                           </a>
                         </div>
 
-                        <div class="col-lg-3 col-md-4 col-sm-5 col-5 g-mb-30">
-                          <a href="#" class="u-link-v5 d-block u-shadow-v1-5 u-shadow-v21--hover g-transition-0_3 g-font-weight-600 g-py-20">
-                            <i class="fa fa-newspaper iconcolor"></i>
-                            <p class="text-uppercase g-font-size-13 g-mb-5">Weekly Designer Update <br></br> <small className="g-color-black">3/12/2020</small></p>
+                        <div className="col-lg-3 col-md-4 col-sm-5 col-5 g-mb-30">
+                          <a href="#" className="u-link-v5 d-block u-shadow-v1-5 u-shadow-v21--hover g-transition-0_3 g-font-weight-600 g-py-20">
+                            <i className="fa fa-newspaper iconcolor"></i>
+                            <p className="text-uppercase g-font-size-13 g-mb-5">Weekly Designer Update <br></br> <small className="g-color-black">3/12/2020</small></p>
                           </a>
                         </div>
 
-                        <div class="col-lg-3 col-md-4 col-sm-5 col-5 g-mb-30">
-                          <a href="#" class="u-link-v5 d-block u-shadow-v1-5 u-shadow-v21--hover g-transition-0_3 g-font-weight-600 g-py-20">
-                            <i class="fa fa-list-alt iconcolor"></i>
-                            <p class="text-uppercase g-font-size-13 g-mb-5">Product List <br></br> <small className="g-color-black">3/12/2020</small></p>
+                        <div className="col-lg-3 col-md-4 col-sm-5 col-5 g-mb-30">
+                          <a href="#" className="u-link-v5 d-block u-shadow-v1-5 u-shadow-v21--hover g-transition-0_3 g-font-weight-600 g-py-20">
+                            <i className="fa fa-list-alt iconcolor"></i>
+                            <p className="text-uppercase g-font-size-13 g-mb-5">Product List <br></br> <small className="g-color-black">3/12/2020</small></p>
                           </a>
                         </div>
-                        <div class="col-lg-3 col-md-4 col-sm-5 col-5 g-mb-30">
-                          <a href="#" class="u-link-v5 d-block u-shadow-v1-5 u-shadow-v21--hover g-transition-0_3 g-font-weight-600 g-py-20">
-                            <i class="fa fa-envelope iconcolor"></i>
-                            <p class="text-uppercase g-font-size-13 g-mb-5">Fab First Email <br></br> <small className="g-color-black">3/12/2020</small></p>
+                        <div className="col-lg-3 col-md-4 col-sm-5 col-5 g-mb-30">
+                          <a href="#" className="u-link-v5 d-block u-shadow-v1-5 u-shadow-v21--hover g-transition-0_3 g-font-weight-600 g-py-20">
+                            <i className="fa fa-envelope iconcolor"></i>
+                            <p className="text-uppercase g-font-size-13 g-mb-5">Fab First Email <br></br> <small className="g-color-black">3/12/2020</small></p>
                           </a>
                         </div>
 
-                        <div class="col-lg-3 col-md-4 col-sm-5 col-5 g-mb-30">
-                          <a href="#" class="u-link-v5 d-block u-shadow-v1-5 u-shadow-v21--hover g-transition-0_3 g-font-weight-600 g-py-20">
-                            <i class="fa fa-phone-square iconcolor" aria-hidden="true"></i>
-                            <p class="text-uppercase g-font-size-13 g-mb-5">Yoofoo Talk <br></br> <small className="g-color-black">3/12/2020</small></p>
+                        <div className="col-lg-3 col-md-4 col-sm-5 col-5 g-mb-30">
+                          <a href="#" className="u-link-v5 d-block u-shadow-v1-5 u-shadow-v21--hover g-transition-0_3 g-font-weight-600 g-py-20">
+                            <i className="fa fa-phone-square iconcolor" aria-hidden="true"></i>
+                            <p className="text-uppercase g-font-size-13 g-mb-5">Yoofoo Talk <br></br> <small className="g-color-black">3/12/2020</small></p>
                           </a>
                         </div>                      
 

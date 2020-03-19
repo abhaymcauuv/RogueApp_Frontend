@@ -138,12 +138,36 @@
         "id": 28,
         "route": "/yoofoo",
         "component_name": "./Yoofoo/yoofoo"
-    }
-    ,
+    },
     {
         "id": 29,
         "route": "/companynews",
         "component_name": "./CompanyNews/companynews"
+    },
+    {
+        "id": 30,
+        "route": "/calendar",
+        "component_name": "./Events/calendar"
+    },
+    {
+        "id": 31,
+        "route": "/subscriptions",
+        "component_name": "./Events/subscriptions"
+    },
+    {
+        "id": 32,
+        "route": "/sales",
+        "component_name": "./Orders/sales"
+    },
+    {
+        "id": 33,
+        "route": "/resources",
+        "component_name": "./Resources/resources"
+    },
+    {
+        "id": 34,
+        "route": "/newresources",
+        "component_name": "./Resources/newresources"
     }
 ]
 
