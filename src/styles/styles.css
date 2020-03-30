@@ -1023,7 +1023,7 @@ dd {
 }
 .rc-menu-horizontal {
     padding-left: 48px !important;
-    background-color: #fff !important;
+    background-color: #fbfbfb !important;
     border: none;
     border-bottom: 1px solid #ebebeb !important;
     box-shadow: none;
@@ -1079,7 +1079,7 @@ dd {
 .mycart{
     padding: 15px 23px 17px 0;
     text-align: center;
-    background-color: #fff !important;
+    background-color: #fbfbfb !important;
     border: none;
     border-bottom: 1px solid #ebebeb !important;
 }
@@ -1871,15 +1871,38 @@ svg.g-transition-0_3 polygon {
     color: #FF3500;
 }
 .gridhdrbg{
-    background-color: #73afe6 !important;
+    background-color: #9bc1e4 !important;
     color: #fff !important;
 }
 .gridmrtop{
     margin-top: 15px;
 }
+.rbc-calendar {
+    min-height: 500px ;
+  }
+  .rbc-btn-group > button {
+      color: #fff !important;
+      background-color: #1867b0 !important;
+  }
 
-
-
+  .rbc-btn-group > button:hover {
+    color: #fff !important;
+    background-color: #216ed4 !important;
+}
+.rbc-toolbar button:active, .rbc-toolbar button.rbc-active {
+    background-image: none;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    background-color: #333 !important;
+    border-color: #adadad;
+}
+.rbc-toolbar .rbc-toolbar-label {
+    flex-grow: 1;
+    padding: 0 10px;
+    text-align: center;
+    font-weight: 600;
+    color: #1867b0;
+    font-size: 20px;
+}
 
 
 
@@ -1977,9 +2000,6 @@ svg.g-transition-0_3 polygon {
   margin-bottom:1.5em;
 }
 }
-
-
-
 
 
 
