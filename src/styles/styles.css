@@ -1745,7 +1745,7 @@ span.disc{
     text-transform: uppercase!important;
 }
 .g-font-size-13 {
-    font-size: 1.5rem !important;
+    font-size: 2rem !important;
 }
 .d-block {
     display: block!important;
@@ -1770,6 +1770,7 @@ span.disc{
 }
 .g-color-black {
     color: #333 !important;
+    font-size: 16px !important;
 }
 
 .g-transition-0_3 {
@@ -1804,7 +1805,7 @@ svg.g-transition-0_3 polygon {
 }
 .u-shadow-v1-5 {
     -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .u-shadow-v21 {
@@ -1903,9 +1904,20 @@ svg.g-transition-0_3 polygon {
     color: #1867b0;
     font-size: 20px;
 }
-
-
-
+.rbc-header{
+    font-size: 18px !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+}
+.rbc-date-cell{
+    font-size: 16px !important;
+    font-weight: 600;
+}
+.company_newsalign{
+    font-size: 30px;   
+    text-align: center;
+    padding-top: 15px;
+}
 
 
 

@@ -24,7 +24,7 @@ class CompanyNewsScreen extends Component {
                 <div className="row">
                   <div className="col-md-12">
                     <div>
-                      <div className="row company_hdr">
+                      <div className="row company_newsalign">
 
                       <div className="col-lg-3 col-md-4 col-sm-5 col-5 g-mb-30">
                           <a href="#" className="u-link-v5 d-block u-shadow-v1-5 u-shadow-v21--hover g-transition-0_3 g-font-weight-600 g-py-20">
