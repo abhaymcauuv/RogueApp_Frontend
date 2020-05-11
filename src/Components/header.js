@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import '../styles/styles.css';
 import { SketchPicker } from 'react-color';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ReactFlagsSelect from 'react-flags-select';
-import 'react-flags-select/css/react-flags-select.css';
+// import ReactFlagsSelect from 'react-flags-select';
+// import 'react-flags-select/css/react-flags-select.css';
 
 const gbHeaderColor = localStorage.getItem("headerColor");
 export class PageHeader extends Component {
